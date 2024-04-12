@@ -66,7 +66,7 @@ final class SpeechPresenter{
             
             if let result = result {
                 print(result.bestTranscription.formattedString)
-                self.view?.refreshLabelText(text: self.colorForResult(result.bestTranscription.formattedString))
+                self.view?.refreshLabelText(text: self.countResult(result.bestTranscription.formattedString))
                 
             }
         }
@@ -91,7 +91,7 @@ final class SpeechPresenter{
         self.recognitionRequest?.endAudio()
     }
     
-    private func colorForResult(_ result: String) -> String {
+    private func countResult(_ result: String) -> String {
         if result.contains(WORD) {
             stopSpeech()
             do {
@@ -100,7 +100,7 @@ final class SpeechPresenter{
                 print("startSpeech Error: \(error)")
             }
             hit_count += 1
-            return "合計\(hit_count)回ヒット"
+            return "現在、\n\(hit_count)回"
         } else {
             return ""
         }
