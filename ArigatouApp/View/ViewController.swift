@@ -64,9 +64,29 @@ class ViewController: UIViewController {
         micImageView.animationDuration = 1.1
         micImageView.image = UIImage(named: "mic1")
     }
+    
+    func startMicAnimating(){
+        guard !micImageView.isAnimating else {
+            return
+        }
+        
+        micImageView.startAnimating()
+        
+        DispatchQueue.global(qos: .default).async {
+           
+            // アニメーション１回分の時間
+            Thread.sleep(forTimeInterval: 1.4)
+            
+            // メインスレッドでアニメーション終了させる
+            DispatchQueue.main.async {
+                self.micImageView.stopAnimating()
+            }
+        }
+    }
 }
 extension ViewController: PresenterOutput{
     func refreshLabelText(text: String) {
+        startMicAnimating()
         guard !text.isEmpty else {return}
         DispatchQueue.main.async {
             self.counterLabel.text = text
