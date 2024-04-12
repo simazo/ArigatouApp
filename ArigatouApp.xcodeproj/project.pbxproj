@@ -60,12 +60,12 @@
 		CC55BF4E2BC9028D003C3E15 /* ArigatouApp */ = {
 			isa = PBXGroup;
 			children = (
+				CC55BF6B2BC9F23A003C3E15 /* Resource */,
 				CC55BF662BC90347003C3E15 /* View */,
 				CC55BF632BC902E4003C3E15 /* Presenter */,
 				CC55BF4F2BC9028D003C3E15 /* AppDelegate.swift */,
 				CC55BF512BC9028D003C3E15 /* SceneDelegate.swift */,
 				CC55BF552BC9028D003C3E15 /* Main.storyboard */,
-				CC55BF582BC9028E003C3E15 /* Assets.xcassets */,
 				CC55BF5A2BC9028E003C3E15 /* LaunchScreen.storyboard */,
 				CC55BF5D2BC9028E003C3E15 /* Info.plist */,
 			);
@@ -87,6 +87,14 @@
 				CC55BF692BC9E135003C3E15 /* PaddingLabel.swift */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		CC55BF6B2BC9F23A003C3E15 /* Resource */ = {
+			isa = PBXGroup;
+			children = (
+				CC55BF582BC9028E003C3E15 /* Assets.xcassets */,
+			);
+			path = Resource;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
