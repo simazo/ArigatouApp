@@ -14,6 +14,7 @@
 		CC55BF592BC9028E003C3E15 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CC55BF582BC9028E003C3E15 /* Assets.xcassets */; };
 		CC55BF5C2BC9028E003C3E15 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CC55BF5A2BC9028E003C3E15 /* LaunchScreen.storyboard */; };
 		CC55BF652BC90301003C3E15 /* SpeechPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC55BF642BC90301003C3E15 /* SpeechPresenter.swift */; };
+		CC55BF682BC92A48003C3E15 /* PaddingLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC55BF672BC92A48003C3E15 /* PaddingLabel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +27,7 @@
 		CC55BF5B2BC9028E003C3E15 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		CC55BF5D2BC9028E003C3E15 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CC55BF642BC90301003C3E15 /* SpeechPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeechPresenter.swift; sourceTree = "<group>"; };
+		CC55BF672BC92A48003C3E15 /* PaddingLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaddingLabel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -82,6 +84,7 @@
 			isa = PBXGroup;
 			children = (
 				CC55BF532BC9028D003C3E15 /* ViewController.swift */,
+				CC55BF672BC92A48003C3E15 /* PaddingLabel.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -158,6 +161,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				CC55BF652BC90301003C3E15 /* SpeechPresenter.swift in Sources */,
+				CC55BF682BC92A48003C3E15 /* PaddingLabel.swift in Sources */,
 				CC55BF542BC9028D003C3E15 /* ViewController.swift in Sources */,
 				CC55BF502BC9028D003C3E15 /* AppDelegate.swift in Sources */,
 				CC55BF522BC9028D003C3E15 /* SceneDelegate.swift in Sources */,

@@ -100,7 +100,7 @@ final class SpeechPresenter{
                 print("startSpeech Error: \(error)")
             }
             hit_count += 1
-            return "合計\(hit_count)回ヒット"
+            return "現在、\n\(hit_count)回"
         } else {
             return ""
         }
