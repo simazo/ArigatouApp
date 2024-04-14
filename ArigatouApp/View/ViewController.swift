@@ -61,7 +61,7 @@ class ViewController: UIViewController {
             micImages.append(UIImage(named: "mic\(i).png")!)
         }
         micImageView.animationImages = micImages
-        micImageView.animationDuration = 1.1
+        micImageView.animationDuration = 0.5
         micImageView.image = UIImage(named: "mic1")
     }
     
@@ -75,7 +75,7 @@ class ViewController: UIViewController {
         DispatchQueue.global(qos: .default).async {
            
             // アニメーション１回分の時間
-            Thread.sleep(forTimeInterval: 1.4)
+            Thread.sleep(forTimeInterval: 1.0)
             
             // メインスレッドでアニメーション終了させる
             DispatchQueue.main.async {
@@ -85,8 +85,7 @@ class ViewController: UIViewController {
     }
 }
 extension ViewController: PresenterOutput{
-    func refreshLabelText(text: String) {
-        startMicAnimating()
+    func refreshCounterLabel(text: String) {
         guard !text.isEmpty else {return}
         DispatchQueue.main.async {
             self.counterLabel.text = text
