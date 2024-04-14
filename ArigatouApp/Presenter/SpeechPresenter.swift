@@ -13,8 +13,7 @@ protocol PresenterInput: AnyObject {
 
 protocol PresenterOutput: AnyObject {
     func refreshLabelText(text: String)
-    func showDeniedSpeechAuthorizeAlert(completion: (() -> Void)?)
-    func exitApp()
+    func showDeniedSpeechAuthorizeAlert()
 }
 
 final class SpeechPresenter{
@@ -43,9 +42,7 @@ final class SpeechPresenter{
                     }
                     self.startTimer()
                 } else {
-                    self.view?.showDeniedSpeechAuthorizeAlert(completion: {
-                        self.view?.exitApp()
-                    })
+                    self.view?.showDeniedSpeechAuthorizeAlert()
                 }
             }
         }
