@@ -12,7 +12,8 @@ protocol PresenterInput: AnyObject {
 }
 
 protocol PresenterOutput: AnyObject {
-    func refreshLabelText(text: String)
+    func refreshCounterLabel(text: String)
+    func startMicAnimating()
 }
 
 final class SpeechPresenter{
@@ -66,7 +67,8 @@ final class SpeechPresenter{
             
             if let result = result {
                 print(result.bestTranscription.formattedString)
-                self.view?.refreshLabelText(text: self.countResult(result.bestTranscription.formattedString))
+                self.view?.startMicAnimating()
+                self.view?.refreshCounterLabel(text: self.countResult(result.bestTranscription.formattedString))
                 
             }
         }
