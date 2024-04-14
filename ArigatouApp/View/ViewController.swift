@@ -61,7 +61,7 @@ class ViewController: UIViewController {
             micImages.append(UIImage(named: "mic\(i).png")!)
         }
         micImageView.animationImages = micImages
-        micImageView.animationDuration = 0.5
+        micImageView.animationDuration = 0.1
         micImageView.image = UIImage(named: "mic1")
     }
     
@@ -75,7 +75,7 @@ class ViewController: UIViewController {
         DispatchQueue.global(qos: .default).async {
            
             // アニメーション１回分の時間
-            Thread.sleep(forTimeInterval: 1.0)
+            Thread.sleep(forTimeInterval: 1.2)
             
             // メインスレッドでアニメーション終了させる
             DispatchQueue.main.async {
