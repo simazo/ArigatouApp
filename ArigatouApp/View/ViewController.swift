@@ -49,5 +49,22 @@ extension ViewController: PresenterOutput{
             self.labelCounter.text = text
         }
     }
+    
+    func showDeniedSpeechAuthorizeAlert(completion: (() -> Void)?){
+        let alert = UIAlertController(title: "ありがとうアプリ", message: "マイクの使用許可がないためアプリを終了します。\nアプリをはじめるには「設定」→「ありがとうアプリ」→音声認識をONにしてください。", preferredStyle: .alert)
+        let ok = UIAlertAction(title: "OK", style: .default) { _ in
+            completion?() // OKボタンがタップされたときにコールバックします
+        }
+        alert.addAction(ok)
+        self.present(alert, animated: true, completion: nil)
+    }
+    
+    // 少し遅延してアプリ終了
+    func exitApp() {
+        UIControl().sendAction(#selector(URLSessionTask.suspend), to: UIApplication.shared, for: nil)
+        Timer.scheduledTimer(withTimeInterval: 0.2, repeats: false) { _ in
+            exit(0)
+        }
+    }
 }
 

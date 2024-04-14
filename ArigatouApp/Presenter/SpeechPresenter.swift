@@ -13,6 +13,8 @@ protocol PresenterInput: AnyObject {
 
 protocol PresenterOutput: AnyObject {
     func refreshLabelText(text: String)
+    func showDeniedSpeechAuthorizeAlert(completion: (() -> Void)?)
+    func exitApp()
 }
 
 final class SpeechPresenter{
@@ -41,8 +43,9 @@ final class SpeechPresenter{
                     }
                     self.startTimer()
                 } else {
-                    print("マイク使用許可なし")
-                    // TODO: メッセージ表示してアプリ終了
+                    self.view?.showDeniedSpeechAuthorizeAlert(completion: {
+                        self.view?.exitApp()
+                    })
                 }
             }
         }
