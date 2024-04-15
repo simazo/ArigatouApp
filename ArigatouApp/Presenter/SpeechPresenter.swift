@@ -90,9 +90,11 @@ final class SpeechPresenter{
             guard let self = self else { return }
             
             if let result = result {
-                print(result.bestTranscription.formattedString)
-                self.view?.startMicAnimating()
-                self.view?.refreshCounterLabel(text: self.countResult(result.bestTranscription.formattedString))
+                //print(result.bestTranscription.formattedString)
+                DispatchQueue.main.async {
+                    self.view?.startMicAnimating()
+                    self.view?.refreshCounterLabel(text: self.countResult(result.bestTranscription.formattedString))
+                }
                 
             }
         }
