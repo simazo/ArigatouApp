@@ -14,14 +14,33 @@ class ViewController: UIViewController {
     
     private var presenter: PresenterInput!
     
+    var timer: Timer = Timer()
+    var count: Int = 0
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        
+        // １秒毎にup()を実行
+        //timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(self.up), userInfo: nil, repeats: true)
         
         initCounterLabel()
         initMicImage()
         presenter = SpeechPresenter(view: self)
         presenter.viewDidLoad()
+        
     }
+    
+    /*@objc func up(){
+        print("xxxxxxxxxxxxxxxxxxxxxx")
+        // 60秒経ったらタイマーを止める
+        if count > 60 {
+            timer.invalidate()
+        } else {
+            count += 1
+        }
+        
+    }*/
     
     func initCounterLabel(){
         counterLabel = PaddingLabel(insets: UIEdgeInsets(top: 20, left: 20, bottom: 20, right: 20))
