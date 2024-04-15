@@ -31,26 +31,6 @@ final class SpeechPresenter{
         self.view = view
     }
     
-    /*
-     func checkAuthorize() {
-        SFSpeechRecognizer.requestAuthorization { [weak self] (status) in
-            guard let self = self else { return }
-            DispatchQueue.main.async {
-                if status == .authorized && self.speechRecognizer.isAvailable {
-                    do {
-                        try self.startSpeech()
-                    } catch {
-                        print("startSpeech Error: \(error)")
-                    }
-                    self.startTimer()
-                } else {
-                    self.view?.showDeniedSpeechAuthorizeAlert()
-                }
-            }
-        }
-    }
-     */
-    
     /// マイク使用許可の確認
     ///
     /// Returns: 許可あり(true), 許可なし(false)
