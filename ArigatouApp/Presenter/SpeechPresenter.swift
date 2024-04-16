@@ -26,6 +26,7 @@ final class SpeechPresenter{
     
     private let WORD = "ありがと"
     private var hit_count = 0
+    private var previousTranscription = ""
     
     init(view: PresenterOutput) {
         self.view = view
@@ -66,10 +67,18 @@ final class SpeechPresenter{
             guard let self = self else { return }
             
             if let result = result {
-                print(result.bestTranscription.formattedString)
-                self.view?.startMicAnimating()
-                self.view?.refreshCounterLabel(text: self.countResult(result.bestTranscription.formattedString))
+
+                let currentTranscription = result.bestTranscription.formattedString
+                // 前回の認識結果と比較して重複を削除
+                let filteredTranscription = self.filterDuplicate(previous: self.previousTranscription, current: currentTranscription)
                 
+                // 結果を表示
+                print(filteredTranscription)
+                
+                self.previousTranscription = currentTranscription
+                
+                self.view?.startMicAnimating()
+                self.view?.refreshCounterLabel(text: self.countResult(filteredTranscription))
             }
         }
         let recordingFormat = audioEngine.inputNode.outputFormat(forBus: 0)
@@ -79,6 +88,18 @@ final class SpeechPresenter{
         
         audioEngine.prepare()
         try? audioEngine.start()
+    }
+    
+    func filterDuplicate(previous: String, current: String) -> String {
+        if previous.isEmpty {
+            return current
+        }
+        
+        if current == previous {
+            return ""
+        }
+        
+        return current
     }
     
     func stopSpeech() {
@@ -95,16 +116,24 @@ final class SpeechPresenter{
     
     private func countResult(_ result: String) -> String {
         if result.contains(WORD) {
-            stopSpeech()
-            do {
-                try startSpeech()
-            } catch {
-                print("startSpeech Error: \(error)")
+            // 少し待機してから再開処理を行う
+            DispatchQueue.global().asyncAfter(deadline: .now() + 0.5) {
+                self.restartSpeech()
             }
+            self.restartSpeech()
             hit_count += 1
             return "現在、\n\(hit_count)回"
         } else {
             return ""
+        }
+    }
+    
+    private func restartSpeech() {
+        self.stopSpeech()
+        do {
+            try self.startSpeech()
+        } catch {
+            print("startError: \(error)")
         }
     }
     
