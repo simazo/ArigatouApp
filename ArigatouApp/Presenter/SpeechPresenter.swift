@@ -120,7 +120,7 @@ final class SpeechPresenter{
             DispatchQueue.global().asyncAfter(deadline: .now() + 0.5) {
                 self.restartSpeech()
             }
-            self.restartSpeech()
+           
             hit_count += 1
             return "現在、\n\(hit_count)回"
         } else {
