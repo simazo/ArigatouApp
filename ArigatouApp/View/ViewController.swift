@@ -14,6 +14,9 @@ class ViewController: UIViewController {
     
     private var presenter: PresenterInput!
     
+    var timer: Timer = Timer()
+    var count: Int = 0
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -21,6 +24,7 @@ class ViewController: UIViewController {
         initMicImage()
         presenter = SpeechPresenter(view: self)
         presenter.viewDidLoad()
+        
     }
     
     func initCounterLabel(){
