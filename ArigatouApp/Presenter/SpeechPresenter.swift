@@ -32,19 +32,18 @@ final class SpeechPresenter{
         self.view = view
     }
     
-    func checkAuthorize() {
+    /// マイク使用許可の確認
+    func isAuthorized(completion: @escaping (Bool) -> Void){
         SFSpeechRecognizer.requestAuthorization { [weak self] (status) in
-            guard let self = self else { return }
+            guard let self = self else {
+                completion(false)
+                return
+            }
             DispatchQueue.main.async {
                 if status == .authorized && self.speechRecognizer.isAvailable {
-                    do {
-                        try self.startSpeech()
-                    } catch {
-                        print("startSpeech Error: \(error)")
-                    }
-                    self.startTimer()
-                } else {
-                    self.view?.showDeniedSpeechAuthorizeAlert()
+                    completion(true)
+                }else {
+                    completion(false)
                 }
             }
         }
@@ -151,7 +150,24 @@ final class SpeechPresenter{
 
 extension SpeechPresenter: PresenterInput {
     func viewDidLoad() {
-        checkAuthorize()
+        isAuthorized { [weak self] (isAuthorized) in
+            guard let self = self else { return }
+            if isAuthorized {
+                do {
+                    try self.startSpeech()
+                } catch {
+                    print("startSpeech Error: \(error)")
+                }
+                self.startTimer()
+            } else {
+                // 10秒ごとにアラート表示
+                Timer.scheduledTimer(withTimeInterval: 10, repeats: true) { _ in
+                    DispatchQueue.main.async {
+                        self.view?.showDeniedSpeechAuthorizeAlert()
+                    }
+                }
+            }
+        }
     }
 }
 
