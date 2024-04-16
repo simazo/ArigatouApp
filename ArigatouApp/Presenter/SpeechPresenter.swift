@@ -32,25 +32,20 @@ final class SpeechPresenter{
     }
     
     /// マイク使用許可の確認
-    ///
-    /// Returns: 許可あり(true), 許可なし(false)
-    func isAuthorized() -> Bool {
-        var isAuthorized = false
-        let semaphore = DispatchSemaphore(value: 0)
+    func isAuthorized(completion: @escaping (Bool) -> Void){
         SFSpeechRecognizer.requestAuthorization { [weak self] (status) in
             guard let self = self else {
-                semaphore.signal()
+                completion(false)
                 return
             }
             DispatchQueue.main.async {
                 if status == .authorized && self.speechRecognizer.isAvailable {
-                    isAuthorized =  true
+                    completion(true)
+                }else {
+                    completion(false)
                 }
-                semaphore.signal()
             }
         }
-        semaphore.wait()
-        return isAuthorized
     }
     
     func startSpeech() throws {
@@ -70,7 +65,7 @@ final class SpeechPresenter{
             guard let self = self else { return }
             
             if let result = result {
-                //print(result.bestTranscription.formattedString)
+                print(result.bestTranscription.formattedString)
                 DispatchQueue.main.async {
                     self.view?.startMicAnimating()
                     self.view?.refreshCounterLabel(text: self.countResult(result.bestTranscription.formattedString))
@@ -128,17 +123,15 @@ final class SpeechPresenter{
 
 extension SpeechPresenter: PresenterInput {
     func viewDidLoad() {
-        DispatchQueue.global().async { [weak self] in
+        isAuthorized { [weak self] (isAuthorized) in
             guard let self = self else { return }
-            if isAuthorized() {
-                DispatchQueue.main.async {
-                    do {
-                        try self.startSpeech()
-                    } catch {
-                        print("startSpeech Error: \(error)")
-                    }
-                    self.startTimer()
+            if isAuthorized {
+                do {
+                    try self.startSpeech()
+                } catch {
+                    print("startSpeech Error: \(error)")
                 }
+                self.startTimer()
             } else {
                 // 10秒ごとにアラート表示
                 Timer.scheduledTimer(withTimeInterval: 10, repeats: true) { _ in
@@ -146,7 +139,6 @@ extension SpeechPresenter: PresenterInput {
                         self.view?.showDeniedSpeechAuthorizeAlert()
                     }
                 }
-                
             }
         }
     }
