@@ -14,7 +14,6 @@ class MockPresenterOutput: PresenterOutput {
     var deniedSpeechAuthorizeAlertShown = false
     
     func showDeniedSpeechAuthorizeAlert() {
-        print("モックでアラート表示されました。")
         deniedSpeechAuthorizeAlertShown = true
     }
     
@@ -54,6 +53,7 @@ class SpeechPresenterTests: XCTestCase {
         // 許可に設定
         presenter.authorized = true
         
+        // viewDidLoad() を呼び出す
         presenter.viewDidLoad()
         
         // アラートが表示されないことを確認
@@ -62,15 +62,26 @@ class SpeechPresenterTests: XCTestCase {
     
     // マイク使用許可が与えられなかった場合にアラートが表示されることをテスト
     func testSpeechAuthorizationDenied() {
-        
         // 不許可に設定
         presenter.authorized = false
         
+        // expectationを作成
+        let expectation = XCTestExpectation(description: "Alert shown")
+        
+        // viewDidLoad() を呼び出す
         presenter.viewDidLoad()
         
-        // アラートが表示されることを確認
-        XCTAssertTrue(mockView.deniedSpeechAuthorizeAlertShown)
+        // 5秒待機してからアラートが表示されたかどうかを確認する
+        DispatchQueue.main.asyncAfter(deadline: .now() + 10.0) {
+            // アラートが表示されていることを確認
+            XCTAssertTrue(self.mockView.deniedSpeechAuthorizeAlertShown)
+            
+            // expectationを完了させる
+            expectation.fulfill()
+        }
         
+        // expectationが完了するまで待機
+        wait(for: [expectation], timeout: 11.0)
     }
-
+    
 }
