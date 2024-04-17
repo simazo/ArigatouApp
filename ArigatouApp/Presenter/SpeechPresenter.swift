@@ -25,11 +25,29 @@ final class SpeechPresenter{
     private var audioEngine = AVAudioEngine()
     
     private let WORD = "ありがと"
-    private var hit_count = 0
+    private var hitCount = 0
+    private let hitCountKey = "HitCount"
     private var previousTranscription = ""
     
     init(view: PresenterOutput) {
         self.view = view
+        loadHitCount()
+    }
+    
+    private func loadHitCount() {
+        let defaults = UserDefaults.standard
+        hitCount = defaults.integer(forKey: hitCountKey)
+        view?.refreshCounterLabel(text: "現在、\n\(hitCount)回")
+    }
+    
+    private func saveHitCount() {
+        let defaults = UserDefaults.standard
+        defaults.set(hitCount, forKey: hitCountKey)
+    }
+    
+    private func incrementHitCount() {
+        hitCount += 1
+        saveHitCount()
     }
     
     /// マイク使用許可の確認
@@ -120,8 +138,8 @@ final class SpeechPresenter{
                 self.restartSpeech()
             }
            
-            hit_count += 1
-            return "現在、\n\(hit_count)回"
+            incrementHitCount()
+            return "現在、\n\(hitCount)回"
         } else {
             return ""
         }
