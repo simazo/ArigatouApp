@@ -19,12 +19,33 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        initBackground(name: "cosmos-1920.jpg")
         initCounterLabel()
         initMicImage()
         presenter = SpeechPresenter(view: self)
         presenter.viewDidLoad()
         
+    }
+    
+    func initBackground(name: String){
+        // imageViewの生成
+        let imageViewBackground = UIImageView()
+        imageViewBackground.translatesAutoresizingMaskIntoConstraints = false
+        imageViewBackground.image = UIImage(named: name)
+        imageViewBackground.contentMode = .scaleAspectFill
+        
+        // imageViewを追加
+        self.view.addSubview(imageViewBackground)
+        
+        // Auto Layout制約を追加
+        NSLayoutConstraint.activate([
+            imageViewBackground.leadingAnchor.constraint(equalTo: self.view.leadingAnchor),
+            imageViewBackground.trailingAnchor.constraint(equalTo: self.view.trailingAnchor),
+            imageViewBackground.topAnchor.constraint(equalTo: self.view.topAnchor),
+            imageViewBackground.bottomAnchor.constraint(equalTo: self.view.bottomAnchor)
+        ])
+        // 加えたsubviewを、最背面に設置する
+        self.view.sendSubviewToBack(imageViewBackground)
     }
     
     func initCounterLabel(){
