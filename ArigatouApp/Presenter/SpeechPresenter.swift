@@ -17,7 +17,7 @@ protocol PresenterOutput: AnyObject {
     func startMicAnimating()
 }
 
-final class SpeechPresenter{
+class SpeechPresenter{
     private weak var view: PresenterOutput?
     private let speechRecognizer = SFSpeechRecognizer(locale: Locale(identifier: "ja-JP"))!
     private var recognitionRequest: SFSpeechAudioBufferRecognitionRequest?
