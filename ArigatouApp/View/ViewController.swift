@@ -8,7 +8,7 @@
 import UIKit
 
 class ViewController: UIViewController {
-    private var counterLabel: PaddingLabel!
+    private var counterLabel: UILabel!
     private var micImageView: UIImageView!
     private var micImages: [UIImage]!
     
@@ -49,16 +49,13 @@ class ViewController: UIViewController {
     }
     
     func initCounterLabel(){
-        counterLabel = PaddingLabel(insets: UIEdgeInsets(top: 20, left: 20, bottom: 20, right: 20))
-        counterLabel.text = "現在、\n0回"
-        counterLabel.font = .systemFont(ofSize: 20)
-        counterLabel.backgroundColor = UIColor.systemOrange
+        counterLabel = UILabel()
+        counterLabel.text = "「ありがとう100万回」\n\n達成まで\n\nあと1,000,000回"
+        counterLabel.font = .boldSystemFont(ofSize: 20)
+        counterLabel.backgroundColor = UIColor.clear
         counterLabel.textColor = .white
         counterLabel.textAlignment = .center
         counterLabel.numberOfLines = 0
-        // 角丸に変更
-        counterLabel.layer.cornerRadius = 15
-        counterLabel.clipsToBounds = true
         
         // 中央に配置
         counterLabel.translatesAutoresizingMaskIntoConstraints = false
