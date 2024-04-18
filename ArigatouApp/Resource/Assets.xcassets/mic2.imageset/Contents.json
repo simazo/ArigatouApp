@@ -1,17 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "icons8-ラジオスタジオ-48 1.png",
+      "filename" : "mic-m-50.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "icons8-ラジオスタジオ-96 1.png",
+      "filename" : "mic-m-100.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "icons8-ラジオスタジオ-144 1.png",
+      "filename" : "mic-m-150.png",
       "idiom" : "universal",
       "scale" : "3x"
     }
