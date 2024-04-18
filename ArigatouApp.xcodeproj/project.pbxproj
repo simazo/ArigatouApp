@@ -15,9 +15,20 @@
 		CC55BF5C2BC9028E003C3E15 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CC55BF5A2BC9028E003C3E15 /* LaunchScreen.storyboard */; };
 		CC55BF652BC90301003C3E15 /* SpeechPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC55BF642BC90301003C3E15 /* SpeechPresenter.swift */; };
 		CC55BF6A2BC9E135003C3E15 /* PaddingLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC55BF692BC9E135003C3E15 /* PaddingLabel.swift */; };
+		CC55BFF72BCE9C2D003C3E15 /* SpeechPresenterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC55BFF62BCE9C2D003C3E15 /* SpeechPresenterTests.swift */; };
 		CC55BFFE2BCF93C3003C3E15 /* cosmos-640.jpg in Resources */ = {isa = PBXBuildFile; fileRef = CC55BFFD2BCF93C3003C3E15 /* cosmos-640.jpg */; };
 		CC55C0002BCF96D3003C3E15 /* cosmos-1920.jpg in Resources */ = {isa = PBXBuildFile; fileRef = CC55BFFF2BCF96D3003C3E15 /* cosmos-1920.jpg */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		CC55BFF82BCE9C2D003C3E15 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = CC55BF442BC9028D003C3E15 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = CC55BF4B2BC9028D003C3E15;
+			remoteInfo = ArigatouApp;
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		CC55BF4C2BC9028D003C3E15 /* ArigatouApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ArigatouApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -30,12 +41,21 @@
 		CC55BF5D2BC9028E003C3E15 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CC55BF642BC90301003C3E15 /* SpeechPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeechPresenter.swift; sourceTree = "<group>"; };
 		CC55BF692BC9E135003C3E15 /* PaddingLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaddingLabel.swift; sourceTree = "<group>"; };
+		CC55BFF42BCE9C2D003C3E15 /* ArigatouAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ArigatouAppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		CC55BFF62BCE9C2D003C3E15 /* SpeechPresenterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeechPresenterTests.swift; sourceTree = "<group>"; };
 		CC55BFFD2BCF93C3003C3E15 /* cosmos-640.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "cosmos-640.jpg"; sourceTree = "<group>"; };
 		CC55BFFF2BCF96D3003C3E15 /* cosmos-1920.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "cosmos-1920.jpg"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		CC55BF492BC9028D003C3E15 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CC55BFF12BCE9C2D003C3E15 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -49,6 +69,7 @@
 			isa = PBXGroup;
 			children = (
 				CC55BF4E2BC9028D003C3E15 /* ArigatouApp */,
+				CC55BFF52BCE9C2D003C3E15 /* ArigatouAppTests */,
 				CC55BF4D2BC9028D003C3E15 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -57,6 +78,7 @@
 			isa = PBXGroup;
 			children = (
 				CC55BF4C2BC9028D003C3E15 /* ArigatouApp.app */,
+				CC55BFF42BCE9C2D003C3E15 /* ArigatouAppTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -103,6 +125,14 @@
 			path = Resource;
 			sourceTree = "<group>";
 		};
+		CC55BFF52BCE9C2D003C3E15 /* ArigatouAppTests */ = {
+			isa = PBXGroup;
+			children = (
+				CC55BFF62BCE9C2D003C3E15 /* SpeechPresenterTests.swift */,
+			);
+			path = ArigatouAppTests;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -123,6 +153,24 @@
 			productReference = CC55BF4C2BC9028D003C3E15 /* ArigatouApp.app */;
 			productType = "com.apple.product-type.application";
 		};
+		CC55BFF32BCE9C2D003C3E15 /* ArigatouAppTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = CC55BFFC2BCE9C2D003C3E15 /* Build configuration list for PBXNativeTarget "ArigatouAppTests" */;
+			buildPhases = (
+				CC55BFF02BCE9C2D003C3E15 /* Sources */,
+				CC55BFF12BCE9C2D003C3E15 /* Frameworks */,
+				CC55BFF22BCE9C2D003C3E15 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				CC55BFF92BCE9C2D003C3E15 /* PBXTargetDependency */,
+			);
+			name = ArigatouAppTests;
+			productName = ArigatouAppTests;
+			productReference = CC55BFF42BCE9C2D003C3E15 /* ArigatouAppTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -135,6 +183,10 @@
 				TargetAttributes = {
 					CC55BF4B2BC9028D003C3E15 = {
 						CreatedOnToolsVersion = 15.1;
+					};
+					CC55BFF32BCE9C2D003C3E15 = {
+						CreatedOnToolsVersion = 15.1;
+						TestTargetID = CC55BF4B2BC9028D003C3E15;
 					};
 				};
 			};
@@ -152,6 +204,7 @@
 			projectRoot = "";
 			targets = (
 				CC55BF4B2BC9028D003C3E15 /* ArigatouApp */,
+				CC55BFF32BCE9C2D003C3E15 /* ArigatouAppTests */,
 			);
 		};
 /* End PBXProject section */
@@ -166,6 +219,13 @@
 				CC55BFFE2BCF93C3003C3E15 /* cosmos-640.jpg in Resources */,
 				CC55BF572BC9028D003C3E15 /* Main.storyboard in Resources */,
 				CC55C0002BCF96D3003C3E15 /* cosmos-1920.jpg in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CC55BFF22BCE9C2D003C3E15 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -184,7 +244,23 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		CC55BFF02BCE9C2D003C3E15 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CC55BFF72BCE9C2D003C3E15 /* SpeechPresenterTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		CC55BFF92BCE9C2D003C3E15 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = CC55BF4B2BC9028D003C3E15 /* ArigatouApp */;
+			targetProxy = CC55BFF82BCE9C2D003C3E15 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		CC55BF552BC9028D003C3E15 /* Main.storyboard */ = {
@@ -379,6 +455,40 @@
 			};
 			name = Release;
 		};
+		CC55BFFA2BCE9C2D003C3E15 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.tanaka.ArigatouAppTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ArigatouApp.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/ArigatouApp";
+			};
+			name = Debug;
+		};
+		CC55BFFB2BCE9C2D003C3E15 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.tanaka.ArigatouAppTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ArigatouApp.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/ArigatouApp";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -396,6 +506,15 @@
 			buildConfigurations = (
 				CC55BF612BC9028E003C3E15 /* Debug */,
 				CC55BF622BC9028E003C3E15 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		CC55BFFC2BCE9C2D003C3E15 /* Build configuration list for PBXNativeTarget "ArigatouAppTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				CC55BFFA2BCE9C2D003C3E15 /* Debug */,
+				CC55BFFB2BCE9C2D003C3E15 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
