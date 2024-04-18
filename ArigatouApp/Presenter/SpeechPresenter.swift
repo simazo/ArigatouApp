@@ -138,12 +138,7 @@ class SpeechPresenter{
     
     func startTimer(){
         Timer.scheduledTimer(withTimeInterval: 60, repeats: true) { _ in
-            self.stopSpeech()
-            do {
-                try self.startSpeech()
-            } catch{
-                print("startSpeech Error: \(error)")
-            }
+            self.restartSpeech()
         }
     }
 }
