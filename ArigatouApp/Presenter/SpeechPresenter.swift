@@ -25,29 +25,12 @@ final class SpeechPresenter{
     private var audioEngine = AVAudioEngine()
     
     private let WORD = "ありがと"
-    private var matchCount = 0
-    private let matchCountKey = "matchCount"
     private var previousTranscription = ""
+    private var matchCountManger: MatchCountManager!
     
     init(view: PresenterOutput) {
         self.view = view
-        loadmatchCount()
-    }
-    
-    private func loadmatchCount() {
-        let defaults = UserDefaults.standard
-        matchCount = defaults.integer(forKey: matchCountKey)
-        view?.refreshCounterLabel(text: "現在、\n\(matchCount)回")
-    }
-    
-    private func savematchCount() {
-        let defaults = UserDefaults.standard
-        defaults.set(matchCount, forKey: matchCountKey)
-    }
-    
-    private func incrementmatchCount() {
-        matchCount += 1
-        savematchCount()
+        self.matchCountManger = MatchCountManager(UserDefaultsMatchCountRepository())
     }
     
     /// マイク使用許可の確認
@@ -138,8 +121,8 @@ final class SpeechPresenter{
                 self.restartSpeech()
             }
            
-            incrementmatchCount()
-            return "現在、\n\(matchCount)回"
+            self.matchCountManger.incrementCount()
+            return "現在、\n\(self.matchCountManger.getCount())回"
         } else {
             return ""
         }

@@ -15,6 +15,10 @@
 		CC55BF5C2BC9028E003C3E15 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CC55BF5A2BC9028E003C3E15 /* LaunchScreen.storyboard */; };
 		CC55BF652BC90301003C3E15 /* SpeechPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC55BF642BC90301003C3E15 /* SpeechPresenter.swift */; };
 		CC55BF6A2BC9E135003C3E15 /* PaddingLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC55BF692BC9E135003C3E15 /* PaddingLabel.swift */; };
+		CCB2798E2BD1E32F00D28378 /* MatchCount.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCB2798D2BD1E32E00D28378 /* MatchCount.swift */; };
+		CCB279902BD1EA5300D28378 /* MatchCountRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCB2798F2BD1EA5300D28378 /* MatchCountRepository.swift */; };
+		CCB279922BD1EC0800D28378 /* UserDefaultsMatchCountRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCB279912BD1EC0800D28378 /* UserDefaultsMatchCountRepository.swift */; };
+		CCB279982BD1F11000D28378 /* MatchCountManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCB279972BD1F11000D28378 /* MatchCountManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +32,10 @@
 		CC55BF5D2BC9028E003C3E15 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CC55BF642BC90301003C3E15 /* SpeechPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeechPresenter.swift; sourceTree = "<group>"; };
 		CC55BF692BC9E135003C3E15 /* PaddingLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaddingLabel.swift; sourceTree = "<group>"; };
+		CCB2798D2BD1E32E00D28378 /* MatchCount.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchCount.swift; sourceTree = "<group>"; };
+		CCB2798F2BD1EA5300D28378 /* MatchCountRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchCountRepository.swift; sourceTree = "<group>"; };
+		CCB279912BD1EC0800D28378 /* UserDefaultsMatchCountRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsMatchCountRepository.swift; sourceTree = "<group>"; };
+		CCB279972BD1F11000D28378 /* MatchCountManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchCountManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -61,6 +69,7 @@
 			isa = PBXGroup;
 			children = (
 				CC55BF6B2BC9F23A003C3E15 /* Resource */,
+				CCB2798C2BD1E2D300D28378 /* Model */,
 				CC55BF662BC90347003C3E15 /* View */,
 				CC55BF632BC902E4003C3E15 /* Presenter */,
 				CC55BF4F2BC9028D003C3E15 /* AppDelegate.swift */,
@@ -95,6 +104,17 @@
 				CC55BF582BC9028E003C3E15 /* Assets.xcassets */,
 			);
 			path = Resource;
+			sourceTree = "<group>";
+		};
+		CCB2798C2BD1E2D300D28378 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				CCB2798D2BD1E32E00D28378 /* MatchCount.swift */,
+				CCB2798F2BD1EA5300D28378 /* MatchCountRepository.swift */,
+				CCB279912BD1EC0800D28378 /* UserDefaultsMatchCountRepository.swift */,
+				CCB279972BD1F11000D28378 /* MatchCountManager.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -168,8 +188,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CCB279982BD1F11000D28378 /* MatchCountManager.swift in Sources */,
 				CC55BF652BC90301003C3E15 /* SpeechPresenter.swift in Sources */,
+				CCB2798E2BD1E32F00D28378 /* MatchCount.swift in Sources */,
+				CCB279922BD1EC0800D28378 /* UserDefaultsMatchCountRepository.swift in Sources */,
 				CC55BF6A2BC9E135003C3E15 /* PaddingLabel.swift in Sources */,
+				CCB279902BD1EA5300D28378 /* MatchCountRepository.swift in Sources */,
 				CC55BF542BC9028D003C3E15 /* ViewController.swift in Sources */,
 				CC55BF502BC9028D003C3E15 /* AppDelegate.swift in Sources */,
 				CC55BF522BC9028D003C3E15 /* SceneDelegate.swift in Sources */,
