@@ -25,12 +25,11 @@ class SpeechPresenter{
     private var audioEngine = AVAudioEngine()
     
     private let WORD = "ありがと"
+    private var hit_count = 0
     private var previousTranscription = ""
-    private var matchCountManger: MatchCountManager!
     
     init(view: PresenterOutput) {
         self.view = view
-        self.matchCountManger = MatchCountManager(UserDefaultsMatchCountRepository())
     }
     
     /// マイク使用許可の確認
@@ -120,8 +119,8 @@ class SpeechPresenter{
 
             self.restartSpeech()
            
-            self.matchCountManger.incrementCount()
-            return "現在、\n\(self.matchCountManger.getCount())回"
+            hit_count += 1
+            return "現在、\n\(hit_count)回"
         } else {
             return ""
         }
