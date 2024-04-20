@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		CC209D262BD47E890069E2E4 /* MatchCount.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC209D252BD47E890069E2E4 /* MatchCount.swift */; };
+		CC209D282BD47EB10069E2E4 /* MatchCountManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC209D272BD47EB10069E2E4 /* MatchCountManager.swift */; };
+		CC209D2A2BD47ED20069E2E4 /* MatchCountRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC209D292BD47ED20069E2E4 /* MatchCountRepository.swift */; };
+		CC209D2C2BD47EED0069E2E4 /* UserDefaultsMatchCountRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC209D2B2BD47EED0069E2E4 /* UserDefaultsMatchCountRepository.swift */; };
 		CC55BF502BC9028D003C3E15 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC55BF4F2BC9028D003C3E15 /* AppDelegate.swift */; };
 		CC55BF522BC9028D003C3E15 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC55BF512BC9028D003C3E15 /* SceneDelegate.swift */; };
 		CC55BF542BC9028D003C3E15 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC55BF532BC9028D003C3E15 /* ViewController.swift */; };
@@ -30,6 +34,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		CC209D252BD47E890069E2E4 /* MatchCount.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchCount.swift; sourceTree = "<group>"; };
+		CC209D272BD47EB10069E2E4 /* MatchCountManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchCountManager.swift; sourceTree = "<group>"; };
+		CC209D292BD47ED20069E2E4 /* MatchCountRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchCountRepository.swift; sourceTree = "<group>"; };
+		CC209D2B2BD47EED0069E2E4 /* UserDefaultsMatchCountRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsMatchCountRepository.swift; sourceTree = "<group>"; };
 		CC55BF4C2BC9028D003C3E15 /* ArigatouApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ArigatouApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CC55BF4F2BC9028D003C3E15 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CC55BF512BC9028D003C3E15 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -63,6 +71,17 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		CC209D242BD47E5F0069E2E4 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				CC209D252BD47E890069E2E4 /* MatchCount.swift */,
+				CC209D272BD47EB10069E2E4 /* MatchCountManager.swift */,
+				CC209D292BD47ED20069E2E4 /* MatchCountRepository.swift */,
+				CC209D2B2BD47EED0069E2E4 /* UserDefaultsMatchCountRepository.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 		CC55BF432BC9028D003C3E15 = {
 			isa = PBXGroup;
 			children = (
@@ -85,6 +104,7 @@
 			isa = PBXGroup;
 			children = (
 				CC55BF6B2BC9F23A003C3E15 /* Resource */,
+				CC209D242BD47E5F0069E2E4 /* Model */,
 				CC55BF662BC90347003C3E15 /* View */,
 				CC55BF632BC902E4003C3E15 /* Presenter */,
 				CC55BF4F2BC9028D003C3E15 /* AppDelegate.swift */,
@@ -234,8 +254,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				CC55BF652BC90301003C3E15 /* SpeechPresenter.swift in Sources */,
+				CC209D282BD47EB10069E2E4 /* MatchCountManager.swift in Sources */,
 				CC55BF542BC9028D003C3E15 /* ViewController.swift in Sources */,
+				CC209D262BD47E890069E2E4 /* MatchCount.swift in Sources */,
 				CC55BF502BC9028D003C3E15 /* AppDelegate.swift in Sources */,
+				CC209D2A2BD47ED20069E2E4 /* MatchCountRepository.swift in Sources */,
+				CC209D2C2BD47EED0069E2E4 /* UserDefaultsMatchCountRepository.swift in Sources */,
 				CC55BF522BC9028D003C3E15 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
