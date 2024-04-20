@@ -6,6 +6,6 @@
 //
 
 struct MatchCount {
-    //let email: String
+    //let uid: String
     let count: Int
 }

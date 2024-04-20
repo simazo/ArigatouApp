@@ -8,6 +8,6 @@
 protocol MatchCountRepository {
     func save(_ matchCount: MatchCount)
     func getCount() -> Int
-    //func getCount(_ email: String)
+    //func getCountByUid(_ uid: String)
     func setCount(_ count: Int)
 }
