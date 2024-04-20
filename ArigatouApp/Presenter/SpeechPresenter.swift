@@ -17,7 +17,7 @@ protocol PresenterOutput: AnyObject {
     func startMicAnimating()
 }
 
-final class SpeechPresenter{
+class SpeechPresenter{
     private weak var view: PresenterOutput?
     private let speechRecognizer = SFSpeechRecognizer(locale: Locale(identifier: "ja-JP"))!
     private var recognitionRequest: SFSpeechAudioBufferRecognitionRequest?
@@ -81,8 +81,9 @@ final class SpeechPresenter{
                 self.view?.refreshCounterLabel(text: self.countResult(filteredTranscription))
             }
         }
+        
         let recordingFormat = audioEngine.inputNode.outputFormat(forBus: 0)
-        audioEngine.inputNode.installTap(onBus: 0, bufferSize: 1024, format: recordingFormat) { (buffer: AVAudioPCMBuffer, when: AVAudioTime) in
+        audioEngine.inputNode.installTap(onBus: 0, bufferSize: 2048, format: recordingFormat) { (buffer: AVAudioPCMBuffer, when: AVAudioTime) in
             self.recognitionRequest?.append(buffer)
         }
         
@@ -116,10 +117,8 @@ final class SpeechPresenter{
     
     private func countResult(_ result: String) -> String {
         if result.contains(WORD) {
-            // 少し待機してから再開処理を行う
-            DispatchQueue.global().asyncAfter(deadline: .now() + 0.5) {
-                self.restartSpeech()
-            }
+
+            self.restartSpeech()
            
             self.matchCountManger.incrementCount()
             return "現在、\n\(self.matchCountManger.getCount())回"
@@ -130,6 +129,9 @@ final class SpeechPresenter{
     
     private func restartSpeech() {
         self.stopSpeech()
+        // タイムラグ挿入
+        Thread.sleep(forTimeInterval: 0.5)
+        
         do {
             try self.startSpeech()
         } catch {
@@ -139,12 +141,7 @@ final class SpeechPresenter{
     
     func startTimer(){
         Timer.scheduledTimer(withTimeInterval: 60, repeats: true) { _ in
-            self.stopSpeech()
-            do {
-                try self.startSpeech()
-            } catch{
-                print("startSpeech Error: \(error)")
-            }
+            self.restartSpeech()
         }
     }
 }
