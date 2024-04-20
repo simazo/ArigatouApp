@@ -80,8 +80,9 @@ class SpeechPresenter{
                 self.view?.refreshCounterLabel(text: self.countResult(filteredTranscription))
             }
         }
+        
         let recordingFormat = audioEngine.inputNode.outputFormat(forBus: 0)
-        audioEngine.inputNode.installTap(onBus: 0, bufferSize: 1024, format: recordingFormat) { (buffer: AVAudioPCMBuffer, when: AVAudioTime) in
+        audioEngine.inputNode.installTap(onBus: 0, bufferSize: 2048, format: recordingFormat) { (buffer: AVAudioPCMBuffer, when: AVAudioTime) in
             self.recognitionRequest?.append(buffer)
         }
         
@@ -115,10 +116,8 @@ class SpeechPresenter{
     
     private func countResult(_ result: String) -> String {
         if result.contains(WORD) {
-            // 少し待機してから再開処理を行う
-            DispatchQueue.global().asyncAfter(deadline: .now() + 0.5) {
-                self.restartSpeech()
-            }
+
+            self.restartSpeech()
            
             hit_count += 1
             return "現在、\n\(hit_count)回"
@@ -129,6 +128,9 @@ class SpeechPresenter{
     
     private func restartSpeech() {
         self.stopSpeech()
+        // タイムラグ挿入
+        Thread.sleep(forTimeInterval: 0.5)
+        
         do {
             try self.startSpeech()
         } catch {
