@@ -55,11 +55,11 @@ class SpeechPresenter{
             recognitionTask.cancel()
             self.recognitionTask = nil
         }
-        
+
         let audioSession = AVAudioSession.sharedInstance()
         try audioSession.setCategory(.record, mode: .measurement, options: [])
         try audioSession.setActive(true, options: .notifyOthersOnDeactivation)
-        
+
         let recognitionRequest = SFSpeechAudioBufferRecognitionRequest()
         self.recognitionRequest = recognitionRequest
         recognitionRequest.shouldReportPartialResults = true
@@ -67,18 +67,34 @@ class SpeechPresenter{
             guard let self = self else { return }
             
             if let result = result {
-
+              
                 let currentTranscription = result.bestTranscription.formattedString
+                
                 // 前回の認識結果と比較して重複を削除
                 let filteredTranscription = self.filterDuplicate(previous: self.previousTranscription, current: currentTranscription)
                 
                 // 結果を表示
                 print(filteredTranscription)
-                
+
                 self.previousTranscription = currentTranscription
-                
                 self.view?.startMicAnimating()
-                self.view?.refreshCounterLabel(text: self.countResult(filteredTranscription))
+                
+                // マッチした場合
+                if filteredTranscription.contains(WORD) {
+                    
+                    // カウントアップ
+                    self.matchCountManger.incrementCount()
+
+                    // ラベル再描画
+                    self.view?.refreshCounterLabel(text: "現在、\n\(self.matchCountManger.getCount())回")
+                    
+                    // タイムラグ挿入
+                    Thread.sleep(forTimeInterval: 0.5)
+                    
+                    // 音声認識リスタート
+                    self.restartSpeech()
+                }
+                
             }
         }
         
@@ -115,24 +131,8 @@ class SpeechPresenter{
         self.recognitionRequest?.endAudio()
     }
     
-    private func countResult(_ result: String) -> String {
-        if result.contains(WORD) {
-
-            self.restartSpeech()
-           
-            self.matchCountManger.incrementCount()
-            return "現在、\n\(self.matchCountManger.getCount())回"
-            
-        } else {
-            return ""
-        }
-    }
-    
     private func restartSpeech() {
         self.stopSpeech()
-        // タイムラグ挿入
-        Thread.sleep(forTimeInterval: 0.5)
-        
         do {
             try self.startSpeech()
         } catch {
