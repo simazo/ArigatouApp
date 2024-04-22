@@ -173,9 +173,7 @@ extension SpeechPresenter: PresenterInput {
             } else {
                 // 10秒ごとにアラート表示
                 Timer.scheduledTimer(withTimeInterval: 10, repeats: true) { _ in
-                    DispatchQueue.main.async {
-                        self.view?.showDeniedSpeechAuthorizeAlert()
-                    }
+                    self.view?.showDeniedSpeechAuthorizeAlert()
                 }
             }
         }
