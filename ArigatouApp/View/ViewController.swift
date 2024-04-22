@@ -149,7 +149,7 @@ extension ViewController: PresenterOutput{
     }
     
     func showDeniedSpeechAuthorizeAlert(){
-        let alert = UIAlertController(title: "ありがとうアプリ", message: "マイクの使用許可がないためアプリを終了します。\nアプリをはじめるには「設定」→「ありがとうアプリ」→音声認識をONにしてください。", preferredStyle: .alert)
+        let alert = UIAlertController(title: "ありがとう100万回", message: "アプリを開始するにはマイクと音声認識へのアクセスを許可してください。", preferredStyle: .alert)
         let ok = UIAlertAction(title: "OK", style: .default)
         
         DispatchQueue.main.async {
