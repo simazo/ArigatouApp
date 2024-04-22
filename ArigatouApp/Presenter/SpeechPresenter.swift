@@ -13,7 +13,8 @@ protocol PresenterInput: AnyObject {
 
 protocol PresenterOutput: AnyObject {
     func showDeniedSpeechAuthorizeAlert()
-    func refreshCounterLabel(text: String)
+    func redrawRemainingLabel(text: String)
+    func redrawCounterLabel(text: String)
     func startMicAnimating()
 }
 
@@ -86,7 +87,10 @@ class SpeechPresenter{
                     self.matchCountManger.incrementCount()
 
                     // ラベル再描画
-                    self.view?.refreshCounterLabel(text: "現在、\n\(self.matchCountManger.getCount())回")
+                    self.view?.redrawRemainingLabel(text: "「ありがとう100万回」\n\n達成まで\n\nあと\(self.formatRemainingCount())回")
+                    
+                    self.view?.redrawCounterLabel(text: "\(self.formatTotalCount())回目のありがとう")
+                    
                     
                     // タイムラグ挿入
                     Thread.sleep(forTimeInterval: 0.5)
@@ -140,10 +144,18 @@ class SpeechPresenter{
         }
     }
     
-    func startTimer(){
+    private func startTimer(){
         Timer.scheduledTimer(withTimeInterval: 60, repeats: true) { _ in
             self.restartSpeech()
         }
+    }
+    
+    private func formatRemainingCount() -> String {
+        return String.localizedStringWithFormat("%d", 1000000 - self.matchCountManger.getCount())
+    }
+    
+    private func formatTotalCount() -> String {
+        return String.localizedStringWithFormat("%d", self.matchCountManger.getCount())
     }
 }
 
@@ -167,6 +179,9 @@ extension SpeechPresenter: PresenterInput {
                 }
             }
         }
+        
+        // ラベル更新
+        self.view?.redrawRemainingLabel(text: "「ありがとう100万回」\n\n達成まで\n\nあと\(self.formatRemainingCount())回")
     }
 }
 
