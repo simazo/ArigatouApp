@@ -24,7 +24,7 @@ class SpeechPresenter{
     private var recognitionTask: SFSpeechRecognitionTask?
     private var audioEngine = AVAudioEngine()
     
-    private let WORD = "ありがと"
+    private let WORD = "ありがとう"
     private var previousTranscription = ""
     private var matchCountManger: MatchCountManager!
     
