@@ -8,6 +8,7 @@
 import UIKit
 
 class ViewController: UIViewController {
+    private var remainingLabel: UILabel!
     private var counterLabel: UILabel!
     private var micImageView: UIImageView!
     private var micImages: [UIImage]!
@@ -20,6 +21,7 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         initBackground(name: "cosmos-1920.jpg")
+        initRemainingLabel()
         initCounterLabel()
         initMicImage()
         presenter = SpeechPresenter(view: self)
@@ -47,13 +49,11 @@ class ViewController: UIViewController {
         // 加えたsubviewを、最背面に設置する
         self.view.sendSubviewToBack(imageViewBackground)
     }
-    
     func initCounterLabel(){
         counterLabel = UILabel()
-        counterLabel.text = "「ありがとう100万回」\n\n達成まで\n\nあと1,000,000回"
-        counterLabel.font = .boldSystemFont(ofSize: 20)
+        counterLabel.font = .boldSystemFont(ofSize: 28)
         counterLabel.backgroundColor = UIColor.clear
-        counterLabel.textColor = .white
+        counterLabel.textColor = .yellow
         counterLabel.textAlignment = .center
         counterLabel.numberOfLines = 0
         
@@ -63,6 +63,24 @@ class ViewController: UIViewController {
         NSLayoutConstraint.activate([
             counterLabel.centerYAnchor.constraint(equalTo: view.centerYAnchor),
             counterLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+        ])
+        counterLabel.alpha = 0
+    }
+    
+    func initRemainingLabel(){
+        remainingLabel = UILabel()
+        remainingLabel.font = .boldSystemFont(ofSize: 20)
+        remainingLabel.backgroundColor = UIColor.clear
+        remainingLabel.textColor = .white
+        remainingLabel.textAlignment = .center
+        remainingLabel.numberOfLines = 0
+        
+        // 中央に配置
+        remainingLabel.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(remainingLabel)
+        NSLayoutConstraint.activate([
+            remainingLabel.centerYAnchor.constraint(equalTo: view.centerYAnchor),
+            remainingLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
         ])
     }
     
@@ -74,7 +92,7 @@ class ViewController: UIViewController {
         micImageView.translatesAutoresizingMaskIntoConstraints = false
         self.view.addSubview(micImageView)
         NSLayoutConstraint.activate([
-            micImageView.centerYAnchor.constraint(equalTo: counterLabel.bottomAnchor, constant: 50.0),
+            micImageView.centerYAnchor.constraint(equalTo: remainingLabel.bottomAnchor, constant: 50.0),
             micImageView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
         ])
         
@@ -107,11 +125,27 @@ class ViewController: UIViewController {
     }
 }
 extension ViewController: PresenterOutput{
-    func refreshCounterLabel(text: String) {
+    func redrawRemainingLabel(text: String) {
         guard !text.isEmpty else {return}
         DispatchQueue.main.async {
-            self.counterLabel.text = text
+            self.remainingLabel.text = text
         }
+    }
+    
+    func redrawCounterLabel(text: String) {
+        guard !text.isEmpty else {return}
+        DispatchQueue.main.async {
+            self.remainingLabel.isHidden = true
+            self.counterLabel.text = text
+            self.counterLabel.alpha = 1
+            UIView.animate(withDuration: 1.4, delay: 0, options: .curveEaseIn) {
+                self.counterLabel.alpha = 0
+            } completion: { (_) in
+                //print("フェードアウト終了")
+                self.remainingLabel.isHidden = false
+            }
+        }
+        
     }
     
     func showDeniedSpeechAuthorizeAlert(){
