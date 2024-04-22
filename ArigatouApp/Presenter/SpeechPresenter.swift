@@ -171,11 +171,12 @@ extension SpeechPresenter: PresenterInput {
                 }
                 self.startTimer()
             } else {
-                // 10秒ごとにアラート表示
-                Timer.scheduledTimer(withTimeInterval: 10, repeats: true) { _ in
-                    DispatchQueue.main.async {
-                        self.view?.showDeniedSpeechAuthorizeAlert()
-                    }
+                // 起動時に１回表示
+                self.view?.showDeniedSpeechAuthorizeAlert()
+                
+                // その後は５秒おきにアラート表示
+                Timer.scheduledTimer(withTimeInterval: 5, repeats: true) { _ in
+                    self.view?.showDeniedSpeechAuthorizeAlert()
                 }
             }
         }
