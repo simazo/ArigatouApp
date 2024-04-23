@@ -9,15 +9,16 @@ import XCTest
 @testable import ArigatouApp
 
 class MockPresenterOutput: PresenterOutput {
-
+    func redrawRemainingLabel(text: String) {}
+    
+    func redrawCounterLabel(text: String) {}
+    
     // アラート表示されたか
     var deniedSpeechAuthorizeAlertShown = false
     
     func showDeniedSpeechAuthorizeAlert() {
         deniedSpeechAuthorizeAlertShown = true
     }
-    
-    func refreshCounterLabel(text: String) {}
     
     func startMicAnimating() {}
 }
@@ -47,7 +48,7 @@ class SpeechPresenterTests: XCTestCase {
         super.tearDown()
     }
     
-    // マイク使用許可が与えられた場合にアラートが表示されないことをテスト
+    // マイク使用許可が与えられている場合、許可確認アラートが表示されないことをテスト
     func testSpeechAuthorization() {
         
         // 許可に設定
@@ -60,7 +61,7 @@ class SpeechPresenterTests: XCTestCase {
         XCTAssertFalse(mockView.deniedSpeechAuthorizeAlertShown)
     }
     
-    // マイク使用許可が与えられなかった場合にアラートが表示されることをテスト
+    // マイク使用許可が与えられてない場合、許可確認アラートが表示されることをテスト
     func testSpeechAuthorizationDenied() {
         // 不許可に設定
         presenter.authorized = false
@@ -71,8 +72,8 @@ class SpeechPresenterTests: XCTestCase {
         // viewDidLoad() を呼び出す
         presenter.viewDidLoad()
         
-        // 5秒待機してからアラートが表示されたかどうかを確認する
-        DispatchQueue.main.asyncAfter(deadline: .now() + 10.0) {
+        // 数秒待機してからアラートが表示されたかどうかを確認する
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
             // アラートが表示されていることを確認
             XCTAssertTrue(self.mockView.deniedSpeechAuthorizeAlertShown)
             
@@ -81,7 +82,7 @@ class SpeechPresenterTests: XCTestCase {
         }
         
         // expectationが完了するまで待機
-        wait(for: [expectation], timeout: 11.0)
+        wait(for: [expectation], timeout: 2.0)
     }
     
 }
