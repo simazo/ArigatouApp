@@ -20,10 +20,9 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         initBackground(name: "cosmos-1920.jpg")
-        initRemainingLabel()
-        initCounterLabel()
-        initMicImage()
+        
         presenter = SpeechPresenter(view: self)
         presenter.viewDidLoad()
         
@@ -49,23 +48,6 @@ class ViewController: UIViewController {
         // 加えたsubviewを、最背面に設置する
         self.view.sendSubviewToBack(imageViewBackground)
     }
-    func initCounterLabel(){
-        counterLabel = UILabel()
-        counterLabel.font = .boldSystemFont(ofSize: 28)
-        counterLabel.backgroundColor = UIColor.clear
-        counterLabel.textColor = .yellow
-        counterLabel.textAlignment = .center
-        counterLabel.numberOfLines = 0
-        
-        // 中央に配置
-        counterLabel.translatesAutoresizingMaskIntoConstraints = false
-        view.addSubview(counterLabel)
-        NSLayoutConstraint.activate([
-            counterLabel.centerYAnchor.constraint(equalTo: view.centerYAnchor),
-            counterLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-        ])
-        counterLabel.alpha = 0
-    }
     
     func initRemainingLabel(){
         remainingLabel = UILabel()
@@ -82,6 +64,24 @@ class ViewController: UIViewController {
             remainingLabel.centerYAnchor.constraint(equalTo: view.centerYAnchor),
             remainingLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
         ])
+    }
+    
+    func initCounterLabel(){
+        counterLabel = UILabel()
+        counterLabel.font = .boldSystemFont(ofSize: 28)
+        counterLabel.backgroundColor = UIColor.clear
+        counterLabel.textColor = .yellow
+        counterLabel.textAlignment = .center
+        counterLabel.numberOfLines = 0
+        
+        // 中央に配置
+        counterLabel.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(counterLabel)
+        NSLayoutConstraint.activate([
+            counterLabel.centerYAnchor.constraint(equalTo: view.centerYAnchor),
+            counterLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+        ])
+        counterLabel.alpha = 0
     }
     
     func initMicImage(){
@@ -125,6 +125,18 @@ class ViewController: UIViewController {
     }
 }
 extension ViewController: PresenterOutput{
+    
+    func showStartScreen() {
+        initRemainingLabel()
+        initCounterLabel()
+        initMicImage()
+    }
+    
+    func showEndScreen() {
+        initRemainingLabel()
+        remainingLabel.text = "「ありがとう100万回」\n\n本当におめでとうございます\n\n最後までありがとうございました\n\nあなたとあなたの周りに\n\n沢山の幸せが訪れますように"
+    }
+    
     func redrawRemainingLabel(text: String) {
         guard !text.isEmpty else {return}
         DispatchQueue.main.async {

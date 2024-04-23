@@ -12,6 +12,8 @@ protocol PresenterInput: AnyObject {
 }
 
 protocol PresenterOutput: AnyObject {
+    func showStartScreen()
+    func showEndScreen()
     func showDeniedSpeechAuthorizeAlert()
     func redrawRemainingLabel(text: String)
     func redrawCounterLabel(text: String)
@@ -26,8 +28,9 @@ class SpeechPresenter{
     private var audioEngine = AVAudioEngine()
     
     private let WORD = "ありがとう"
+    private let MAX_COUNT = 1000000
     private var previousTranscription = ""
-    private var matchCountManger: MatchCountManager!
+    var matchCountManger: MatchCountManager!
     
     init(view: PresenterOutput) {
         self.view = view
@@ -90,7 +93,6 @@ class SpeechPresenter{
                     self.view?.redrawRemainingLabel(text: "「ありがとう100万回」\n\n達成まで\n\nあと\(self.formatRemainingCount())回")
                     
                     self.view?.redrawCounterLabel(text: "\(self.formatTotalCount())回目のありがとう")
-                    
                     
                     // タイムラグ挿入
                     Thread.sleep(forTimeInterval: 0.5)
@@ -160,7 +162,18 @@ class SpeechPresenter{
 }
 
 extension SpeechPresenter: PresenterInput {
+    
     func viewDidLoad() {
+        if matchCountManger.getCount() >= MAX_COUNT {
+            view?.showEndScreen()
+        }
+        else {
+            view?.showStartScreen()
+            handleAuthorizationStatus()
+        }
+    }
+    
+    func handleAuthorizationStatus() {
         isAuthorized { [weak self] (isAuthorized) in
             guard let self = self else { return }
             if isAuthorized {
@@ -180,7 +193,6 @@ extension SpeechPresenter: PresenterInput {
                 }
             }
         }
-        
         // ラベル更新
         self.view?.redrawRemainingLabel(text: "「ありがとう100万回」\n\n達成まで\n\nあと\(self.formatRemainingCount())回")
     }
