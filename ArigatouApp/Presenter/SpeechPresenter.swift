@@ -64,6 +64,11 @@ class SpeechPresenter{
         try audioSession.setCategory(.record, mode: .measurement, options: [])
         try audioSession.setActive(true, options: .notifyOthersOnDeactivation)
 
+        // オンデバイス音声認識
+        if self.speechRecognizer.supportsOnDeviceRecognition {
+            self.recognitionRequest?.requiresOnDeviceRecognition = true
+        }
+        
         let recognitionRequest = SFSpeechAudioBufferRecognitionRequest()
         self.recognitionRequest = recognitionRequest
         recognitionRequest.shouldReportPartialResults = true
