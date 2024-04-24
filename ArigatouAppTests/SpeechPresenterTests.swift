@@ -9,13 +9,23 @@ import XCTest
 @testable import ArigatouApp
 
 class MockPresenterOutput: PresenterOutput {
+    
+    var startScreenShown = false
+    func showStartScreen() {
+        startScreenShown = true
+    }
+    
+    var endScreenShown = false
+    func showEndScreen() {
+        endScreenShown = true
+    }
+    
     func redrawRemainingLabel(text: String) {}
     
     func redrawCounterLabel(text: String) {}
     
-    // アラート表示されたか
+
     var deniedSpeechAuthorizeAlertShown = false
-    
     func showDeniedSpeechAuthorizeAlert() {
         deniedSpeechAuthorizeAlertShown = true
     }
@@ -83,6 +93,29 @@ class SpeechPresenterTests: XCTestCase {
         
         // expectationが完了するまで待機
         wait(for: [expectation], timeout: 2.0)
+    }
+    
+    // カウント数が最大まで達していない場合は、開始用の画面になる事を確認
+    func testMaxCountNotReached() {
+        
+        presenter.matchCountManger.setCount(100)
+        
+        // viewDidLoad() を呼び出す
+        presenter.viewDidLoad()
+        
+        // アプリ開始用のビューが呼ばれたことを確認
+        XCTAssertTrue(mockView.startScreenShown)
+    }
+    
+    // カウント数が最大まで達した場合は、終了用の画面になる事を確認
+    func testMaxCountReached() {
+        presenter.matchCountManger.setCount(1000000)
+        
+        // viewDidLoad() を呼び出す
+        presenter.viewDidLoad()
+        
+        // アプリ終了用のビューが呼ばれたことを確認
+        XCTAssertTrue(mockView.endScreenShown)
     }
     
 }
