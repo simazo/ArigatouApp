@@ -1,17 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "mic-50.png",
+      "filename" : "icons8-マイク-50.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "mic-100.png",
+      "filename" : "icons8-マイク-100.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "mic-150.png",
+      "filename" : "icons8-マイク-100_Resize Image.png",
       "idiom" : "universal",
       "scale" : "3x"
     }
