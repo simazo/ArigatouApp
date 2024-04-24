@@ -164,7 +164,9 @@ class SpeechPresenter{
 extension SpeechPresenter: PresenterInput {
     
     func viewDidLoad() {
-        if matchCountManger.getCount() >= MAX_COUNT {
+        let shouldShowEndScreen = matchCountManger.getCount() >= MAX_COUNT
+        
+        if shouldShowEndScreen {
             view?.showEndScreen()
         }
         else {
