@@ -1,5 +1,5 @@
 //
-//  ViewController.swift
+//  HomeViewController.swift
 //  ArigatouApp
 //
 //  Created by pero on 2024/04/12.
@@ -7,7 +7,7 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class HomeViewController: UIViewController {
     private var remainingLabel: UILabel!
     private var counterLabel: UILabel!
     private var micImageView: UIImageView!
@@ -124,7 +124,7 @@ class ViewController: UIViewController {
         }
     }
 }
-extension ViewController: PresenterOutput{
+extension HomeViewController: PresenterOutput{
     
     func showStartScreen() {
         initRemainingLabel()
