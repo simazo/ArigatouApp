@@ -1,5 +1,5 @@
 //
-//  ViewController.swift
+//  HomeViewController.swift
 //  ArigatouApp
 //
 //  Created by pero on 2024/04/12.
@@ -7,7 +7,7 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class HomeViewController: UIViewController {
     private var remainingLabel: UILabel!
     private var counterLabel: UILabel!
     private var micImageView: UIImageView!
@@ -23,7 +23,7 @@ class ViewController: UIViewController {
         
         initBackground(name: "cosmos-1920.jpg")
         
-        presenter = SpeechPresenter(view: self)
+        presenter = HomePresenter(view: self)
         presenter.viewDidLoad()
         
     }
@@ -124,7 +124,7 @@ class ViewController: UIViewController {
         }
     }
 }
-extension ViewController: PresenterOutput{
+extension HomeViewController: PresenterOutput{
     
     func showStartScreen() {
         initRemainingLabel()
