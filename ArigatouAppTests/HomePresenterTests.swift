@@ -33,7 +33,7 @@ class MockPresenterOutput: PresenterOutput {
     func startMicAnimating() {}
 }
 
-class MockSpeechPresenter: SpeechPresenter {
+class MockHomePresenter: HomePresenter {
     var authorized: Bool = true // デフォルトは許可状態
     
     override func isAuthorized(completion: @escaping (Bool) -> Void) {
@@ -41,15 +41,15 @@ class MockSpeechPresenter: SpeechPresenter {
     }
 }
 
-class SpeechPresenterTests: XCTestCase {
+class HomePresenterTests: XCTestCase {
     
-    var presenter: MockSpeechPresenter!
+    var presenter: MockHomePresenter!
     var mockView: MockPresenterOutput!
 
     override func setUp() {
         super.setUp()
         mockView = MockPresenterOutput()
-        presenter = MockSpeechPresenter(view: mockView)
+        presenter = MockHomePresenter(view: mockView)
     }
     
     override func tearDown() {
@@ -64,8 +64,8 @@ class SpeechPresenterTests: XCTestCase {
         // 許可に設定
         presenter.authorized = true
         
-        // viewDidLoad() を呼び出す
-        presenter.viewDidLoad()
+        // handleAuthorizationStatus() を呼び出す
+        presenter.handleAuthorizationStatus()
         
         // アラートが表示されないことを確認
         XCTAssertFalse(mockView.deniedSpeechAuthorizeAlertShown)
@@ -79,8 +79,8 @@ class SpeechPresenterTests: XCTestCase {
         // expectationを作成
         let expectation = XCTestExpectation(description: "Alert shown")
         
-        // viewDidLoad() を呼び出す
-        presenter.viewDidLoad()
+        // handleAuthorizationStatus() を呼び出す
+        presenter.handleAuthorizationStatus()
         
         // 数秒待機してからアラートが表示されたかどうかを確認する
         DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {

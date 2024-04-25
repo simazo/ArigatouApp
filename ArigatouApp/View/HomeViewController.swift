@@ -23,7 +23,7 @@ class HomeViewController: UIViewController {
         
         initBackground(name: "cosmos-1920.jpg")
         
-        presenter = SpeechPresenter(view: self)
+        presenter = HomePresenter(view: self)
         presenter.viewDidLoad()
         
     }

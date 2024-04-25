@@ -1,5 +1,5 @@
 //
-//  SpeechPresenter.swift
+//  HomePresenter.swift
 //  ArigatouApp
 //
 //  Created by pero on 2024/04/12.
@@ -20,7 +20,7 @@ protocol PresenterOutput: AnyObject {
     func startMicAnimating()
 }
 
-class SpeechPresenter{
+class HomePresenter{
     private weak var view: PresenterOutput?
     private let speechRecognizer = SFSpeechRecognizer(locale: Locale(identifier: "ja-JP"))!
     private var recognitionRequest: SFSpeechAudioBufferRecognitionRequest?
@@ -166,7 +166,7 @@ class SpeechPresenter{
     }
 }
 
-extension SpeechPresenter: PresenterInput {
+extension HomePresenter: PresenterInput {
     
     func viewDidLoad() {
         let shouldShowEndScreen = matchCountManger.getCount() >= MAX_COUNT
