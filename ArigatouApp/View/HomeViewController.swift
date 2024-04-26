@@ -21,11 +21,23 @@ class HomeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        initNavigation()
         initBackground(name: "cosmos-1920.jpg")
         
         presenter = HomePresenter(view: self)
         presenter.viewDidLoad()
         
+    }
+    
+    func initNavigation(){
+        self.title = "アプリ名"
+        let barButton = UIBarButtonItem(barButtonSystemItem: .trash, target: self, action: #selector(addButtonTapped))
+        navigationItem.rightBarButtonItem = barButton
+    }
+    
+    @objc func addButtonTapped(){
+        let secondVC = LoginViewController()
+        self.navigationController?.pushViewController(secondVC, animated: true)
     }
     
     func initBackground(name: String){
