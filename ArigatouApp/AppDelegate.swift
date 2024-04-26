@@ -19,7 +19,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             //ナビゲーションバーの外観設定を宣言
             let navigationBarAppearance = UINavigationBarAppearance()
             //デフォルトの背景色を設定
-            navigationBarAppearance.configureWithDefaultBackground()
+            //navigationBarAppearance.configureWithDefaultBackground()
+            navigationBarAppearance.backgroundColor = .black
             //各モードに代入
             UINavigationBar.appearance().standardAppearance = navigationBarAppearance
             UINavigationBar.appearance().compactAppearance = navigationBarAppearance

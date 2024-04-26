@@ -30,9 +30,12 @@ class HomeViewController: UIViewController {
     }
     
     func initNavigation(){
-        self.title = "アプリ名"
-        let barButton = UIBarButtonItem(barButtonSystemItem: .trash, target: self, action: #selector(addButtonTapped))
+        self.title = "ありがとう100万回"
+        let barButton = UIBarButtonItem(title: "", image: UIImage(systemName: "person.fill"), target: self, action: #selector(addButtonTapped))
         navigationItem.rightBarButtonItem = barButton
+        
+        // 次の画面のBackボタンを「戻る」に変更
+        self.navigationItem.backBarButtonItem = UIBarButtonItem(title:  "戻る", style:  .plain, target: nil, action: nil)
     }
     
     @objc func addButtonTapped(){
