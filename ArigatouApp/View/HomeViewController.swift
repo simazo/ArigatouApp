@@ -21,11 +21,26 @@ class HomeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        initNavigation()
         initBackground(name: "cosmos-1920.jpg")
         
         presenter = HomePresenter(view: self)
         presenter.viewDidLoad()
         
+    }
+    
+    func initNavigation(){
+        self.title = "ありがとう100万回"
+        let barButton = UIBarButtonItem(title: "", image: UIImage(systemName: "person.fill"), target: self, action: #selector(addButtonTapped))
+        navigationItem.rightBarButtonItem = barButton
+        
+        // 次の画面のBackボタンを「戻る」に変更
+        self.navigationItem.backBarButtonItem = UIBarButtonItem(title:  "戻る", style:  .plain, target: nil, action: nil)
+    }
+    
+    @objc func addButtonTapped(){
+        let secondVC = LoginViewController()
+        self.navigationController?.pushViewController(secondVC, animated: true)
     }
     
     func initBackground(name: String){
