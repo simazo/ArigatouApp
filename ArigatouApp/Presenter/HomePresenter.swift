@@ -27,7 +27,7 @@ class HomePresenter{
     private var recognitionTask: SFSpeechRecognitionTask?
     private var audioEngine = AVAudioEngine()
     
-    private let WORD = "ありがとう"
+    private let MATCH_WORD = "ありがと|ありがとう"
     private let MAX_COUNT = 1000000
     private var previousTranscription = ""
     var matchCountManger: MatchCountManager!
@@ -89,8 +89,8 @@ class HomePresenter{
                 self.view?.startMicAnimating()
                 
                 // マッチした場合
-                if filteredTranscription.contains(WORD) {
-                    
+                if let _ = filteredTranscription.range(of: MATCH_WORD, options: .regularExpression) {
+
                     // カウントアップ
                     self.matchCountManger.incrementCount()
 
@@ -100,7 +100,7 @@ class HomePresenter{
                     self.view?.redrawCounterLabel(text: "\(self.formatTotalCount())回目のありがとう")
                     
                     // タイムラグ挿入
-                    Thread.sleep(forTimeInterval: 0.5)
+                    //Thread.sleep(forTimeInterval: 0.5)
                     
                     // 音声認識リスタート
                     self.restartSpeech()
