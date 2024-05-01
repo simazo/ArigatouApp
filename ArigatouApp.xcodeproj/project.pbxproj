@@ -51,6 +51,7 @@
 		CC55BFFD2BCF93C3003C3E15 /* cosmos-640.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "cosmos-640.jpg"; sourceTree = "<group>"; };
 		CC55BFFF2BCF96D3003C3E15 /* cosmos-1920.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "cosmos-1920.jpg"; sourceTree = "<group>"; };
 		CCDEAD282BDB1CCE0096704A /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		CCDEADC22BE1ECBB0096704A /* device_provisioning_profile.mobileprovision */ = {isa = PBXFileReference; lastKnownFileType = file; path = device_provisioning_profile.mobileprovision; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -85,6 +86,7 @@
 		CC55BF432BC9028D003C3E15 = {
 			isa = PBXGroup;
 			children = (
+				CCDEADC22BE1ECBB0096704A /* device_provisioning_profile.mobileprovision */,
 				CC55BF4E2BC9028D003C3E15 /* ArigatouApp */,
 				CC55BFF52BCE9C2D003C3E15 /* ArigatouAppTests */,
 				CC55BF4D2BC9028D003C3E15 /* Products */,
