@@ -24,6 +24,7 @@
 		CCDEADCE2BE224ED0096704A /* AppStore_ProvisioningProfile.mobileprovision in Resources */ = {isa = PBXBuildFile; fileRef = CCDEADCD2BE224ED0096704A /* AppStore_ProvisioningProfile.mobileprovision */; };
 		CCDEADD02BE225460096704A /* Develop_ProvisioningProfile.mobileprovision in Resources */ = {isa = PBXBuildFile; fileRef = CCDEADCF2BE225460096704A /* Develop_ProvisioningProfile.mobileprovision */; };
 		CCDEADD12BE225460096704A /* Develop_ProvisioningProfile.mobileprovision in Resources */ = {isa = PBXBuildFile; fileRef = CCDEADCF2BE225460096704A /* Develop_ProvisioningProfile.mobileprovision */; };
+		CCDEADF32BE44A160096704A /* MicImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCDEADF22BE44A160096704A /* MicImageView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -56,6 +57,7 @@
 		CCDEAD282BDB1CCE0096704A /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		CCDEADCD2BE224ED0096704A /* AppStore_ProvisioningProfile.mobileprovision */ = {isa = PBXFileReference; lastKnownFileType = file; path = AppStore_ProvisioningProfile.mobileprovision; sourceTree = "<group>"; };
 		CCDEADCF2BE225460096704A /* Develop_ProvisioningProfile.mobileprovision */ = {isa = PBXFileReference; lastKnownFileType = file; path = Develop_ProvisioningProfile.mobileprovision; sourceTree = "<group>"; };
+		CCDEADF22BE44A160096704A /* MicImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MicImageView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -135,6 +137,7 @@
 			children = (
 				CC55BF532BC9028D003C3E15 /* HomeViewController.swift */,
 				CCDEAD282BDB1CCE0096704A /* LoginViewController.swift */,
+				CCDEADF22BE44A160096704A /* MicImageView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -266,6 +269,7 @@
 				CC209D282BD47EB10069E2E4 /* MatchCountManager.swift in Sources */,
 				CC55BF542BC9028D003C3E15 /* HomeViewController.swift in Sources */,
 				CCDEAD292BDB1CCE0096704A /* LoginViewController.swift in Sources */,
+				CCDEADF32BE44A160096704A /* MicImageView.swift in Sources */,
 				CC209D262BD47E890069E2E4 /* MatchCount.swift in Sources */,
 				CC55BF502BC9028D003C3E15 /* AppDelegate.swift in Sources */,
 				CC209D2A2BD47ED20069E2E4 /* MatchCountRepository.swift in Sources */,
