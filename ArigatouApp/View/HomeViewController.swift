@@ -105,7 +105,7 @@ class HomeViewController: UIViewController {
         view.addSubview(micView)
         
         NSLayoutConstraint.activate([
-            micView.centerYAnchor.constraint(equalTo: remainingLabel.bottomAnchor, constant: 50.0),
+            micView.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: 110.0),
             micView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             micView.widthAnchor.constraint(equalToConstant: 50),
             micView.heightAnchor.constraint(equalToConstant: 50)
