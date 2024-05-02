@@ -10,8 +10,7 @@ import UIKit
 class HomeViewController: UIViewController {
     private var remainingLabel: UILabel!
     private var counterLabel: UILabel!
-    private var micImageView: UIImageView!
-    private var micImages: [UIImage]!
+    private var micView: MicImageView!
     
     private var presenter: PresenterInput!
     
@@ -100,42 +99,29 @@ class HomeViewController: UIViewController {
     }
     
     func initMicImage(){
-        micImageView = UIImageView()
-        micImages = [UIImage]()
+        micView = MicImageView(image: UIImage(systemName: "mic.fill"))
+        micView.tintColor = .orange // アイコンの色をオレンジに設定
+        micView.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(micView)
         
-        // 配置
-        micImageView.translatesAutoresizingMaskIntoConstraints = false
-        self.view.addSubview(micImageView)
         NSLayoutConstraint.activate([
-            micImageView.centerYAnchor.constraint(equalTo: remainingLabel.bottomAnchor, constant: 50.0),
-            micImageView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            micView.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: 110.0),
+            micView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            micView.widthAnchor.constraint(equalToConstant: 50),
+            micView.heightAnchor.constraint(equalToConstant: 50)
         ])
-        
-        // アニメーション設定
-        for i in 1...2 {
-            micImages.append(UIImage(named: "mic\(i).png")!)
-        }
-        micImageView.animationImages = micImages
-        micImageView.animationDuration = 0.1
-        micImageView.image = UIImage(named: "mic1")
     }
     
     func startMicAnimating(){
-        guard !micImageView.isAnimating else {
-            return
+        
+        // 1.2秒後にアニメーションを停止する
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1.2) {
+            self.micView.stopBounceAnimation()
         }
         
-        micImageView.startAnimating()
-        
-        DispatchQueue.global(qos: .default).async {
-           
-            // アニメーション１回分の時間
-            Thread.sleep(forTimeInterval: 1.2)
-            
-            // メインスレッドでアニメーション終了させる
-            DispatchQueue.main.async {
-                self.micImageView.stopAnimating()
-            }
+        // アニメーションを開始する
+        DispatchQueue.main.async {
+            self.micView.startBounceAnimation()
         }
     }
 }
