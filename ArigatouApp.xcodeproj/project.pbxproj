@@ -25,6 +25,7 @@
 		CCDEADD02BE225460096704A /* Develop_ProvisioningProfile.mobileprovision in Resources */ = {isa = PBXBuildFile; fileRef = CCDEADCF2BE225460096704A /* Develop_ProvisioningProfile.mobileprovision */; };
 		CCDEADD12BE225460096704A /* Develop_ProvisioningProfile.mobileprovision in Resources */ = {isa = PBXBuildFile; fileRef = CCDEADCF2BE225460096704A /* Develop_ProvisioningProfile.mobileprovision */; };
 		CCDEADF32BE44A160096704A /* MicImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCDEADF22BE44A160096704A /* MicImageView.swift */; };
+		CCDEAE152BE514630096704A /* NaviMenuTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCDEAE142BE514630096704A /* NaviMenuTableView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -58,6 +59,7 @@
 		CCDEADCD2BE224ED0096704A /* AppStore_ProvisioningProfile.mobileprovision */ = {isa = PBXFileReference; lastKnownFileType = file; path = AppStore_ProvisioningProfile.mobileprovision; sourceTree = "<group>"; };
 		CCDEADCF2BE225460096704A /* Develop_ProvisioningProfile.mobileprovision */ = {isa = PBXFileReference; lastKnownFileType = file; path = Develop_ProvisioningProfile.mobileprovision; sourceTree = "<group>"; };
 		CCDEADF22BE44A160096704A /* MicImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MicImageView.swift; sourceTree = "<group>"; };
+		CCDEAE142BE514630096704A /* NaviMenuTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NaviMenuTableView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -138,6 +140,7 @@
 				CC55BF532BC9028D003C3E15 /* HomeViewController.swift */,
 				CCDEAD282BDB1CCE0096704A /* LoginViewController.swift */,
 				CCDEADF22BE44A160096704A /* MicImageView.swift */,
+				CCDEAE142BE514630096704A /* NaviMenuTableView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -275,6 +278,7 @@
 				CC209D2A2BD47ED20069E2E4 /* MatchCountRepository.swift in Sources */,
 				CC209D2C2BD47EED0069E2E4 /* UserDefaultsMatchCountRepository.swift in Sources */,
 				CC55BF522BC9028D003C3E15 /* SceneDelegate.swift in Sources */,
+				CCDEAE152BE514630096704A /* NaviMenuTableView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
