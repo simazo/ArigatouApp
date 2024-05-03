@@ -26,7 +26,7 @@ class LoginViewController: UIViewController {
         emailTextField = UITextField()
         emailTextField.font = .boldSystemFont(ofSize: 20)
         
-        emailTextField.placeholder = "email"
+        emailTextField.placeholder = "メールアドレス"
         emailTextField.keyboardType = .emailAddress
         emailTextField.backgroundColor = UIColor.white
         emailTextField.layer.borderWidth = 1
@@ -52,7 +52,7 @@ class LoginViewController: UIViewController {
         passwordTextField = UITextField()
         passwordTextField.font = .boldSystemFont(ofSize: 20)
         
-        passwordTextField.placeholder = "password"
+        passwordTextField.placeholder = "パスワード"
         passwordTextField.keyboardType = .alphabet
         passwordTextField.backgroundColor = UIColor.white
         passwordTextField.layer.borderWidth = 1
