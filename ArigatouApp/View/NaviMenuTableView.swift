@@ -10,6 +10,7 @@ import UIKit
 class NaviMenuTableView: UITableView, UITableViewDataSource, UITableViewDelegate {
     var items: [String] = []
     var selectedItem: String?
+    weak var menuDelegate: NaviMenuTableViewDelegate?
     
     override init(frame: CGRect, style: UITableView.Style) {
         super.init(frame: frame, style: style)
@@ -38,10 +39,17 @@ class NaviMenuTableView: UITableView, UITableViewDataSource, UITableViewDelegate
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         selectedItem = items[indexPath.row]
-        // 選択されたアイテムに対する任意の処理を実行
-        print("選択されたアイテム：", selectedItem ?? "")
+        
+        //print("選択されたアイテム：", selectedItem ?? "")
         
         // プルダウンメニューを閉じる場合は、選択後のアクションを実行する
         // 例： self.dismiss(animated: true, completion: nil)
+        
+        // 選択されたアイテムをデリゲートに通知
+        menuDelegate?.didSelectItem(selectedItem ?? "")
     }
+}
+
+protocol NaviMenuTableViewDelegate: AnyObject {
+    func didSelectItem(_ item: String)
 }

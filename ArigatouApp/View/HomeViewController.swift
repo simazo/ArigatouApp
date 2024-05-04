@@ -52,22 +52,12 @@ class HomeViewController: UIViewController {
         ])
         naviMenutableView.isHidden = true
         naviMenutableView.items = items
+        naviMenutableView.menuDelegate = self
     }
     
     @objc func addButtonTapped(){
-        /*
-        let secondVC = LoginViewController()
-        self.navigationController?.pushViewController(secondVC, animated: true)
-         */
-        //
-        isMenuVisible.toggle() // フラグを切り替える
-        
-        // メニューが表示されている場合
-        if isMenuVisible {
-            naviMenutableView.isHidden = false
-        } else {
-            naviMenutableView.isHidden = true
-        }
+        isMenuVisible.toggle()
+        naviMenutableView.isHidden = !isMenuVisible
     }
     
     func initBackground(name: String){
@@ -150,6 +140,24 @@ class HomeViewController: UIViewController {
         // アニメーションを開始する
         DispatchQueue.main.async {
             self.micView.startBounceAnimation()
+        }
+    }
+}
+extension HomeViewController: NaviMenuTableViewDelegate{
+    func didSelectItem(_ item: String) {
+        
+        // 項目をタップしても、ナビがそのまま残るのでタップのタイミングで非表示に
+        naviMenutableView.isHidden = true
+        isMenuVisible = false
+        
+        switch item {
+        case "ログイン":
+            let secondVC = LoginViewController()
+            self.navigationController?.pushViewController(secondVC, animated: true)
+        case "アカウント登録":
+            print("アカウント登録へ")
+        default:
+            break
         }
     }
 }
