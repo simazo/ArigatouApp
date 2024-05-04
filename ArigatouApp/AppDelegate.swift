@@ -21,13 +21,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             //デフォルトの背景色を設定
             //navigationBarAppearance.configureWithDefaultBackground()
             navigationBarAppearance.backgroundColor = .black
+            
             //各モードに代入
             UINavigationBar.appearance().standardAppearance = navigationBarAppearance
             UINavigationBar.appearance().compactAppearance = navigationBarAppearance
             UINavigationBar.appearance().scrollEdgeAppearance = navigationBarAppearance
             
             //ナビゲーションバーのタイトル文字の色変更
-            navigationBarAppearance.titleTextAttributes = [.foregroundColor: UIColor.black]
+            navigationBarAppearance.titleTextAttributes = [.foregroundColor: UIColor.white]
+            
         }
         
         return true

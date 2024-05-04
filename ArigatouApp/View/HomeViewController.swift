@@ -12,6 +12,10 @@ class HomeViewController: UIViewController {
     private var counterLabel: UILabel!
     private var micView: MicImageView!
     
+    var naviMenutableView: NaviMenuTableView!
+    var isMenuVisible = false
+    let items = ["ログイン", "アカウント登録"]
+    
     private var presenter: PresenterInput!
     
     var timer: Timer = Timer()
@@ -35,11 +39,25 @@ class HomeViewController: UIViewController {
         
         // 次の画面のBackボタンを「戻る」に変更
         self.navigationItem.backBarButtonItem = UIBarButtonItem(title:  "戻る", style:  .plain, target: nil, action: nil)
+        
+        naviMenutableView = NaviMenuTableView(frame: CGRect.zero, style: .plain)
+        naviMenutableView.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(naviMenutableView)
+        
+        NSLayoutConstraint.activate([
+            naviMenutableView.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.4),
+            naviMenutableView.heightAnchor.constraint(equalToConstant: 200),
+            naviMenutableView.topAnchor.constraint(equalTo: view.topAnchor),
+            naviMenutableView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
+        ])
+        naviMenutableView.isHidden = true
+        naviMenutableView.items = items
+        naviMenutableView.menuDelegate = self
     }
     
     @objc func addButtonTapped(){
-        let secondVC = LoginViewController()
-        self.navigationController?.pushViewController(secondVC, animated: true)
+        isMenuVisible.toggle()
+        naviMenutableView.isHidden = !isMenuVisible
     }
     
     func initBackground(name: String){
@@ -122,6 +140,24 @@ class HomeViewController: UIViewController {
         // アニメーションを開始する
         DispatchQueue.main.async {
             self.micView.startBounceAnimation()
+        }
+    }
+}
+extension HomeViewController: NaviMenuTableViewDelegate{
+    func didSelectItem(_ item: String) {
+        
+        // 項目をタップしても、ナビがそのまま残るのでタップのタイミングで非表示に
+        naviMenutableView.isHidden = true
+        isMenuVisible = false
+        
+        switch item {
+        case "ログイン":
+            let secondVC = LoginViewController()
+            self.navigationController?.pushViewController(secondVC, animated: true)
+        case "アカウント登録":
+            print("アカウント登録へ")
+        default:
+            break
         }
     }
 }
