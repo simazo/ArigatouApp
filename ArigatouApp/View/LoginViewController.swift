@@ -11,6 +11,7 @@ class LoginViewController: UIViewController {
     
     private var emailTextField: UITextField!
     private var passwordTextField: UITextField!
+    private var loginButton: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -20,11 +21,36 @@ class LoginViewController: UIViewController {
         
         initEmailTextField()
         initPasswordTextField()
+        initLoginButton()
+    }
+    
+    func initLoginButton(){
+        loginButton = UIButton()
+        loginButton.setTitle("ログイン", for:UIControl.State.normal)
+        loginButton.titleLabel?.font =  UIFont.systemFont(ofSize: 16)
+        loginButton.backgroundColor = .systemBlue
+        
+        loginButton.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(loginButton)
+        NSLayoutConstraint.activate([
+            loginButton.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: 0.0),
+            loginButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            loginButton.widthAnchor.constraint(equalToConstant: 280),
+            loginButton.heightAnchor.constraint(equalToConstant: 40)
+        ])
+        
+        loginButton.addTarget(self,
+                       action: #selector(LoginViewController.buttonTapped(sender:)),
+                       for: .touchUpInside)
+    }
+    
+    @objc func buttonTapped(sender : Any) {
+        print("LOGINNNN")
     }
     
     func initEmailTextField(){
         emailTextField = UITextField()
-        emailTextField.font = .boldSystemFont(ofSize: 20)
+        emailTextField.font = .boldSystemFont(ofSize: 16)
         
         emailTextField.placeholder = "メールアドレス"
         emailTextField.keyboardType = .emailAddress
@@ -50,7 +76,7 @@ class LoginViewController: UIViewController {
     
     func initPasswordTextField(){
         passwordTextField = UITextField()
-        passwordTextField.font = .boldSystemFont(ofSize: 20)
+        passwordTextField.font = .boldSystemFont(ofSize: 16)
         
         passwordTextField.placeholder = "パスワード"
         passwordTextField.keyboardType = .alphabet
