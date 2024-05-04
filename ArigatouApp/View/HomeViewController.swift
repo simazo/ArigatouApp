@@ -25,12 +25,39 @@ class HomeViewController: UIViewController {
         super.viewDidLoad()
         
         initNavigation()
+        initGesture()
         initBackground(name: "cosmos-1920.jpg")
         
         presenter = HomePresenter(view: self)
         presenter.viewDidLoad()
         
+        
     }
+    
+    func initGesture() {
+        // タップジェスチャーの追加
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleTap(_:)))
+        // メニューのタップを処理するために、cancelsTouchesInView を false に設定する
+        tapGesture.cancelsTouchesInView = false
+        self.view.addGestureRecognizer(tapGesture)
+    }
+    
+    @objc func handleTap(_ sender: UITapGestureRecognizer) {
+        if isMenuVisible {
+            // タップされた場所がメニュー内であれば、メニューのタップを処理し、
+            // それ以外の場所のタップを無視する
+            let location = sender.location(in: naviMenutableView)
+            if naviMenutableView.bounds.contains(location) {
+                return
+            }
+        }
+        
+        // メニュー以外の場所がタップされた場合の処理
+        isMenuVisible = false
+        naviMenutableView.isHidden = true
+    }
+
+
     
     func initNavigation(){
         self.title = "ありがとう100万回"
