@@ -28,8 +28,6 @@
 		CCDEAE152BE514630096704A /* NaviMenuTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCDEAE142BE514630096704A /* NaviMenuTableView.swift */; };
 		CCDEAE172BE6BD350096704A /* Validator.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCDEAE162BE6BD350096704A /* Validator.swift */; };
 		CCDEAE192BE6BE330096704A /* LoginPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCDEAE182BE6BE330096704A /* LoginPresenter.swift */; };
-		CCDEAE1B2BE7B31F0096704A /* PasswordChangeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCDEAE1A2BE7B31F0096704A /* PasswordChangeViewController.swift */; };
-		CCDEAE1D2BE83C9E0096704A /* ResetPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCDEAE1C2BE83C9E0096704A /* ResetPasswordViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -66,8 +64,6 @@
 		CCDEAE142BE514630096704A /* NaviMenuTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NaviMenuTableView.swift; sourceTree = "<group>"; };
 		CCDEAE162BE6BD350096704A /* Validator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Validator.swift; sourceTree = "<group>"; };
 		CCDEAE182BE6BE330096704A /* LoginPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginPresenter.swift; sourceTree = "<group>"; };
-		CCDEAE1A2BE7B31F0096704A /* PasswordChangeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordChangeViewController.swift; sourceTree = "<group>"; };
-		CCDEAE1C2BE83C9E0096704A /* ResetPasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetPasswordViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -151,8 +147,6 @@
 				CCDEAD282BDB1CCE0096704A /* LoginViewController.swift */,
 				CCDEADF22BE44A160096704A /* MicImageView.swift */,
 				CCDEAE142BE514630096704A /* NaviMenuTableView.swift */,
-				CCDEAE1A2BE7B31F0096704A /* PasswordChangeViewController.swift */,
-				CCDEAE1C2BE83C9E0096704A /* ResetPasswordViewController.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -292,8 +286,6 @@
 				CC209D2A2BD47ED20069E2E4 /* MatchCountRepository.swift in Sources */,
 				CC209D2C2BD47EED0069E2E4 /* UserDefaultsMatchCountRepository.swift in Sources */,
 				CC55BF522BC9028D003C3E15 /* SceneDelegate.swift in Sources */,
-				CCDEAE1D2BE83C9E0096704A /* ResetPasswordViewController.swift in Sources */,
-				CCDEAE1B2BE7B31F0096704A /* PasswordChangeViewController.swift in Sources */,
 				CCDEAE152BE514630096704A /* NaviMenuTableView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
