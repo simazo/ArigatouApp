@@ -44,6 +44,10 @@ class LoginViewController: UIViewController {
             resetPasswordButton.widthAnchor.constraint(equalToConstant: 280),
             resetPasswordButton.heightAnchor.constraint(equalToConstant: 40)
         ])
+        
+        resetPasswordButton.addTarget(self,
+                                      action: #selector(LoginViewController.buttonResetPasswordTapped(sender:)),
+                       for: .touchUpInside)
     }
     
     func initLoginButton(){
@@ -62,11 +66,42 @@ class LoginViewController: UIViewController {
         ])
         
         loginButton.addTarget(self,
-                       action: #selector(LoginViewController.buttonTapped(sender:)),
+                       action: #selector(LoginViewController.buttonLoginTapped(sender:)),
                        for: .touchUpInside)
     }
     
-    @objc func buttonTapped(sender : Any) {
+    @objc func buttonResetPasswordTapped(sender : Any) {
+        var alertTextField: UITextField?
+        
+        let alert = UIAlertController(
+            title: "パスワード・リセット",
+            message: "アカウント登録に使用したメールアドレスを入力ください。\nパスワード・リセットへのリンクをお送りします。",
+            preferredStyle: UIAlertController.Style.alert)
+        alert.addTextField(
+            configurationHandler: {(textField: UITextField!) in
+                alertTextField = textField
+                textField.text = self.emailTextField.text
+                textField.placeholder = "メールアドレス"
+                // textField.isSecureTextEntry = true
+            })
+        alert.addAction(
+            UIAlertAction(
+                title: "キャンセル",
+                style: UIAlertAction.Style.cancel,
+                handler: nil))
+        alert.addAction(
+            UIAlertAction(
+                title: "送信",
+                style: UIAlertAction.Style.default) { _ in
+                    if let text = alertTextField?.text {
+                    }
+                }
+        )
+        
+        self.present(alert, animated: true, completion: nil)
+    }
+    
+    @objc func buttonLoginTapped(sender : Any) {
         guard let email = emailTextField.text,
               let password = passwordTextField.text else {
             return
