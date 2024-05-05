@@ -26,6 +26,8 @@
 		CCDEADD12BE225460096704A /* Develop_ProvisioningProfile.mobileprovision in Resources */ = {isa = PBXBuildFile; fileRef = CCDEADCF2BE225460096704A /* Develop_ProvisioningProfile.mobileprovision */; };
 		CCDEADF32BE44A160096704A /* MicImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCDEADF22BE44A160096704A /* MicImageView.swift */; };
 		CCDEAE152BE514630096704A /* NaviMenuTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCDEAE142BE514630096704A /* NaviMenuTableView.swift */; };
+		CCDEAE172BE6BD350096704A /* Validator.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCDEAE162BE6BD350096704A /* Validator.swift */; };
+		CCDEAE192BE6BE330096704A /* LoginPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCDEAE182BE6BE330096704A /* LoginPresenter.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -60,6 +62,8 @@
 		CCDEADCF2BE225460096704A /* Develop_ProvisioningProfile.mobileprovision */ = {isa = PBXFileReference; lastKnownFileType = file; path = Develop_ProvisioningProfile.mobileprovision; sourceTree = "<group>"; };
 		CCDEADF22BE44A160096704A /* MicImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MicImageView.swift; sourceTree = "<group>"; };
 		CCDEAE142BE514630096704A /* NaviMenuTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NaviMenuTableView.swift; sourceTree = "<group>"; };
+		CCDEAE162BE6BD350096704A /* Validator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Validator.swift; sourceTree = "<group>"; };
+		CCDEAE182BE6BE330096704A /* LoginPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginPresenter.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -87,6 +91,7 @@
 				CC209D272BD47EB10069E2E4 /* MatchCountManager.swift */,
 				CC209D292BD47ED20069E2E4 /* MatchCountRepository.swift */,
 				CC209D2B2BD47EED0069E2E4 /* UserDefaultsMatchCountRepository.swift */,
+				CCDEAE162BE6BD350096704A /* Validator.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -130,6 +135,7 @@
 			isa = PBXGroup;
 			children = (
 				CC55BF642BC90301003C3E15 /* HomePresenter.swift */,
+				CCDEAE182BE6BE330096704A /* LoginPresenter.swift */,
 			);
 			path = Presenter;
 			sourceTree = "<group>";
@@ -272,9 +278,11 @@
 				CC209D282BD47EB10069E2E4 /* MatchCountManager.swift in Sources */,
 				CC55BF542BC9028D003C3E15 /* HomeViewController.swift in Sources */,
 				CCDEAD292BDB1CCE0096704A /* LoginViewController.swift in Sources */,
+				CCDEAE172BE6BD350096704A /* Validator.swift in Sources */,
 				CCDEADF32BE44A160096704A /* MicImageView.swift in Sources */,
 				CC209D262BD47E890069E2E4 /* MatchCount.swift in Sources */,
 				CC55BF502BC9028D003C3E15 /* AppDelegate.swift in Sources */,
+				CCDEAE192BE6BE330096704A /* LoginPresenter.swift in Sources */,
 				CC209D2A2BD47ED20069E2E4 /* MatchCountRepository.swift in Sources */,
 				CC209D2C2BD47EED0069E2E4 /* UserDefaultsMatchCountRepository.swift in Sources */,
 				CC55BF522BC9028D003C3E15 /* SceneDelegate.swift in Sources */,

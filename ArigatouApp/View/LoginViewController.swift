@@ -13,6 +13,8 @@ class LoginViewController: UIViewController {
     private var passwordTextField: UITextField!
     private var loginButton: UIButton!
     
+    private var presenter: LoginPresenterInput!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -22,6 +24,8 @@ class LoginViewController: UIViewController {
         initEmailTextField()
         initPasswordTextField()
         initLoginButton()
+        
+        presenter = LoginPresenter(view: self)
     }
     
     func initLoginButton(){
@@ -45,7 +49,12 @@ class LoginViewController: UIViewController {
     }
     
     @objc func buttonTapped(sender : Any) {
-        print("LOGINNNN")
+        guard let email = emailTextField.text,
+              let password = passwordTextField.text else {
+            return
+        }
+        
+        presenter.validateLogin(email: email, password: password)
     }
     
     func initEmailTextField(){
@@ -98,5 +107,23 @@ class LoginViewController: UIViewController {
             passwordTextField.widthAnchor.constraint(equalToConstant: 280),
             passwordTextField.heightAnchor.constraint(equalToConstant: 40)
         ])
+    }
+}
+
+extension LoginViewController : LoginPresenterOutput {
+    func validationSuccess() {
+        print("ログインします")
+    }
+    
+    func validationFailed(errorMessage: String) {
+        let alert = UIAlertController(title: "ログインエラー", message: errorMessage, preferredStyle: .alert)
+
+        let ok = UIAlertAction(title: "OK", style: .default) { (action) in
+            self.dismiss(animated: true, completion: nil)
+        }
+        alert.addAction(ok)
+        DispatchQueue.main.async {
+            self.present(alert, animated: true, completion: nil)
+        }
     }
 }

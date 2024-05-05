@@ -30,8 +30,6 @@ class HomeViewController: UIViewController {
         
         presenter = HomePresenter(view: self)
         presenter.viewDidLoad()
-        
-        
     }
     
     func initGesture() {
