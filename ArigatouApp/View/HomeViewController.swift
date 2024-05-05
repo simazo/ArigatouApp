@@ -55,8 +55,6 @@ class HomeViewController: UIViewController {
         naviMenutableView.isHidden = true
     }
 
-
-    
     func initNavigation(){
         self.title = "ありがとう100万回"
         let barButton = UIBarButtonItem(title: "", image: UIImage(systemName: "person.fill"), target: self, action: #selector(addButtonTapped))

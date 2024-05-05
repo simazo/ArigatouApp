@@ -12,6 +12,7 @@ class LoginViewController: UIViewController {
     private var emailTextField: UITextField!
     private var passwordTextField: UITextField!
     private var loginButton: UIButton!
+    private var resetPasswordButton: UIButton!
     
     private var presenter: LoginPresenterInput!
     
@@ -19,13 +20,30 @@ class LoginViewController: UIViewController {
         super.viewDidLoad()
         
         self.view.backgroundColor = .lightGray
-        self.title = ""
+        self.title = "ログイン"
         
         initEmailTextField()
         initPasswordTextField()
         initLoginButton()
+        initResetPasswordButton()
         
         presenter = LoginPresenter(view: self)
+    }
+    
+    func initResetPasswordButton() {
+        resetPasswordButton = UIButton()
+        resetPasswordButton.setTitle("パスワードを忘れた場合はこちら", for:UIControl.State.normal)
+        resetPasswordButton.titleLabel?.font =  UIFont.systemFont(ofSize: 14)
+        resetPasswordButton.backgroundColor = .systemGray
+        
+        resetPasswordButton.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(resetPasswordButton)
+        NSLayoutConstraint.activate([
+            resetPasswordButton.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: 60),
+            resetPasswordButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            resetPasswordButton.widthAnchor.constraint(equalToConstant: 280),
+            resetPasswordButton.heightAnchor.constraint(equalToConstant: 40)
+        ])
     }
     
     func initLoginButton(){
