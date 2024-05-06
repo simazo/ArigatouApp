@@ -9,7 +9,7 @@ import Firebase
 
 protocol LoginPresenterInput: AnyObject {
     func validateLogin(email: String, password: String)
-    func exists(email: String)
+    func emailExists(email: String)
 }
 
 protocol LoginPresenterOutput: AnyObject {
@@ -26,30 +26,51 @@ class LoginPresenter {
     }
 }
 extension LoginPresenter : LoginPresenterInput {
-    func exists(email: String) {
-        // ユーザーのメールアドレス
-        let userEmail = "user@example.com"
-
-        // Firebase Authentication のメソッドを使用して登録済みかどうかを確認する
-        firebase.auth().fetchSignInMethods(forEmail: userEmail) { providers, error in
+    
+    func emailExists(email: String) {
+        
+        checkIfEmailExists(email: email) { (exists, error) in
             if let error = error {
-                print("エラー：", error.localizedDescription)
+                // エラーが発生した場合のハンドリング
+                print("エラー: \(error.localizedDescription)")
                 return
             }
             
-            guard let providers = providers as? [String] else {
-                print("プロバイダーが見つかりませんでした")
-                return
-            }
-            
-            if providers.contains(firebase.auth.EmailAuthProvider.emailPasswordSignInMethod()) {
-                print("ユーザーは登録されています")
-                // ここに登録されたユーザーに対する追加の処理を記述します
+            if exists {
+                print("\(email) は登録済みです。")
             } else {
-                print("ユーザーは登録されていません")
-                // ここに新しいユーザーの登録手続きを開始するための処理を記述します
+                print("\(email) は未登録です。")
             }
         }
+    }
+    
+    func checkIfEmailExists(email: String, completion: @escaping (Bool, Error?) -> Void) {
+        // Auth.auth().fetchSignInMethods　非推奨
+        /*
+        Auth.auth().fetchSignInMethods(forEmail: email) { (methods, error) in
+            if let error = error {
+                // エラーが発生した場合は、エラーをハンドリングしてメールが登録されているかどうかを確認することができません。
+                print("エラー: \(error.localizedDescription)")
+                completion(false, error)
+                return
+            }
+            
+            if let methods = methods {
+                // メソッドが nil でない場合、そのメールアドレスは登録済みです。
+                if methods.isEmpty {
+                    // 登録されていない場合
+                    completion(false, nil)
+                } else {
+                    // 登録されている場合
+                    completion(true, nil)
+                }
+            } else {
+                // メソッドが nil の場合、エラーをハンドリングしてメールが登録されているかどうかを確認することができません。
+                print("メソッドが nil です。")
+                completion(false, nil)
+            }
+        }
+         */
     }
     
     func validateLogin(email: String, password: String) {

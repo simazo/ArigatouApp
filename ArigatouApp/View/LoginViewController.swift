@@ -47,7 +47,7 @@ class LoginViewController: UIViewController {
         
         resetPasswordButton.addTarget(self,
                                       action: #selector(LoginViewController.buttonResetPasswordTapped(sender:)),
-                       for: .touchUpInside)
+                                      for: .touchUpInside)
     }
     
     func initLoginButton(){
@@ -66,8 +66,8 @@ class LoginViewController: UIViewController {
         ])
         
         loginButton.addTarget(self,
-                       action: #selector(LoginViewController.buttonLoginTapped(sender:)),
-                       for: .touchUpInside)
+                              action: #selector(LoginViewController.buttonLoginTapped(sender:)),
+                              for: .touchUpInside)
     }
     
     @objc func buttonResetPasswordTapped(sender : Any) {
@@ -75,7 +75,7 @@ class LoginViewController: UIViewController {
         
         let alert = UIAlertController(
             title: "パスワード変更",
-            message: "アカウント登録に使用したメールアドレスを入力ください。\nパスワード変更へのリンクをお送りします。",
+            message: "パスワード変更へのリンクをお送りします。",
             preferredStyle: UIAlertController.Style.alert)
         alert.addTextField(
             configurationHandler: {(textField: UITextField!) in
@@ -94,6 +94,7 @@ class LoginViewController: UIViewController {
                 title: "送信",
                 style: UIAlertAction.Style.default) { _ in
                     if let text = alertTextField?.text {
+                        self.presenter.emailExists(email: text)
                     }
                 }
         )
