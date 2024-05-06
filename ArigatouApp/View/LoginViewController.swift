@@ -12,6 +12,7 @@ class LoginViewController: UIViewController {
     private var emailTextField: UITextField!
     private var passwordTextField: UITextField!
     private var loginButton: UIButton!
+    private var resetPasswordButton: UIButton!
     
     private var presenter: LoginPresenterInput!
     
@@ -19,13 +20,34 @@ class LoginViewController: UIViewController {
         super.viewDidLoad()
         
         self.view.backgroundColor = .lightGray
-        self.title = ""
+        self.title = "ログイン"
         
         initEmailTextField()
         initPasswordTextField()
         initLoginButton()
+        initResetPasswordButton()
         
         presenter = LoginPresenter(view: self)
+    }
+    
+    func initResetPasswordButton() {
+        resetPasswordButton = UIButton()
+        resetPasswordButton.setTitle("パスワードを忘れた場合はこちら", for:UIControl.State.normal)
+        resetPasswordButton.titleLabel?.font =  UIFont.systemFont(ofSize: 14)
+        resetPasswordButton.backgroundColor = .systemGray
+        
+        resetPasswordButton.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(resetPasswordButton)
+        NSLayoutConstraint.activate([
+            resetPasswordButton.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: 60),
+            resetPasswordButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            resetPasswordButton.widthAnchor.constraint(equalToConstant: 280),
+            resetPasswordButton.heightAnchor.constraint(equalToConstant: 40)
+        ])
+        
+        resetPasswordButton.addTarget(self,
+                                      action: #selector(LoginViewController.buttonResetPasswordTapped(sender:)),
+                                      for: .touchUpInside)
     }
     
     func initLoginButton(){
@@ -44,11 +66,43 @@ class LoginViewController: UIViewController {
         ])
         
         loginButton.addTarget(self,
-                       action: #selector(LoginViewController.buttonTapped(sender:)),
-                       for: .touchUpInside)
+                              action: #selector(LoginViewController.buttonLoginTapped(sender:)),
+                              for: .touchUpInside)
     }
     
-    @objc func buttonTapped(sender : Any) {
+    @objc func buttonResetPasswordTapped(sender : Any) {
+        var alertTextField: UITextField?
+        
+        let alert = UIAlertController(
+            title: "パスワード変更",
+            message: "パスワード変更へのリンクをお送りします。",
+            preferredStyle: UIAlertController.Style.alert)
+        alert.addTextField(
+            configurationHandler: {(textField: UITextField!) in
+                alertTextField = textField
+                textField.text = self.emailTextField.text
+                textField.placeholder = "メールアドレス"
+                // textField.isSecureTextEntry = true
+            })
+        alert.addAction(
+            UIAlertAction(
+                title: "キャンセル",
+                style: UIAlertAction.Style.cancel,
+                handler: nil))
+        alert.addAction(
+            UIAlertAction(
+                title: "送信",
+                style: UIAlertAction.Style.default) { _ in
+                    if let text = alertTextField?.text {
+                        self.presenter.emailExists(email: text)
+                    }
+                }
+        )
+        
+        self.present(alert, animated: true, completion: nil)
+    }
+    
+    @objc func buttonLoginTapped(sender : Any) {
         guard let email = emailTextField.text,
               let password = passwordTextField.text else {
             return
