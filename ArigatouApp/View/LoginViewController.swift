@@ -74,8 +74,8 @@ class LoginViewController: UIViewController {
         var alertTextField: UITextField?
         
         let alert = UIAlertController(
-            title: "パスワード・リセット",
-            message: "アカウント登録に使用したメールアドレスを入力ください。\nパスワード・リセットへのリンクをお送りします。",
+            title: "パスワード変更",
+            message: "アカウント登録に使用したメールアドレスを入力ください。\nパスワード変更へのリンクをお送りします。",
             preferredStyle: UIAlertController.Style.alert)
         alert.addTextField(
             configurationHandler: {(textField: UITextField!) in
