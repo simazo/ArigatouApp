@@ -17,9 +17,7 @@ jobs:
 
       - name: Install provisioning profile
         run: |
-         echo ${{ secrets.DEVELOP_PROVISIONING_PROFILE }} | base64 --decode > dev_prov_profile.mobileprovision
+          echo ${{ secrets.DEVELOP_PROVISIONING_PROFILE }} | base64 --decode > dev_prov_profile.mobileprovision
 
       - name: UnitTests
         run: xcodebuild test -project ArigatouApp.xcodeproj -scheme ArigatouApp -sdk iphonesimulator -destination platform='iOS Simulator,name=iPhone 15,OS=15.3.0' -allowProvisioningUpdates
-
-
