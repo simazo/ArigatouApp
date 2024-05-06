@@ -28,6 +28,8 @@
 		CCDEAE152BE514630096704A /* NaviMenuTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCDEAE142BE514630096704A /* NaviMenuTableView.swift */; };
 		CCDEAE172BE6BD350096704A /* Validator.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCDEAE162BE6BD350096704A /* Validator.swift */; };
 		CCDEAE192BE6BE330096704A /* LoginPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCDEAE182BE6BE330096704A /* LoginPresenter.swift */; };
+		CCDEAE202BE866270096704A /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = CCDEAE1F2BE866270096704A /* FirebaseAuth */; };
+		CCDEAE222BE866270096704A /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = CCDEAE212BE866270096704A /* FirebaseFirestore */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -71,6 +73,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CCDEAE202BE866270096704A /* FirebaseAuth in Frameworks */,
+				CCDEAE222BE866270096704A /* FirebaseFirestore in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -185,6 +189,10 @@
 			dependencies = (
 			);
 			name = ArigatouApp;
+			packageProductDependencies = (
+				CCDEAE1F2BE866270096704A /* FirebaseAuth */,
+				CCDEAE212BE866270096704A /* FirebaseFirestore */,
+			);
 			productName = ArigatouApp;
 			productReference = CC55BF4C2BC9028D003C3E15 /* ArigatouApp.app */;
 			productType = "com.apple.product-type.application";
@@ -235,6 +243,9 @@
 				Base,
 			);
 			mainGroup = CC55BF432BC9028D003C3E15;
+			packageReferences = (
+				CCDEAE1E2BE866270096704A /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+			);
 			productRefGroup = CC55BF4D2BC9028D003C3E15 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -574,6 +585,30 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		CCDEAE1E2BE866270096704A /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/firebase/firebase-ios-sdk.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 10.25.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		CCDEAE1F2BE866270096704A /* FirebaseAuth */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = CCDEAE1E2BE866270096704A /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAuth;
+		};
+		CCDEAE212BE866270096704A /* FirebaseFirestore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = CCDEAE1E2BE866270096704A /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseFirestore;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = CC55BF442BC9028D003C3E15 /* Project object */;
 }
