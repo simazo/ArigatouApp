@@ -27,23 +27,27 @@ jobs:
         run: |
           echo ${{ secrets.CERTIFICATE_PASSWORD }} | base64 --decode > password.txt
 
+      # debug
       - name: Check if password is correctly decoded
         run: cat password.txt
 
+      # debug
       - name: Import certificate using password from file
         run: |
+          echo ${{ secrets.DEVELOP_APPLE_CERTIFICATE }} | base64 --decode > dev_certificate.p12
           security import dev_certificate.p12 -t agg -k ~/Library/Keychains/build.keychain -P $(cat password.txt)
-
+          
+      # debug
       - name: Verify imported identities
         run: security find-identity -v
 
-      - name: Install Apple signing certificate (Develop)
-        run: |
-          echo ${{ secrets.DEVELOP_APPLE_CERTIFICATE }} | base64 --decode > dev_certificate.p12
-          security create-keychain -p "" build.keychain
-          security import dev_certificate.p12 -t agg -k ~/Library/Keychains/build.keychain -P $(cat password.txt)
-          security set-key-partition-list -S apple-tool:,apple: -k "" -D ~/Library/Keychains/build.keychain
-          security find-identity -v
+      #- name: Install Apple signing certificate (Develop)
+      #  run: |
+      #    echo ${{ secrets.DEVELOP_APPLE_CERTIFICATE }} | base64 --decode > dev_certificate.p12
+      #    security create-keychain -p "" build.keychain
+      #    security import dev_certificate.p12 -t agg -k ~/Library/Keychains/build.keychain -P $(cat password.txt)
+      #    security set-key-partition-list -S apple-tool:,apple: -k "" -D ~/Library/Keychains/build.keychain
+      #    security find-identity -v
 
       - name: Install Apple signing certificate (AppStore)
         run: |
