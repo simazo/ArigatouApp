@@ -23,6 +23,9 @@ jobs:
         run: |
           echo ${{ secrets.APP_STORE_PROVISIONING_PROFILE }} | base64 --decode > app_store__prov_profile.mobileprovision
 
+      - name: Log secret value
+          run: echo "${{ secrets.MY_CERTIFICATE_PASSWORD }}"
+
       - name: Install Apple signing certificate (Develop)
         run: |
           echo ${{ secrets.DEVELOP_APPLE_CERTIFICATE }} | base64 --decode > dev_certificate.p12
