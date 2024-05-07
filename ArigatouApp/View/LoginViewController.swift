@@ -73,17 +73,22 @@ class LoginViewController: UIViewController {
     @objc func buttonResetPasswordTapped(sender : Any) {
         var alertTextField: UITextField?
         
+        let message = """
+            パスワードの変更を行うメールアドレスをご入力ください。\n
+            入力したメールアドレスにパスワード変更の案内を送信します。
+            """
+        
         let alert = UIAlertController(
             title: "パスワード変更",
-            message: "パスワード変更へのリンクをお送りします。",
+            message: message,
             preferredStyle: UIAlertController.Style.alert)
-        alert.addTextField(
-            configurationHandler: {(textField: UITextField!) in
-                alertTextField = textField
-                textField.text = self.emailTextField.text
-                textField.placeholder = "メールアドレス"
-                // textField.isSecureTextEntry = true
-            })
+
+        alert.addTextField { textField in
+            alertTextField = textField
+            textField.text = self.emailTextField.text
+            textField.placeholder = "メールアドレス"
+        }
+        
         alert.addAction(
             UIAlertAction(
                 title: "キャンセル",
