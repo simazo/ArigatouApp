@@ -23,16 +23,15 @@ jobs:
         run: |
           echo ${{ secrets.APP_STORE_PROVISIONING_PROFILE }} | base64 --decode > app_store__prov_profile.mobileprovision
 
-      - name: Decode and display certificate
+      - name: Decode Apple signing certificate Password from secrets
         run: |
-          echo ${{ secrets.CERTIFICATE_PASSWORD }} | base64 --decode > certificate.p12
-          cat certificate.p12
+          echo ${{ secrets.CERTIFICATE_PASSWORD }} | base64 --decode > password.txt
 
       - name: Install Apple signing certificate (Develop)
         run: |
           echo ${{ secrets.DEVELOP_APPLE_CERTIFICATE }} | base64 --decode > dev_certificate.p12
           security create-keychain -p "" build.keychain
-          security import dev_certificate.p12 -t agg -k ~/Library/Keychains/build.keychain -P ${{ secrets.CERTIFICATE_PASSWORD }}
+          security import dev_certificate.p12 -t agg -k ~/Library/Keychains/build.keychain -P $(cat password.txt)
           security set-key-partition-list -S apple-tool:,apple: -k "" -D ~/Library/Keychains/build.keychain
           security find-identity -v
 
@@ -40,7 +39,7 @@ jobs:
         run: |
           echo ${{ secrets.APPSTORE_APPLE_CERTIFICATE }} | base64 --decode > app_certificate.p12
           security create-keychain -p "" build.keychain
-          security import app_certificate.p12 -t agg -k ~/Library/Keychains/build.keychain -P ${{ secrets.CERTIFICATE_PASSWORD }}
+          security import app_certificate.p12 -t agg -k ~/Library/Keychains/build.keychain -P $(cat password.txt)
           security set-key-partition-list -S apple-tool:,apple: -k "" -D ~/Library/Keychains/build.keychain
           security find-identity -v
 
