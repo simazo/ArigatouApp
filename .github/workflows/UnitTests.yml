@@ -15,13 +15,29 @@ jobs:
         with:
           xcode-version: latest-stable
 
-      - name: Install develop provisioning profile
+      - name: Install provisioning profile (Develop)
         run: |
           echo ${{ secrets.DEVELOP_PROVISIONING_PROFILE }} | base64 --decode > dev_prov_profile.mobileprovision
 
-      - name: Install AppStore provisioning profile
+      - name: Install provisioning profile (AppStore)
         run: |
           echo ${{ secrets.APP_STORE_PROVISIONING_PROFILE }} | base64 --decode > app_store__prov_profile.mobileprovision
+
+      - name: Install Apple signing certificate (Develop)
+        run: |
+          echo ${{ secrets.DEVELOP_APPLE_CERTIFICATE }} | base64 --decode > dev_certificate.p12
+          security create-keychain -p "" build.keychain
+          security import dev_certificate.p12 -t agg -k ~/Library/Keychains/build.keychain -P "<dev-certificate-password>"
+          security set-key-partition-list -S apple-tool:,apple: -k "" -D ~/Library/Keychains/build.keychain
+          security find-identity -v
+
+      - name: Install Apple signing certificate (AppStore)
+        run: |
+          echo ${{ secrets.APPSTORE_APPLE_CERTIFICATE }} | base64 --decode > app_certificate.p12
+          security create-keychain -p "" build.keychain
+          security import app_certificate.p12 -t agg -k ~/Library/Keychains/build.keychain -P "<app-certificate-password>"
+          security set-key-partition-list -S apple-tool:,apple: -k "" -D ~/Library/Keychains/build.keychain
+          security find-identity -v
 
       - name: UnitTests
         run: xcodebuild test -project ArigatouApp.xcodeproj -scheme ArigatouApp -sdk iphonesimulator -destination platform='iOS Simulator,name=iPhone 15,OS=15.3.0' -allowProvisioningUpdates
