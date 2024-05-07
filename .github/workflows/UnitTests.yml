@@ -27,7 +27,7 @@ jobs:
         run: |
           echo ${{ secrets.DEVELOP_APPLE_CERTIFICATE }} | base64 --decode > dev_certificate.p12
           security create-keychain -p "" build.keychain
-          security import dev_certificate.p12 -t agg -k ~/Library/Keychains/build.keychain -P "hogepiyo"
+          security import dev_certificate.p12 -t agg -k ~/Library/Keychains/build.keychain -P ${{ secrets.CERTIFICATE_PASSWORD }}
           security set-key-partition-list -S apple-tool:,apple: -k "" -D ~/Library/Keychains/build.keychain
           security find-identity -v
 
@@ -35,7 +35,7 @@ jobs:
         run: |
           echo ${{ secrets.APPSTORE_APPLE_CERTIFICATE }} | base64 --decode > app_certificate.p12
           security create-keychain -p "" build.keychain
-          security import app_certificate.p12 -t agg -k ~/Library/Keychains/build.keychain -P "hogepiyo"
+          security import app_certificate.p12 -t agg -k ~/Library/Keychains/build.keychain -P ${{ secrets.CERTIFICATE_PASSWORD }}
           security set-key-partition-list -S apple-tool:,apple: -k "" -D ~/Library/Keychains/build.keychain
           security find-identity -v
 
