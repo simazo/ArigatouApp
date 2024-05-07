@@ -32,6 +32,16 @@ jobs:
         run: cat password.txt
 
       # debug
+      - name: Check if keychain exists
+        run: ls ~/Library/Keychains/build.keychain
+    
+      - name: Check if keychain is unlocked
+        run: security show-keychain-info ~/Library/Keychains/build.keychain
+
+      - name: Check keychain permissions
+        run: security dump-keychain ~/Library/Keychains/build.keychain
+
+      # debug
       - name: Import certificate using password from file
         run: |
           echo ${{ secrets.DEVELOP_APPLE_CERTIFICATE }} | base64 --decode > dev_certificate.p12
@@ -40,6 +50,9 @@ jobs:
       # debug
       - name: Verify imported identities
         run: security find-identity -v
+
+
+
 
       #- name: Install Apple signing certificate (Develop)
       #  run: |
