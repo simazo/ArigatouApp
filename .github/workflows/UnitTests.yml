@@ -27,6 +27,16 @@ jobs:
         run: |
           echo ${{ secrets.CERTIFICATE_PASSWORD }} | base64 --decode > password.txt
 
+      - name: Check if password is correctly decoded
+        run: cat password.txt
+
+      - name: Import certificate using password from file
+        run: |
+          security import dev_certificate.p12 -t agg -k ~/Library/Keychains/build.keychain -P $(cat password.txt)
+
+      - name: Verify imported identities
+        run: security find-identity -v
+
       - name: Install Apple signing certificate (Develop)
         run: |
           echo ${{ secrets.DEVELOP_APPLE_CERTIFICATE }} | base64 --decode > dev_certificate.p12
