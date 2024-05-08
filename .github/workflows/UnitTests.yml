@@ -40,6 +40,14 @@ jobs:
           echo ${{ secrets.APPSTORE_APPLE_CERTIFICATE }} | base64 --decode > app_certificate.p12
           security import app_certificate.p12 -t agg -k ~/Library/Keychains/build.keychain -P $(cat password.txt)
 
+      # debug start
+      - name: Check Keychain Access
+        run: security dump-keychain ~/Library/Keychains/build.keychain
+
+      - name: Check Keychain Password
+        run: security show-keychain-info ~/Library/Keychains/build.keychain
+      # debug end
+      
       - name: Set key partition list
         run: |
           security set-key-partition-list -S apple-tool:,apple: -k "" -D ~/Library/Keychains/build.keychain
