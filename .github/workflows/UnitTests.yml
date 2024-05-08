@@ -41,7 +41,8 @@ jobs:
           security import app_certificate.p12 -t agg -k ~/Library/Keychains/build.keychain -P $(cat password.txt)
 
       - name: Set key partition list
-        run: security set-key-partition-list -S apple-tool:,apple: -k "" -D ~/Library/Keychains/build.keychain
+        run: |
+          security set-key-partition-list -S apple-tool:,apple: -k "" -D ~/Library/Keychains/build.keychain
 
       - name: Display installed identities
         run: security find-identity -v
