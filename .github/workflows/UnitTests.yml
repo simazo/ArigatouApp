@@ -54,8 +54,8 @@ jobs:
       - name: List Keychain Certificates
         run: security find-certificate -a -p -Z ~/Library/Keychains/build.keychain
 
-      - name: Show Keychain Password
-        run: security find-generic-password -w -a $USER -s "build.keychain"
+      #- name: Show Keychain Password
+      #  run: security find-generic-password -w -a $USER -s "build.keychain"
       # debug end
       
       - name: Set key partition list
