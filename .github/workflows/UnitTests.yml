@@ -48,7 +48,7 @@ jobs:
         run: security show-keychain-info ~/Library/Keychains/build.keychain
 
       - name: List Keychain Items
-        run: security list-keychain-items ~/Library/Keychains/build.keychain
+        run: security find-certificate -a -p -c -Z -v ~/Library/Keychains/build.keychain
 
       - name: Show Keychain Password
         run: security find-generic-password -w -a $USER -s "build.keychain"
