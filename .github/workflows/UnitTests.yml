@@ -30,16 +30,6 @@ jobs:
       - name: Create new keychain
         run: security create-keychain -p "" build.keychain
 
-      # debug
-      - name: Import certificate using password from file
-        run: |
-          echo ${{ secrets.DEVELOP_APPLE_CERTIFICATE }} | base64 --decode > dev_certificate.p12
-          security import dev_certificate.p12 -t agg -k ~/Library/Keychains/build.keychain -P $(cat password.txt)
-          
-      # debug
-      - name: Verify imported identities
-        run: security find-identity -v
-
       - name: Install Apple signing certificate (Develop)
         run: |
           echo ${{ secrets.DEVELOP_APPLE_CERTIFICATE }} | base64 --decode > dev_certificate.p12
