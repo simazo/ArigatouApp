@@ -60,7 +60,7 @@ jobs:
       
       - name: Set key partition list
         run: |
-          security set-key-partition-list -S apple-tool:,apple: -k "" -D ~/Library/Keychains/build.keychain
+          security set-key-partition-list -S apple-tool:,apple: -k $(cat keychain_password.txt) -D ~/Library/Keychains/build.keychain
 
       - name: Display installed identities
         run: security find-identity -v
