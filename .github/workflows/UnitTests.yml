@@ -15,55 +15,42 @@ jobs:
         with:
           xcode-version: latest-stable
 
-      - name: Install provisioning profile (Develop)
-        run: |
-          echo ${{ secrets.DEVELOP_PROVISIONING_PROFILE }} | base64 --decode > dev_prov_profile.mobileprovision
+      - name: Install the Apple certificate and provisioning profile
+        env:
+          DEVELOP_CERTIFICATE_BASE64: ${{ secrets.DEVELOP_APPLE_CERTIFICATE }}
+          APPSTORE_CERTIFICATE_BASE64: ${{ secrets.APPSTORE_APPLE_CERTIFICATE }}
+          CERTIFICATE_PASSWORD: ${{ secrets.CERTIFICATE_PASSWORD }}
+          DEVELOP_PROVISION_PROFILE_BASE64: ${{ secrets.DEVELOP_PROVISIONING_PROFILE }}
+          APP_STORE_PROVISION_PROFILE_BASE64: ${{ secrets.APP_STORE_PROVISIONING_PROFILE }}
+          KEYCHAIN_PASSWORD: ${{ secrets.KEYCHAIN_PASSWORD }}
+          # create variables
+          DEVELOP_CERTIFICATE_PATH=$RUNNER_TEMP/dev_certificate.p12
+          APPSTORE_CERTIFICATE_PATH=$RUNNER_TEMP/app_certificate.p12
+          DEV_PP_PATH=$RUNNER_TEMP/dev_prov_profile.mobileprovision
+          APP_PP_PATH=$RUNNER_TEMP/app_store__prov_profile.mobileprovision
+          KEYCHAIN_PATH=$RUNNER_TEMP/app-signing.keychain-db
 
-      - name: Install provisioning profile (AppStore)
-        run: |
-          echo ${{ secrets.APP_STORE_PROVISIONING_PROFILE }} | base64 --decode > app_store__prov_profile.mobileprovision
+          # import certificate and provisioning profile from secrets
+          echo -n "$DEVELOP_CERTIFICATE_BASE64" | base64 --decode -o $DEVELOP_CERTIFICATE_PATH
+          echo -n "$APPSTORE_CERTIFICATE_BASE64" | base64 --decode -o $APPSTORE_CERTIFICATE_PATH
+          echo -n "$DEVELOP_PROVISION_PROFILE_BASE64" | base64 --decode -o $DEV_PP_PATH
+          echo -n "$APP_STORE_PROVISION_PROFILE_BASE64" | base64 --decode -o $APP_PP_PATH
 
-      - name: Decode Apple signing certificate Password from secrets
-        run: |
-          echo ${{ secrets.CERTIFICATE_PASSWORD }} | base64 --decode > certificate_password.txt
+          # create temporary keychain
+          security create-keychain -p "$KEYCHAIN_PASSWORD" $KEYCHAIN_PATH
+          security set-keychain-settings -lut 21600 $KEYCHAIN_PATH
+          security unlock-keychain -p "$KEYCHAIN_PASSWORD" $KEYCHAIN_PATH
 
-      - name: Decode keychain Password from secrets
-        run: |
-          echo ${{ secrets.KEYCHAIN_PASSWORD }} | base64 --decode > keychain_password.txt
+          # import certificate to keychain
+          security import $DEVELOP_CERTIFICATE_PATH -P "$CERTIFICATE_PASSWORD" -A -t cert -f pkcs12 -k $KEYCHAIN_PATH
+          security import $APPSTORE_CERTIFICATE_PATH -P "$CERTIFICATE_PASSWORD" -A -t cert -f pkcs12 -k $KEYCHAIN_PATH
+          security set-key-partition-list -S apple-tool:,apple: -k "$KEYCHAIN_PASSWORD" $KEYCHAIN_PATH
+          security list-keychain -d user -s $KEYCHAIN_PATH
 
-      - name: Create new keychain
-        run: security create-keychain -p $(cat keychain_password.txt) build.keychain
-
-      - name: Install Apple signing certificate (Develop)
-        run: |
-          echo ${{ secrets.DEVELOP_APPLE_CERTIFICATE }} | base64 --decode > dev_certificate.p12
-          security import dev_certificate.p12 -t agg -k ~/Library/Keychains/build.keychain -P $(cat certificate_password.txt)
-
-      - name: Install Apple signing certificate (AppStore)
-        run: |
-          echo ${{ secrets.APPSTORE_APPLE_CERTIFICATE }} | base64 --decode > app_certificate.p12
-          security import app_certificate.p12 -t agg -k ~/Library/Keychains/build.keychain -P $(cat certificate_password.txt)
-
-      # debug start
-      - name: Check Keychain Access
-        run: security dump-keychain ~/Library/Keychains/build.keychain
-
-      - name: Check Keychain Password
-        run: security show-keychain-info ~/Library/Keychains/build.keychain
-
-      - name: List Keychain Certificates
-        run: security find-certificate -a -p -Z ~/Library/Keychains/build.keychain
-
-      #- name: Show Keychain Password
-      #  run: security find-generic-password -w -a $USER -s "build.keychain"
-      # debug end
-      
-      - name: Set key partition list
-        run: |
-          security set-key-partition-list -S apple-tool:,apple: -k $(cat keychain_password.txt) -D ~/Library/Keychains/build.keychain
-
-      - name: Display installed identities
-        run: security find-identity -v
+          # apply provisioning profile
+          mkdir -p ~/Library/MobileDevice/Provisioning\ Profiles
+          cp $DEV_PP_PATH ~/Library/MobileDevice/Provisioning\ Profiles
+          cp $APP_PP_PATH ~/Library/MobileDevice/Provisioning\ Profiles
 
       - name: UnitTests
         run: xcodebuild test -project ArigatouApp.xcodeproj -scheme ArigatouApp -sdk iphonesimulator -destination platform='iOS Simulator,name=iPhone 15,OS=15.3.0' -allowProvisioningUpdates
