@@ -23,6 +23,7 @@ jobs:
           DEVELOP_PROVISION_PROFILE_BASE64: ${{ secrets.DEVELOP_PROVISIONING_PROFILE }}
           APP_STORE_PROVISION_PROFILE_BASE64: ${{ secrets.APP_STORE_PROVISIONING_PROFILE }}
           KEYCHAIN_PASSWORD: ${{ secrets.KEYCHAIN_PASSWORD }}
+        run: |
           # create variables
           DEVELOP_CERTIFICATE_PATH=$RUNNER_TEMP/dev_certificate.p12
           APPSTORE_CERTIFICATE_PATH=$RUNNER_TEMP/app_certificate.p12
