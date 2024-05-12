@@ -99,7 +99,7 @@ class LoginViewController: UIViewController {
                 title: "送信",
                 style: UIAlertAction.Style.default) { _ in
                     if let text = alertTextField?.text {
-                        self.presenter.emailExists(email: text)
+                        self.presenter.accountExists(email: text)
                     }
                 }
         )
@@ -113,7 +113,7 @@ class LoginViewController: UIViewController {
             return
         }
         
-        presenter.validateLogin(email: email, password: password)
+        presenter.login(email: email, password: password)
     }
     
     func initEmailTextField(){
@@ -170,11 +170,16 @@ class LoginViewController: UIViewController {
 }
 
 extension LoginViewController : LoginPresenterOutput {
-    func validationSuccess() {
+    func showLoginSuccess() {
         print("ログインします")
     }
     
-    func validationFailed(errorMessage: String) {
+    func showLoginFailed(errorMessage: String) {
+        print(errorMessage)
+        print("ログイン失敗")
+    }
+    
+    func showValidationFailed(errorMessage: String) {
         let alert = UIAlertController(title: "ログインエラー", message: errorMessage, preferredStyle: .alert)
 
         let ok = UIAlertAction(title: "OK", style: .default) { (action) in
