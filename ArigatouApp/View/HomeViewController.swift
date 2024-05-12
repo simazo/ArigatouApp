@@ -16,7 +16,7 @@ class HomeViewController: UIViewController {
     var isMenuVisible = false
     let items = ["ログイン", "アカウント登録"]
     
-    private var presenter: PresenterInput!
+    private var presenter: HomePresenterInput!
     
     var timer: Timer = Timer()
     var count: Int = 0
@@ -184,7 +184,7 @@ extension HomeViewController: NaviMenuTableViewDelegate{
         }
     }
 }
-extension HomeViewController: PresenterOutput{
+extension HomeViewController: HomePresenterOutput{
     
     func showStartScreen() {
         initRemainingLabel()

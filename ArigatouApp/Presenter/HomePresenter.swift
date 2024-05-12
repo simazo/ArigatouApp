@@ -7,11 +7,11 @@
 
 import Speech
 
-protocol PresenterInput: AnyObject {
+protocol HomePresenterInput: AnyObject {
     func viewDidLoad()
 }
 
-protocol PresenterOutput: AnyObject {
+protocol HomePresenterOutput: AnyObject {
     func showStartScreen()
     func showEndScreen()
     func showDeniedSpeechAuthorizeAlert()
@@ -21,7 +21,7 @@ protocol PresenterOutput: AnyObject {
 }
 
 class HomePresenter{
-    private weak var view: PresenterOutput?
+    private weak var view: HomePresenterOutput?
     private let speechRecognizer = SFSpeechRecognizer(locale: Locale(identifier: "ja-JP"))!
     private var recognitionRequest: SFSpeechAudioBufferRecognitionRequest?
     private var recognitionTask: SFSpeechRecognitionTask?
@@ -32,7 +32,7 @@ class HomePresenter{
     private var previousTranscription = ""
     var matchCountManger: MatchCountManager!
     
-    init(view: PresenterOutput) {
+    init(view: HomePresenterOutput) {
         self.view = view
         self.matchCountManger = MatchCountManager(UserDefaultsMatchCountRepository())
     }
@@ -166,7 +166,7 @@ class HomePresenter{
     }
 }
 
-extension HomePresenter: PresenterInput {
+extension HomePresenter: HomePresenterInput {
     
     func viewDidLoad() {
         let shouldShowEndScreen = matchCountManger.getCount() >= MAX_COUNT
