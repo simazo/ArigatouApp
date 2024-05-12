@@ -8,13 +8,15 @@
 import Firebase
 
 protocol LoginPresenterInput: AnyObject {
-    func validateLogin(email: String, password: String)
-    func emailExists(email: String)
+    func validate(email: String, password: String)
+    func accountExists(email: String)
+    func login(email: String, password: String)
 }
 
 protocol LoginPresenterOutput: AnyObject {
-    func validationSuccess()
-    func validationFailed(errorMessage: String)
+    func showValidationFailed(errorMessage: String)
+    func showLoginSuccess()
+    func showLoginFailed(errorMessage: String)
 }
 
 class LoginPresenter {
@@ -26,65 +28,45 @@ class LoginPresenter {
     }
 }
 extension LoginPresenter : LoginPresenterInput {
-    
-    func emailExists(email: String) {
-        
-        checkIfEmailExists(email: email) { (exists, error) in
-            if let error = error {
-                // エラーが発生した場合のハンドリング
-                print("エラー: \(error.localizedDescription)")
-                return
-            }
-            
-            if exists {
-                print("\(email) は登録済みです。")
-            } else {
-                print("\(email) は未登録です。")
-            }
-        }
-    }
-    
-    func checkIfEmailExists(email: String, completion: @escaping (Bool, Error?) -> Void) {
-        // Auth.auth().fetchSignInMethods　非推奨
-        /*
-        Auth.auth().fetchSignInMethods(forEmail: email) { (methods, error) in
-            if let error = error {
-                // エラーが発生した場合は、エラーをハンドリングしてメールが登録されているかどうかを確認することができません。
-                print("エラー: \(error.localizedDescription)")
-                completion(false, error)
-                return
-            }
-            
-            if let methods = methods {
-                // メソッドが nil でない場合、そのメールアドレスは登録済みです。
-                if methods.isEmpty {
-                    // 登録されていない場合
-                    completion(false, nil)
-                } else {
-                    // 登録されている場合
-                    completion(true, nil)
-                }
-            } else {
-                // メソッドが nil の場合、エラーをハンドリングしてメールが登録されているかどうかを確認することができません。
-                print("メソッドが nil です。")
-                completion(false, nil)
-            }
-        }
-         */
-    }
-    
-    func validateLogin(email: String, password: String) {
+
+    func validate(email: String, password: String) {
         
         guard validator.isEmail(email) else {
-            view?.validationFailed(errorMessage: "メールアドレスが不正です")
+            view?.showValidationFailed(errorMessage: "メールアドレスが不正です")
             return
         }
         
-        guard validator.isPassword(password) else {
-            view?.validationFailed(errorMessage: "パスワードが不正です")
+        /*guard validator.isPassword(password) else {
+            view?.showValidationFailed(errorMessage: "パスワードが不正です")
             return
-        }
+        }*/
+    }
+    
+    func accountExists(email: String) {
+        // TODO
+    }
+    
+    func login(email: String, password: String) {
+        // バリデーション
+        validate(email: email, password: password)
         
-        view?.validationSuccess()
+        AuthManager.shared.login(email: email, password: password) { [weak self] success, error in
+            guard let self = self else { return }
+            
+            // ログイン成功
+            if success {
+                self.view?.showLoginSuccess()
+                return
+            }
+            
+            // ログイン失敗
+            if let error = error {
+                let errorMessage = error.localizedDescription
+                self.view?.showLoginFailed(errorMessage: errorMessage)
+            } else {
+                let errorMessage = "ログインエラー"
+                self.view?.showLoginFailed(errorMessage: errorMessage)
+            }
+        }
     }
 }

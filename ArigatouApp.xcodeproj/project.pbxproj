@@ -32,6 +32,7 @@
 		CCDEAE222BE866270096704A /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = CCDEAE212BE866270096704A /* FirebaseFirestore */; };
 		CCDEAE242BE89D430096704A /* FirebaseFirestoreSwift in Frameworks */ = {isa = PBXBuildFile; productRef = CCDEAE232BE89D430096704A /* FirebaseFirestoreSwift */; };
 		CCDEAE262BE89E040096704A /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = CCDEAE252BE89E040096704A /* GoogleService-Info.plist */; };
+		CCFB7DD52BED9C1300C4617A /* AuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCFB7DD42BED9C1300C4617A /* AuthManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -69,6 +70,7 @@
 		CCDEAE162BE6BD350096704A /* Validator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Validator.swift; sourceTree = "<group>"; };
 		CCDEAE182BE6BE330096704A /* LoginPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginPresenter.swift; sourceTree = "<group>"; };
 		CCDEAE252BE89E040096704A /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		CCFB7DD42BED9C1300C4617A /* AuthManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -100,6 +102,7 @@
 				CC209D292BD47ED20069E2E4 /* MatchCountRepository.swift */,
 				CC209D2B2BD47EED0069E2E4 /* UserDefaultsMatchCountRepository.swift */,
 				CCDEAE162BE6BD350096704A /* Validator.swift */,
+				CCFB7DD42BED9C1300C4617A /* AuthManager.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -293,6 +296,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				CC55BF652BC90301003C3E15 /* HomePresenter.swift in Sources */,
+				CCFB7DD52BED9C1300C4617A /* AuthManager.swift in Sources */,
 				CC209D282BD47EB10069E2E4 /* MatchCountManager.swift in Sources */,
 				CC55BF542BC9028D003C3E15 /* HomeViewController.swift in Sources */,
 				CCDEAD292BDB1CCE0096704A /* LoginViewController.swift in Sources */,
