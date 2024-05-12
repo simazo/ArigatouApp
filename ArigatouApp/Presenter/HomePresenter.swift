@@ -18,6 +18,7 @@ protocol HomePresenterOutput: AnyObject {
     func redrawRemainingLabel(text: String)
     func redrawCounterLabel(text: String)
     func startMicAnimating()
+    func playMovie(url: String)
 }
 
 class HomePresenter{
@@ -94,6 +95,9 @@ class HomePresenter{
                     // カウントアップ
                     self.matchCountManger.incrementCount()
 
+                    // 動画再生
+                    playMovie(self.matchCountManger.getCount())
+                    
                     // ラベル再描画
                     self.view?.redrawRemainingLabel(text: "「ありがとう100万回」\n\n達成まで\n\nあと\(self.formatRemainingCount())回")
                     
@@ -163,6 +167,13 @@ class HomePresenter{
     
     private func formatTotalCount() -> String {
         return String.localizedStringWithFormat("%d", self.matchCountManger.getCount())
+    }
+    
+    private func playMovie(_ match_count: Int) {
+        guard let movieURL = movieList[match_count] else {
+            return
+        }
+        self.view?.playMovie(url: movieURL)
     }
 }
 

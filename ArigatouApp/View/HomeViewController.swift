@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import AVKit
 
 class HomeViewController: UIViewController {
     private var remainingLabel: UILabel!
@@ -185,6 +186,20 @@ extension HomeViewController: NaviMenuTableViewDelegate{
     }
 }
 extension HomeViewController: HomePresenterOutput{
+    
+    func playMovie(url: String) {
+        let url = URL(string: url)!
+        let player = AVPlayer(url: url)
+        let playerViewController = AVPlayerViewController()
+        playerViewController.exitsFullScreenWhenPlaybackEnds = true
+        playerViewController.player = player
+        DispatchQueue.main.async {
+            self.present(playerViewController, animated: true) {
+                player.play()
+            }
+        }
+    }
+    
     
     func showStartScreen() {
         initRemainingLabel()
