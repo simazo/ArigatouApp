@@ -169,8 +169,8 @@ class HomePresenter{
         return String.localizedStringWithFormat("%d", self.matchCountManger.getCount())
     }
     
-    private func playMovie(_ match_count: Int) {
-        guard let movieURL = movieList[match_count] else {
+    func playMovie(_ match_count: Int) {
+        guard let movieURL = MovieList.getURL[match_count] else {
             return
         }
         

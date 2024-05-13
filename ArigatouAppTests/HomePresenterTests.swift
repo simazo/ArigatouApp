@@ -8,7 +8,12 @@
 import XCTest
 @testable import ArigatouApp
 
-class MockPresenterOutput: PresenterOutput {
+class MockPresenterOutput: HomePresenterOutput {
+    
+    var movieShown = false
+    func playMovie(url: String) {
+        movieShown = true
+    }
     
     var startScreenShown = false
     func showStartScreen() {
@@ -116,6 +121,28 @@ class HomePresenterTests: XCTestCase {
         
         // アプリ終了用のビューが呼ばれたことを確認
         XCTAssertTrue(mockView.endScreenShown)
+    }
+    
+    // カウント数が一定数まで達した場合、動画再生することを確認
+    func testPlayMovieReached() {
+        presenter.matchCountManger.setCount(100)
+        
+        // playMovie() を呼び出す
+        presenter.playMovie(presenter.matchCountManger.getCount())
+        
+        // 動画再生用のビューが呼ばれたことを確認
+        XCTAssertTrue(mockView.movieShown)
+    }
+    
+    // カウント数が一定数まで達しない場合は、動画再生しないことを確認
+    func testPlayMovieNotReached() {
+        presenter.matchCountManger.setCount(99)
+        
+        // playMovie() を呼び出す
+        presenter.playMovie(presenter.matchCountManger.getCount())
+        
+        // 動画再生用のビューが呼ばれていないことを確認
+        XCTAssertFalse(mockView.movieShown)
     }
     
 }
