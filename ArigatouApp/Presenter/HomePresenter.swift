@@ -7,21 +7,22 @@
 
 import Speech
 
-protocol PresenterInput: AnyObject {
+protocol HomePresenterInput: AnyObject {
     func viewDidLoad()
 }
 
-protocol PresenterOutput: AnyObject {
+protocol HomePresenterOutput: AnyObject {
     func showStartScreen()
     func showEndScreen()
     func showDeniedSpeechAuthorizeAlert()
     func redrawRemainingLabel(text: String)
     func redrawCounterLabel(text: String)
     func startMicAnimating()
+    func playMovie(url: String)
 }
 
 class HomePresenter{
-    private weak var view: PresenterOutput?
+    private weak var view: HomePresenterOutput?
     private let speechRecognizer = SFSpeechRecognizer(locale: Locale(identifier: "ja-JP"))!
     private var recognitionRequest: SFSpeechAudioBufferRecognitionRequest?
     private var recognitionTask: SFSpeechRecognitionTask?
@@ -32,7 +33,7 @@ class HomePresenter{
     private var previousTranscription = ""
     var matchCountManger: MatchCountManager!
     
-    init(view: PresenterOutput) {
+    init(view: HomePresenterOutput) {
         self.view = view
         self.matchCountManger = MatchCountManager(UserDefaultsMatchCountRepository())
     }
@@ -94,6 +95,9 @@ class HomePresenter{
                     // カウントアップ
                     self.matchCountManger.incrementCount()
 
+                    // 動画再生
+                    playMovie(self.matchCountManger.getCount())
+                    
                     // ラベル再描画
                     self.view?.redrawRemainingLabel(text: "「ありがとう100万回」\n\n達成まで\n\nあと\(self.formatRemainingCount())回")
                     
@@ -164,9 +168,20 @@ class HomePresenter{
     private func formatTotalCount() -> String {
         return String.localizedStringWithFormat("%d", self.matchCountManger.getCount())
     }
+    
+    func playMovie(_ match_count: Int) {
+        guard let movieURL = MovieList.getURL[match_count] else {
+            return
+        }
+        
+        // ネットワーク接続ある場合は動画再生
+        if (NetworkManager.isConnectedToNetwork()) {
+            self.view?.playMovie(url: movieURL)
+        }
+    }
 }
 
-extension HomePresenter: PresenterInput {
+extension HomePresenter: HomePresenterInput {
     
     func viewDidLoad() {
         let shouldShowEndScreen = matchCountManger.getCount() >= MAX_COUNT

@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import AVKit
 
 class HomeViewController: UIViewController {
     private var remainingLabel: UILabel!
@@ -16,7 +17,7 @@ class HomeViewController: UIViewController {
     var isMenuVisible = false
     let items = ["ログイン", "アカウント登録"]
     
-    private var presenter: PresenterInput!
+    private var presenter: HomePresenterInput!
     
     var timer: Timer = Timer()
     var count: Int = 0
@@ -184,7 +185,21 @@ extension HomeViewController: NaviMenuTableViewDelegate{
         }
     }
 }
-extension HomeViewController: PresenterOutput{
+extension HomeViewController: HomePresenterOutput{
+    
+    func playMovie(url: String) {
+        let url = URL(string: url)!
+        let player = AVPlayer(url: url)
+        let playerViewController = AVPlayerViewController()
+        playerViewController.exitsFullScreenWhenPlaybackEnds = true
+        playerViewController.player = player
+        DispatchQueue.main.async {
+            self.present(playerViewController, animated: true) {
+                player.play()
+            }
+        }
+    }
+    
     
     func showStartScreen() {
         initRemainingLabel()
