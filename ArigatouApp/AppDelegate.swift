@@ -17,6 +17,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
+        // スプラッシュ画面表示のためスリープ
+        sleep(1)
+        
         FirebaseApp.configure()
         
         //iOS 15でNavigationBarがデフォルトで透過されるためのios14までと同じように表示する設定
