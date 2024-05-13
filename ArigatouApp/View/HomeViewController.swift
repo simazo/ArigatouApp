@@ -57,7 +57,7 @@ class HomeViewController: UIViewController {
     }
 
     func initNavigation(){
-        self.title = "ありがとう100万回"
+        self.title = ""
         let barButton = UIBarButtonItem(title: "", image: UIImage(systemName: "person.fill"), target: self, action: #selector(addButtonTapped))
         navigationItem.rightBarButtonItem = barButton
         
