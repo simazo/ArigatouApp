@@ -7,6 +7,6 @@
 
 
 var movieList: [Int: String] = [
-    225: "https://dancer.boo.jp/arigatou/mp4/space_travel_big.mp4",
-    230: "https://dancer.boo.jp/arigatou/mp4/space_travel_big.mp4",
+    235: "https://dancer.boo.jp/arigatou/mp4/space_travel_big.mp4",
+    240: "https://dancer.boo.jp/arigatou/mp4/space_travel_big.mp4",
 ]

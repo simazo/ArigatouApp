@@ -173,7 +173,11 @@ class HomePresenter{
         guard let movieURL = movieList[match_count] else {
             return
         }
-        self.view?.playMovie(url: movieURL)
+        
+        // ネットワーク接続ある場合は動画再生
+        if (NetworkManager.isConnectedToNetwork()) {
+            self.view?.playMovie(url: movieURL)
+        }
     }
 }
 
