@@ -18,7 +18,8 @@ protocol HomePresenterOutput: AnyObject {
     func redrawRemainingLabel(text: String)
     func redrawCounterLabel(text: String)
     func startMicAnimating()
-    func playMovie(url: String)
+    func playVideo(url: String)
+    func showPlayVideoListMenu()
 }
 
 class HomePresenter{
@@ -96,7 +97,7 @@ class HomePresenter{
                     self.matchCountManger.incrementCount()
 
                     // 動画再生
-                    playMovie(self.matchCountManger.getCount())
+                    playVideoIfMatchCountReached(self.matchCountManger.getCount())
                     
                     // ラベル再描画
                     self.view?.redrawRemainingLabel(text: "「ありがとう100万回」\n\n達成まで\n\nあと\(self.formatRemainingCount())回")
@@ -169,15 +170,19 @@ class HomePresenter{
         return String.localizedStringWithFormat("%d", self.matchCountManger.getCount())
     }
     
-    func playMovie(_ match_count: Int) {
-        guard let movieURL = MovieList.getURL[match_count] else {
+    private func playVideoIfMatchCountReached(_ match_count: Int) {
+        // 特定のマッチ数ではない場合処理を抜ける
+        guard let videoURL = VideoList.getUrl(match_count) else {
             return
         }
         
         // ネットワーク接続ある場合は動画再生
         if (NetworkManager.isConnectedToNetwork()) {
-            self.view?.playMovie(url: movieURL)
+            self.view?.playVideo(url: videoURL)
         }
+        
+        // 再生リスト表示
+        view?.showPlayVideoListMenu()
     }
 }
 

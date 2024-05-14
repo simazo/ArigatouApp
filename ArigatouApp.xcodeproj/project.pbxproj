@@ -33,7 +33,7 @@
 		CCDEAE242BE89D430096704A /* FirebaseFirestoreSwift in Frameworks */ = {isa = PBXBuildFile; productRef = CCDEAE232BE89D430096704A /* FirebaseFirestoreSwift */; };
 		CCDEAE262BE89E040096704A /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = CCDEAE252BE89E040096704A /* GoogleService-Info.plist */; };
 		CCFB7DD52BED9C1300C4617A /* AuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCFB7DD42BED9C1300C4617A /* AuthManager.swift */; };
-		CCFB7DD72BF17A8300C4617A /* MovieList.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCFB7DD62BF17A8300C4617A /* MovieList.swift */; };
+		CCFB7DD72BF17A8300C4617A /* VideoList.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCFB7DD62BF17A8300C4617A /* VideoList.swift */; };
 		CCFB7E142BF18D6F00C4617A /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCFB7E132BF18D6F00C4617A /* NetworkManager.swift */; };
 		CCFB7E162BF1B54D00C4617A /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = CCFB7E152BF1B54D00C4617A /* icon.png */; };
 /* End PBXBuildFile section */
@@ -74,7 +74,7 @@
 		CCDEAE182BE6BE330096704A /* LoginPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginPresenter.swift; sourceTree = "<group>"; };
 		CCDEAE252BE89E040096704A /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		CCFB7DD42BED9C1300C4617A /* AuthManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthManager.swift; sourceTree = "<group>"; };
-		CCFB7DD62BF17A8300C4617A /* MovieList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieList.swift; sourceTree = "<group>"; };
+		CCFB7DD62BF17A8300C4617A /* VideoList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoList.swift; sourceTree = "<group>"; };
 		CCFB7E132BF18D6F00C4617A /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		CCFB7E152BF1B54D00C4617A /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -109,7 +109,7 @@
 				CC209D2B2BD47EED0069E2E4 /* UserDefaultsMatchCountRepository.swift */,
 				CCDEAE162BE6BD350096704A /* Validator.swift */,
 				CCFB7DD42BED9C1300C4617A /* AuthManager.swift */,
-				CCFB7DD62BF17A8300C4617A /* MovieList.swift */,
+				CCFB7DD62BF17A8300C4617A /* VideoList.swift */,
 				CCFB7E132BF18D6F00C4617A /* NetworkManager.swift */,
 			);
 			path = Model;
@@ -305,7 +305,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CCFB7DD72BF17A8300C4617A /* MovieList.swift in Sources */,
+				CCFB7DD72BF17A8300C4617A /* VideoList.swift in Sources */,
 				CC55BF652BC90301003C3E15 /* HomePresenter.swift in Sources */,
 				CCFB7E142BF18D6F00C4617A /* NetworkManager.swift in Sources */,
 				CCFB7DD52BED9C1300C4617A /* AuthManager.swift in Sources */,
