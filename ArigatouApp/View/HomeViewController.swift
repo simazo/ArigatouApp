@@ -14,9 +14,9 @@ class HomeViewController: UIViewController {
     private var micView: MicImageView!
     
     var naviMenutableViewForPerson: NaviMenuTableView!
-    var naviMenutableViewForPlay: NaviMenuTableView!
+    var naviMenutableViewForPlayMovie: NaviMenuTableView!
     var isPersonMenuVisible = false
-    var isPlayMenuVisible = false
+    var isPlayMovieMenuVisible = false
     
     private var presenter: HomePresenterInput!
     
@@ -25,10 +25,12 @@ class HomeViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        initBackground(name: "cosmos-1920.jpg")
         
         initNavigation()
+        initPersonMenu()
+        initPlayMovieMenu()
         initGesture()
-        initBackground(name: "cosmos-1920.jpg")
         
         presenter = HomePresenter(view: self)
         presenter.viewDidLoad()
@@ -50,9 +52,9 @@ class HomeViewController: UIViewController {
             if naviMenutableViewForPerson.bounds.contains(location) {
                 return
             }
-        } else if isPlayMenuVisible {
-            let location = sender.location(in: naviMenutableViewForPlay)
-            if naviMenutableViewForPlay.bounds.contains(location) {
+        } else if isPlayMovieMenuVisible {
+            let location = sender.location(in: naviMenutableViewForPlayMovie)
+            if naviMenutableViewForPlayMovie.bounds.contains(location) {
                 return
             }
         }
@@ -61,20 +63,20 @@ class HomeViewController: UIViewController {
         isPersonMenuVisible = false
         naviMenutableViewForPerson.isHidden = true
         
-        isPlayMenuVisible = false
-        naviMenutableViewForPlay.isHidden = true
+        isPlayMovieMenuVisible = false
+        naviMenutableViewForPlayMovie.isHidden = true
     }
 
     func initNavigation(){
         self.title = ""
-        let personBarButton = UIBarButtonItem(title: "", image: UIImage(systemName: "person.fill"), target: self, action: #selector(personButtonTapped))
-        navigationItem.rightBarButtonItem = personBarButton
         
-        let playBarButton = UIBarButtonItem(title: "", image: UIImage(systemName: "play.fill"), target: self, action: #selector(playButtonTapped))
-                navigationItem.leftBarButtonItem = playBarButton
-                
         // 次の画面のBackボタンを「戻る」に変更
         self.navigationItem.backBarButtonItem = UIBarButtonItem(title:  "戻る", style:  .plain, target: nil, action: nil)
+    }
+    
+    func initPersonMenu() {
+        let personBarButton = UIBarButtonItem(title: "", image: UIImage(systemName: "person.fill"), target: self, action: #selector(personButtonTapped))
+        navigationItem.rightBarButtonItem = personBarButton
         
         naviMenutableViewForPerson = NaviMenuTableView(frame: CGRect.zero, style: .plain)
         naviMenutableViewForPerson.translatesAutoresizingMaskIntoConstraints = false
@@ -90,19 +92,25 @@ class HomeViewController: UIViewController {
         naviMenutableViewForPerson.items = ["ログイン", "アカウント登録"]
         naviMenutableViewForPerson.menuDelegate = self
         
-        naviMenutableViewForPlay = NaviMenuTableView(frame: CGRect.zero, style: .plain)
-        naviMenutableViewForPlay.translatesAutoresizingMaskIntoConstraints = false
-        view.addSubview(naviMenutableViewForPlay)
+    }
+    
+    func initPlayMovieMenu() {
+        let playMovieBarButton = UIBarButtonItem(title: "", image: UIImage(systemName: "play.fill"), target: self, action: #selector(playMovieButtonTapped))
+        navigationItem.leftBarButtonItem = playMovieBarButton
+        
+        naviMenutableViewForPlayMovie = NaviMenuTableView(frame: CGRect.zero, style: .plain)
+        naviMenutableViewForPlayMovie.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(naviMenutableViewForPlayMovie)
         
         NSLayoutConstraint.activate([
-            naviMenutableViewForPlay.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.4),
-            naviMenutableViewForPlay.heightAnchor.constraint(equalToConstant: 100),
-            naviMenutableViewForPlay.topAnchor.constraint(equalTo: view.topAnchor),
-            naviMenutableViewForPlay.leadingAnchor.constraint(equalTo: view.leadingAnchor)
+            naviMenutableViewForPlayMovie.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.4),
+            naviMenutableViewForPlayMovie.heightAnchor.constraint(equalToConstant: 200),
+            naviMenutableViewForPlayMovie.topAnchor.constraint(equalTo: view.topAnchor),
+            naviMenutableViewForPlayMovie.leadingAnchor.constraint(equalTo: view.leadingAnchor)
         ])
-        naviMenutableViewForPlay.isHidden = true
-        naviMenutableViewForPlay.items = ["ほげ", "ぴよ"]
-        naviMenutableViewForPlay.menuDelegate = self
+        naviMenutableViewForPlayMovie.isHidden = true
+        naviMenutableViewForPlayMovie.items = ["ほげ", "ぴよ"]
+        naviMenutableViewForPlayMovie.menuDelegate = self
     }
     
     @objc func personButtonTapped(){
@@ -110,9 +118,9 @@ class HomeViewController: UIViewController {
         naviMenutableViewForPerson.isHidden = !isPersonMenuVisible
     }
     
-    @objc func playButtonTapped() {
-        isPlayMenuVisible.toggle()
-        naviMenutableViewForPlay.isHidden = !isPlayMenuVisible
+    @objc func playMovieButtonTapped() {
+        isPlayMovieMenuVisible.toggle()
+        naviMenutableViewForPlayMovie.isHidden = !isPlayMovieMenuVisible
     }
     
     func initBackground(name: String){
@@ -205,8 +213,8 @@ extension HomeViewController: NaviMenuTableViewDelegate{
         naviMenutableViewForPerson.isHidden = true
         isPersonMenuVisible = false
         
-        naviMenutableViewForPlay.isHidden = true
-        isPlayMenuVisible = false
+        naviMenutableViewForPlayMovie.isHidden = true
+        isPlayMovieMenuVisible = false
         
         switch item {
         case "ログイン":
