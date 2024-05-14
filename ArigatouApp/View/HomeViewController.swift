@@ -13,9 +13,10 @@ class HomeViewController: UIViewController {
     private var counterLabel: UILabel!
     private var micView: MicImageView!
     
-    var naviMenutableView: NaviMenuTableView!
-    var isMenuVisible = false
-    let items = ["ログイン", "アカウント登録"]
+    var naviMenutableViewForPerson: NaviMenuTableView!
+    var naviMenutableViewForPlay: NaviMenuTableView!
+    var isPersonMenuVisible = false
+    var isPlayMenuVisible = false
     
     private var presenter: HomePresenterInput!
     
@@ -33,8 +34,8 @@ class HomeViewController: UIViewController {
         presenter.viewDidLoad()
     }
     
+    // タップジェスチャーの追加
     func initGesture() {
-        // タップジェスチャーの追加
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleTap(_:)))
         // メニューのタップを処理するために、cancelsTouchesInView を false に設定する
         tapGesture.cancelsTouchesInView = false
@@ -42,46 +43,76 @@ class HomeViewController: UIViewController {
     }
     
     @objc func handleTap(_ sender: UITapGestureRecognizer) {
-        if isMenuVisible {
+        if isPersonMenuVisible {
             // タップされた場所がメニュー内であれば、メニューのタップを処理し、
             // それ以外の場所のタップを無視する
-            let location = sender.location(in: naviMenutableView)
-            if naviMenutableView.bounds.contains(location) {
+            let location = sender.location(in: naviMenutableViewForPerson)
+            if naviMenutableViewForPerson.bounds.contains(location) {
+                return
+            }
+        } else if isPlayMenuVisible {
+            let location = sender.location(in: naviMenutableViewForPlay)
+            if naviMenutableViewForPlay.bounds.contains(location) {
                 return
             }
         }
         
         // メニュー以外の場所がタップされた場合の処理
-        isMenuVisible = false
-        naviMenutableView.isHidden = true
+        isPersonMenuVisible = false
+        naviMenutableViewForPerson.isHidden = true
+        
+        isPlayMenuVisible = false
+        naviMenutableViewForPlay.isHidden = true
     }
 
     func initNavigation(){
         self.title = ""
-        let barButton = UIBarButtonItem(title: "", image: UIImage(systemName: "person.fill"), target: self, action: #selector(addButtonTapped))
-        navigationItem.rightBarButtonItem = barButton
+        let personBarButton = UIBarButtonItem(title: "", image: UIImage(systemName: "person.fill"), target: self, action: #selector(personButtonTapped))
+        navigationItem.rightBarButtonItem = personBarButton
         
+        let playBarButton = UIBarButtonItem(title: "", image: UIImage(systemName: "play.fill"), target: self, action: #selector(playButtonTapped))
+                navigationItem.leftBarButtonItem = playBarButton
+                
         // 次の画面のBackボタンを「戻る」に変更
         self.navigationItem.backBarButtonItem = UIBarButtonItem(title:  "戻る", style:  .plain, target: nil, action: nil)
         
-        naviMenutableView = NaviMenuTableView(frame: CGRect.zero, style: .plain)
-        naviMenutableView.translatesAutoresizingMaskIntoConstraints = false
-        view.addSubview(naviMenutableView)
+        naviMenutableViewForPerson = NaviMenuTableView(frame: CGRect.zero, style: .plain)
+        naviMenutableViewForPerson.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(naviMenutableViewForPerson)
         
         NSLayoutConstraint.activate([
-            naviMenutableView.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.4),
-            naviMenutableView.heightAnchor.constraint(equalToConstant: 200),
-            naviMenutableView.topAnchor.constraint(equalTo: view.topAnchor),
-            naviMenutableView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
+            naviMenutableViewForPerson.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.4),
+            naviMenutableViewForPerson.heightAnchor.constraint(equalToConstant: 200),
+            naviMenutableViewForPerson.topAnchor.constraint(equalTo: view.topAnchor),
+            naviMenutableViewForPerson.trailingAnchor.constraint(equalTo: view.trailingAnchor)
         ])
-        naviMenutableView.isHidden = true
-        naviMenutableView.items = items
-        naviMenutableView.menuDelegate = self
+        naviMenutableViewForPerson.isHidden = true
+        naviMenutableViewForPerson.items = ["ログイン", "アカウント登録"]
+        naviMenutableViewForPerson.menuDelegate = self
+        
+        naviMenutableViewForPlay = NaviMenuTableView(frame: CGRect.zero, style: .plain)
+        naviMenutableViewForPlay.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(naviMenutableViewForPlay)
+        
+        NSLayoutConstraint.activate([
+            naviMenutableViewForPlay.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.4),
+            naviMenutableViewForPlay.heightAnchor.constraint(equalToConstant: 100),
+            naviMenutableViewForPlay.topAnchor.constraint(equalTo: view.topAnchor),
+            naviMenutableViewForPlay.leadingAnchor.constraint(equalTo: view.leadingAnchor)
+        ])
+        naviMenutableViewForPlay.isHidden = true
+        naviMenutableViewForPlay.items = ["ほげ", "ぴよ"]
+        naviMenutableViewForPlay.menuDelegate = self
     }
     
-    @objc func addButtonTapped(){
-        isMenuVisible.toggle()
-        naviMenutableView.isHidden = !isMenuVisible
+    @objc func personButtonTapped(){
+        isPersonMenuVisible.toggle()
+        naviMenutableViewForPerson.isHidden = !isPersonMenuVisible
+    }
+    
+    @objc func playButtonTapped() {
+        isPlayMenuVisible.toggle()
+        naviMenutableViewForPlay.isHidden = !isPlayMenuVisible
     }
     
     func initBackground(name: String){
@@ -171,8 +202,11 @@ extension HomeViewController: NaviMenuTableViewDelegate{
     func didSelectItem(_ item: String) {
         
         // 項目をタップしても、ナビがそのまま残るのでタップのタイミングで非表示に
-        naviMenutableView.isHidden = true
-        isMenuVisible = false
+        naviMenutableViewForPerson.isHidden = true
+        isPersonMenuVisible = false
+        
+        naviMenutableViewForPlay.isHidden = true
+        isPlayMenuVisible = false
         
         switch item {
         case "ログイン":
@@ -180,6 +214,10 @@ extension HomeViewController: NaviMenuTableViewDelegate{
             self.navigationController?.pushViewController(secondVC, animated: true)
         case "アカウント登録":
             print("アカウント登録へ")
+        case "ほげ":
+            print("aaaa")
+        case "ぴよ":
+            print("bbb")
         default:
             break
         }
