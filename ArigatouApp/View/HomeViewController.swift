@@ -13,9 +13,10 @@ class HomeViewController: UIViewController {
     private var counterLabel: UILabel!
     private var micView: MicImageView!
     
-    var naviMenutableView: NaviMenuTableView!
-    var isMenuVisible = false
-    let items = ["ログイン", "アカウント登録"]
+    var naviMenutableViewForPerson: NaviMenuTableView!
+    var naviMenutableViewForPlayMovie: NaviMenuTableView!
+    var isPersonMenuVisible = false
+    var isPlayMovieMenuVisible = false
     
     private var presenter: HomePresenterInput!
     
@@ -24,17 +25,19 @@ class HomeViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        initBackground(name: "cosmos-1920.jpg")
         
         initNavigation()
+        initPersonMenu()
+        initPlayMovieMenu()
         initGesture()
-        initBackground(name: "cosmos-1920.jpg")
         
         presenter = HomePresenter(view: self)
         presenter.viewDidLoad()
     }
     
+    // タップジェスチャーの追加
     func initGesture() {
-        // タップジェスチャーの追加
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleTap(_:)))
         // メニューのタップを処理するために、cancelsTouchesInView を false に設定する
         tapGesture.cancelsTouchesInView = false
@@ -42,46 +45,82 @@ class HomeViewController: UIViewController {
     }
     
     @objc func handleTap(_ sender: UITapGestureRecognizer) {
-        if isMenuVisible {
+        if isPersonMenuVisible {
             // タップされた場所がメニュー内であれば、メニューのタップを処理し、
             // それ以外の場所のタップを無視する
-            let location = sender.location(in: naviMenutableView)
-            if naviMenutableView.bounds.contains(location) {
+            let location = sender.location(in: naviMenutableViewForPerson)
+            if naviMenutableViewForPerson.bounds.contains(location) {
+                return
+            }
+        } else if isPlayMovieMenuVisible {
+            let location = sender.location(in: naviMenutableViewForPlayMovie)
+            if naviMenutableViewForPlayMovie.bounds.contains(location) {
                 return
             }
         }
         
         // メニュー以外の場所がタップされた場合の処理
-        isMenuVisible = false
-        naviMenutableView.isHidden = true
+        isPersonMenuVisible = false
+        naviMenutableViewForPerson.isHidden = true
+        
+        isPlayMovieMenuVisible = false
+        naviMenutableViewForPlayMovie.isHidden = true
     }
 
     func initNavigation(){
-        self.title = "ありがとう100万回"
-        let barButton = UIBarButtonItem(title: "", image: UIImage(systemName: "person.fill"), target: self, action: #selector(addButtonTapped))
-        navigationItem.rightBarButtonItem = barButton
+        self.title = ""
         
         // 次の画面のBackボタンを「戻る」に変更
         self.navigationItem.backBarButtonItem = UIBarButtonItem(title:  "戻る", style:  .plain, target: nil, action: nil)
-        
-        naviMenutableView = NaviMenuTableView(frame: CGRect.zero, style: .plain)
-        naviMenutableView.translatesAutoresizingMaskIntoConstraints = false
-        view.addSubview(naviMenutableView)
-        
-        NSLayoutConstraint.activate([
-            naviMenutableView.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.4),
-            naviMenutableView.heightAnchor.constraint(equalToConstant: 200),
-            naviMenutableView.topAnchor.constraint(equalTo: view.topAnchor),
-            naviMenutableView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
-        ])
-        naviMenutableView.isHidden = true
-        naviMenutableView.items = items
-        naviMenutableView.menuDelegate = self
     }
     
-    @objc func addButtonTapped(){
-        isMenuVisible.toggle()
-        naviMenutableView.isHidden = !isMenuVisible
+    func initPersonMenu() {
+        let personBarButton = UIBarButtonItem(title: "", image: UIImage(systemName: "person.fill"), target: self, action: #selector(personButtonTapped))
+        navigationItem.rightBarButtonItem = personBarButton
+        
+        naviMenutableViewForPerson = NaviMenuTableView(frame: CGRect.zero, style: .plain)
+        naviMenutableViewForPerson.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(naviMenutableViewForPerson)
+        
+        NSLayoutConstraint.activate([
+            naviMenutableViewForPerson.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.4),
+            naviMenutableViewForPerson.heightAnchor.constraint(equalToConstant: 200),
+            naviMenutableViewForPerson.topAnchor.constraint(equalTo: view.topAnchor),
+            naviMenutableViewForPerson.trailingAnchor.constraint(equalTo: view.trailingAnchor)
+        ])
+        naviMenutableViewForPerson.isHidden = true
+        naviMenutableViewForPerson.items = ["ログイン", "アカウント登録"]
+        naviMenutableViewForPerson.menuDelegate = self
+        
+    }
+    
+    func initPlayMovieMenu() {
+        let playMovieBarButton = UIBarButtonItem(title: "", image: UIImage(systemName: "play.fill"), target: self, action: #selector(playMovieButtonTapped))
+        navigationItem.leftBarButtonItem = playMovieBarButton
+        
+        naviMenutableViewForPlayMovie = NaviMenuTableView(frame: CGRect.zero, style: .plain)
+        naviMenutableViewForPlayMovie.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(naviMenutableViewForPlayMovie)
+        
+        NSLayoutConstraint.activate([
+            naviMenutableViewForPlayMovie.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.4),
+            naviMenutableViewForPlayMovie.heightAnchor.constraint(equalToConstant: 200),
+            naviMenutableViewForPlayMovie.topAnchor.constraint(equalTo: view.topAnchor),
+            naviMenutableViewForPlayMovie.leadingAnchor.constraint(equalTo: view.leadingAnchor)
+        ])
+        naviMenutableViewForPlayMovie.isHidden = true
+        naviMenutableViewForPlayMovie.items = MovieList.naviItem
+        naviMenutableViewForPlayMovie.menuDelegate = self
+    }
+    
+    @objc func personButtonTapped(){
+        isPersonMenuVisible.toggle()
+        naviMenutableViewForPerson.isHidden = !isPersonMenuVisible
+    }
+    
+    @objc func playMovieButtonTapped() {
+        isPlayMovieMenuVisible.toggle()
+        naviMenutableViewForPlayMovie.isHidden = !isPlayMovieMenuVisible
     }
     
     func initBackground(name: String){
@@ -171,8 +210,11 @@ extension HomeViewController: NaviMenuTableViewDelegate{
     func didSelectItem(_ item: String) {
         
         // 項目をタップしても、ナビがそのまま残るのでタップのタイミングで非表示に
-        naviMenutableView.isHidden = true
-        isMenuVisible = false
+        naviMenutableViewForPerson.isHidden = true
+        isPersonMenuVisible = false
+        
+        naviMenutableViewForPlayMovie.isHidden = true
+        isPlayMovieMenuVisible = false
         
         switch item {
         case "ログイン":
@@ -180,6 +222,10 @@ extension HomeViewController: NaviMenuTableViewDelegate{
             self.navigationController?.pushViewController(secondVC, animated: true)
         case "アカウント登録":
             print("アカウント登録へ")
+        case "ほげ":
+            print("aaaa")
+        case "ぴよ":
+            print("bbb")
         default:
             break
         }
