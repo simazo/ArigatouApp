@@ -109,7 +109,7 @@ class HomeViewController: UIViewController {
             naviMenutableViewForPlayMovie.leadingAnchor.constraint(equalTo: view.leadingAnchor)
         ])
         naviMenutableViewForPlayMovie.isHidden = true
-        naviMenutableViewForPlayMovie.items = ["ほげ", "ぴよ"]
+        naviMenutableViewForPlayMovie.items = MovieList.naviItem
         naviMenutableViewForPlayMovie.menuDelegate = self
     }
     

@@ -17,5 +17,12 @@ public final class MovieList {
         500000: "https://dancer.boo.jp/arigatou/mp4/space_travel_big.mp4",
         1000000: "https://dancer.boo.jp/arigatou/mp4/space_travel_big.mp4",
     ]
+    
+    public static var naviItem: [String] = [
+        "10回目の動画",
+        "100回目の動画",
+        "1,000回目の動画",
+        "5,000回目の動画",
+    ]
 }
 
