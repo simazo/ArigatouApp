@@ -9,7 +9,7 @@ import XCTest
 @testable import ArigatouApp
 
 class MockPresenterOutput: HomePresenterOutput {
-    func showPlayVideoListMenu() {
+    func showPlayVideoListMenu(menus: [String]) {
     }
     
     var videoShown = false
@@ -129,7 +129,7 @@ class HomePresenterTests: XCTestCase {
     func testPlayVideoReached() {
         presenter.matchCountManger.setCount(100)
         
-        guard let videoURL = VideoList.getUrl(presenter.matchCountManger.getCount()) else {
+        guard let videoURL = VideoList.getUrlByCount(presenter.matchCountManger.getCount()) else {
             return
         }
         // playVideo() を呼び出す
@@ -143,7 +143,7 @@ class HomePresenterTests: XCTestCase {
     func testPlayVideoNotReached() {
         presenter.matchCountManger.setCount(99)
         
-        guard let videoURL = VideoList.getUrl(presenter.matchCountManger.getCount()) else {
+        guard let videoURL = VideoList.getUrlByCount(presenter.matchCountManger.getCount()) else {
             return
         }
         

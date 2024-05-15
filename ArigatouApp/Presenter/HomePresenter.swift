@@ -172,7 +172,7 @@ class HomePresenter{
     
     private func playVideoIfMatchCountReached(_ match_count: Int) {
         // 特定のマッチ数ではない場合処理を抜ける
-        guard let videoURL = VideoList.getUrl(match_count) else {
+        guard let videoURL = VideoList.getUrlByCount(match_count) else {
             return
         }
         
