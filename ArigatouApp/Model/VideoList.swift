@@ -7,6 +7,7 @@
 
 public final class VideoList {
     static let items: [(count: Int, menu: String, url: String)] = [
+        //(count: 10, menu: "10回目の動画", url: "https://dancer.boo.jp/arigatou/mp4/space_travel_big.mp4"),
         (count: 100, menu: "100回目の動画", url: "https://dancer.boo.jp/arigatou/mp4/space_travel_big.mp4"),
         (count: 1000, menu: "1,000回目の動画", url: "https://dancer.boo.jp/arigatou/mp4/space_travel_big.mp4"),
         (count: 5000, menu: "5,000回目の動画", url: "https://dancer.boo.jp/arigatou/mp4/space_travel_big.mp4"),
@@ -17,14 +18,21 @@ public final class VideoList {
         (count: 1000000, menu: "1000,000回目の動画", url: "aaa.mp4"),
     ]
     
-    static func getUrl(_ count: Int) -> String? {
+    static func getUrlByCount(_ count: Int) -> String? {
         if let item = items.first(where: { $0.count == count }) {
             return item.url
         }
         return nil
     }
     
-    static func getMenu(_ count: Int) -> String? {
+    static func getUrlByMenu(_ menu: String) -> String? {
+        if let item = items.first(where: { $0.menu == menu }) {
+            return item.url
+        }
+        return nil
+    }
+
+    static func getMenuByCount(_ count: Int) -> String? {
         if let item = items.first(where: { $0.count == count }) {
             return item.menu
         }
