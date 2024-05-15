@@ -14,9 +14,9 @@ class HomeViewController: UIViewController {
     private var micView: MicImageView!
     
     var naviMenutableViewForPerson: NaviMenuTableView!
-    var naviMenutableViewForPlayMovie: NaviMenuTableView!
+    var naviMenutableViewForPlayVideo: NaviMenuTableView!
     var isPersonMenuVisible = false
-    var isPlayMovieMenuVisible = false
+    var isPlayVideoMenuVisible = false
     
     private var presenter: HomePresenterInput!
     
@@ -29,7 +29,6 @@ class HomeViewController: UIViewController {
         
         initNavigation()
         initPersonMenu()
-        initPlayMovieMenu()
         initGesture()
         
         presenter = HomePresenter(view: self)
@@ -37,7 +36,7 @@ class HomeViewController: UIViewController {
     }
     
     // タップジェスチャーの追加
-    func initGesture() {
+    private func initGesture() {
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleTap(_:)))
         // メニューのタップを処理するために、cancelsTouchesInView を false に設定する
         tapGesture.cancelsTouchesInView = false
@@ -52,9 +51,9 @@ class HomeViewController: UIViewController {
             if naviMenutableViewForPerson.bounds.contains(location) {
                 return
             }
-        } else if isPlayMovieMenuVisible {
-            let location = sender.location(in: naviMenutableViewForPlayMovie)
-            if naviMenutableViewForPlayMovie.bounds.contains(location) {
+        } else if isPlayVideoMenuVisible {
+            let location = sender.location(in: naviMenutableViewForPlayVideo)
+            if naviMenutableViewForPlayVideo.bounds.contains(location) {
                 return
             }
         }
@@ -63,18 +62,18 @@ class HomeViewController: UIViewController {
         isPersonMenuVisible = false
         naviMenutableViewForPerson.isHidden = true
         
-        isPlayMovieMenuVisible = false
-        naviMenutableViewForPlayMovie.isHidden = true
+        isPlayVideoMenuVisible = false
+        naviMenutableViewForPlayVideo.isHidden = true
     }
 
-    func initNavigation(){
+    private func initNavigation(){
         self.title = ""
         
         // 次の画面のBackボタンを「戻る」に変更
         self.navigationItem.backBarButtonItem = UIBarButtonItem(title:  "戻る", style:  .plain, target: nil, action: nil)
     }
     
-    func initPersonMenu() {
+    private func initPersonMenu() {
         let personBarButton = UIBarButtonItem(title: "", image: UIImage(systemName: "person.fill"), target: self, action: #selector(personButtonTapped))
         navigationItem.rightBarButtonItem = personBarButton
         
@@ -94,33 +93,51 @@ class HomeViewController: UIViewController {
         
     }
     
-    func initPlayMovieMenu() {
-        let playMovieBarButton = UIBarButtonItem(title: "", image: UIImage(systemName: "play.fill"), target: self, action: #selector(playMovieButtonTapped))
-        navigationItem.leftBarButtonItem = playMovieBarButton
+    private func initPlayVideoMenu(menus: [String]) {
+        let playVideoBarButton = UIBarButtonItem(title: "", image: UIImage(systemName: "play.fill"), target: self, action: #selector(playVideoButtonTapped))
+        navigationItem.leftBarButtonItem = playVideoBarButton
         
-        naviMenutableViewForPlayMovie = NaviMenuTableView(frame: CGRect.zero, style: .plain)
-        naviMenutableViewForPlayMovie.translatesAutoresizingMaskIntoConstraints = false
-        view.addSubview(naviMenutableViewForPlayMovie)
+        naviMenutableViewForPlayVideo = NaviMenuTableView(frame: CGRect.zero, style: .plain)
+        naviMenutableViewForPlayVideo.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(naviMenutableViewForPlayVideo)
         
+        // メニュー数によって高さ調整
+        let initialHeight: CGFloat = 140 // 高さの基準値
+        let adjustedHeight = max(initialHeight - CGFloat(10 * (menus.count - 1)), 60) //１増えるごとに基準値を10減少
+            
         NSLayoutConstraint.activate([
-            naviMenutableViewForPlayMovie.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.4),
-            naviMenutableViewForPlayMovie.heightAnchor.constraint(equalToConstant: 200),
-            naviMenutableViewForPlayMovie.topAnchor.constraint(equalTo: view.topAnchor),
-            naviMenutableViewForPlayMovie.leadingAnchor.constraint(equalTo: view.leadingAnchor)
+            naviMenutableViewForPlayVideo.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.4),
+            naviMenutableViewForPlayVideo.heightAnchor.constraint(equalToConstant: CGFloat(CGFloat(menus.count) * adjustedHeight)),
+            naviMenutableViewForPlayVideo.topAnchor.constraint(equalTo: view.topAnchor),
+            naviMenutableViewForPlayVideo.leadingAnchor.constraint(equalTo: view.leadingAnchor)
         ])
-        naviMenutableViewForPlayMovie.isHidden = true
-        naviMenutableViewForPlayMovie.items = MovieList.naviItem
-        naviMenutableViewForPlayMovie.menuDelegate = self
+        naviMenutableViewForPlayVideo.isHidden = true
+        naviMenutableViewForPlayVideo.items = menus
+        naviMenutableViewForPlayVideo.menuDelegate = self
+        
     }
     
+    private func deinitPlayVideoMenu() {
+
+        navigationItem.leftBarButtonItem = nil
+        
+        // 生成されている場合にのみ削除する
+        guard let naviMenuTableView = naviMenutableViewForPlayVideo else {
+            return
+        }
+        
+        // 画面から削除
+        naviMenuTableView.removeFromSuperview()
+    }
+
     @objc func personButtonTapped(){
         isPersonMenuVisible.toggle()
         naviMenutableViewForPerson.isHidden = !isPersonMenuVisible
     }
     
-    @objc func playMovieButtonTapped() {
-        isPlayMovieMenuVisible.toggle()
-        naviMenutableViewForPlayMovie.isHidden = !isPlayMovieMenuVisible
+    @objc func playVideoButtonTapped() {
+        isPlayVideoMenuVisible.toggle()
+        naviMenutableViewForPlayVideo.isHidden = !isPlayVideoMenuVisible
     }
     
     func initBackground(name: String){
@@ -213,8 +230,8 @@ extension HomeViewController: NaviMenuTableViewDelegate{
         naviMenutableViewForPerson.isHidden = true
         isPersonMenuVisible = false
         
-        naviMenutableViewForPlayMovie.isHidden = true
-        isPlayMovieMenuVisible = false
+        naviMenutableViewForPlayVideo.isHidden = true
+        isPlayVideoMenuVisible = false
         
         switch item {
         case "ログイン":
@@ -232,8 +249,18 @@ extension HomeViewController: NaviMenuTableViewDelegate{
     }
 }
 extension HomeViewController: HomePresenterOutput{
+    func showPlayVideoListMenu(menus: [String]) {
+        // 初期化
+        deinitPlayVideoMenu()
+        
+        guard !menus.isEmpty else {
+            return
+        }
+        // 生成
+        initPlayVideoMenu(menus: menus)
+    }
     
-    func playMovie(url: String) {
+    func playVideo(url: String) {
         let url = URL(string: url)!
         let player = AVPlayer(url: url)
         let playerViewController = AVPlayerViewController()
@@ -245,7 +272,6 @@ extension HomeViewController: HomePresenterOutput{
             }
         }
     }
-    
     
     func showStartScreen() {
         initRemainingLabel()
