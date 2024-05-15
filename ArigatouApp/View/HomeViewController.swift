@@ -29,7 +29,6 @@ class HomeViewController: UIViewController {
         
         initNavigation()
         initPersonMenu()
-        initPlayVideoMenu()
         initGesture()
         
         presenter = HomePresenter(view: self)
@@ -37,7 +36,7 @@ class HomeViewController: UIViewController {
     }
     
     // タップジェスチャーの追加
-    func initGesture() {
+    private func initGesture() {
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleTap(_:)))
         // メニューのタップを処理するために、cancelsTouchesInView を false に設定する
         tapGesture.cancelsTouchesInView = false
@@ -67,14 +66,14 @@ class HomeViewController: UIViewController {
         naviMenutableViewForPlayVideo.isHidden = true
     }
 
-    func initNavigation(){
+    private func initNavigation(){
         self.title = ""
         
         // 次の画面のBackボタンを「戻る」に変更
         self.navigationItem.backBarButtonItem = UIBarButtonItem(title:  "戻る", style:  .plain, target: nil, action: nil)
     }
     
-    func initPersonMenu() {
+    private func initPersonMenu() {
         let personBarButton = UIBarButtonItem(title: "", image: UIImage(systemName: "person.fill"), target: self, action: #selector(personButtonTapped))
         navigationItem.rightBarButtonItem = personBarButton
         
@@ -94,7 +93,7 @@ class HomeViewController: UIViewController {
         
     }
     
-    func initPlayVideoMenu() {
+    private func initPlayVideoMenu(menus: [String]) {
         let playVideoBarButton = UIBarButtonItem(title: "", image: UIImage(systemName: "play.fill"), target: self, action: #selector(playVideoButtonTapped))
         navigationItem.leftBarButtonItem = playVideoBarButton
         
@@ -102,18 +101,35 @@ class HomeViewController: UIViewController {
         naviMenutableViewForPlayVideo.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(naviMenutableViewForPlayVideo)
         
+        // メニュー数によって高さ調整
+        let initialHeight: CGFloat = 140 // 高さの基準値
+        let adjustedHeight = max(initialHeight - CGFloat(10 * (menus.count - 1)), 60) //１増えるごとに基準値を10減少
+            
         NSLayoutConstraint.activate([
             naviMenutableViewForPlayVideo.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.4),
-            naviMenutableViewForPlayVideo.heightAnchor.constraint(equalToConstant: 200),
+            naviMenutableViewForPlayVideo.heightAnchor.constraint(equalToConstant: CGFloat(CGFloat(menus.count) * adjustedHeight)),
             naviMenutableViewForPlayVideo.topAnchor.constraint(equalTo: view.topAnchor),
             naviMenutableViewForPlayVideo.leadingAnchor.constraint(equalTo: view.leadingAnchor)
         ])
         naviMenutableViewForPlayVideo.isHidden = true
-        naviMenutableViewForPlayVideo.items = ["aaaaaa", "xxxx"]
+        naviMenutableViewForPlayVideo.items = menus
         naviMenutableViewForPlayVideo.menuDelegate = self
         
     }
     
+    private func deinitPlayVideoMenu() {
+
+        navigationItem.leftBarButtonItem = nil
+        
+        // 生成されている場合にのみ削除する
+        guard let naviMenuTableView = naviMenutableViewForPlayVideo else {
+            return
+        }
+        
+        // 画面から削除
+        naviMenuTableView.removeFromSuperview()
+    }
+
     @objc func personButtonTapped(){
         isPersonMenuVisible.toggle()
         naviMenutableViewForPerson.isHidden = !isPersonMenuVisible
@@ -233,8 +249,15 @@ extension HomeViewController: NaviMenuTableViewDelegate{
     }
 }
 extension HomeViewController: HomePresenterOutput{
-    func showPlayVideoListMenu() {
-        print("x")
+    func showPlayVideoListMenu(menus: [String]) {
+        // 初期化
+        deinitPlayVideoMenu()
+        
+        guard !menus.isEmpty else {
+            return
+        }
+        // 生成
+        initPlayVideoMenu(menus: menus)
     }
     
     func playVideo(url: String) {

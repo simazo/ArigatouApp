@@ -19,7 +19,7 @@ protocol HomePresenterOutput: AnyObject {
     func redrawCounterLabel(text: String)
     func startMicAnimating()
     func playVideo(url: String)
-    func showPlayVideoListMenu()
+    func showPlayVideoListMenu(menus: [String])
 }
 
 class HomePresenter{
@@ -182,7 +182,7 @@ class HomePresenter{
         }
         
         // 再生リスト表示
-        view?.showPlayVideoListMenu()
+        view?.showPlayVideoListMenu(menus: VideoList.getMatchMenus(matchCount: match_count))
     }
 }
 
@@ -198,6 +198,9 @@ extension HomePresenter: HomePresenterInput {
             view?.showStartScreen()
             handleAuthorizationStatus()
         }
+        
+        // 再生リスト表示
+        view?.showPlayVideoListMenu(menus: VideoList.getMatchMenus(matchCount: matchCountManger.getCount()))
     }
     
     func handleAuthorizationStatus() {
