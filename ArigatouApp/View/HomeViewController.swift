@@ -33,6 +33,20 @@ class HomeViewController: UIViewController {
         
         presenter = HomePresenter(view: self)
         presenter.viewDidLoad()
+        
+        // 「ログイン成功」通知の登録
+        NotificationCenter.default.addObserver(self, selector: #selector(handleLoginSuccess), name: .loginSuccess, object: nil)
+    }
+    
+    deinit {
+        // 「ログイン成功」通知の解除
+        NotificationCenter.default.removeObserver(self, name: .loginSuccess, object: nil)
+    }
+    
+    @objc func handleLoginSuccess() {
+        // ログイン成功時にナビゲーションメニューを変更
+        naviMenutableViewForPerson.items = ["プロフィール", "設定", "ログアウト"]
+        naviMenutableViewForPerson.reloadData()
     }
     
     // タップジェスチャーの追加
