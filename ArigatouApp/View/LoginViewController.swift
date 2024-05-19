@@ -175,8 +175,7 @@ extension LoginViewController : LoginPresenterOutput {
     }
     
     func showLoginFailed(errorMessage: String) {
-        print(errorMessage)
-        print("ログイン失敗")
+        showValidationFailed(errorMessage: errorMessage)
     }
     
     func showValidationFailed(errorMessage: String) {
