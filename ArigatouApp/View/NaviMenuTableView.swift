@@ -8,7 +8,11 @@
 import UIKit
 
 class NaviMenuTableView: UITableView, UITableViewDataSource, UITableViewDelegate {
-    var items: [String] = []
+    var items: [String] = [] {
+        didSet {
+            reloadData()
+        }
+    }
     var selectedItem: String?
     weak var menuDelegate: NaviMenuTableViewDelegate?
     

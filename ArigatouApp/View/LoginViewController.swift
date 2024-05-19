@@ -171,7 +171,8 @@ class LoginViewController: UIViewController {
 
 extension LoginViewController : LoginPresenterOutput {
     func showLoginSuccess() {
-        print("ログインします")
+        NotificationCenter.default.post(name: .loginSuccess, object: nil)
+        self.navigationController?.popViewController(animated: true)
     }
     
     func showLoginFailed(errorMessage: String) {
@@ -189,4 +190,8 @@ extension LoginViewController : LoginPresenterOutput {
             self.present(alert, animated: true, completion: nil)
         }
     }
+}
+
+extension Notification.Name {
+    static let loginSuccess = Notification.Name("loginSuccess")
 }
