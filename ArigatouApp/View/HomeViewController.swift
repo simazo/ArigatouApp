@@ -33,22 +33,23 @@ class HomeViewController: UIViewController {
         
         presenter = HomePresenter(view: self)
         presenter.viewDidLoad()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        updateNavigationMenu()
+    }
+    
+    private func updateNavigationMenu() {
+        let isAuthenticated = AuthManager.shared.checkAuthentication()
         
-        // 「ログイン成功」通知の登録
-        NotificationCenter.default.addObserver(self, selector: #selector(handleLoginSuccess), name: .loginSuccess, object: nil)
-    }
-    
-    deinit {
-        // 「ログイン成功」通知の解除
-        NotificationCenter.default.removeObserver(self, name: .loginSuccess, object: nil)
-    }
-    
-    @objc func handleLoginSuccess() {
-        // ログイン成功時にナビゲーションメニューを変更
-        naviMenutableViewForPerson.items = ["プロフィール", "設定", "ログアウト"]
+        if isAuthenticated {
+            naviMenutableViewForPerson.items = ["同期", "ログアウト"]
+        } else {
+            naviMenutableViewForPerson.items = ["ログイン", "アカウント登録"]
+        }
         naviMenutableViewForPerson.reloadData()
     }
-    
     // タップジェスチャーの追加
     private func initGesture() {
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleTap(_:)))

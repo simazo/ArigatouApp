@@ -171,8 +171,9 @@ class LoginViewController: UIViewController {
 
 extension LoginViewController : LoginPresenterOutput {
     func showLoginSuccess() {
-        NotificationCenter.default.post(name: .loginSuccess, object: nil)
-        self.navigationController?.popViewController(animated: true)
+        DispatchQueue.main.async {
+            self.navigationController?.popViewController(animated: true)
+        }
     }
     
     func showLoginFailed(errorMessage: String) {
