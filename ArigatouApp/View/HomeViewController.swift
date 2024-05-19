@@ -62,8 +62,10 @@ class HomeViewController: UIViewController {
         isPersonMenuVisible = false
         naviMenutableViewForPerson.isHidden = true
         
-        isPlayVideoMenuVisible = false
-        naviMenutableViewForPlayVideo.isHidden = true
+        if naviMenutableViewForPlayVideo != nil {
+            isPlayVideoMenuVisible = false
+            naviMenutableViewForPlayVideo.isHidden = true
+        }
     }
 
     private func initNavigation(){
@@ -230,8 +232,10 @@ extension HomeViewController: NaviMenuTableViewDelegate{
         naviMenutableViewForPerson.isHidden = true
         isPersonMenuVisible = false
         
-        naviMenutableViewForPlayVideo.isHidden = true
-        isPlayVideoMenuVisible = false
+        if naviMenutableViewForPlayVideo != nil {
+            naviMenutableViewForPlayVideo.isHidden = true
+            isPlayVideoMenuVisible = false
+        }
         
         switch item {
         case "ログイン":
