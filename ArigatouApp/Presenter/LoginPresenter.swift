@@ -60,8 +60,25 @@ extension LoginPresenter : LoginPresenterInput {
             }
             
             // ログイン失敗
-            if let error = error {
-                let errorMessage = error.localizedDescription
+            if let error = error as NSError? {
+                let errorMessage: String
+                
+                switch error.code {
+                case AuthErrorCode.invalidCredential.rawValue:
+                    errorMessage = "提供された認証情報が不正か期限切れです。"
+                case AuthErrorCode.userDisabled.rawValue:
+                    errorMessage = "このアカウントは無効化されています。"
+                case AuthErrorCode.wrongPassword.rawValue:
+                    errorMessage = "パスワードが間違っています。"
+                case AuthErrorCode.invalidEmail.rawValue:
+                    errorMessage = "メールアドレスの形式が正しくありません。"
+                case AuthErrorCode.tooManyRequests.rawValue:
+                    errorMessage = "ログインが何度も失敗したため、一時的にアクセス制限されました。パスワードをリセットするか、時間をしばらく置いて再度ログインしてください。"
+                    
+                default:
+                    errorMessage = error.localizedDescription
+                }
+                
                 self.view?.showLoginFailed(errorMessage: errorMessage)
             } else {
                 let errorMessage = "ログインエラー"
