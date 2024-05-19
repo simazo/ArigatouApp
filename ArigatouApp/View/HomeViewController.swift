@@ -258,6 +258,10 @@ extension HomeViewController: NaviMenuTableViewDelegate{
             self.navigationController?.pushViewController(secondVC, animated: true)
         case "アカウント登録":
             print("アカウント登録へ")
+        case "ログアウト":
+            print("ログアウト")
+        case "同期":
+            print("同期へ")
         case let x where x.contains("回目の動画"):
             playVideo(url: VideoList.getUrlByMenu(item)!)
         default:
