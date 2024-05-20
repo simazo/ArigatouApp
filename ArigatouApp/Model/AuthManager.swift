@@ -24,12 +24,14 @@ class AuthManager {
         }
     }
     
-    func logout() {
+    func logout(completion: @escaping (Bool, Error?) -> Void) {
         do {
             try Auth.auth().signOut()
             isAuthenticated = false
+            completion(true, nil)
         } catch let signOutError as NSError {
             print("Error signing out: %@", signOutError)
+            completion(false, signOutError)
         }
     }
     

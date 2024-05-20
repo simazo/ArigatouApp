@@ -177,22 +177,10 @@ extension LoginViewController : LoginPresenterOutput {
     }
     
     func showLoginFailed(errorMessage: String) {
-        showValidationFailed(errorMessage: errorMessage)
+        self.showAlert(title: "ログインエラー", message: errorMessage)
     }
     
     func showValidationFailed(errorMessage: String) {
-        let alert = UIAlertController(title: "ログインエラー", message: errorMessage, preferredStyle: .alert)
-
-        let ok = UIAlertAction(title: "OK", style: .default) { (action) in
-            self.dismiss(animated: true, completion: nil)
-        }
-        alert.addAction(ok)
-        DispatchQueue.main.async {
-            self.present(alert, animated: true, completion: nil)
-        }
+        self.showAlert(title: "ログインエラー", message: errorMessage)
     }
-}
-
-extension Notification.Name {
-    static let loginSuccess = Notification.Name("loginSuccess")
 }

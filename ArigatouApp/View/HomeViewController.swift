@@ -259,7 +259,7 @@ extension HomeViewController: NaviMenuTableViewDelegate{
         case "アカウント登録":
             print("アカウント登録へ")
         case "ログアウト":
-            print("ログアウト")
+            showLogoutAlert()
         case "同期":
             print("同期へ")
         case let x where x.contains("回目の動画"):
@@ -268,8 +268,29 @@ extension HomeViewController: NaviMenuTableViewDelegate{
             break
         }
     }
+    private func showLogoutAlert() {
+        let alertController = UIAlertController(title: "ログアウト", message: "ログアウトしますか？", preferredStyle: .alert)
+        
+        let okAction = UIAlertAction(title: "ログアウト", style: .default) { (_) in
+            self.presenter.logout()
+        }
+        alertController.addAction(okAction)
+    
+        let cancelAction = UIAlertAction(title: "キャンセル", style: .cancel, handler: nil)
+        alertController.addAction(cancelAction)
+        
+        present(alertController, animated: true, completion: nil)
+    }
 }
 extension HomeViewController: HomePresenterOutput{
+    func showLogoutSuccess() {
+        updateNavigationMenu()
+    }
+    
+    func showLogoutFailure(errorMessage: String) {
+        self.showAlert(title: "ログアウトエラー", message: errorMessage)
+    }
+    
     func showPlayVideoListMenu(menus: [String]) {
         // 初期化
         deinitPlayVideoMenu()
