@@ -81,9 +81,9 @@ extension LoginPresenter : LoginPresenterInput {
                 
                 self.view?.showLoginFailed(errorMessage: errorMessage)
             } else {
-                let errorMessage = "ログインエラー"
-                self.view?.showLoginFailed(errorMessage: errorMessage)
+                self.view?.showLoginFailed(errorMessage: "ログインエラー")
             }
         }
     }
+    
 }

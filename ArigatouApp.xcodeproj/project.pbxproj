@@ -37,6 +37,7 @@
 		CCFB7E162BF1B54D00C4617A /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = CCFB7E152BF1B54D00C4617A /* icon.png */; };
 		CCFB7E372BF9EBF600C4617A /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = CCFB7E362BF9EBF600C4617A /* GoogleService-Info.plist */; };
 		CCFB7E382BF9EBF600C4617A /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = CCFB7E362BF9EBF600C4617A /* GoogleService-Info.plist */; };
+		CCFB7E3C2BFB1AF600C4617A /* Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCFB7E3B2BFB1AF600C4617A /* Alert.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -78,6 +79,7 @@
 		CCFB7E132BF18D6F00C4617A /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		CCFB7E152BF1B54D00C4617A /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon.png; sourceTree = "<group>"; };
 		CCFB7E362BF9EBF600C4617A /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		CCFB7E3B2BFB1AF600C4617A /* Alert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Alert.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -168,6 +170,7 @@
 				CCDEAD282BDB1CCE0096704A /* LoginViewController.swift */,
 				CCDEADF22BE44A160096704A /* MicImageView.swift */,
 				CCDEAE142BE514630096704A /* NaviMenuTableView.swift */,
+				CCFB7E3B2BFB1AF600C4617A /* Alert.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -310,6 +313,7 @@
 				CCFB7DD72BF17A8300C4617A /* VideoList.swift in Sources */,
 				CC55BF652BC90301003C3E15 /* HomePresenter.swift in Sources */,
 				CCFB7E142BF18D6F00C4617A /* NetworkManager.swift in Sources */,
+				CCFB7E3C2BFB1AF600C4617A /* Alert.swift in Sources */,
 				CCFB7DD52BED9C1300C4617A /* AuthManager.swift in Sources */,
 				CC209D282BD47EB10069E2E4 /* MatchCountManager.swift in Sources */,
 				CC55BF542BC9028D003C3E15 /* HomeViewController.swift in Sources */,
