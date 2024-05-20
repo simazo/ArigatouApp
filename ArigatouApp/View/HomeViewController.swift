@@ -44,8 +44,10 @@ class HomeViewController: UIViewController {
         let isAuthenticated = AuthManager.shared.checkAuthentication()
         
         if isAuthenticated {
+            navigationItem.rightBarButtonItem = UIBarButtonItem(title: "", image: UIImage(systemName: "person.fill"), target: self, action: #selector(personButtonTapped))
             naviMenutableViewForPerson.items = ["同期", "ログアウト"]
         } else {
+            navigationItem.rightBarButtonItem = UIBarButtonItem(title: "", image: UIImage(systemName: "person"), target: self, action: #selector(personButtonTapped))
             naviMenutableViewForPerson.items = ["ログイン", "アカウント登録"]
         }
         naviMenutableViewForPerson.reloadData()
@@ -91,8 +93,7 @@ class HomeViewController: UIViewController {
     }
     
     private func initPersonMenu() {
-        let personBarButton = UIBarButtonItem(title: "", image: UIImage(systemName: "person.fill"), target: self, action: #selector(personButtonTapped))
-        navigationItem.rightBarButtonItem = personBarButton
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "", image: UIImage(systemName: "person"), target: self, action: #selector(personButtonTapped))
         
         naviMenutableViewForPerson = NaviMenuTableView(frame: CGRect.zero, style: .plain)
         naviMenutableViewForPerson.translatesAutoresizingMaskIntoConstraints = false
@@ -111,8 +112,7 @@ class HomeViewController: UIViewController {
     }
     
     private func initPlayVideoMenu(menus: [String]) {
-        let playVideoBarButton = UIBarButtonItem(title: "", image: UIImage(systemName: "play.fill"), target: self, action: #selector(playVideoButtonTapped))
-        navigationItem.leftBarButtonItem = playVideoBarButton
+        navigationItem.leftBarButtonItem = UIBarButtonItem(title: "", image: UIImage(systemName: "play.fill"), target: self, action: #selector(playVideoButtonTapped))
         
         naviMenutableViewForPlayVideo = NaviMenuTableView(frame: CGRect.zero, style: .plain)
         naviMenutableViewForPlayVideo.translatesAutoresizingMaskIntoConstraints = false
