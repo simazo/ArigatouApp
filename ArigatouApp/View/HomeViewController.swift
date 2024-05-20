@@ -33,22 +33,25 @@ class HomeViewController: UIViewController {
         
         presenter = HomePresenter(view: self)
         presenter.viewDidLoad()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        updateNavigationMenu()
+    }
+    
+    private func updateNavigationMenu() {
+        let isAuthenticated = AuthManager.shared.checkAuthentication()
         
-        // 「ログイン成功」通知の登録
-        NotificationCenter.default.addObserver(self, selector: #selector(handleLoginSuccess), name: .loginSuccess, object: nil)
-    }
-    
-    deinit {
-        // 「ログイン成功」通知の解除
-        NotificationCenter.default.removeObserver(self, name: .loginSuccess, object: nil)
-    }
-    
-    @objc func handleLoginSuccess() {
-        // ログイン成功時にナビゲーションメニューを変更
-        naviMenutableViewForPerson.items = ["プロフィール", "設定", "ログアウト"]
+        if isAuthenticated {
+            navigationItem.rightBarButtonItem = UIBarButtonItem(title: "", image: UIImage(systemName: "person.fill"), target: self, action: #selector(personButtonTapped))
+            naviMenutableViewForPerson.items = ["同期", "ログアウト"]
+        } else {
+            navigationItem.rightBarButtonItem = UIBarButtonItem(title: "", image: UIImage(systemName: "person"), target: self, action: #selector(personButtonTapped))
+            naviMenutableViewForPerson.items = ["ログイン", "アカウント登録"]
+        }
         naviMenutableViewForPerson.reloadData()
     }
-    
     // タップジェスチャーの追加
     private func initGesture() {
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleTap(_:)))
@@ -90,8 +93,7 @@ class HomeViewController: UIViewController {
     }
     
     private func initPersonMenu() {
-        let personBarButton = UIBarButtonItem(title: "", image: UIImage(systemName: "person.fill"), target: self, action: #selector(personButtonTapped))
-        navigationItem.rightBarButtonItem = personBarButton
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "", image: UIImage(systemName: "person"), target: self, action: #selector(personButtonTapped))
         
         naviMenutableViewForPerson = NaviMenuTableView(frame: CGRect.zero, style: .plain)
         naviMenutableViewForPerson.translatesAutoresizingMaskIntoConstraints = false
@@ -110,8 +112,7 @@ class HomeViewController: UIViewController {
     }
     
     private func initPlayVideoMenu(menus: [String]) {
-        let playVideoBarButton = UIBarButtonItem(title: "", image: UIImage(systemName: "play.fill"), target: self, action: #selector(playVideoButtonTapped))
-        navigationItem.leftBarButtonItem = playVideoBarButton
+        navigationItem.leftBarButtonItem = UIBarButtonItem(title: "", image: UIImage(systemName: "play.fill"), target: self, action: #selector(playVideoButtonTapped))
         
         naviMenutableViewForPlayVideo = NaviMenuTableView(frame: CGRect.zero, style: .plain)
         naviMenutableViewForPlayVideo.translatesAutoresizingMaskIntoConstraints = false
@@ -257,6 +258,10 @@ extension HomeViewController: NaviMenuTableViewDelegate{
             self.navigationController?.pushViewController(secondVC, animated: true)
         case "アカウント登録":
             print("アカウント登録へ")
+        case "ログアウト":
+            print("ログアウト")
+        case "同期":
+            print("同期へ")
         case let x where x.contains("回目の動画"):
             playVideo(url: VideoList.getUrlByMenu(item)!)
         default:
