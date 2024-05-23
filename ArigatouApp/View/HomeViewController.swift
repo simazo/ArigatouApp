@@ -35,23 +35,12 @@ class HomeViewController: UIViewController {
         presenter.viewDidLoad()
     }
     
+    // ログインページから戻ってきた場合など、このViewControllerがアクティブになった時
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        updateNavigationMenu()
+        presenter.viewWillAppear()
     }
     
-    private func updateNavigationMenu() {
-        let isAuthenticated = AuthManager.shared.checkAuthentication()
-        
-        if isAuthenticated {
-            navigationItem.rightBarButtonItem = UIBarButtonItem(title: "", image: UIImage(systemName: "person.fill"), target: self, action: #selector(personButtonTapped))
-            naviMenutableViewForPerson.items = ["同期", "ログアウト"]
-        } else {
-            navigationItem.rightBarButtonItem = UIBarButtonItem(title: "", image: UIImage(systemName: "person"), target: self, action: #selector(personButtonTapped))
-            naviMenutableViewForPerson.items = ["ログイン", "アカウント登録"]
-        }
-        naviMenutableViewForPerson.reloadData()
-    }
     // タップジェスチャーの追加
     private func initGesture() {
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleTap(_:)))
@@ -283,8 +272,14 @@ extension HomeViewController: NaviMenuTableViewDelegate{
     }
 }
 extension HomeViewController: HomePresenterOutput{
-    func showLogoutSuccess() {
-        updateNavigationMenu()
+    func showLoginMenu() {
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "", image: UIImage(systemName: "person.fill"), target: self, action: #selector(personButtonTapped))
+        naviMenutableViewForPerson.items = ["同期", "ログアウト"]
+    }
+    
+    func showPreLoginMenu() {
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "", image: UIImage(systemName: "person"), target: self, action: #selector(personButtonTapped))
+        naviMenutableViewForPerson.items = ["ログイン", "アカウント登録"]
     }
     
     func showLogoutFailure(errorMessage: String) {

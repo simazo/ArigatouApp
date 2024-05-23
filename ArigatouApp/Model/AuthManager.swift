@@ -9,7 +9,6 @@ import Firebase
 
 class AuthManager {
     static let shared = AuthManager()
-    private var isAuthenticated = false
     
     private init() {}
     
@@ -18,7 +17,6 @@ class AuthManager {
             if let error = error {
                 completion(false, error)
             } else {
-                self.isAuthenticated = true
                 completion(true, nil)
             }
         }
@@ -27,7 +25,6 @@ class AuthManager {
     func logout(completion: @escaping (Bool, Error?) -> Void) {
         do {
             try Auth.auth().signOut()
-            isAuthenticated = false
             completion(true, nil)
         } catch let signOutError as NSError {
             print("Error signing out: %@", signOutError)
@@ -35,8 +32,14 @@ class AuthManager {
         }
     }
     
-    func checkAuthentication() -> Bool {
-        return isAuthenticated
+    func checkUserAuthentication () -> Bool {
+        if let user = Auth.auth().currentUser {
+            // ユーザーがログインしている場合
+            return true
+        } else {
+            // ユーザーがログインしていない場合
+            return false
+        }
     }
 }
 
