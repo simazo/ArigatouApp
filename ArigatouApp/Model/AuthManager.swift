@@ -33,12 +33,18 @@ class AuthManager {
     }
     
     func checkUserAuthentication () -> Bool {
-        if let user = Auth.auth().currentUser {
+        if Auth.auth().currentUser != nil {
             // ユーザーがログインしている場合
             return true
         } else {
             // ユーザーがログインしていない場合
             return false
+        }
+    }
+    
+    func sendPasswordReset(email: String, completion: @escaping (Error?) -> Void) {
+        Auth.auth().sendPasswordReset(withEmail: email) { error in
+            completion(error)
         }
     }
 }

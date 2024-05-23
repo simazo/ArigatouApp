@@ -37,6 +37,7 @@ class HomeViewController: UIViewController {
     
     // ログインページから戻ってきた場合など、このViewControllerがアクティブになった時
     override func viewWillAppear(_ animated: Bool) {
+    
         super.viewWillAppear(animated)
         presenter.viewWillAppear()
     }
