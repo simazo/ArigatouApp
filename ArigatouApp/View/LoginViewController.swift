@@ -25,12 +25,12 @@ class LoginViewController: UIViewController {
         initEmailTextField()
         initPasswordTextField()
         initLoginButton()
-        initResetPasswordButton()
+        initPasswordResetButton()
         
         presenter = LoginPresenter(view: self)
     }
     
-    func initResetPasswordButton() {
+    func initPasswordResetButton() {
         resetPasswordButton = UIButton()
         resetPasswordButton.setTitle("パスワードを忘れた場合はこちら", for:UIControl.State.normal)
         resetPasswordButton.titleLabel?.font =  UIFont.systemFont(ofSize: 14)
@@ -46,7 +46,7 @@ class LoginViewController: UIViewController {
         ])
         
         resetPasswordButton.addTarget(self,
-                                      action: #selector(LoginViewController.buttonResetPasswordTapped(sender:)),
+                                      action: #selector(LoginViewController.buttonPasswordResetTapped(sender:)),
                                       for: .touchUpInside)
     }
     
@@ -70,12 +70,12 @@ class LoginViewController: UIViewController {
                               for: .touchUpInside)
     }
     
-    @objc func buttonResetPasswordTapped(sender : Any) {
+    @objc func buttonPasswordResetTapped(sender : Any) {
         var alertTextField: UITextField?
         
         let message = """
-            パスワードの変更を行うメールアドレスをご入力ください。\n
-            入力したメールアドレスにパスワード変更の案内を送信します。
+            アカウント登録したメールアドレスをご入力ください。\n
+            パスワード変更の案内を送信します。
             """
         
         let alert = UIAlertController(
@@ -98,8 +98,20 @@ class LoginViewController: UIViewController {
             UIAlertAction(
                 title: "送信",
                 style: UIAlertAction.Style.default) { _ in
-                    if let text = alertTextField?.text {
-                        self.presenter.accountExists(email: text)
+                    if (alertTextField?.text) != nil {
+                        self.presenter.passwordResetRequest(email: alertTextField!.text!)
+                        // アラートでメッセージを表示する
+                        let successAlert = UIAlertController(
+                            title: "送信完了",
+                            message: "パスワード変更の案内を送信しました",
+                            preferredStyle: .alert)
+                        
+                        successAlert.addAction(UIAlertAction(
+                            title: "OK",
+                            style: .default,
+                            handler: nil))
+                        
+                        self.present(successAlert, animated: true, completion: nil)
                     }
                 }
         )

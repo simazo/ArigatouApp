@@ -9,8 +9,8 @@ import Firebase
 
 protocol LoginPresenterInput: AnyObject {
     func validate(email: String, password: String)
-    func accountExists(email: String)
     func login(email: String, password: String)
+    func passwordResetRequest(email: String)
 }
 
 protocol LoginPresenterOutput: AnyObject {
@@ -28,7 +28,16 @@ class LoginPresenter {
     }
 }
 extension LoginPresenter : LoginPresenterInput {
-
+    func passwordResetRequest(email: String) {
+        AuthManager.shared.sendPasswordReset(email: email) { error in
+            if let error = error {
+                print("Error sending password reset email: \(error.localizedDescription)")
+            } else {
+                print("Password reset email sent successfully.")
+            }
+        }
+    }
+    
     func validate(email: String, password: String) {
         
         guard validator.isEmail(email) else {
@@ -36,14 +45,10 @@ extension LoginPresenter : LoginPresenterInput {
             return
         }
         
-        /*guard validator.isPassword(password) else {
+        guard validator.isPassword(password) else {
             view?.showValidationFailed(errorMessage: "パスワードが不正です")
             return
-        }*/
-    }
-    
-    func accountExists(email: String) {
-        // TODO
+        }
     }
     
     func login(email: String, password: String) {
