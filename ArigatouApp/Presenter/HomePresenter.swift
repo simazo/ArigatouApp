@@ -10,6 +10,7 @@ import Firebase
 
 protocol HomePresenterInput: AnyObject {
     func viewDidLoad()
+    func viewWillAppear()
     func logout()
 }
 
@@ -22,7 +23,8 @@ protocol HomePresenterOutput: AnyObject {
     func startMicAnimating()
     func playVideo(url: String)
     func showPlayVideoListMenu(menus: [String])
-    func showLogoutSuccess()
+    func showLoginMenu()
+    func showPreLoginMenu()
     func showLogoutFailure(errorMessage: String)
 }
 
@@ -191,6 +193,17 @@ class HomePresenter{
 }
 
 extension HomePresenter: HomePresenterInput {
+    func viewWillAppear() {
+        // ログイン済みかどうか
+        let isAuthenticated = AuthManager.shared.checkUserAuthentication()
+        
+        if isAuthenticated {
+            view?.showLoginMenu()
+        } else {
+            view?.showPreLoginMenu()
+        }
+    }
+    
     
     func viewDidLoad() {
         let shouldShowEndScreen = matchCountManger.getCount() >= MAX_COUNT
@@ -237,7 +250,7 @@ extension HomePresenter: HomePresenterInput {
             
             // ログアウト成功
             if success {
-                self.view?.showLogoutSuccess()
+                self.view?.showPreLoginMenu()
                 return
             }
             
