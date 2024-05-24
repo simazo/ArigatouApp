@@ -36,7 +36,7 @@ extension LoginPresenter : LoginPresenterInput {
     }
     
     func login(email: String, password: String) {
-        // バリデーション
+        
         validate(email: email, password: password)
         
         AuthManager.shared.login(email: email, password: password) { [weak self] success, error in
@@ -75,7 +75,7 @@ extension LoginPresenter : LoginPresenterInput {
         }
     }
     
-    func validate(email: String, password: String) {
+    private func validate(email: String, password: String) {
         
         guard validateEmail(email: email) else {
             view?.showLoginFailed(errorMessage: "メールアドレスが不正です")

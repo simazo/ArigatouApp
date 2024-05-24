@@ -130,11 +130,12 @@ class SignupViewController: UIViewController {
  
     @objc func buttonSignupTapped(sender : Any) {
         guard let email = emailTextField.text,
-              let password = passwordTextField.text else {
+              let password = passwordTextField.text,
+              let passwordConfirm = passwordConfirmTextField.text else {
             return
         }
         
-        presenter.signup(email: email, password: password)
+        presenter.signup(email: email, password: password, passwordConfirm: passwordConfirm)
     }
     
     func initInformationLabel() {
