@@ -244,10 +244,9 @@ extension HomeViewController: NaviMenuTableViewDelegate{
         
         switch item {
         case "ログイン":
-            let secondVC = LoginViewController()
-            self.navigationController?.pushViewController(secondVC, animated: true)
+            self.navigationController?.pushViewController(LoginViewController(), animated: true)
         case "アカウント登録":
-            print("アカウント登録へ")
+            self.navigationController?.pushViewController(SignupViewController(), animated: true)
         case "ログアウト":
             showLogoutAlert()
         case "同期":

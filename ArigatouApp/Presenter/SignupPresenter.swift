@@ -8,17 +8,26 @@
 import Firebase
 
 protocol SignupPresenterInput: AnyObject {
-    func signUp(email: String, password: String)
+    func signup(email: String, password: String)
 }
 
 protocol SignupPresenterOutput: AnyObject {
-    func showValidationFailed(errorMessage: String)
     func showSignupSuccess()
     func showSignupFailed(errorMessage: String)
 }
 
-
 class SignupPresenter {
+    private weak var view: SignupPresenterOutput?
+
+    init(view: SignupPresenterOutput) {
+        self.view = view
+    }
+}
+
+extension SignupPresenter : SignupPresenterInput {
+    func signup(email: String, password: String) {
+        print("登録！")
+    }
     
 }
 

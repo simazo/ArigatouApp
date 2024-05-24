@@ -22,6 +22,7 @@
 		CC55C0002BCF96D3003C3E15 /* cosmos-1920.jpg in Resources */ = {isa = PBXBuildFile; fileRef = CC55BFFF2BCF96D3003C3E15 /* cosmos-1920.jpg */; };
 		CCA1F9DC2C001165008DCF70 /* SignupPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCA1F9DB2C001165008DCF70 /* SignupPresenter.swift */; };
 		CCA1F9DE2C0046BA008DCF70 /* ValidationPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCA1F9DD2C0046BA008DCF70 /* ValidationPresenter.swift */; };
+		CCA1F9E02C006731008DCF70 /* SignupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCA1F9DF2C006731008DCF70 /* SignupViewController.swift */; };
 		CCAA463B2BEC99AA00FBF22D /* Develop_Provisioning_Profile.mobileprovision in Resources */ = {isa = PBXBuildFile; fileRef = CCAA463A2BEC99AA00FBF22D /* Develop_Provisioning_Profile.mobileprovision */; };
 		CCAA463C2BEC99AA00FBF22D /* Develop_Provisioning_Profile.mobileprovision in Resources */ = {isa = PBXBuildFile; fileRef = CCAA463A2BEC99AA00FBF22D /* Develop_Provisioning_Profile.mobileprovision */; };
 		CCDEAD292BDB1CCE0096704A /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCDEAD282BDB1CCE0096704A /* LoginViewController.swift */; };
@@ -71,6 +72,7 @@
 		CC55BFFF2BCF96D3003C3E15 /* cosmos-1920.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "cosmos-1920.jpg"; sourceTree = "<group>"; };
 		CCA1F9DB2C001165008DCF70 /* SignupPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupPresenter.swift; sourceTree = "<group>"; };
 		CCA1F9DD2C0046BA008DCF70 /* ValidationPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidationPresenter.swift; sourceTree = "<group>"; };
+		CCA1F9DF2C006731008DCF70 /* SignupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupViewController.swift; sourceTree = "<group>"; };
 		CCAA463A2BEC99AA00FBF22D /* Develop_Provisioning_Profile.mobileprovision */ = {isa = PBXFileReference; lastKnownFileType = file; path = Develop_Provisioning_Profile.mobileprovision; sourceTree = "<group>"; };
 		CCDEAD282BDB1CCE0096704A /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		CCDEADCD2BE224ED0096704A /* AppStore_ProvisioningProfile.mobileprovision */ = {isa = PBXFileReference; lastKnownFileType = file; path = AppStore_ProvisioningProfile.mobileprovision; sourceTree = "<group>"; };
@@ -173,6 +175,7 @@
 			isa = PBXGroup;
 			children = (
 				CC55BF532BC9028D003C3E15 /* HomeViewController.swift */,
+				CCA1F9DF2C006731008DCF70 /* SignupViewController.swift */,
 				CCDEAD282BDB1CCE0096704A /* LoginViewController.swift */,
 				CCDEADF22BE44A160096704A /* MicImageView.swift */,
 				CCDEAE142BE514630096704A /* NaviMenuTableView.swift */,
@@ -318,6 +321,7 @@
 			files = (
 				CCFB7DD72BF17A8300C4617A /* VideoList.swift in Sources */,
 				CC55BF652BC90301003C3E15 /* HomePresenter.swift in Sources */,
+				CCA1F9E02C006731008DCF70 /* SignupViewController.swift in Sources */,
 				CCFB7E142BF18D6F00C4617A /* NetworkManager.swift in Sources */,
 				CCFB7E3C2BFB1AF600C4617A /* Alert.swift in Sources */,
 				CCFB7DD52BED9C1300C4617A /* AuthManager.swift in Sources */,
