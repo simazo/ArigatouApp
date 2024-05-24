@@ -13,7 +13,6 @@ protocol LoginPresenterInput: AnyObject {
 }
 
 protocol LoginPresenterOutput: AnyObject {
-    func showValidationFailed(errorMessage: String)
     func showLoginSuccess()
     func showLoginFailed(errorMessage: String)
 }
@@ -79,12 +78,12 @@ extension LoginPresenter : LoginPresenterInput {
     func validate(email: String, password: String) {
         
         guard validateEmail(email: email) else {
-            view?.showValidationFailed(errorMessage: "メールアドレスが不正です")
+            view?.showLoginFailed(errorMessage: "メールアドレスが不正です")
             return
         }
         
         guard  validatePassword(password: password) else {
-            view?.showValidationFailed(errorMessage: "パスワードが不正です")
+            view?.showLoginFailed(errorMessage: "パスワードが不正です")
             return
         }
     }
