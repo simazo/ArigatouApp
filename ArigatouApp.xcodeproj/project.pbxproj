@@ -23,6 +23,7 @@
 		CCA1F9DC2C001165008DCF70 /* SignupPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCA1F9DB2C001165008DCF70 /* SignupPresenter.swift */; };
 		CCA1F9DE2C0046BA008DCF70 /* ValidationPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCA1F9DD2C0046BA008DCF70 /* ValidationPresenter.swift */; };
 		CCA1F9E02C006731008DCF70 /* SignupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCA1F9DF2C006731008DCF70 /* SignupViewController.swift */; };
+		CCA1F9E22C016A4F008DCF70 /* FirebaseDatabase in Frameworks */ = {isa = PBXBuildFile; productRef = CCA1F9E12C016A4F008DCF70 /* FirebaseDatabase */; };
 		CCAA463B2BEC99AA00FBF22D /* Develop_Provisioning_Profile.mobileprovision in Resources */ = {isa = PBXBuildFile; fileRef = CCAA463A2BEC99AA00FBF22D /* Develop_Provisioning_Profile.mobileprovision */; };
 		CCAA463C2BEC99AA00FBF22D /* Develop_Provisioning_Profile.mobileprovision in Resources */ = {isa = PBXBuildFile; fileRef = CCAA463A2BEC99AA00FBF22D /* Develop_Provisioning_Profile.mobileprovision */; };
 		CCDEAD292BDB1CCE0096704A /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCDEAD282BDB1CCE0096704A /* LoginViewController.swift */; };
@@ -95,6 +96,7 @@
 			files = (
 				CCDEAE202BE866270096704A /* FirebaseAuth in Frameworks */,
 				CCDEAE222BE866270096704A /* FirebaseFirestore in Frameworks */,
+				CCA1F9E22C016A4F008DCF70 /* FirebaseDatabase in Frameworks */,
 				CCDEAE242BE89D430096704A /* FirebaseFirestoreSwift in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -223,6 +225,7 @@
 				CCDEAE1F2BE866270096704A /* FirebaseAuth */,
 				CCDEAE212BE866270096704A /* FirebaseFirestore */,
 				CCDEAE232BE89D430096704A /* FirebaseFirestoreSwift */,
+				CCA1F9E12C016A4F008DCF70 /* FirebaseDatabase */,
 			);
 			productName = ArigatouApp;
 			productReference = CC55BF4C2BC9028D003C3E15 /* ArigatouApp.app */;
@@ -639,6 +642,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		CCA1F9E12C016A4F008DCF70 /* FirebaseDatabase */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = CCDEAE1E2BE866270096704A /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseDatabase;
+		};
 		CCDEAE1F2BE866270096704A /* FirebaseAuth */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = CCDEAE1E2BE866270096704A /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
