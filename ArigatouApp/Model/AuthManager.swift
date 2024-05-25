@@ -12,6 +12,16 @@ class AuthManager {
     
     private init() {}
     
+    func createUser(email: String, password: String, completion: @escaping (Bool, Error?) -> Void){
+        Auth.auth().createUser(withEmail: email, password: password) { (authResult, error) in
+            if let error = error {
+                completion(false, error)
+            } else {
+                completion(true, nil)
+            }
+        }
+    }
+    
     func login(email: String, password: String, completion: @escaping (Bool, Error?) -> Void){
         Auth.auth().signIn(withEmail: email, password: password) { (authResult, error) in
             if let error = error {
