@@ -10,9 +10,6 @@ import Foundation
 class UserDefaultsMatchCountRepository: MatchCountRepository {
     private let matchCountKey = "matchCount"
 
-    func save(_ matchCount: MatchCount) {
-    }
-
     func getCount() -> Int {
         let defaults = UserDefaults.standard
         return defaults.integer(forKey: matchCountKey)

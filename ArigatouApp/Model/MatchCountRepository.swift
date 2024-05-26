@@ -6,7 +6,6 @@
 //
 
 protocol MatchCountRepository {
-    func save(_ matchCount: MatchCount)
     func getCount() -> Int
     //func getCountByUid(_ uid: String)
     func setCount(_ count: Int)

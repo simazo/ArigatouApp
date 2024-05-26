@@ -8,12 +8,9 @@
 class MatchCountManager {
     private let matchCountRepository: MatchCountRepository
 
+    // リポジトリ先を登録
     init(_ repository: MatchCountRepository){
         self.matchCountRepository = repository
-    }
-
-    func save(_ matchCount: MatchCount){
-        matchCountRepository.save(matchCount)
     }
 
     func getCount() -> Int {
