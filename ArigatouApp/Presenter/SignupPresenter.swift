@@ -33,6 +33,7 @@ extension SignupPresenter : SignupPresenterInput {
             
             // ユーザ登録成功
             if success {
+                print("RealtimeDB 登録へ")
                 self.view?.showSignupSuccess()
                 return
             }
@@ -79,6 +80,10 @@ extension SignupPresenter : SignupPresenterInput {
             view?.showSignupFailed(errorMessage: "パスワードが一致しません")
             return
         }
+        
+    }
+    
+    private func createUser(email: String, password: String) {
         
     }
 }
