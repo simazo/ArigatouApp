@@ -13,14 +13,17 @@ class MatchCountManager {
         self.matchCountRepository = repository
     }
 
+    // マッチ数を返す
     func getCount() -> Int {
         return matchCountRepository.getCount()
     }
 
+    // マッチ数を保存する
     func setCount(_ count: Int){
         matchCountRepository.setCount(count)
     }
 
+    // マッチ数をカウントアップする
     func incrementCount(){
         var count = matchCountRepository.getCount()
         count += 1

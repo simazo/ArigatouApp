@@ -42,7 +42,6 @@ class HomePresenter{
     
     init(view: HomePresenterOutput) {
         self.view = view
-        self.matchCountManger = MatchCountManager(UserDefaultsMatchCountRepository())
     }
     
     /// マイク使用許可の確認
@@ -208,15 +207,30 @@ extension HomePresenter: HomePresenterInput {
     func viewDidLoad() {
         let shouldShowEndScreen = matchCountManger.getCount() >= MAX_COUNT
         
+        // 100万回達していれば
         if shouldShowEndScreen {
+            // 終了画面を表示
             view?.showEndScreen()
         }
         else {
+            // 通常画面を表示
             view?.showStartScreen()
+            
+            // マイクの使用許可確認
             handleAuthorizationStatus()
+            
+            // アカウント登録済みかどうかでリポジトリ先判定
+            if isSignedUp() {
+                // Realtime Database
+                let uid = UserDefaults.standard.string(forKey: "uid")
+                self.matchCountManger = MatchCountManager(RealtimeDBMatchCountRepository(uid: uid!))
+            } else {
+                // UserDefaults
+                self.matchCountManger = MatchCountManager(UserDefaultsMatchCountRepository())
+            }
         }
         
-        // 再生リスト表示
+        // 動画の再生リスト表示
         view?.showPlayVideoListMenu(menus: VideoList.getMatchMenus(matchCount: matchCountManger.getCount()))
     }
     
@@ -281,6 +295,22 @@ extension HomePresenter: HomePresenterInput {
                 self.view?.showLogoutFailure(errorMessage: "ログアウトエラー")
             }
         }
+    }
+    
+    /// ユーザーがサインアップ済みかどうかを確認します。
+    ///
+    /// このメソッドは、UserDefaultsに保存された "uid" の値が空でないかをチェックすることで、
+    /// ユーザーがサインアップ済みかどうかを判断します。まず、"uid" に対してデフォルト値として
+    /// 空文字列を設定し、nil値が使用されないようにします。次に、"uid" の値が空でない場合は
+    /// `true` を返し、空の場合は `false` を返します。
+    ///
+    /// - Returns: ユーザーがサインアップ済みであれば `true`、そうでなければ `false`。
+    func isSignedUp() -> Bool {
+        let defaultValues: [String: Any] = ["uid": ""]
+        UserDefaults.standard.register(defaults: defaultValues)
+            
+        let uid = UserDefaults.standard.string(forKey: "uid") ?? ""
+        return !uid.isEmpty
     }
 }
 

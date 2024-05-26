@@ -1,5 +1,5 @@
 //
-//  RealtimeDBManager.swift
+//  RealtimeDBMatchCountRepository.swift
 //  ArigatouApp
 //
 //  Created by pero on 2024/05/25.
@@ -7,10 +7,21 @@
 
 import FirebaseDatabase
 
-class RealtimeDBManager {
-    static let shared = RealtimeDBManager()
-    private init() {}
+class RealtimeDBMatchCountRepository: MatchCountRepository {
     let database = Database.database().reference()
+    var uid: String
+    
+    init(uid: String) {
+        self.uid = uid
+    }
+    
+    func getCount() -> Int {
+        <#code#>
+    }
+    
+    func setCount(_ count: Int) {
+        <#code#>
+    }
     
     func createData(uid: String, matchCount: Int, completion: @escaping (Bool) -> Void) {
         let userData = [

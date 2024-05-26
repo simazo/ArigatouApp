@@ -24,7 +24,7 @@
 		CCA1F9DE2C0046BA008DCF70 /* ValidationPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCA1F9DD2C0046BA008DCF70 /* ValidationPresenter.swift */; };
 		CCA1F9E02C006731008DCF70 /* SignupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCA1F9DF2C006731008DCF70 /* SignupViewController.swift */; };
 		CCA1F9E22C016A4F008DCF70 /* FirebaseDatabase in Frameworks */ = {isa = PBXBuildFile; productRef = CCA1F9E12C016A4F008DCF70 /* FirebaseDatabase */; };
-		CCA1F9E42C016AC6008DCF70 /* RealtimeDBManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCA1F9E32C016AC6008DCF70 /* RealtimeDBManager.swift */; };
+		CCA1F9E42C016AC6008DCF70 /* RealtimeDBMatchCountRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCA1F9E32C016AC6008DCF70 /* RealtimeDBMatchCountRepository.swift */; };
 		CCA1F9E62C017FE1008DCF70 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = CCA1F9E52C017FE1008DCF70 /* GoogleService-Info.plist */; };
 		CCAA463B2BEC99AA00FBF22D /* Develop_Provisioning_Profile.mobileprovision in Resources */ = {isa = PBXBuildFile; fileRef = CCAA463A2BEC99AA00FBF22D /* Develop_Provisioning_Profile.mobileprovision */; };
 		CCAA463C2BEC99AA00FBF22D /* Develop_Provisioning_Profile.mobileprovision in Resources */ = {isa = PBXBuildFile; fileRef = CCAA463A2BEC99AA00FBF22D /* Develop_Provisioning_Profile.mobileprovision */; };
@@ -74,7 +74,7 @@
 		CCA1F9DB2C001165008DCF70 /* SignupPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupPresenter.swift; sourceTree = "<group>"; };
 		CCA1F9DD2C0046BA008DCF70 /* ValidationPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidationPresenter.swift; sourceTree = "<group>"; };
 		CCA1F9DF2C006731008DCF70 /* SignupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupViewController.swift; sourceTree = "<group>"; };
-		CCA1F9E32C016AC6008DCF70 /* RealtimeDBManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealtimeDBManager.swift; sourceTree = "<group>"; };
+		CCA1F9E32C016AC6008DCF70 /* RealtimeDBMatchCountRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealtimeDBMatchCountRepository.swift; sourceTree = "<group>"; };
 		CCA1F9E52C017FE1008DCF70 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		CCAA463A2BEC99AA00FBF22D /* Develop_Provisioning_Profile.mobileprovision */ = {isa = PBXFileReference; lastKnownFileType = file; path = Develop_Provisioning_Profile.mobileprovision; sourceTree = "<group>"; };
 		CCDEAD282BDB1CCE0096704A /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
@@ -121,7 +121,7 @@
 				CC209D2B2BD47EED0069E2E4 /* UserDefaultsMatchCountRepository.swift */,
 				CCDEAE162BE6BD350096704A /* Validator.swift */,
 				CCFB7DD42BED9C1300C4617A /* AuthManager.swift */,
-				CCA1F9E32C016AC6008DCF70 /* RealtimeDBManager.swift */,
+				CCA1F9E32C016AC6008DCF70 /* RealtimeDBMatchCountRepository.swift */,
 				CCFB7DD62BF17A8300C4617A /* VideoList.swift */,
 				CCFB7E132BF18D6F00C4617A /* NetworkManager.swift */,
 			);
@@ -323,7 +323,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CCA1F9E42C016AC6008DCF70 /* RealtimeDBManager.swift in Sources */,
+				CCA1F9E42C016AC6008DCF70 /* RealtimeDBMatchCountRepository.swift in Sources */,
 				CCFB7DD72BF17A8300C4617A /* VideoList.swift in Sources */,
 				CC55BF652BC90301003C3E15 /* HomePresenter.swift in Sources */,
 				CCA1F9E02C006731008DCF70 /* SignupViewController.swift in Sources */,
