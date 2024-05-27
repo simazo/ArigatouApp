@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		CC209D262BD47E890069E2E4 /* MatchCount.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC209D252BD47E890069E2E4 /* MatchCount.swift */; };
 		CC209D282BD47EB10069E2E4 /* MatchCountManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC209D272BD47EB10069E2E4 /* MatchCountManager.swift */; };
 		CC209D2A2BD47ED20069E2E4 /* MatchCountRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC209D292BD47ED20069E2E4 /* MatchCountRepository.swift */; };
 		CC209D2C2BD47EED0069E2E4 /* UserDefaultsMatchCountRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC209D2B2BD47EED0069E2E4 /* UserDefaultsMatchCountRepository.swift */; };
@@ -55,7 +54,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		CC209D252BD47E890069E2E4 /* MatchCount.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchCount.swift; sourceTree = "<group>"; };
 		CC209D272BD47EB10069E2E4 /* MatchCountManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchCountManager.swift; sourceTree = "<group>"; };
 		CC209D292BD47ED20069E2E4 /* MatchCountRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchCountRepository.swift; sourceTree = "<group>"; };
 		CC209D2B2BD47EED0069E2E4 /* UserDefaultsMatchCountRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsMatchCountRepository.swift; sourceTree = "<group>"; };
@@ -115,7 +113,6 @@
 		CC209D242BD47E5F0069E2E4 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				CC209D252BD47E890069E2E4 /* MatchCount.swift */,
 				CC209D272BD47EB10069E2E4 /* MatchCountManager.swift */,
 				CC209D292BD47ED20069E2E4 /* MatchCountRepository.swift */,
 				CC209D2B2BD47EED0069E2E4 /* UserDefaultsMatchCountRepository.swift */,
@@ -336,7 +333,6 @@
 				CCA1F9DE2C0046BA008DCF70 /* ValidationPresenter.swift in Sources */,
 				CCDEAE172BE6BD350096704A /* Validator.swift in Sources */,
 				CCDEADF32BE44A160096704A /* MicImageView.swift in Sources */,
-				CC209D262BD47E890069E2E4 /* MatchCount.swift in Sources */,
 				CC55BF502BC9028D003C3E15 /* AppDelegate.swift in Sources */,
 				CCDEAE192BE6BE330096704A /* LoginPresenter.swift in Sources */,
 				CC209D2A2BD47ED20069E2E4 /* MatchCountRepository.swift in Sources */,

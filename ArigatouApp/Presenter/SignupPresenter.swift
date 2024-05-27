@@ -47,8 +47,6 @@ extension SignupPresenter : SignupPresenterInput {
                 // リポジトリはRealtime Databaseを使用
                 self.matchCountManger = MatchCountManager(RealtimeDBMatchCountRepository(uid: user.uid))
                 self.matchCountManger.setCount(matchCount)
-                // TODO UserDefaultにuid
-                //
                 
                 self.view?.showSignupSuccess()
             case .failure(let error):
