@@ -20,9 +20,6 @@ class HomeViewController: UIViewController {
     
     private var presenter: HomePresenterInput!
     
-    var timer: Timer = Timer()
-    var count: Int = 0
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         initBackground(name: "cosmos-1920.jpg")
@@ -244,10 +241,9 @@ extension HomeViewController: NaviMenuTableViewDelegate{
         
         switch item {
         case "ログイン":
-            let secondVC = LoginViewController()
-            self.navigationController?.pushViewController(secondVC, animated: true)
+            self.navigationController?.pushViewController(LoginViewController(), animated: true)
         case "アカウント登録":
-            print("アカウント登録へ")
+            self.navigationController?.pushViewController(SignupViewController(), animated: true)
         case "ログアウト":
             showLogoutAlert()
         case "同期":

@@ -10,22 +10,24 @@
 
 import Foundation
 
-class Validator {
-    private func validate(str: String, pattern: String) -> [NSTextCheckingResult] {
+public final class Validator {
+    private init() {}
+    
+    private static func validate(str: String, pattern: String) -> [NSTextCheckingResult] {
         guard let regex = try? NSRegularExpression(pattern: pattern) else { return [] }
         return regex.matches(in: str, range: NSRange(location: 0, length: str.count))
     }
     
-    func isEmail(_ email: String) -> Bool {
+    static func isEmail(_ email: String) -> Bool {
         // 前後のスペースと改行を削除
         let target = email.trimmingCharacters(in: .whitespacesAndNewlines)
         
         let pattern = "^[\\w\\.\\-_]+@[\\w\\.\\-_]+\\.[a-zA-Z]+$"
-        let matches = validate(str: target, pattern: pattern)
+        let matches = self.validate(str: target, pattern: pattern)
         return matches.count > 0
     }
     
-    func isPassword(_ password: String) -> Bool {
+    static func isPassword(_ password: String) -> Bool {
         // 前後のスペースと改行を削除
         let target = password.trimmingCharacters(in: .whitespacesAndNewlines)
         

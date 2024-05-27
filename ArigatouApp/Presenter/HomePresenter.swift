@@ -42,6 +42,8 @@ class HomePresenter{
     
     init(view: HomePresenterOutput) {
         self.view = view
+        
+        // リポジトリはUserDefaultsを使用
         self.matchCountManger = MatchCountManager(UserDefaultsMatchCountRepository())
     }
     
@@ -194,7 +196,7 @@ class HomePresenter{
 
 extension HomePresenter: HomePresenterInput {
     func viewWillAppear() {
-        // ログイン済みかどうか
+        // ログイン済みかどうかでナビメニュー変更
         let isAuthenticated = AuthManager.shared.checkUserAuthentication()
         
         if isAuthenticated {
@@ -206,18 +208,23 @@ extension HomePresenter: HomePresenterInput {
     
     
     func viewDidLoad() {
-        let shouldShowEndScreen = matchCountManger.getCount() >= MAX_COUNT
+        let shouldShowEndScreen = self.matchCountManger.getCount() >= MAX_COUNT
         
+        // 100万回達していれば
         if shouldShowEndScreen {
+            // 終了画面を表示
             view?.showEndScreen()
         }
         else {
+            // 通常画面を表示
             view?.showStartScreen()
+            
+            // マイクの使用許可確認
             handleAuthorizationStatus()
         }
         
-        // 再生リスト表示
-        view?.showPlayVideoListMenu(menus: VideoList.getMatchMenus(matchCount: matchCountManger.getCount()))
+        // 動画の再生リスト表示
+        view?.showPlayVideoListMenu(menus: VideoList.getMatchMenus(matchCount: self.matchCountManger.getCount()))
     }
     
     func handleAuthorizationStatus() {

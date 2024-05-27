@@ -8,27 +8,24 @@
 import Firebase
 
 protocol LoginPresenterInput: AnyObject {
-    func validate(email: String, password: String)
     func login(email: String, password: String)
-    func passwordResetRequest(email: String)
+    func passwordReset(email: String)
 }
 
 protocol LoginPresenterOutput: AnyObject {
-    func showValidationFailed(errorMessage: String)
     func showLoginSuccess()
     func showLoginFailed(errorMessage: String)
 }
 
 class LoginPresenter {
     private weak var view: LoginPresenterOutput?
-    private let validator = Validator()
     
     init(view: LoginPresenterOutput) {
         self.view = view
     }
 }
 extension LoginPresenter : LoginPresenterInput {
-    func passwordResetRequest(email: String) {
+    func passwordReset(email: String) {
         AuthManager.shared.sendPasswordReset(email: email) { error in
             if let error = error {
                 print("Error sending password reset email: \(error.localizedDescription)")
@@ -38,22 +35,12 @@ extension LoginPresenter : LoginPresenterInput {
         }
     }
     
-    func validate(email: String, password: String) {
-        
-        guard validator.isEmail(email) else {
-            view?.showValidationFailed(errorMessage: "メールアドレスが不正です")
-            return
-        }
-        
-        guard validator.isPassword(password) else {
-            view?.showValidationFailed(errorMessage: "パスワードが不正です")
-            return
-        }
-    }
-    
     func login(email: String, password: String) {
+        
         // バリデーション
-        validate(email: email, password: password)
+        if !validate(email: email, password: password) {
+            return
+        }
         
         AuthManager.shared.login(email: email, password: password) { [weak self] success, error in
             guard let self = self else { return }
@@ -91,4 +78,20 @@ extension LoginPresenter : LoginPresenterInput {
         }
     }
     
+    private func validate(email: String, password: String) -> Bool {
+        
+        guard validateEmail(email: email) else {
+            view?.showLoginFailed(errorMessage: "メールアドレスが不正です")
+            return false
+        }
+        
+        guard  validatePassword(password: password) else {
+            view?.showLoginFailed(errorMessage: "パスワードが不正です")
+            return false
+        }
+        return true
+    }
+}
+
+extension LoginPresenter : ValidationPresenterInput {
 }

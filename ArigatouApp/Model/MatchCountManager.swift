@@ -6,24 +6,24 @@
 //
 
 class MatchCountManager {
-    private let matchCountRepository: MatchCountRepository
+    
+    private var matchCountRepository: MatchCountRepository
 
-    init(_ repository: MatchCountRepository){
+    init (_ repository: MatchCountRepository) {
         self.matchCountRepository = repository
     }
 
-    func save(_ matchCount: MatchCount){
-        matchCountRepository.save(matchCount)
-    }
-
+    // マッチ数を返す
     func getCount() -> Int {
         return matchCountRepository.getCount()
     }
 
+    // マッチ数を保存する
     func setCount(_ count: Int){
         matchCountRepository.setCount(count)
     }
 
+    // マッチ数をカウントアップする
     func incrementCount(){
         var count = matchCountRepository.getCount()
         count += 1

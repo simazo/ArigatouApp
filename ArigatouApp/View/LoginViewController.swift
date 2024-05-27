@@ -99,7 +99,7 @@ class LoginViewController: UIViewController {
                 title: "送信",
                 style: UIAlertAction.Style.default) { _ in
                     if (alertTextField?.text) != nil {
-                        self.presenter.passwordResetRequest(email: alertTextField!.text!)
+                        self.presenter.passwordReset(email: alertTextField!.text!)
                         // アラートでメッセージを表示する
                         let successAlert = UIAlertController(
                             title: "送信完了",
@@ -189,10 +189,6 @@ extension LoginViewController : LoginPresenterOutput {
     }
     
     func showLoginFailed(errorMessage: String) {
-        self.showAlert(title: "ログインエラー", message: errorMessage)
-    }
-    
-    func showValidationFailed(errorMessage: String) {
         self.showAlert(title: "ログインエラー", message: errorMessage)
     }
 }
