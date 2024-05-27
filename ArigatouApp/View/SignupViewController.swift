@@ -160,6 +160,7 @@ extension SignupViewController: SignupPresenterOutput {
     func showSignupSuccess() {
         DispatchQueue.main.async {
             self.navigationController?.popViewController(animated: true)
+            self.showAlert(title: "アカウント登録成功", message: "カウント数は定期的にサーバ上に記録されます。")
         }
     }
     

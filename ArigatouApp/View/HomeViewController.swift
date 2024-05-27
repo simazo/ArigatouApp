@@ -20,9 +20,6 @@ class HomeViewController: UIViewController {
     
     private var presenter: HomePresenterInput!
     
-    var timer: Timer = Timer()
-    var count: Int = 0
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         initBackground(name: "cosmos-1920.jpg")

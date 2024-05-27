@@ -8,9 +8,13 @@
 import Foundation
 
 class UserDefaultsMatchCountRepository: MatchCountRepository {
+    
     private let matchCountKey = "matchCount"
-
-    init() {}
+    
+    func setUid(uid: String) {
+        let defaults = UserDefaults.standard
+        defaults.set(uid, forKey: "uid")
+    }
     
     func getCount() -> Int {
         let defaults = UserDefaults.standard

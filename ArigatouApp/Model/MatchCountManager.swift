@@ -6,10 +6,10 @@
 //
 
 class MatchCountManager {
-    private let matchCountRepository: MatchCountRepository
+    
+    private var matchCountRepository: MatchCountRepository
 
-    // リポジトリ先を登録
-    init(_ repository: MatchCountRepository){
+    init (_ repository: MatchCountRepository) {
         self.matchCountRepository = repository
     }
 

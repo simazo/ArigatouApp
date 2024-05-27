@@ -6,6 +6,6 @@
 //
 
 struct MatchCount {
-    let uid: String //アカウント登録されるまでは空
+    let uid: String //アカウント登録するまでは空
     let count: Int
 }
