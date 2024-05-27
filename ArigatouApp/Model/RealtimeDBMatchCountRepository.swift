@@ -20,8 +20,12 @@ class RealtimeDBMatchCountRepository: MatchCountRepository {
     }
     
     func setCount(_ count: Int) {
+        // 現在時刻をFirebaseのタイムスタンプとしてフォーマット
+        let timestamp = Date().timeIntervalSince1970
+        
         let userData = [
-            "count": count
+            "count": count,
+            "updatedAt": timestamp
         ] as [String : Any]
         database.child("userMatchCount").child(uid).setValue(userData)
     }
