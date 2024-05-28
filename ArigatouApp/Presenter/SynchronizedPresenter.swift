@@ -25,9 +25,18 @@ class SynchronizedPresenter {
         matchCount = matchCountManger.getCount()
         matchCountManger = nil
     }
+    
+
 }
 extension SynchronizedPresenter: SynchronizedPresenterInput {
     func viewWillAppear() {
-        
+        AuthManager.shared.isLoggedIn { (isAuthenticated, uid) in
+            if isAuthenticated {
+                self.matchCountManger = MatchCountManager(RealtimeDBMatchCountRepository(uid: uid!))
+                let lastUpdatedCount = self.matchCountManger.getCount ()
+                
+                //view?.showLoginMenu()
+            }
+        }
     }
 }

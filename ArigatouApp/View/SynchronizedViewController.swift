@@ -12,10 +12,13 @@ class SynchronizedViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         presenter = SynchronizedPresenter(view: self)
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        presenter.viewWillAppear()
+    }
 }
 extension SynchronizedViewController: SynchronizedPresenterOutput {
     
