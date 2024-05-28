@@ -45,13 +45,20 @@ class AuthManager {
         }
     }
     
-    func checkUserAuthentication () -> Bool {
-        if Auth.auth().currentUser != nil {
+    /**
+     ユーザーが現在ログインしているかどうかを確認し、ログイン状態とユーザーIDを返します。
+
+     - Parameter completion: ログイン状態とユーザーIDを受け取るクロージャ。
+       - `isAuthenticated`: ユーザーがログインしているかどうかを示すブール値。
+       - `uid`: ユーザーがログインしている場合のユーザーID。ログインしていない場合は`nil`。
+     */
+    func isLoggedIn (completion: (Bool, String?) -> Void){
+        if let user = Auth.auth().currentUser {
             // ユーザーがログインしている場合
-            return true
+            completion(true, user.uid)
         } else {
             // ユーザーがログインしていない場合
-            return false
+            completion(false, nil)
         }
     }
     

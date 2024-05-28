@@ -197,12 +197,12 @@ class HomePresenter{
 extension HomePresenter: HomePresenterInput {
     func viewWillAppear() {
         // ログイン済みかどうかでナビメニュー変更
-        let isAuthenticated = AuthManager.shared.checkUserAuthentication()
-        
-        if isAuthenticated {
-            view?.showLoginMenu()
-        } else {
-            view?.showPreLoginMenu()
+        AuthManager.shared.isLoggedIn { (isAuthenticated, uid) in
+            if isAuthenticated {
+                view?.showLoginMenu()
+            } else {
+                view?.showPreLoginMenu()
+            }
         }
     }
     

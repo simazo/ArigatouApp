@@ -247,7 +247,7 @@ extension HomeViewController: NaviMenuTableViewDelegate{
         case "ログアウト":
             showLogoutAlert()
         case "同期":
-            print("同期へ")
+            self.navigationController?.pushViewController(SynchronizedViewController(), animated: true)
         case let x where x.contains("回目の動画"):
             playVideo(url: VideoList.getUrlByMenu(item)!)
         default:

@@ -24,7 +24,7 @@ class SignupPresenter {
     init(view: SignupPresenterOutput) {
         self.view = view
         
-        // UserDefaultsから現在のマッチ数を取得
+        // UserDefaultsから現在の（ローカルの）マッチ数を取得
         matchCountManger = MatchCountManager(UserDefaultsMatchCountRepository())
         matchCount = matchCountManger.getCount()
         matchCountManger = nil

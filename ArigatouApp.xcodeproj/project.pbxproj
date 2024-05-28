@@ -26,6 +26,8 @@
 		CCA1F9E42C016AC6008DCF70 /* RealtimeDBMatchCountRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCA1F9E32C016AC6008DCF70 /* RealtimeDBMatchCountRepository.swift */; };
 		CCA1F9E82C04A831008DCF70 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = CCA1F9E72C04A831008DCF70 /* GoogleService-Info.plist */; };
 		CCA1F9E92C04A831008DCF70 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = CCA1F9E72C04A831008DCF70 /* GoogleService-Info.plist */; };
+		CCA1F9EB2C0548E4008DCF70 /* SynchronizedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCA1F9EA2C0548E4008DCF70 /* SynchronizedViewController.swift */; };
+		CCA1F9ED2C054BAB008DCF70 /* SynchronizedPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCA1F9EC2C054BAB008DCF70 /* SynchronizedPresenter.swift */; };
 		CCAA463B2BEC99AA00FBF22D /* Develop_Provisioning_Profile.mobileprovision in Resources */ = {isa = PBXBuildFile; fileRef = CCAA463A2BEC99AA00FBF22D /* Develop_Provisioning_Profile.mobileprovision */; };
 		CCAA463C2BEC99AA00FBF22D /* Develop_Provisioning_Profile.mobileprovision in Resources */ = {isa = PBXBuildFile; fileRef = CCAA463A2BEC99AA00FBF22D /* Develop_Provisioning_Profile.mobileprovision */; };
 		CCDEAD292BDB1CCE0096704A /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCDEAD282BDB1CCE0096704A /* LoginViewController.swift */; };
@@ -75,6 +77,8 @@
 		CCA1F9DF2C006731008DCF70 /* SignupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupViewController.swift; sourceTree = "<group>"; };
 		CCA1F9E32C016AC6008DCF70 /* RealtimeDBMatchCountRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealtimeDBMatchCountRepository.swift; sourceTree = "<group>"; };
 		CCA1F9E72C04A831008DCF70 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		CCA1F9EA2C0548E4008DCF70 /* SynchronizedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SynchronizedViewController.swift; sourceTree = "<group>"; };
+		CCA1F9EC2C054BAB008DCF70 /* SynchronizedPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SynchronizedPresenter.swift; sourceTree = "<group>"; };
 		CCAA463A2BEC99AA00FBF22D /* Develop_Provisioning_Profile.mobileprovision */ = {isa = PBXFileReference; lastKnownFileType = file; path = Develop_Provisioning_Profile.mobileprovision; sourceTree = "<group>"; };
 		CCDEAD282BDB1CCE0096704A /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		CCDEADCD2BE224ED0096704A /* AppStore_ProvisioningProfile.mobileprovision */ = {isa = PBXFileReference; lastKnownFileType = file; path = AppStore_ProvisioningProfile.mobileprovision; sourceTree = "<group>"; };
@@ -166,6 +170,7 @@
 			isa = PBXGroup;
 			children = (
 				CC55BF642BC90301003C3E15 /* HomePresenter.swift */,
+				CCA1F9EC2C054BAB008DCF70 /* SynchronizedPresenter.swift */,
 				CCDEAE182BE6BE330096704A /* LoginPresenter.swift */,
 				CCA1F9DB2C001165008DCF70 /* SignupPresenter.swift */,
 				CCA1F9DD2C0046BA008DCF70 /* ValidationPresenter.swift */,
@@ -177,6 +182,7 @@
 			isa = PBXGroup;
 			children = (
 				CC55BF532BC9028D003C3E15 /* HomeViewController.swift */,
+				CCA1F9EA2C0548E4008DCF70 /* SynchronizedViewController.swift */,
 				CCA1F9DF2C006731008DCF70 /* SignupViewController.swift */,
 				CCDEAD282BDB1CCE0096704A /* LoginViewController.swift */,
 				CCDEADF22BE44A160096704A /* MicImageView.swift */,
@@ -322,10 +328,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CCA1F9ED2C054BAB008DCF70 /* SynchronizedPresenter.swift in Sources */,
 				CCA1F9E42C016AC6008DCF70 /* RealtimeDBMatchCountRepository.swift in Sources */,
 				CCFB7DD72BF17A8300C4617A /* VideoList.swift in Sources */,
 				CC55BF652BC90301003C3E15 /* HomePresenter.swift in Sources */,
 				CCA1F9E02C006731008DCF70 /* SignupViewController.swift in Sources */,
+				CCA1F9EB2C0548E4008DCF70 /* SynchronizedViewController.swift in Sources */,
 				CCFB7E142BF18D6F00C4617A /* NetworkManager.swift in Sources */,
 				CCFB7E3C2BFB1AF600C4617A /* Alert.swift in Sources */,
 				CCFB7DD52BED9C1300C4617A /* AuthManager.swift in Sources */,
