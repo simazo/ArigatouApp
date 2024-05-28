@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		CC209D282BD47EB10069E2E4 /* MatchCountManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC209D272BD47EB10069E2E4 /* MatchCountManager.swift */; };
 		CC209D2A2BD47ED20069E2E4 /* MatchCountRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC209D292BD47ED20069E2E4 /* MatchCountRepository.swift */; };
-		CC209D2C2BD47EED0069E2E4 /* UserDefaultsMatchCountRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC209D2B2BD47EED0069E2E4 /* UserDefaultsMatchCountRepository.swift */; };
+		CC209D2C2BD47EED0069E2E4 /* UserDefaultsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC209D2B2BD47EED0069E2E4 /* UserDefaultsManager.swift */; };
 		CC55BF502BC9028D003C3E15 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC55BF4F2BC9028D003C3E15 /* AppDelegate.swift */; };
 		CC55BF522BC9028D003C3E15 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC55BF512BC9028D003C3E15 /* SceneDelegate.swift */; };
 		CC55BF542BC9028D003C3E15 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC55BF532BC9028D003C3E15 /* HomeViewController.swift */; };
@@ -28,6 +28,7 @@
 		CCA1F9E92C04A831008DCF70 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = CCA1F9E72C04A831008DCF70 /* GoogleService-Info.plist */; };
 		CCA1F9EB2C0548E4008DCF70 /* SynchronizedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCA1F9EA2C0548E4008DCF70 /* SynchronizedViewController.swift */; };
 		CCA1F9ED2C054BAB008DCF70 /* SynchronizedPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCA1F9EC2C054BAB008DCF70 /* SynchronizedPresenter.swift */; };
+		CCA1F9EF2C059D74008DCF70 /* MatchCount.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCA1F9EE2C059D74008DCF70 /* MatchCount.swift */; };
 		CCAA463B2BEC99AA00FBF22D /* Develop_Provisioning_Profile.mobileprovision in Resources */ = {isa = PBXBuildFile; fileRef = CCAA463A2BEC99AA00FBF22D /* Develop_Provisioning_Profile.mobileprovision */; };
 		CCAA463C2BEC99AA00FBF22D /* Develop_Provisioning_Profile.mobileprovision in Resources */ = {isa = PBXBuildFile; fileRef = CCAA463A2BEC99AA00FBF22D /* Develop_Provisioning_Profile.mobileprovision */; };
 		CCDEAD292BDB1CCE0096704A /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCDEAD282BDB1CCE0096704A /* LoginViewController.swift */; };
@@ -59,7 +60,7 @@
 /* Begin PBXFileReference section */
 		CC209D272BD47EB10069E2E4 /* MatchCountManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchCountManager.swift; sourceTree = "<group>"; };
 		CC209D292BD47ED20069E2E4 /* MatchCountRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchCountRepository.swift; sourceTree = "<group>"; };
-		CC209D2B2BD47EED0069E2E4 /* UserDefaultsMatchCountRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsMatchCountRepository.swift; sourceTree = "<group>"; };
+		CC209D2B2BD47EED0069E2E4 /* UserDefaultsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsManager.swift; sourceTree = "<group>"; };
 		CC55BF4C2BC9028D003C3E15 /* ArigatouApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ArigatouApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CC55BF4F2BC9028D003C3E15 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CC55BF512BC9028D003C3E15 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -79,6 +80,7 @@
 		CCA1F9E72C04A831008DCF70 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		CCA1F9EA2C0548E4008DCF70 /* SynchronizedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SynchronizedViewController.swift; sourceTree = "<group>"; };
 		CCA1F9EC2C054BAB008DCF70 /* SynchronizedPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SynchronizedPresenter.swift; sourceTree = "<group>"; };
+		CCA1F9EE2C059D74008DCF70 /* MatchCount.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchCount.swift; sourceTree = "<group>"; };
 		CCAA463A2BEC99AA00FBF22D /* Develop_Provisioning_Profile.mobileprovision */ = {isa = PBXFileReference; lastKnownFileType = file; path = Develop_Provisioning_Profile.mobileprovision; sourceTree = "<group>"; };
 		CCDEAD282BDB1CCE0096704A /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		CCDEADCD2BE224ED0096704A /* AppStore_ProvisioningProfile.mobileprovision */ = {isa = PBXFileReference; lastKnownFileType = file; path = AppStore_ProvisioningProfile.mobileprovision; sourceTree = "<group>"; };
@@ -118,14 +120,15 @@
 		CC209D242BD47E5F0069E2E4 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				CC209D272BD47EB10069E2E4 /* MatchCountManager.swift */,
+				CCA1F9EE2C059D74008DCF70 /* MatchCount.swift */,
 				CC209D292BD47ED20069E2E4 /* MatchCountRepository.swift */,
-				CC209D2B2BD47EED0069E2E4 /* UserDefaultsMatchCountRepository.swift */,
+				CC209D272BD47EB10069E2E4 /* MatchCountManager.swift */,
+				CCA1F9E32C016AC6008DCF70 /* RealtimeDBMatchCountRepository.swift */,
 				CCDEAE162BE6BD350096704A /* Validator.swift */,
 				CCFB7DD42BED9C1300C4617A /* AuthManager.swift */,
-				CCA1F9E32C016AC6008DCF70 /* RealtimeDBMatchCountRepository.swift */,
 				CCFB7DD62BF17A8300C4617A /* VideoList.swift */,
 				CCFB7E132BF18D6F00C4617A /* NetworkManager.swift */,
+				CC209D2B2BD47EED0069E2E4 /* UserDefaultsManager.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -334,6 +337,7 @@
 				CC55BF652BC90301003C3E15 /* HomePresenter.swift in Sources */,
 				CCA1F9E02C006731008DCF70 /* SignupViewController.swift in Sources */,
 				CCA1F9EB2C0548E4008DCF70 /* SynchronizedViewController.swift in Sources */,
+				CCA1F9EF2C059D74008DCF70 /* MatchCount.swift in Sources */,
 				CCFB7E142BF18D6F00C4617A /* NetworkManager.swift in Sources */,
 				CCFB7E3C2BFB1AF600C4617A /* Alert.swift in Sources */,
 				CCFB7DD52BED9C1300C4617A /* AuthManager.swift in Sources */,
@@ -346,7 +350,7 @@
 				CC55BF502BC9028D003C3E15 /* AppDelegate.swift in Sources */,
 				CCDEAE192BE6BE330096704A /* LoginPresenter.swift in Sources */,
 				CC209D2A2BD47ED20069E2E4 /* MatchCountRepository.swift in Sources */,
-				CC209D2C2BD47EED0069E2E4 /* UserDefaultsMatchCountRepository.swift in Sources */,
+				CC209D2C2BD47EED0069E2E4 /* UserDefaultsManager.swift in Sources */,
 				CC55BF522BC9028D003C3E15 /* SceneDelegate.swift in Sources */,
 				CCA1F9DC2C001165008DCF70 /* SignupPresenter.swift in Sources */,
 				CCDEAE152BE514630096704A /* NaviMenuTableView.swift in Sources */,

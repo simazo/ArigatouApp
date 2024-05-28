@@ -18,16 +18,9 @@ protocol SignupPresenterOutput: AnyObject {
 
 class SignupPresenter {
     private weak var view: SignupPresenterOutput?
-    var matchCountManger: MatchCountManager!
-    var matchCount: Int
     
     init(view: SignupPresenterOutput) {
         self.view = view
-        
-        // UserDefaultsから現在の（ローカルの）マッチ数を取得
-        matchCountManger = MatchCountManager(UserDefaultsMatchCountRepository())
-        matchCount = matchCountManger.getCount()
-        matchCountManger = nil
     }
 }
 
@@ -44,9 +37,14 @@ extension SignupPresenter : SignupPresenterInput {
             
             switch result {
             case .success(let user):
-                // リポジトリはRealtime Databaseを使用
-                self.matchCountManger = MatchCountManager(RealtimeDBMatchCountRepository(uid: user.uid))
-                self.matchCountManger.setCount(matchCount)
+                var userMatchCount = MatchCount(
+                    uid: user.uid,
+                    count: UserDefaultsManager.getCount(),
+                    updateAt: Date().timeIntervalSince1970
+                )
+                
+                var matchCountManger = MatchCountManager(RealtimeDBMatchCountRepository())
+                matchCountManger.create(userMatchCount)
                 
                 self.view?.showSignupSuccess()
             case .failure(let error):
