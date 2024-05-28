@@ -13,21 +13,11 @@ class MatchCountManager {
         self.matchCountRepository = repository
     }
 
-    // マッチ数を返す
-    func getCount() -> Int {
-        return matchCountRepository.getCount()
+    func create(_ matchCount: MatchCount) {
+        self.matchCountRepository.create(matchCount)
     }
-
-    // マッチ数を保存する
-    func setCount(_ count: Int){
-        matchCountRepository.setCount(count)
+    
+    func findByUid(uid: String, completion: @escaping (Result<MatchCount, Error>) -> Void) {
+        self.matchCountRepository.findByUid(uid: uid, completion: completion)
     }
-
-    // マッチ数をカウントアップする
-    func incrementCount(){
-        var count = matchCountRepository.getCount()
-        count += 1
-        matchCountRepository.setCount(count)
-    }
-
 }

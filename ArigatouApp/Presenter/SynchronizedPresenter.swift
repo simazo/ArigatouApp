@@ -10,32 +10,31 @@ protocol SynchronizedPresenterInput: AnyObject {
 }
 
 protocol SynchronizedPresenterOutput: AnyObject {
+    func redrawInformationLabel(matchCount: MatchCount)
+    func showFindDataFailed(errorMessage: String)
 }
 
 class SynchronizedPresenter {
     private weak var view: SynchronizedPresenterOutput?
-    var matchCountManger: MatchCountManager!
-    var matchCount: Int
     
     init(view: SynchronizedPresenterOutput) {
         self.view = view
-        
-        // UserDefaultsから現在の（ローカルの）マッチ数を取得
-        matchCountManger = MatchCountManager(UserDefaultsMatchCountRepository())
-        matchCount = matchCountManger.getCount()
-        matchCountManger = nil
     }
-    
-
 }
 extension SynchronizedPresenter: SynchronizedPresenterInput {
     func viewWillAppear() {
         AuthManager.shared.isLoggedIn { (isAuthenticated, uid) in
             if isAuthenticated {
-                self.matchCountManger = MatchCountManager(RealtimeDBMatchCountRepository(uid: uid!))
-                let lastUpdatedCount = self.matchCountManger.getCount ()
-                
-                //view?.showLoginMenu()
+                let matchCountManger = MatchCountManager(RealtimeDBMatchCountRepository())
+                matchCountManger.findByUid(uid: uid!) { result in
+                    switch result {
+                    case .success(let matchCount):
+                        self.view?.redrawInformationLabel(matchCount: matchCount)
+                    case .failure(let error):
+                        print(error.localizedDescription)
+                        self.view?.showFindDataFailed(errorMessage: error.localizedDescription)
+                    }
+                }
             }
         }
     }

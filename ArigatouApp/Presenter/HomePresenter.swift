@@ -38,13 +38,9 @@ class HomePresenter{
     private let MATCH_WORD = "ありがと|ありがとう"
     private let MAX_COUNT = 1000000
     private var previousTranscription = ""
-    var matchCountManger: MatchCountManager!
     
     init(view: HomePresenterOutput) {
         self.view = view
-        
-        // リポジトリはUserDefaultsを使用
-        self.matchCountManger = MatchCountManager(UserDefaultsMatchCountRepository())
     }
     
     /// マイク使用許可の確認
@@ -102,10 +98,10 @@ class HomePresenter{
                 if let _ = filteredTranscription.range(of: MATCH_WORD, options: .regularExpression) {
 
                     // カウントアップ
-                    self.matchCountManger.incrementCount()
+                    UserDefaultsManager.incrementCount()
 
                     // 動画再生
-                    playVideoIfMatchCountReached(self.matchCountManger.getCount())
+                    playVideoIfMatchCountReached(UserDefaultsManager.getCount())
                     
                     // ラベル再描画
                     self.view?.redrawRemainingLabel(text: "「ありがとう100万回」\n\n達成まで\n\nあと\(self.formatRemainingCount())回")
@@ -171,11 +167,11 @@ class HomePresenter{
     }
     
     private func formatRemainingCount() -> String {
-        return String.localizedStringWithFormat("%d", 1000000 - self.matchCountManger.getCount())
+        return String.localizedStringWithFormat("%d", 1000000 - UserDefaultsManager.getCount())
     }
     
     private func formatTotalCount() -> String {
-        return String.localizedStringWithFormat("%d", self.matchCountManger.getCount())
+        return String.localizedStringWithFormat("%d", UserDefaultsManager.getCount())
     }
     
     private func playVideoIfMatchCountReached(_ match_count: Int) {
@@ -208,7 +204,7 @@ extension HomePresenter: HomePresenterInput {
     
     
     func viewDidLoad() {
-        let shouldShowEndScreen = self.matchCountManger.getCount() >= MAX_COUNT
+        let shouldShowEndScreen = UserDefaultsManager.getCount() >= MAX_COUNT
         
         // 100万回達していれば
         if shouldShowEndScreen {
@@ -224,7 +220,7 @@ extension HomePresenter: HomePresenterInput {
         }
         
         // 動画の再生リスト表示
-        view?.showPlayVideoListMenu(menus: VideoList.getMatchMenus(matchCount: self.matchCountManger.getCount()))
+        view?.showPlayVideoListMenu(menus: VideoList.getMatchMenus(matchCount: UserDefaultsManager.getCount()))
     }
     
     func handleAuthorizationStatus() {
