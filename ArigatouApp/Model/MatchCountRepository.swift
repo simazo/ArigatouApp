@@ -6,6 +6,6 @@
 //
 
 protocol MatchCountRepository {
-    func create(_ matchCount: MatchCount)
+    func create(_ matchCount: MatchCount, completion: @escaping (Bool, Error?) -> Void)
     func findByUid(uid:String, completion: @escaping (Result<MatchCount, Error>) -> Void)
 }

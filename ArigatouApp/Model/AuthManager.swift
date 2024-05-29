@@ -25,6 +25,17 @@ class AuthManager {
         }
     }
     
+    func deleteUser(completion: @escaping(Bool, Error?) -> Void){
+        Auth.auth().currentUser?.delete { error in
+            if let error = error {
+                completion(false, error)
+            } else {
+                completion(true, nil)
+            }
+        }
+    }
+
+    
     func login(email: String, password: String, completion: @escaping (Bool, Error?) -> Void){
         Auth.auth().signIn(withEmail: email, password: password) { (authResult, error) in
             if let error = error {

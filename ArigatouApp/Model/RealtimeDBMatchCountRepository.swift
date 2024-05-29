@@ -10,12 +10,19 @@ import FirebaseDatabase
 class RealtimeDBMatchCountRepository: MatchCountRepository {
     let database = Database.database().reference()
     
-    func create(_ matchCount: MatchCount) {
+    func create(_ matchCount: MatchCount, completion: @escaping (Bool, Error?) -> Void) {
         let userData = [
             "count": matchCount.count,
             "updatedAt": matchCount.updateAt
         ] as [String : Any]
-        database.child("userMatchCount").child(matchCount.uid).setValue(userData)
+        
+        database.child("userMatchCount").child(matchCount.uid).setValue(userData){ error, _ in
+            if let error = error {
+                completion(false, error)
+            } else {
+                completion(true, nil)
+            }
+        }
     }
     
     func findByUid(uid:String, completion: @escaping (Result<MatchCount, Error>) -> Void) {
