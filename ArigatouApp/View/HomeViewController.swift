@@ -280,7 +280,9 @@ extension HomeViewController: HomePresenterOutput{
     }
     
     func showLogoutFailure(errorMessage: String) {
-        self.showAlert(title: "ログアウトエラー", message: errorMessage)
+        DispatchQueue.main.async {
+            self.showAlert(title: "ログアウトエラー", message: errorMessage)
+        }
     }
     
     func showPlayVideoListMenu(menus: [String]) {

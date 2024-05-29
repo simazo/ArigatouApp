@@ -13,8 +13,8 @@ class MatchCountManager {
         self.matchCountRepository = repository
     }
 
-    func create(_ matchCount: MatchCount) {
-        self.matchCountRepository.create(matchCount)
+    func create(_ matchCount: MatchCount, completion: @escaping (Bool, Error?) -> Void) {
+        self.matchCountRepository.create(matchCount, completion: completion)
     }
     
     func findByUid(uid: String, completion: @escaping (Result<MatchCount, Error>) -> Void) {

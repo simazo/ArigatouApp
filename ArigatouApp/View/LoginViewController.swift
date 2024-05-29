@@ -189,6 +189,8 @@ extension LoginViewController : LoginPresenterOutput {
     }
     
     func showLoginFailed(errorMessage: String) {
-        self.showAlert(title: "ログインエラー", message: errorMessage)
+        DispatchQueue.main.async {
+            self.showAlert(title: "ログインエラー", message: errorMessage)
+        }
     }
 }

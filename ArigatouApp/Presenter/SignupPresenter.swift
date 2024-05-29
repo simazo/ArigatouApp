@@ -14,6 +14,7 @@ protocol SignupPresenterInput: AnyObject {
 protocol SignupPresenterOutput: AnyObject {
     func showSignupSuccess()
     func showSignupFailed(errorMessage: String)
+    func showSignupSuccessButCreateMatchCountFailed(errorMessage: String)
 }
 
 class SignupPresenter {
@@ -37,16 +38,30 @@ extension SignupPresenter : SignupPresenterInput {
             
             switch result {
             case .success(let user):
-                var userMatchCount = MatchCount(
+                let userMatchCount = MatchCount(
                     uid: user.uid,
                     count: UserDefaultsManager.getCount(),
                     updateAt: Date().timeIntervalSince1970
                 )
                 
-                var matchCountManger = MatchCountManager(RealtimeDBMatchCountRepository())
-                matchCountManger.create(userMatchCount)
-                
-                self.view?.showSignupSuccess()
+                // マッチ数作成
+                let matchCountManger = MatchCountManager(RealtimeDBMatchCountRepository())
+                matchCountManger.create(userMatchCount) { success, error in
+                    // 成功
+                    if success {
+                        self.view?.showSignupSuccess()
+                    // 失敗
+                    } else {
+                        // rollobackのためユーザアカウント削除
+                        AuthManager.shared.deleteUser { success, error in
+                            if success {
+                                self.view?.showSignupSuccessButCreateMatchCountFailed(errorMessage: "カウント数の登録に失敗したためロールバックしました")
+                            } else {
+                                self.view?.showSignupSuccessButCreateMatchCountFailed(errorMessage: error!.localizedDescription)
+                            }
+                        }
+                    }
+                }
             case .failure(let error):
                 self.handleSignupError(error)
             }

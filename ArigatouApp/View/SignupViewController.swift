@@ -157,6 +157,12 @@ class SignupViewController: UIViewController {
 }
 
 extension SignupViewController: SignupPresenterOutput {
+    func showSignupSuccessButCreateMatchCountFailed(errorMessage: String) {
+        DispatchQueue.main.async {
+            self.showAlert(title: "カウント数登録エラー", message: errorMessage)
+        }
+    }
+    
     func showSignupSuccess() {
         DispatchQueue.main.async {
             self.navigationController?.popViewController(animated: true)
@@ -165,7 +171,9 @@ extension SignupViewController: SignupPresenterOutput {
     }
     
     func showSignupFailed(errorMessage: String) {
-        self.showAlert(title: "アカウント登録エラー", message: errorMessage)
+        DispatchQueue.main.async {
+            self.showAlert(title: "アカウント登録エラー", message: errorMessage)
+        }
     }
     
     
