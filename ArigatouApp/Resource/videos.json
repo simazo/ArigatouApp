@@ -1,0 +1,11 @@
+[
+    {"count": 100, "menu": "100回目の動画", "url": "https://dancer.boo.jp/arigatou/mp4/v100.mp4"},
+    {"count": 500, "menu": "500回目の動画", "url": "https://dancer.boo.jp/arigatou/mp4/v500.mp4"},
+    {"count": 1000, "menu": "1,000回目の動画", "url": "https://dancer.boo.jp/arigatou/mp4/v1000.mp4"},
+    {"count": 5000, "menu": "5,000回目の動画", "url": "https://dancer.boo.jp/arigatou/mp4/v5000.mp4"},
+    {"count": 10000, "menu": "10,000回目の動画", "url": "https://dancer.boo.jp/arigatou/mp4/v10000.mp4"},
+    {"count": 50000, "menu": "50,000回目の動画", "url": "https://dancer.boo.jp/arigatou/mp4/v50000.mp4"},
+    {"count": 100000, "menu": "100,000回目の動画", "url": "https://dancer.boo.jp/arigatou/mp4/v100000.mp4"},
+    {"count": 500000, "menu": "500,000回目の動画", "url": "https://dancer.boo.jp/arigatou/mp4/v500000.mp4"},
+    {"count": 1000000, "menu": "1000,000回目の動画", "url": "https://dancer.boo.jp/arigatou/mp4/v1000000.mp4"}
+]

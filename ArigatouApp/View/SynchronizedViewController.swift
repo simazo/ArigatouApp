@@ -103,7 +103,7 @@ extension SynchronizedViewController: SynchronizedPresenterOutput {
     func redrawInformationLabel(matchCount: MatchCount) {
         DispatchQueue.main.async {
             self.informationLabel.text = """
-            端末のカウント：\(UserDefaultsManager.getCount())
+            端末のカウント：\(UserDefaultsManager.shared.getCount())
             サーバのカウント：\(matchCount.count)
             前回更新：\(self.dateFormat(matchCount.updateAt))
             """

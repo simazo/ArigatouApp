@@ -249,7 +249,7 @@ extension HomeViewController: NaviMenuTableViewDelegate{
         case "同期":
             self.navigationController?.pushViewController(SynchronizedViewController(), animated: true)
         case let x where x.contains("回目の動画"):
-            playVideo(url: VideoList.getUrlByMenu(item)!)
+            playVideo(url: VideoList.shared.getUrlByMenu(item)!)
         default:
             break
         }

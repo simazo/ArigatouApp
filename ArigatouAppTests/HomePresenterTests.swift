@@ -9,6 +9,15 @@ import XCTest
 @testable import ArigatouApp
 
 class MockPresenterOutput: HomePresenterOutput {
+    func showLoginMenu() {
+    }
+    
+    func showPreLoginMenu() {
+    }
+    
+    func showLogoutFailure(errorMessage: String) {
+    }
+    
     func showPlayVideoListMenu(menus: [String]) {
     }
     
@@ -105,7 +114,7 @@ class HomePresenterTests: XCTestCase {
     // カウント数が最大まで達していない場合は、開始用の画面になる事を確認
     func testMaxCountNotReached() {
         
-        presenter.matchCountManger.setCount(100)
+        UserDefaultsManager.shared.setCount(100)
         
         // viewDidLoad() を呼び出す
         presenter.viewDidLoad()
@@ -116,8 +125,8 @@ class HomePresenterTests: XCTestCase {
     
     // カウント数が最大まで達した場合は、終了用の画面になる事を確認
     func testMaxCountReached() {
-        presenter.matchCountManger.setCount(1000000)
-        
+        UserDefaultsManager.shared.setCount(1000000)
+         
         // viewDidLoad() を呼び出す
         presenter.viewDidLoad()
         
@@ -127,9 +136,9 @@ class HomePresenterTests: XCTestCase {
     
     // カウント数が一定数まで達した場合、動画再生することを確認
     func testPlayVideoReached() {
-        presenter.matchCountManger.setCount(100)
+        UserDefaultsManager.shared.setCount(100)
         
-        guard let videoURL = VideoList.getUrlByCount(presenter.matchCountManger.getCount()) else {
+        guard let videoURL = VideoList.shared.getUrlByCount(UserDefaultsManager.shared.getCount()) else {
             return
         }
         // playVideo() を呼び出す
@@ -141,9 +150,9 @@ class HomePresenterTests: XCTestCase {
     
     // カウント数が一定数まで達しない場合は、動画再生しないことを確認
     func testPlayVideoNotReached() {
-        presenter.matchCountManger.setCount(99)
+        UserDefaultsManager.shared.setCount(99)
         
-        guard let videoURL = VideoList.getUrlByCount(presenter.matchCountManger.getCount()) else {
+        guard let videoURL = VideoList.shared.getUrlByCount(UserDefaultsManager.shared.getCount()) else {
             return
         }
         

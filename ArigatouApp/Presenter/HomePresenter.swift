@@ -98,10 +98,10 @@ class HomePresenter{
                 if let _ = filteredTranscription.range(of: MATCH_WORD, options: .regularExpression) {
 
                     // カウントアップ
-                    UserDefaultsManager.incrementCount()
+                    UserDefaultsManager.shared.incrementCount()
 
                     // 動画再生
-                    playVideoIfMatchCountReached(UserDefaultsManager.getCount())
+                    playVideoIfMatchCountReached(UserDefaultsManager.shared.getCount())
                     
                     // ラベル再描画
                     self.view?.redrawRemainingLabel(text: "「ありがとう100万回」\n\n達成まで\n\nあと\(self.formatRemainingCount())回")
@@ -167,16 +167,16 @@ class HomePresenter{
     }
     
     private func formatRemainingCount() -> String {
-        return String.localizedStringWithFormat("%d", 1000000 - UserDefaultsManager.getCount())
+        return String.localizedStringWithFormat("%d", 1000000 - UserDefaultsManager.shared.getCount())
     }
     
     private func formatTotalCount() -> String {
-        return String.localizedStringWithFormat("%d", UserDefaultsManager.getCount())
+        return String.localizedStringWithFormat("%d", UserDefaultsManager.shared.getCount())
     }
     
     private func playVideoIfMatchCountReached(_ match_count: Int) {
         // 特定のマッチ数ではない場合処理を抜ける
-        guard let videoURL = VideoList.getUrlByCount(match_count) else {
+        guard let videoURL = VideoList.shared.getUrlByCount(match_count) else {
             return
         }
         
@@ -186,7 +186,7 @@ class HomePresenter{
         }
         
         // 再生リスト表示
-        view?.showPlayVideoListMenu(menus: VideoList.getMatchMenus(matchCount: match_count))
+        view?.showPlayVideoListMenu(menus: VideoList.shared.getMatchMenus(matchCount: match_count))
     }
 }
 
@@ -204,7 +204,7 @@ extension HomePresenter: HomePresenterInput {
     
     
     func viewDidLoad() {
-        let shouldShowEndScreen = UserDefaultsManager.getCount() >= MAX_COUNT
+        let shouldShowEndScreen = UserDefaultsManager.shared.getCount() >= MAX_COUNT
         
         // 100万回達していれば
         if shouldShowEndScreen {
@@ -220,7 +220,7 @@ extension HomePresenter: HomePresenterInput {
         }
         
         // 動画の再生リスト表示
-        view?.showPlayVideoListMenu(menus: VideoList.getMatchMenus(matchCount: UserDefaultsManager.getCount()))
+        view?.showPlayVideoListMenu(menus: VideoList.shared.getMatchMenus(matchCount: UserDefaultsManager.shared.getCount()))
     }
     
     func handleAuthorizationStatus() {

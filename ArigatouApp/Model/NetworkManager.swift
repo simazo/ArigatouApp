@@ -8,7 +8,6 @@
 import SystemConfiguration
 
 final public class NetworkManager {
-    private init() {}
     
     public static func isConnectedToNetwork() -> Bool {
         guard let flags = getFlags() else { return false }

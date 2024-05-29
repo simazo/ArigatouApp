@@ -19,7 +19,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         sleep(1)
         
         FirebaseApp.configure()
-        
+    
+        // シングルトンクラス生成
+        let _ = UserDefaultsManager.shared
+        let _ = VideoList.shared
+
         //iOS 15でNavigationBarがデフォルトで透過されるためのios14までと同じように表示する設定
         if #available(iOS 15.0, *) {
             //ナビゲーションバーの外観設定を宣言

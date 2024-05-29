@@ -49,7 +49,7 @@ extension SynchronizedPresenter: SynchronizedPresenterInput {
     func synchronize() {
         let userMatchCount = MatchCount(
             uid: self.uid,
-            count: UserDefaultsManager.getCount(),
+            count: UserDefaultsManager.shared.getCount(),
             updateAt: Date().timeIntervalSince1970
         )
         let matchCountManger = MatchCountManager(RealtimeDBMatchCountRepository())

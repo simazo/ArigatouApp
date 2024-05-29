@@ -40,7 +40,7 @@ extension SignupPresenter : SignupPresenterInput {
             case .success(let user):
                 let userMatchCount = MatchCount(
                     uid: user.uid,
-                    count: UserDefaultsManager.getCount(),
+                    count: UserDefaultsManager.shared.getCount(),
                     updateAt: Date().timeIntervalSince1970
                 )
                 
