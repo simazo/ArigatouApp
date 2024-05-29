@@ -11,20 +11,20 @@ class UserDefaultsManager {
     static let shared = UserDefaultsManager()
     private init() {}
     
-    private static let KEY = "matchCount"
+    private let KEY = "matchCount"
     
-    static func getCount() -> Int {
+    func getCount() -> Int {
         let defaults = UserDefaults.standard
         return defaults.integer(forKey: KEY)
     }
 
-    static func setCount(_ count: Int) {
+    func setCount(_ count: Int) {
         let defaults = UserDefaults.standard
         defaults.set(count, forKey: KEY)
     }
     
     // マッチ数をカウントアップする
-    static func incrementCount(){
+    func incrementCount(){
         var count = self.getCount()
         count += 1
         self.setCount(count)

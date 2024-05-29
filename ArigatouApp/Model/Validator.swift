@@ -11,7 +11,6 @@
 import Foundation
 
 public final class Validator {
-    private init() {}
     
     private static func validate(str: String, pattern: String) -> [NSTextCheckingResult] {
         guard let regex = try? NSRegularExpression(pattern: pattern) else { return [] }
