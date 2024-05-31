@@ -61,7 +61,7 @@ class SignupViewController: UIViewController {
     func initPasswordTextField(){
         passwordTextField = UITextField()
         passwordTextField.font = .boldSystemFont(ofSize: 16)
-        
+        passwordTextField.isSecureTextEntry = true
         passwordTextField.placeholder = "パスワード"
         passwordTextField.keyboardType = .alphabet
         passwordTextField.backgroundColor = UIColor.white
@@ -87,7 +87,8 @@ class SignupViewController: UIViewController {
     func initPasswordConfirmTextField(){
         passwordConfirmTextField = UITextField()
         passwordConfirmTextField.font = .boldSystemFont(ofSize: 16)
-        
+        passwordConfirmTextField.isSecureTextEntry
+        = true
         passwordConfirmTextField.placeholder = "パスワード確認"
         passwordConfirmTextField.keyboardType = .alphabet
         passwordConfirmTextField.backgroundColor = UIColor.white
@@ -172,13 +173,14 @@ class SignupViewController: UIViewController {
         ])
         
         passwordToggleButton.addTarget(self,
-                              action: #selector(LoginViewController.togglePasswordTapped(sender:)),
+                              action: #selector(SignupViewController.togglePasswordTapped(sender:)),
                               for: .touchUpInside)
     }
     
     @objc func togglePasswordTapped(sender: Any) {
         // パスワードの表示状態を切り替える
         passwordTextField.isSecureTextEntry.toggle()
+        passwordConfirmTextField.isSecureTextEntry.toggle()
         updatePasswordToggleIcon()
     }
     
