@@ -143,18 +143,25 @@ class SignupViewController: UIViewController {
     
     func initInformationLabel() {
         let infoLabel = UILabel()
-        infoLabel.text = "説明文"
+        infoLabel.text = """
+        パスワードは8以上10文字以内で以下が使用できます。
+        ・大文字  A～Z
+        ・小文字  a～z
+        ・数字  0～9
+        ・記号  ! # $ % & * +  -  / : ; < = > ? @
+        """
+        infoLabel.numberOfLines = 0
         infoLabel.font = UIFont.systemFont(ofSize: 14)
-        infoLabel.backgroundColor = .systemGray
-        infoLabel.textAlignment = .center
+        infoLabel.backgroundColor = .clear
+        infoLabel.textAlignment = .left
         
         infoLabel.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(infoLabel)
         NSLayoutConstraint.activate([
-            infoLabel.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: 100),
+            infoLabel.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: 140),
             infoLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             infoLabel.widthAnchor.constraint(equalToConstant: 280),
-            infoLabel.heightAnchor.constraint(equalToConstant: 40)
+            infoLabel.heightAnchor.constraint(equalToConstant: 200)
         ])
     }
     
