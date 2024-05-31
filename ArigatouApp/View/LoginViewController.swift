@@ -13,6 +13,7 @@ class LoginViewController: UIViewController {
     private var passwordTextField: UITextField!
     private var loginButton: UIButton!
     private var resetPasswordButton: UIButton!
+    private var passwordToggleButton: UIButton!
     
     private var presenter: LoginPresenterInput!
     
@@ -26,6 +27,7 @@ class LoginViewController: UIViewController {
         initPasswordTextField()
         initLoginButton()
         initPasswordResetButton()
+        initPasswordToggleButton()
         
         presenter = LoginPresenter(view: self)
     }
@@ -128,6 +130,12 @@ class LoginViewController: UIViewController {
         presenter.login(email: email, password: password)
     }
     
+    @objc func togglePasswordTapped(sender: Any) {
+        // パスワードの表示状態を切り替える
+        passwordTextField.isSecureTextEntry.toggle()
+        updatePasswordToggleIcon()
+    }
+    
     func initEmailTextField(){
         emailTextField = UITextField()
         emailTextField.font = .boldSystemFont(ofSize: 16)
@@ -157,7 +165,7 @@ class LoginViewController: UIViewController {
     func initPasswordTextField(){
         passwordTextField = UITextField()
         passwordTextField.font = .boldSystemFont(ofSize: 16)
-        
+        passwordTextField.isSecureTextEntry = true
         passwordTextField.placeholder = "パスワード"
         passwordTextField.keyboardType = .alphabet
         passwordTextField.backgroundColor = UIColor.white
@@ -178,6 +186,30 @@ class LoginViewController: UIViewController {
             passwordTextField.widthAnchor.constraint(equalToConstant: 280),
             passwordTextField.heightAnchor.constraint(equalToConstant: 40)
         ])
+    }
+    
+    func initPasswordToggleButton() {
+        passwordToggleButton = UIButton()
+
+        updatePasswordToggleIcon()
+        
+        passwordToggleButton.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(passwordToggleButton)
+        NSLayoutConstraint.activate([
+            passwordToggleButton.centerYAnchor.constraint(equalTo: passwordTextField.centerYAnchor, constant: 0.0),
+            passwordToggleButton.centerXAnchor.constraint(equalTo: passwordTextField.centerXAnchor, constant: 120.0),
+            passwordToggleButton.widthAnchor.constraint(equalToConstant: 40),
+            passwordToggleButton.heightAnchor.constraint(equalToConstant: 40)
+        ])
+        
+        passwordToggleButton.addTarget(self,
+                              action: #selector(LoginViewController.togglePasswordTapped(sender:)),
+                              for: .touchUpInside)
+    }
+    
+    func updatePasswordToggleIcon(){
+        let buttonImage = passwordTextField.isSecureTextEntry ? UIImage(systemName: "eye.slash") : UIImage(systemName: "eye")
+                passwordToggleButton.setImage(buttonImage, for: .normal)
     }
 }
 

@@ -12,6 +12,7 @@ class SignupViewController: UIViewController {
     private var passwordTextField: UITextField!
     private var passwordConfirmTextField: UITextField!
     private var signupButton: UIButton!
+    private var passwordToggleButton: UIButton!
     
     private var presenter: SignupPresenterInput!
     
@@ -26,6 +27,7 @@ class SignupViewController: UIViewController {
         initPasswordConfirmTextField()
         initSignupButton()
         initInformationLabel()
+        initPasswordToggleButton()
         
         presenter = SignupPresenter(view: self)
     }
@@ -153,6 +155,36 @@ class SignupViewController: UIViewController {
             infoLabel.widthAnchor.constraint(equalToConstant: 280),
             infoLabel.heightAnchor.constraint(equalToConstant: 40)
         ])
+    }
+    
+    func initPasswordToggleButton() {
+        passwordToggleButton = UIButton()
+
+        updatePasswordToggleIcon()
+        
+        passwordToggleButton.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(passwordToggleButton)
+        NSLayoutConstraint.activate([
+            passwordToggleButton.centerYAnchor.constraint(equalTo: passwordTextField.centerYAnchor, constant: 0.0),
+            passwordToggleButton.centerXAnchor.constraint(equalTo: passwordTextField.centerXAnchor, constant: 120.0),
+            passwordToggleButton.widthAnchor.constraint(equalToConstant: 40),
+            passwordToggleButton.heightAnchor.constraint(equalToConstant: 40)
+        ])
+        
+        passwordToggleButton.addTarget(self,
+                              action: #selector(LoginViewController.togglePasswordTapped(sender:)),
+                              for: .touchUpInside)
+    }
+    
+    @objc func togglePasswordTapped(sender: Any) {
+        // パスワードの表示状態を切り替える
+        passwordTextField.isSecureTextEntry.toggle()
+        updatePasswordToggleIcon()
+    }
+    
+    func updatePasswordToggleIcon(){
+        let buttonImage = passwordTextField.isSecureTextEntry ? UIImage(systemName: "eye.slash") : UIImage(systemName: "eye")
+                passwordToggleButton.setImage(buttonImage, for: .normal)
     }
 }
 
