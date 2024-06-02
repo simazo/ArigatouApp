@@ -80,7 +80,11 @@ class HomeViewController: UIViewController {
     }
     
     private func initPersonMenu() {
-        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "", image: UIImage(systemName: "person"), target: self, action: #selector(personButtonTapped))
+        if #available(iOS 16.0, *) {
+            navigationItem.rightBarButtonItem = UIBarButtonItem(title: "", image: UIImage(systemName: "person"), target: self, action: #selector(personButtonTapped))
+        } else {
+            navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "person"), style: .plain, target: self, action: #selector(personButtonTapped))
+        }
         
         naviMenutableViewForPerson = NaviMenuTableView(frame: CGRect.zero, style: .plain)
         naviMenutableViewForPerson.translatesAutoresizingMaskIntoConstraints = false
@@ -99,7 +103,11 @@ class HomeViewController: UIViewController {
     }
     
     private func initPlayVideoMenu(menus: [String]) {
-        navigationItem.leftBarButtonItem = UIBarButtonItem(title: "", image: UIImage(systemName: "play.fill"), target: self, action: #selector(playVideoButtonTapped))
+        if #available(iOS 16.0, *) {
+            navigationItem.leftBarButtonItem = UIBarButtonItem(title: "", image: UIImage(systemName: "play.fill"), target: self, action: #selector(playVideoButtonTapped))
+        } else {
+            navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "play.fill"), style: .plain, target: self, action: #selector(personButtonTapped))
+        }
         
         naviMenutableViewForPlayVideo = NaviMenuTableView(frame: CGRect.zero, style: .plain)
         naviMenutableViewForPlayVideo.translatesAutoresizingMaskIntoConstraints = false
@@ -270,12 +278,20 @@ extension HomeViewController: NaviMenuTableViewDelegate{
 }
 extension HomeViewController: HomePresenterOutput{
     func showLoginMenu() {
-        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "", image: UIImage(systemName: "person.fill"), target: self, action: #selector(personButtonTapped))
+        if #available(iOS 16.0, *) {
+            navigationItem.rightBarButtonItem = UIBarButtonItem(title: "", image: UIImage(systemName: "person.fill"), target: self, action: #selector(personButtonTapped))
+        } else {
+            navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "person.fill"), style: .plain, target: self, action: #selector(personButtonTapped))
+        }
         naviMenutableViewForPerson.items = ["同期", "ログアウト"]
     }
     
     func showPreLoginMenu() {
-        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "", image: UIImage(systemName: "person"), target: self, action: #selector(personButtonTapped))
+        if #available(iOS 16.0, *) {
+            navigationItem.rightBarButtonItem = UIBarButtonItem(title: "", image: UIImage(systemName: "person"), target: self, action: #selector(personButtonTapped))
+        } else {
+            navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "person"), style: .plain, target: self, action: #selector(personButtonTapped))
+        }
         naviMenutableViewForPerson.items = ["ログイン", "アカウント登録"]
     }
     
