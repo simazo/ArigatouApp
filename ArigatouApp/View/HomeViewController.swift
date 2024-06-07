@@ -175,7 +175,11 @@ class HomeViewController: UIViewController {
     
     func initRemainingLabel(){
         remainingLabel = UILabel()
-        remainingLabel.font = .boldSystemFont(ofSize: 20)
+        if UIDevice.current.userInterfaceIdiom == .pad {
+            remainingLabel.font = .boldSystemFont(ofSize: 44)
+        } else {
+            remainingLabel.font = .boldSystemFont(ofSize: 20)
+        }
         remainingLabel.backgroundColor = UIColor.clear
         remainingLabel.textColor = .white
         remainingLabel.textAlignment = .center
@@ -192,7 +196,11 @@ class HomeViewController: UIViewController {
     
     func initCounterLabel(){
         counterLabel = UILabel()
-        counterLabel.font = .boldSystemFont(ofSize: 28)
+        if UIDevice.current.userInterfaceIdiom == .pad {
+            counterLabel.font = .boldSystemFont(ofSize: 54)
+        } else {
+            counterLabel.font = .boldSystemFont(ofSize: 28)
+        }
         counterLabel.backgroundColor = UIColor.clear
         counterLabel.textColor = .yellow
         counterLabel.textAlignment = .center
@@ -214,11 +222,21 @@ class HomeViewController: UIViewController {
         micView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(micView)
         
+        var position: CGFloat = 0.0
+        var size: CGFloat = 0.0
+        if UIDevice.current.userInterfaceIdiom == .pad {
+            position = 200
+            size = 80
+        } else {
+            position = 110
+            size = 40
+        }
+        
         NSLayoutConstraint.activate([
-            micView.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: 110.0),
+            micView.centerYAnchor.constraint(equalTo: remainingLabel.centerYAnchor, constant: position),
             micView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            micView.widthAnchor.constraint(equalToConstant: 50),
-            micView.heightAnchor.constraint(equalToConstant: 50)
+            micView.widthAnchor.constraint(equalToConstant: size),
+            micView.heightAnchor.constraint(equalToConstant: size)
         ])
     }
     
