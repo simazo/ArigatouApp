@@ -35,7 +35,11 @@ class LoginViewController: UIViewController {
     func initPasswordResetButton() {
         resetPasswordButton = UIButton()
         resetPasswordButton.setTitle("パスワードを忘れた場合はこちら", for:UIControl.State.normal)
-        resetPasswordButton.titleLabel?.font =  UIFont.systemFont(ofSize: 14)
+        if UIDevice.current.userInterfaceIdiom == .pad {
+            resetPasswordButton.titleLabel?.font =  UIFont.systemFont(ofSize: 18)
+        } else {
+            resetPasswordButton.titleLabel?.font =  UIFont.systemFont(ofSize: 14)
+        }
         resetPasswordButton.backgroundColor = .systemGray
         
         resetPasswordButton.translatesAutoresizingMaskIntoConstraints = false
@@ -54,8 +58,12 @@ class LoginViewController: UIViewController {
     
     func initLoginButton(){
         loginButton = UIButton()
+        if UIDevice.current.userInterfaceIdiom == .pad {
+            loginButton.titleLabel?.font =  UIFont.systemFont(ofSize: 26)
+        } else {
+            loginButton.titleLabel?.font =  UIFont.systemFont(ofSize: 16)
+        }
         loginButton.setTitle("ログイン", for:UIControl.State.normal)
-        loginButton.titleLabel?.font =  UIFont.systemFont(ofSize: 16)
         loginButton.backgroundColor = .systemBlue
         
         loginButton.translatesAutoresizingMaskIntoConstraints = false
@@ -138,8 +146,11 @@ class LoginViewController: UIViewController {
     
     func initEmailTextField(){
         emailTextField = UITextField()
-        emailTextField.font = .boldSystemFont(ofSize: 16)
-        
+        if UIDevice.current.userInterfaceIdiom == .pad {
+            emailTextField.font = .boldSystemFont(ofSize: 26)
+        } else {
+            emailTextField.font = .boldSystemFont(ofSize: 16)
+        }
         emailTextField.placeholder = "メールアドレス"
         emailTextField.keyboardType = .emailAddress
         emailTextField.backgroundColor = UIColor.white
@@ -164,7 +175,11 @@ class LoginViewController: UIViewController {
     
     func initPasswordTextField(){
         passwordTextField = UITextField()
-        passwordTextField.font = .boldSystemFont(ofSize: 16)
+        if UIDevice.current.userInterfaceIdiom == .pad {
+            passwordTextField.font = .boldSystemFont(ofSize: 26)
+        } else {
+            passwordTextField.font = .boldSystemFont(ofSize: 16)
+        }
         passwordTextField.isSecureTextEntry = true
         passwordTextField.placeholder = "パスワード"
         passwordTextField.keyboardType = .alphabet
@@ -190,11 +205,11 @@ class LoginViewController: UIViewController {
     
     func initPasswordToggleButton() {
         passwordToggleButton = UIButton()
-
         updatePasswordToggleIcon()
         
         passwordToggleButton.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(passwordToggleButton)
+        
         NSLayoutConstraint.activate([
             passwordToggleButton.centerYAnchor.constraint(equalTo: passwordTextField.centerYAnchor, constant: 0.0),
             passwordToggleButton.centerXAnchor.constraint(equalTo: passwordTextField.centerXAnchor, constant: 120.0),

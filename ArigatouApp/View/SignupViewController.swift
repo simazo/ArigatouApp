@@ -34,8 +34,11 @@ class SignupViewController: UIViewController {
     
     func initEmailTextField(){
         emailTextField = UITextField()
-        emailTextField.font = .boldSystemFont(ofSize: 16)
-        
+        if UIDevice.current.userInterfaceIdiom == .pad {
+            emailTextField.font = .boldSystemFont(ofSize: 26)
+        } else {
+            emailTextField.font = .boldSystemFont(ofSize: 16)
+        }
         emailTextField.placeholder = "メールアドレス"
         emailTextField.keyboardType = .emailAddress
         emailTextField.backgroundColor = UIColor.white
@@ -60,7 +63,11 @@ class SignupViewController: UIViewController {
     
     func initPasswordTextField(){
         passwordTextField = UITextField()
-        passwordTextField.font = .boldSystemFont(ofSize: 16)
+        if UIDevice.current.userInterfaceIdiom == .pad {
+            passwordTextField.font = .boldSystemFont(ofSize: 26)
+        } else {
+            passwordTextField.font = .boldSystemFont(ofSize: 16)
+        }
         passwordTextField.isSecureTextEntry = true
         passwordTextField.placeholder = "パスワード"
         passwordTextField.keyboardType = .alphabet
@@ -86,7 +93,11 @@ class SignupViewController: UIViewController {
     
     func initPasswordConfirmTextField(){
         passwordConfirmTextField = UITextField()
-        passwordConfirmTextField.font = .boldSystemFont(ofSize: 16)
+        if UIDevice.current.userInterfaceIdiom == .pad {
+            passwordConfirmTextField.font = .boldSystemFont(ofSize: 26)
+        } else {
+            passwordConfirmTextField.font = .boldSystemFont(ofSize: 16)
+        }
         passwordConfirmTextField.isSecureTextEntry
         = true
         passwordConfirmTextField.placeholder = "パスワード確認"
@@ -114,7 +125,11 @@ class SignupViewController: UIViewController {
     func initSignupButton(){
         signupButton = UIButton()
         signupButton.setTitle("登録", for:UIControl.State.normal)
-        signupButton.titleLabel?.font =  UIFont.systemFont(ofSize: 16)
+        if UIDevice.current.userInterfaceIdiom == .pad {
+            signupButton.titleLabel?.font =  UIFont.systemFont(ofSize: 26)
+        } else {
+            signupButton.titleLabel?.font =  UIFont.systemFont(ofSize: 16)
+        }
         signupButton.backgroundColor = .systemBlue
         
         signupButton.translatesAutoresizingMaskIntoConstraints = false
@@ -151,14 +166,18 @@ class SignupViewController: UIViewController {
         ・記号  ! # $ % & * +  -  / : ; < = > ? @
         """
         infoLabel.numberOfLines = 0
-        infoLabel.font = UIFont.systemFont(ofSize: 14)
+        if UIDevice.current.userInterfaceIdiom == .pad {
+            infoLabel.font = UIFont.systemFont(ofSize: 24)
+        } else {
+            infoLabel.font = UIFont.systemFont(ofSize: 14)
+        }
         infoLabel.backgroundColor = .clear
         infoLabel.textAlignment = .left
         
         infoLabel.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(infoLabel)
         NSLayoutConstraint.activate([
-            infoLabel.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: 140),
+            infoLabel.centerYAnchor.constraint(equalTo: signupButton.centerYAnchor, constant: 140),
             infoLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             infoLabel.widthAnchor.constraint(equalToConstant: 280),
             infoLabel.heightAnchor.constraint(equalToConstant: 200)

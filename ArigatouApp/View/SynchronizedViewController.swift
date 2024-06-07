@@ -30,7 +30,11 @@ class SynchronizedViewController: UIViewController {
     
     func initInformationLabel(){
         informationLabel = UILabel()
-        informationLabel.font = .boldSystemFont(ofSize: 16)
+        if UIDevice.current.userInterfaceIdiom == .pad {
+            informationLabel.font = .boldSystemFont(ofSize: 26)
+        } else {
+            informationLabel.font = .boldSystemFont(ofSize: 16)
+        }
         informationLabel.backgroundColor = UIColor.clear
         informationLabel.textColor = .white
         informationLabel.textAlignment = .center
@@ -48,7 +52,11 @@ class SynchronizedViewController: UIViewController {
     func initSynchronizedButton(){
         synchronizedButton = UIButton()
         synchronizedButton.setTitle("同期", for:UIControl.State.normal)
-        synchronizedButton.titleLabel?.font =  UIFont.systemFont(ofSize: 16)
+        if UIDevice.current.userInterfaceIdiom == .pad {
+            synchronizedButton.titleLabel?.font =  UIFont.systemFont(ofSize: 26)
+        } else {
+            synchronizedButton.titleLabel?.font =  UIFont.systemFont(ofSize: 16)
+        }
         synchronizedButton.backgroundColor = .systemBlue
         
         synchronizedButton.translatesAutoresizingMaskIntoConstraints = false
@@ -71,7 +79,11 @@ class SynchronizedViewController: UIViewController {
     
     func initDescriptionLabel() {
         descriptionLabel = UILabel()
-        descriptionLabel.font = .boldSystemFont(ofSize: 16)
+        if UIDevice.current.userInterfaceIdiom == .pad {
+            descriptionLabel.font = .boldSystemFont(ofSize: 26)
+        } else {
+            descriptionLabel.font = .boldSystemFont(ofSize: 16)
+        }
         descriptionLabel.backgroundColor = UIColor.clear
         descriptionLabel.textColor = .white
         descriptionLabel.textAlignment = .center
@@ -83,7 +95,7 @@ class SynchronizedViewController: UIViewController {
             descriptionLabel.centerYAnchor.constraint(equalTo: synchronizedButton.centerYAnchor, constant: 60),
             descriptionLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
         ])
-        descriptionLabel.text = "※同期すると端末とサーバのいずれか\n多い方のカウントで更新されます"
+        descriptionLabel.text = "※同期すると端末もしくはサーバ、\n多い方のカウントで更新されます"
     }
 }
 extension SynchronizedViewController: SynchronizedPresenterOutput {
