@@ -69,7 +69,7 @@ class CustomAlertViewController: UIViewController {
         // メッセージラベルを作成
         let messageLabel = UILabel()
         messageLabel.text = alertMessage
-        messageLabel.font = UIFont.boldSystemFont(ofSize: 28)
+        messageLabel.font = UIFont.boldSystemFont(ofSize: 22)
         messageLabel.numberOfLines = 0
         messageLabel.textAlignment = .center
         messageLabel.translatesAutoresizingMaskIntoConstraints = false
