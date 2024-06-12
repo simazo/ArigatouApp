@@ -12,6 +12,7 @@ protocol HomePresenterInput: AnyObject {
     func viewDidLoad()
     func viewWillAppear()
     func logout()
+    func deleteAccount()
 }
 
 protocol HomePresenterOutput: AnyObject {
@@ -26,6 +27,7 @@ protocol HomePresenterOutput: AnyObject {
     func showLoginMenu()
     func showPreLoginMenu()
     func showLogoutFailure(errorMessage: String)
+    func showDeleteAccountFailure(errorMessage: String)
 }
 
 class HomePresenter{
@@ -191,6 +193,7 @@ class HomePresenter{
 }
 
 extension HomePresenter: HomePresenterInput {
+
     func viewWillAppear() {
         // ログイン済みかどうかでナビメニュー変更
         AuthManager.shared.isLoggedIn { (isAuthenticated, uid) in
@@ -201,8 +204,7 @@ extension HomePresenter: HomePresenterInput {
             }
         }
     }
-    
-    
+
     func viewDidLoad() {
         let shouldShowEndScreen = UserDefaultsManager.shared.getCount() >= MAX_COUNT
         
@@ -285,5 +287,52 @@ extension HomePresenter: HomePresenterInput {
             }
         }
     }
+    
+    func deleteAccount() {
+        guard let user = Auth.auth().currentUser else {
+            self.view?.showDeleteAccountFailure(errorMessage: "ユーザーが見つかりません。")
+            return
+        }
+        
+        user.delete { [weak self] error in
+            guard let self = self else { return }
+            
+            // 退会成功
+            if error == nil {
+                self.view?.showPreLoginMenu()
+                return
+            }
+            
+            // 退会失敗
+            if let error = error as NSError? {
+                let errorMessage: String
+                
+                switch error.code {
+                case AuthErrorCode.networkError.rawValue:
+                    errorMessage = "ネットワークエラーが発生しました。接続を確認してください。"
+                case AuthErrorCode.userTokenExpired.rawValue:
+                    errorMessage = "認証トークンの期限が切れています。再ログインしてください。"
+                case AuthErrorCode.userNotFound.rawValue:
+                    errorMessage = "ユーザーが見つかりません。"
+                case AuthErrorCode.invalidUserToken.rawValue:
+                    errorMessage = "無効なユーザートークンです。"
+                case AuthErrorCode.invalidCredential.rawValue:
+                    errorMessage = "提供された認証情報が不正か期限切れです。"
+                case AuthErrorCode.requiresRecentLogin.rawValue:
+                    errorMessage = "再認証が必要です。再度ログインしてからもう一度お試しください。"
+                case AuthErrorCode.userDisabled.rawValue:
+                    errorMessage = "このアカウントは無効化されています。"
+                case AuthErrorCode.tooManyRequests.rawValue:
+                    errorMessage = "リクエストが多すぎます。後でもう一度お試しください。"
+                default:
+                    errorMessage = error.localizedDescription
+                }
+                self.view?.showDeleteAccountFailure(errorMessage: errorMessage)
+            } else {
+                self.view?.showDeleteAccountFailure(errorMessage: "退会エラー")
+            }
+        }
+    }
+    
 }
 

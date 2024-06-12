@@ -92,7 +92,7 @@ class HomeViewController: UIViewController {
         
         NSLayoutConstraint.activate([
             naviMenutableViewForPerson.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.4),
-            naviMenutableViewForPerson.heightAnchor.constraint(equalToConstant: 200),
+            naviMenutableViewForPerson.heightAnchor.constraint(equalToConstant: 240),
             naviMenutableViewForPerson.topAnchor.constraint(equalTo: view.topAnchor),
             naviMenutableViewForPerson.trailingAnchor.constraint(equalTo: view.trailingAnchor)
         ])
@@ -272,6 +272,8 @@ extension HomeViewController: NaviMenuTableViewDelegate{
             self.navigationController?.pushViewController(SignupViewController(), animated: true)
         case "ログアウト":
             showLogoutAlert()
+        case "退会":
+            showDeleteAccountAlert()
         case "同期":
             self.navigationController?.pushViewController(SynchronizedViewController(), animated: true)
         case let x where x.contains("回目の動画"):
@@ -280,11 +282,26 @@ extension HomeViewController: NaviMenuTableViewDelegate{
             break
         }
     }
+    
     private func showLogoutAlert() {
         let alertController = UIAlertController(title: "ログアウト", message: "ログアウトしますか？", preferredStyle: .alert)
         
         let okAction = UIAlertAction(title: "ログアウト", style: .default) { (_) in
             self.presenter.logout()
+        }
+        alertController.addAction(okAction)
+    
+        let cancelAction = UIAlertAction(title: "キャンセル", style: .cancel, handler: nil)
+        alertController.addAction(cancelAction)
+        
+        present(alertController, animated: true, completion: nil)
+    }
+    
+    private func showDeleteAccountAlert() {
+        let alertController = UIAlertController(title: "退会しますか？", message: "退会するとカウント数はクラウドに保存できなくなりますが、アプリはそのままご利用いただけます。", preferredStyle: .alert)
+        
+        let okAction = UIAlertAction(title: "退会する", style: .default) { (_) in
+            self.presenter.deleteAccount()
         }
         alertController.addAction(okAction)
     
@@ -301,7 +318,7 @@ extension HomeViewController: HomePresenterOutput{
         } else {
             navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "person.fill"), style: .plain, target: self, action: #selector(personButtonTapped))
         }
-        naviMenutableViewForPerson.items = ["同期", "ログアウト"]
+        naviMenutableViewForPerson.items = ["同期", "ログアウト", "退会"]
     }
     
     func showPreLoginMenu() {
@@ -316,6 +333,12 @@ extension HomeViewController: HomePresenterOutput{
     func showLogoutFailure(errorMessage: String) {
         DispatchQueue.main.async {
             self.showAlert(title: "ログアウトエラー", message: errorMessage)
+        }
+    }
+    
+    func showDeleteAccountFailure(errorMessage: String) {
+        DispatchQueue.main.async {
+            self.showAlert(title: "退会エラー", message: errorMessage)
         }
     }
     
