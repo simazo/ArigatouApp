@@ -521,8 +521,9 @@
 				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = P4V2PFCQ2W;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = ArigatouApp/Info.plist;
-				INFOPLIST_KEY_NSMicrophoneUsageDescription = "";
-				INFOPLIST_KEY_NSSpeechRecognitionUsageDescription = "";
+				INFOPLIST_KEY_CFBundleDisplayName = "ありがとう100万回";
+				INFOPLIST_KEY_NSMicrophoneUsageDescription = "音声データは匿名化され、個人情報は含まず、保存されることもありません。";
+				INFOPLIST_KEY_NSSpeechRecognitionUsageDescription = "音声データは匿名化され、個人情報は含まず、保存されることもありません。";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
@@ -556,8 +557,9 @@
 				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = P4V2PFCQ2W;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = ArigatouApp/Info.plist;
-				INFOPLIST_KEY_NSMicrophoneUsageDescription = "";
-				INFOPLIST_KEY_NSSpeechRecognitionUsageDescription = "";
+				INFOPLIST_KEY_CFBundleDisplayName = "ありがとう100万回";
+				INFOPLIST_KEY_NSMicrophoneUsageDescription = "音声データは匿名化され、個人情報は含まず、保存されることもありません。";
+				INFOPLIST_KEY_NSSpeechRecognitionUsageDescription = "音声データは匿名化され、個人情報は含まず、保存されることもありません。";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";

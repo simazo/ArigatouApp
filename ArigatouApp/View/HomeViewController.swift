@@ -378,7 +378,14 @@ extension HomeViewController: HomePresenterOutput{
     }
     
     func showDeniedSpeechAuthorizeAlert(){
-        let alert = UIAlertController(title: "ありがとう100万回", message: "開始するにはマイクと音声認識へのアクセスを許可してください。", preferredStyle: .alert)
+        let alert = UIAlertController(title: "ありがとう100万回", message: """
+                                      開始するにはマイクと音声認識へのアクセスを許可してください。
+                                      
+                                      このアプリは音声認識を使用して、音声をリアルタイムで処理します。
+                                      
+                                      音声データはリクエストの処理と音声認識技術の向上のためにAppleに送信されますが、音声データは匿名化され、個人情報は含まず、保存されることもありません。
+                                      """,
+                                      preferredStyle: .alert)
         let cancel = UIAlertAction(title: "キャンセル", style: .default)
         alert.addAction(cancel)
         
