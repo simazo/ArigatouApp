@@ -19,5 +19,9 @@
 			</array>
 		</dict>
 	</dict>
+	<key>NSMicrophoneUsageDescription</key>
+    <string>マイクの使用許可を求めています。カスタムメッセージを入力してください。</string>
+    <key>NSSpeechRecognitionUsageDescription</key>
+    <string>音声認識の使用許可を求めています。カスタムメッセージを入力してください。</string>
 </dict>
 </plist>
