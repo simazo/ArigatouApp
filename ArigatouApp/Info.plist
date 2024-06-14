@@ -20,8 +20,8 @@
 		</dict>
 	</dict>
 	<key>NSMicrophoneUsageDescription</key>
-    <string>マイクの使用許可を求めています。カスタムメッセージを入力してください。</string>
-    <key>NSSpeechRecognitionUsageDescription</key>
-    <string>音声認識の使用許可を求めています。カスタムメッセージを入力してください。</string>
+	<string>音声データは匿名化され、個人情報は含まず、保存されることもありません。</string>
+	<key>NSSpeechRecognitionUsageDescription</key>
+	<string>音声データは匿名化され、個人情報は含まず、保存されることもありません。</string>
 </dict>
 </plist>
