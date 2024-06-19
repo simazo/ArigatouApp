@@ -19,9 +19,5 @@
 			</array>
 		</dict>
 	</dict>
-	<key>NSMicrophoneUsageDescription</key>
-	<string>音声データは匿名化され、個人情報は含まず、保存されることもありません。</string>
-	<key>NSSpeechRecognitionUsageDescription</key>
-	<string>音声データは匿名化され、個人情報は含まず、保存されることもありません。</string>
 </dict>
 </plist>
