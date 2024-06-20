@@ -516,7 +516,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development: futoshi tanaka (HJ4P3RH3ZB)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "Apple Development: futoshi tanaka (HJ4P3RH3ZB)";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = P4V2PFCQ2W;
 				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = P4V2PFCQ2W;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -552,7 +552,7 @@
 				CODE_SIGN_IDENTITY = "Apple Distribution: futoshi tanaka (P4V2PFCQ2W)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "Apple Distribution: futoshi tanaka (P4V2PFCQ2W)";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = P4V2PFCQ2W;
 				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = P4V2PFCQ2W;
 				GENERATE_INFOPLIST_FILE = YES;
