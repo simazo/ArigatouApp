@@ -38,7 +38,12 @@ class NaviMenuTableView: UITableView, UITableViewDataSource, UITableViewDelegate
         cell.textLabel?.text = items[indexPath.row]
         
         // フォントサイズを調整する
-        cell.textLabel?.font = UIFont.systemFont(ofSize: 13)
+        if UIDevice.current.userInterfaceIdiom == .pad {
+            cell.textLabel?.font = UIFont.systemFont(ofSize: 24)
+        } else {
+            cell.textLabel?.font = UIFont.systemFont(ofSize: 13)
+        }
+        
             
         return cell
     }
