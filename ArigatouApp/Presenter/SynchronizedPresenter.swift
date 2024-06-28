@@ -13,7 +13,7 @@ protocol SynchronizedPresenterInput: AnyObject {
 }
 
 protocol SynchronizedPresenterOutput: AnyObject {
-    func redrawInformationLabel(matchCount: MatchCount)
+    func redrawInformationLabel(localCount: Int, serverCount: Int, lastUpdateAt: Double)
     func showFindDataFailed(errorMessage: String)
     func showSynchronizedSuccess()
     func showSynchronizedFailed(errorMessage: String)
@@ -36,7 +36,11 @@ extension SynchronizedPresenter: SynchronizedPresenterInput {
                     switch result {
                     case .success(let matchCount):
                         self.uid = uid!
-                        self.view?.redrawInformationLabel(matchCount: matchCount)
+                        self.view?.redrawInformationLabel(
+                            localCount: UserDefaultsManager.shared.getCount(),
+                            serverCount: matchCount.count,
+                            lastUpdateAt: matchCount.updateAt
+                        )
                     case .failure(let error):
                         print(error.localizedDescription)
                         self.view?.showFindDataFailed(errorMessage: error.localizedDescription)
