@@ -31,6 +31,14 @@
 		CCA1F9EF2C059D74008DCF70 /* MatchCount.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCA1F9EE2C059D74008DCF70 /* MatchCount.swift */; };
 		CCA1F9F12C06BE75008DCF70 /* videos.json in Resources */ = {isa = PBXBuildFile; fileRef = CCA1F9F02C06BE75008DCF70 /* videos.json */; };
 		CCA1F9F22C06BE75008DCF70 /* videos.json in Resources */ = {isa = PBXBuildFile; fileRef = CCA1F9F02C06BE75008DCF70 /* videos.json */; };
+		CCA600C42C2CBA0A00C72A85 /* CountContextTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCA600C32C2CBA0A00C72A85 /* CountContextTests.swift */; };
+		CCA600C62C2E93EF00C72A85 /* CountStrategy.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCA600C52C2E93EF00C72A85 /* CountStrategy.swift */; };
+		CCA600C82C2E941E00C72A85 /* TotalCountStrategy.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCA600C72C2E941E00C72A85 /* TotalCountStrategy.swift */; };
+		CCA600CA2C2E95E200C72A85 /* UserDefaultsKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCA600C92C2E95E100C72A85 /* UserDefaultsKeys.swift */; };
+		CCA600CC2C2E9A9100C72A85 /* CountContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCA600CB2C2E9A9100C72A85 /* CountContext.swift */; };
+		CCA600CE2C2EA39600C72A85 /* DailyCountStrategy.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCA600CD2C2EA39600C72A85 /* DailyCountStrategy.swift */; };
+		CCA600D02C2EA7F100C72A85 /* WeeklyCountStrategy.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCA600CF2C2EA7F100C72A85 /* WeeklyCountStrategy.swift */; };
+		CCA600D22C2EA93700C72A85 /* MonthlyCountStrategy.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCA600D12C2EA93700C72A85 /* MonthlyCountStrategy.swift */; };
 		CCAA463B2BEC99AA00FBF22D /* Develop_Provisioning_Profile.mobileprovision in Resources */ = {isa = PBXBuildFile; fileRef = CCAA463A2BEC99AA00FBF22D /* Develop_Provisioning_Profile.mobileprovision */; };
 		CCAA463C2BEC99AA00FBF22D /* Develop_Provisioning_Profile.mobileprovision in Resources */ = {isa = PBXBuildFile; fileRef = CCAA463A2BEC99AA00FBF22D /* Develop_Provisioning_Profile.mobileprovision */; };
 		CCDEAD292BDB1CCE0096704A /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCDEAD282BDB1CCE0096704A /* LoginViewController.swift */; };
@@ -83,6 +91,14 @@
 		CCA1F9EC2C054BAB008DCF70 /* SynchronizedPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SynchronizedPresenter.swift; sourceTree = "<group>"; };
 		CCA1F9EE2C059D74008DCF70 /* MatchCount.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchCount.swift; sourceTree = "<group>"; };
 		CCA1F9F02C06BE75008DCF70 /* videos.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = videos.json; sourceTree = "<group>"; };
+		CCA600C32C2CBA0A00C72A85 /* CountContextTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountContextTests.swift; sourceTree = "<group>"; };
+		CCA600C52C2E93EF00C72A85 /* CountStrategy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountStrategy.swift; sourceTree = "<group>"; };
+		CCA600C72C2E941E00C72A85 /* TotalCountStrategy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TotalCountStrategy.swift; sourceTree = "<group>"; };
+		CCA600C92C2E95E100C72A85 /* UserDefaultsKeys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsKeys.swift; sourceTree = "<group>"; };
+		CCA600CB2C2E9A9100C72A85 /* CountContext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountContext.swift; sourceTree = "<group>"; };
+		CCA600CD2C2EA39600C72A85 /* DailyCountStrategy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyCountStrategy.swift; sourceTree = "<group>"; };
+		CCA600CF2C2EA7F100C72A85 /* WeeklyCountStrategy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeeklyCountStrategy.swift; sourceTree = "<group>"; };
+		CCA600D12C2EA93700C72A85 /* MonthlyCountStrategy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonthlyCountStrategy.swift; sourceTree = "<group>"; };
 		CCAA463A2BEC99AA00FBF22D /* Develop_Provisioning_Profile.mobileprovision */ = {isa = PBXFileReference; lastKnownFileType = file; path = Develop_Provisioning_Profile.mobileprovision; sourceTree = "<group>"; };
 		CCDEAD282BDB1CCE0096704A /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		CCDEADCD2BE224ED0096704A /* AppStore_ProvisioningProfile.mobileprovision */ = {isa = PBXFileReference; lastKnownFileType = file; path = AppStore_ProvisioningProfile.mobileprovision; sourceTree = "<group>"; };
@@ -130,6 +146,13 @@
 				CCFB7DD62BF17A8300C4617A /* VideoList.swift */,
 				CCFB7E132BF18D6F00C4617A /* NetworkManager.swift */,
 				CC209D2B2BD47EED0069E2E4 /* UserDefaultsManager.swift */,
+				CCA600C52C2E93EF00C72A85 /* CountStrategy.swift */,
+				CCA600CB2C2E9A9100C72A85 /* CountContext.swift */,
+				CCA600C92C2E95E100C72A85 /* UserDefaultsKeys.swift */,
+				CCA600C72C2E941E00C72A85 /* TotalCountStrategy.swift */,
+				CCA600CD2C2EA39600C72A85 /* DailyCountStrategy.swift */,
+				CCA600CF2C2EA7F100C72A85 /* WeeklyCountStrategy.swift */,
+				CCA600D12C2EA93700C72A85 /* MonthlyCountStrategy.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -211,6 +234,7 @@
 			isa = PBXGroup;
 			children = (
 				CC55BFF62BCE9C2D003C3E15 /* HomePresenterTests.swift */,
+				CCA600C32C2CBA0A00C72A85 /* CountContextTests.swift */,
 			);
 			path = ArigatouAppTests;
 			sourceTree = "<group>";
@@ -333,9 +357,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CCA600CC2C2E9A9100C72A85 /* CountContext.swift in Sources */,
 				CCA1F9ED2C054BAB008DCF70 /* SynchronizedPresenter.swift in Sources */,
+				CCA600D02C2EA7F100C72A85 /* WeeklyCountStrategy.swift in Sources */,
 				CCA1F9E42C016AC6008DCF70 /* RealtimeDBMatchCountRepository.swift in Sources */,
+				CCA600D22C2EA93700C72A85 /* MonthlyCountStrategy.swift in Sources */,
+				CCA600CA2C2E95E200C72A85 /* UserDefaultsKeys.swift in Sources */,
+				CCA600C62C2E93EF00C72A85 /* CountStrategy.swift in Sources */,
 				CCFB7DD72BF17A8300C4617A /* VideoList.swift in Sources */,
+				CCA600CE2C2EA39600C72A85 /* DailyCountStrategy.swift in Sources */,
 				CC55BF652BC90301003C3E15 /* HomePresenter.swift in Sources */,
 				CCA1F9E02C006731008DCF70 /* SignupViewController.swift in Sources */,
 				CCA1F9EB2C0548E4008DCF70 /* SynchronizedViewController.swift in Sources */,
@@ -349,6 +379,7 @@
 				CCA1F9DE2C0046BA008DCF70 /* ValidationPresenter.swift in Sources */,
 				CCDEAE172BE6BD350096704A /* Validator.swift in Sources */,
 				CCDEADF32BE44A160096704A /* MicImageView.swift in Sources */,
+				CCA600C82C2E941E00C72A85 /* TotalCountStrategy.swift in Sources */,
 				CC55BF502BC9028D003C3E15 /* AppDelegate.swift in Sources */,
 				CCDEAE192BE6BE330096704A /* LoginPresenter.swift in Sources */,
 				CC209D2A2BD47ED20069E2E4 /* MatchCountRepository.swift in Sources */,
@@ -363,6 +394,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CCA600C42C2CBA0A00C72A85 /* CountContextTests.swift in Sources */,
 				CC55BFF72BCE9C2D003C3E15 /* HomePresenterTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

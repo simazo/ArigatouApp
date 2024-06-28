@@ -9,6 +9,9 @@ import XCTest
 @testable import ArigatouApp
 
 class MockPresenterOutput: HomePresenterOutput {
+    func showDeleteAccountFailure(errorMessage: String) {
+    }
+    
     func showLoginMenu() {
     }
     
