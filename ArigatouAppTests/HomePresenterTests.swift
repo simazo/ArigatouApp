@@ -64,16 +64,20 @@ class HomePresenterTests: XCTestCase {
     
     var presenter: MockHomePresenter!
     var mockView: MockPresenterOutput!
-
+    var testUserDefaults: UserDefaults!
+    let factory = CounterFactory()
+    
     override func setUp() {
         super.setUp()
         mockView = MockPresenterOutput()
         presenter = MockHomePresenter(view: mockView)
+        testUserDefaults = UserDefaults(suiteName: "testSuite")
     }
     
     override func tearDown() {
         presenter = nil
         mockView = nil
+        testUserDefaults.removePersistentDomain(forName: "testSuite")
         super.tearDown()
     }
     
@@ -116,8 +120,8 @@ class HomePresenterTests: XCTestCase {
     
     // カウント数が最大まで達していない場合は、開始用の画面になる事を確認
     func testMaxCountNotReached() {
-        
-        UserDefaultsManager.shared.setCount(100)
+        let totalCounter = factory.create(type: .total)
+        totalCounter.setCount(100)
         
         // viewDidLoad() を呼び出す
         presenter.viewDidLoad()
@@ -128,8 +132,9 @@ class HomePresenterTests: XCTestCase {
     
     // カウント数が最大まで達した場合は、終了用の画面になる事を確認
     func testMaxCountReached() {
-        UserDefaultsManager.shared.setCount(1000000)
-         
+        let totalCounter = factory.create(type: .total)
+        totalCounter.setCount(1000000)
+        
         // viewDidLoad() を呼び出す
         presenter.viewDidLoad()
         
@@ -139,9 +144,11 @@ class HomePresenterTests: XCTestCase {
     
     // カウント数が一定数まで達した場合、動画再生することを確認
     func testPlayVideoReached() {
-        UserDefaultsManager.shared.setCount(100)
         
-        guard let videoURL = VideoList.shared.getUrlByCount(UserDefaultsManager.shared.getCount()) else {
+        let totalCounter = factory.create(type: .total)
+        totalCounter.setCount(100)
+        
+        guard let videoURL = VideoList.shared.getUrlByCount(totalCounter.getCount()) else {
             return
         }
         // playVideo() を呼び出す
@@ -153,9 +160,10 @@ class HomePresenterTests: XCTestCase {
     
     // カウント数が一定数まで達しない場合は、動画再生しないことを確認
     func testPlayVideoNotReached() {
-        UserDefaultsManager.shared.setCount(99)
+        let totalCounter = factory.create(type: .total)
+        totalCounter.setCount(99)
         
-        guard let videoURL = VideoList.shared.getUrlByCount(UserDefaultsManager.shared.getCount()) else {
+        guard let videoURL = VideoList.shared.getUrlByCount(totalCounter.getCount()) else {
             return
         }
         
@@ -165,5 +173,4 @@ class HomePresenterTests: XCTestCase {
         // 動画再生用のビューが呼ばれていないことを確認
         XCTAssertFalse(mockView.videoShown)
     }
-    
 }

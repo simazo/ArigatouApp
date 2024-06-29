@@ -41,8 +41,27 @@ class HomePresenter{
     private let MAX_COUNT = 1000000
     private var previousTranscription = ""
     
+    private let dateManager = DateManager.shared
+    private let factory = CounterFactory()
+    private var totalCounter: Counter!
+    private var dailyCounter: Counter!
+    private var weelyCounter: Counter!
+    private var monthlyCounter: Counter!
+    
     init(view: HomePresenterOutput) {
         self.view = view
+        
+        totalCounter = factory.create(type: .total)
+        dailyCounter = factory.create(type: .daily)
+        weelyCounter = factory.create(type: .weekly)
+        monthlyCounter = factory.create(type: .monthly)
+    }
+    
+    private func incrementCount() {
+        totalCounter.incrementCount()
+        dailyCounter.incrementCount(for: dateManager.currentDateString())
+        weelyCounter.incrementCount(for: dateManager.currentWeekString())
+        monthlyCounter.incrementCount(for: dateManager.currentMonthString())
     }
     
     /// マイク使用許可の確認
@@ -100,10 +119,10 @@ class HomePresenter{
                 if let _ = filteredTranscription.range(of: MATCH_WORD, options: .regularExpression) {
 
                     // カウントアップ
-                    UserDefaultsManager.shared.incrementCount()
+                    self.incrementCount()
 
                     // 動画再生
-                    playVideoIfMatchCountReached(UserDefaultsManager.shared.getCount())
+                    playVideoIfMatchCountReached(totalCounter.getCount())
                     
                     // ラベル再描画
                     self.view?.redrawRemainingLabel(text: "「ありがとう100万回」\n\n達成まで\n\nあと\(self.formatRemainingCount())回")
@@ -169,11 +188,11 @@ class HomePresenter{
     }
     
     private func formatRemainingCount() -> String {
-        return String.localizedStringWithFormat("%d", 1000000 - UserDefaultsManager.shared.getCount())
+        return String.localizedStringWithFormat("%d", 1000000 - totalCounter.getCount())
     }
     
     private func formatTotalCount() -> String {
-        return String.localizedStringWithFormat("%d", UserDefaultsManager.shared.getCount())
+        return String.localizedStringWithFormat("%d", totalCounter.getCount())
     }
     
     private func playVideoIfMatchCountReached(_ match_count: Int) {
@@ -206,7 +225,7 @@ extension HomePresenter: HomePresenterInput {
     }
 
     func viewDidLoad() {
-        let shouldShowEndScreen = UserDefaultsManager.shared.getCount() >= MAX_COUNT
+        let shouldShowEndScreen = totalCounter.getCount() >= MAX_COUNT
         
         // 100万回達していれば
         if shouldShowEndScreen {
@@ -222,7 +241,7 @@ extension HomePresenter: HomePresenterInput {
         }
         
         // 動画の再生リスト表示
-        view?.showPlayVideoListMenu(menus: VideoList.shared.getMatchMenus(matchCount: UserDefaultsManager.shared.getCount()))
+        view?.showPlayVideoListMenu(menus: VideoList.shared.getMatchMenus(matchCount: totalCounter.getCount()))
     }
     
     func handleAuthorizationStatus() {

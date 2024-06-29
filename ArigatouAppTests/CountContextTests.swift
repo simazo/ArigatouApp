@@ -10,77 +10,74 @@ import XCTest
 
 final class CountContextTests: XCTestCase {
 
-    var userDefaults: UserDefaults!
+    var testUserDefaults: UserDefaults!
+    let factory = CounterFactory()
     
     override func setUp() {
         super.setUp()
-        userDefaults = UserDefaults(suiteName: "testSuite")
+        testUserDefaults = UserDefaults(suiteName: "testSuite")
     }
     
     override func tearDown() {
-        userDefaults.removePersistentDomain(forName: "testSuite")
+        testUserDefaults.removePersistentDomain(forName: "testSuite")
         super.tearDown()
     }
 
-    func testTotalCountStrategy() {
-        let strategy = TotalCountStrategy(defaults: userDefaults)
-        let context = CountContext(strategy: strategy)
-        
-        context.setCount(for: UserDefaultsKeys.TOTAL_COUNT, count: 10)
-        XCTAssertEqual(context.getCount(for: UserDefaultsKeys.TOTAL_COUNT), 10)
+    func testTotalCounter() {
+        let totalCounter = factory.create(type: .total)
 
-        context.incrementCount(for: UserDefaultsKeys.TOTAL_COUNT)
-        XCTAssertEqual(context.getCount(for: UserDefaultsKeys.TOTAL_COUNT), 11)
-    }
-    
-    func testDailyCountStrategy() {
-        let strategy = DailyCountStrategy(defaults: userDefaults)
-        let context = CountContext(strategy: strategy)
-        
-        context.setCount(for: "2023-10-01", count: 100)
-        XCTAssertEqual(context.getCount(for: "2023-10-01"), 100)
-        
-        context.setCount(for: "2023-10-02", count: 200)
-        XCTAssertEqual(context.getCount(for: "2023-10-02"), 200)
+        totalCounter.setCount(10)
+        XCTAssertEqual(totalCounter.getCount(), 10)
 
-        context.incrementCount(for: "2023-10-01")
-        XCTAssertEqual(context.getCount(for: "2023-10-01"), 101)
-        
-        context.incrementCount(for: "2023-10-02")
-        XCTAssertEqual(context.getCount(for: "2023-10-02"), 201)
+        totalCounter.incrementCount()
+        XCTAssertEqual(totalCounter.getCount(), 11)
     }
     
-    func testWeeklyCountStrategy() {
-        let strategy = WeeklyCountStrategy(defaults: userDefaults)
-        let context = CountContext(strategy: strategy)
+    func testDailyCounter() {
+        let dailyCounter = factory.create(type: .daily)
         
-        context.setCount(for: "2023-W30", count: 100)
-        XCTAssertEqual(context.getCount(for: "2023-W30"), 100)
+        dailyCounter.setCount(for: "2023-10-01", count: 100)
+        XCTAssertEqual(dailyCounter.getCount(for: "2023-10-01"), 100)
         
-        context.setCount(for: "2023-W31", count: 200)
-        XCTAssertEqual(context.getCount(for: "2023-W31"), 200)
+        dailyCounter.setCount(for: "2023-10-02", count: 200)
+        XCTAssertEqual(dailyCounter.getCount(for: "2023-10-02"), 200)
+
+        dailyCounter.incrementCount(for: "2023-10-01")
+        XCTAssertEqual(dailyCounter.getCount(for: "2023-10-01"), 101)
         
-        context.incrementCount(for: "2023-W30")
-        XCTAssertEqual(context.getCount(for: "2023-W30"), 101)
-        
-        context.incrementCount(for: "2023-W31")
-        XCTAssertEqual(context.getCount(for: "2023-W31"), 201)
+        dailyCounter.incrementCount(for: "2023-10-02")
+        XCTAssertEqual(dailyCounter.getCount(for: "2023-10-02"), 201)
     }
     
-    func testMonthlyCountStrategy() {
-        let strategy = MonthlyCountStrategy(defaults: userDefaults)
-        let context = CountContext(strategy: strategy)
+    func testWeeklyCounter() {
+        let weeklyCounter = factory.create(type: .weekly)
         
-        context.setCount(for: "2023-01", count: 1000)
-        XCTAssertEqual(context.getCount(for: "2023-01"), 1000)
+        weeklyCounter.setCount(for: "2023-W30", count: 100)
+        XCTAssertEqual(weeklyCounter.getCount(for: "2023-W30"), 100)
         
-        context.setCount(for: "2023-12", count: 2000)
-        XCTAssertEqual(context.getCount(for: "2023-12"), 2000)
+        weeklyCounter.setCount(for: "2023-W31", count: 200)
+        XCTAssertEqual(weeklyCounter.getCount(for: "2023-W31"), 200)
         
-        context.incrementCount(for: "2023-01")
-        XCTAssertEqual(context.getCount(for: "2023-01"), 1001)
+        weeklyCounter.incrementCount(for: "2023-W30")
+        XCTAssertEqual(weeklyCounter.getCount(for: "2023-W30"), 101)
         
-        context.incrementCount(for: "2023-12")
-        XCTAssertEqual(context.getCount(for: "2023-12"), 2001)
+        weeklyCounter.incrementCount(for: "2023-W31")
+        XCTAssertEqual(weeklyCounter.getCount(for: "2023-W31"), 201)
+    }
+    
+    func testMonthlyCounter() {
+        let monthlyCounter = factory.create(type: .monthly)
+        
+        monthlyCounter.setCount(for: "2023-01", count: 1000)
+        XCTAssertEqual(monthlyCounter.getCount(for: "2023-01"), 1000)
+        
+        monthlyCounter.setCount(for: "2023-12", count: 2000)
+        XCTAssertEqual(monthlyCounter.getCount(for: "2023-12"), 2000)
+        
+        monthlyCounter.incrementCount(for: "2023-01")
+        XCTAssertEqual(monthlyCounter.getCount(for: "2023-01"), 1001)
+        
+        monthlyCounter.incrementCount(for: "2023-12")
+        XCTAssertEqual(monthlyCounter.getCount(for: "2023-12"), 2001)
     }
 }
