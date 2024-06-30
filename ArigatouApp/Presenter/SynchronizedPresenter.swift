@@ -13,7 +13,7 @@ protocol SynchronizedPresenterInput: AnyObject {
 }
 
 protocol SynchronizedPresenterOutput: AnyObject {
-    func redrawInformationLabel(matchCount: MatchCount)
+    func redrawInformationLabel(localCount: Int, serverCount: Int, lastUpdateAt: Double)
     func showFindDataFailed(errorMessage: String)
     func showSynchronizedSuccess()
     func showSynchronizedFailed(errorMessage: String)
@@ -23,20 +23,36 @@ class SynchronizedPresenter {
     private weak var view: SynchronizedPresenterOutput?
     private var uid = ""
     
+    private let dateManager = DateManager.shared
+    private let factory = CounterFactory()
+    private var totalCounter: Counter!
+    private var dailyCounter: Counter!
+    private var weeklyCounter: Counter!
+    private var monthlyCounter: Counter!
+    
     init(view: SynchronizedPresenterOutput) {
         self.view = view
+        
+        totalCounter = factory.create(type: .total)
+        dailyCounter = factory.create(type: .daily)
+        weeklyCounter = factory.create(type: .weekly)
+        monthlyCounter = factory.create(type: .monthly)
     }
 }
 extension SynchronizedPresenter: SynchronizedPresenterInput {
     func viewWillAppear() {
         AuthManager.shared.isLoggedIn { (isAuthenticated, uid) in
             if isAuthenticated {
-                let matchCountManger = MatchCountManager(RealtimeDBMatchCountRepository())
-                matchCountManger.findByUid(uid: uid!) { result in
+                let countManger = CountManager(RealtimeDBCountRepository())
+                countManger.findByUid(uid: uid!) { result in
                     switch result {
-                    case .success(let matchCount):
+                    case .success(let count):
                         self.uid = uid!
-                        self.view?.redrawInformationLabel(matchCount: matchCount)
+                        self.view?.redrawInformationLabel(
+                            localCount: self.totalCounter.getCount(),
+                            serverCount: count.totalCount,
+                            lastUpdateAt: count.updateAt
+                        )
                     case .failure(let error):
                         print(error.localizedDescription)
                         self.view?.showFindDataFailed(errorMessage: error.localizedDescription)
@@ -47,14 +63,17 @@ extension SynchronizedPresenter: SynchronizedPresenterInput {
     }
     
     func synchronize() {
-        let userMatchCount = MatchCount(
+        let count = Count(
             uid: self.uid,
-            count: UserDefaultsManager.shared.getCount(),
+            totalCount: self.totalCounter.getCount(),
+            dailyCount: self.dailyCounter.getAllCounts(),
+            weeklyCount: self.weeklyCounter.getAllCounts(),
+            monthlyCount: self.monthlyCounter.getAllCounts(),
             updateAt: Date().timeIntervalSince1970
         )
-        let matchCountManger = MatchCountManager(RealtimeDBMatchCountRepository())
+        let countManger = CountManager(RealtimeDBCountRepository())
         
-        matchCountManger.create(userMatchCount){ success, error in
+        countManger.create(count){ success, error in
             if success {
                 self.view?.showSynchronizedSuccess()
             } else {

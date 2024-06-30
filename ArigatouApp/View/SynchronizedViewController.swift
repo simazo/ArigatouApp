@@ -112,12 +112,12 @@ extension SynchronizedViewController: SynchronizedPresenterOutput {
         }
     }
     
-    func redrawInformationLabel(matchCount: MatchCount) {
+    func redrawInformationLabel(localCount: Int, serverCount: Int, lastUpdateAt: Double) {
         DispatchQueue.main.async {
             self.informationLabel.text = """
-            端末のカウント：\(UserDefaultsManager.shared.getCount())
-            サーバのカウント：\(matchCount.count)
-            前回更新：\(self.dateFormat(matchCount.updateAt))
+            端末のカウント：\(localCount)
+            サーバのカウント：\(serverCount)
+            前回更新：\(self.dateFormat(lastUpdateAt))
             """
         }
     }

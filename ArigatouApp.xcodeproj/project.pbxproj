@@ -7,9 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		CC209D282BD47EB10069E2E4 /* MatchCountManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC209D272BD47EB10069E2E4 /* MatchCountManager.swift */; };
-		CC209D2A2BD47ED20069E2E4 /* MatchCountRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC209D292BD47ED20069E2E4 /* MatchCountRepository.swift */; };
-		CC209D2C2BD47EED0069E2E4 /* UserDefaultsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC209D2B2BD47EED0069E2E4 /* UserDefaultsManager.swift */; };
+		CC209D282BD47EB10069E2E4 /* CountManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC209D272BD47EB10069E2E4 /* CountManager.swift */; };
+		CC209D2A2BD47ED20069E2E4 /* CountRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC209D292BD47ED20069E2E4 /* CountRepository.swift */; };
 		CC55BF502BC9028D003C3E15 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC55BF4F2BC9028D003C3E15 /* AppDelegate.swift */; };
 		CC55BF522BC9028D003C3E15 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC55BF512BC9028D003C3E15 /* SceneDelegate.swift */; };
 		CC55BF542BC9028D003C3E15 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC55BF532BC9028D003C3E15 /* HomeViewController.swift */; };
@@ -23,14 +22,23 @@
 		CCA1F9DE2C0046BA008DCF70 /* ValidationPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCA1F9DD2C0046BA008DCF70 /* ValidationPresenter.swift */; };
 		CCA1F9E02C006731008DCF70 /* SignupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCA1F9DF2C006731008DCF70 /* SignupViewController.swift */; };
 		CCA1F9E22C016A4F008DCF70 /* FirebaseDatabase in Frameworks */ = {isa = PBXBuildFile; productRef = CCA1F9E12C016A4F008DCF70 /* FirebaseDatabase */; };
-		CCA1F9E42C016AC6008DCF70 /* RealtimeDBMatchCountRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCA1F9E32C016AC6008DCF70 /* RealtimeDBMatchCountRepository.swift */; };
+		CCA1F9E42C016AC6008DCF70 /* RealtimeDBCountRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCA1F9E32C016AC6008DCF70 /* RealtimeDBCountRepository.swift */; };
 		CCA1F9E82C04A831008DCF70 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = CCA1F9E72C04A831008DCF70 /* GoogleService-Info.plist */; };
 		CCA1F9E92C04A831008DCF70 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = CCA1F9E72C04A831008DCF70 /* GoogleService-Info.plist */; };
 		CCA1F9EB2C0548E4008DCF70 /* SynchronizedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCA1F9EA2C0548E4008DCF70 /* SynchronizedViewController.swift */; };
 		CCA1F9ED2C054BAB008DCF70 /* SynchronizedPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCA1F9EC2C054BAB008DCF70 /* SynchronizedPresenter.swift */; };
-		CCA1F9EF2C059D74008DCF70 /* MatchCount.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCA1F9EE2C059D74008DCF70 /* MatchCount.swift */; };
+		CCA1F9EF2C059D74008DCF70 /* Count.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCA1F9EE2C059D74008DCF70 /* Count.swift */; };
 		CCA1F9F12C06BE75008DCF70 /* videos.json in Resources */ = {isa = PBXBuildFile; fileRef = CCA1F9F02C06BE75008DCF70 /* videos.json */; };
 		CCA1F9F22C06BE75008DCF70 /* videos.json in Resources */ = {isa = PBXBuildFile; fileRef = CCA1F9F02C06BE75008DCF70 /* videos.json */; };
+		CCA600C42C2CBA0A00C72A85 /* CountContextTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCA600C32C2CBA0A00C72A85 /* CountContextTests.swift */; };
+		CCA600C62C2E93EF00C72A85 /* Counter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCA600C52C2E93EF00C72A85 /* Counter.swift */; };
+		CCA600C82C2E941E00C72A85 /* TotalCounter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCA600C72C2E941E00C72A85 /* TotalCounter.swift */; };
+		CCA600CA2C2E95E200C72A85 /* UserDefaultsKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCA600C92C2E95E100C72A85 /* UserDefaultsKeys.swift */; };
+		CCA600CE2C2EA39600C72A85 /* DailyCounter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCA600CD2C2EA39600C72A85 /* DailyCounter.swift */; };
+		CCA600D02C2EA7F100C72A85 /* WeeklyCounter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCA600CF2C2EA7F100C72A85 /* WeeklyCounter.swift */; };
+		CCA600D22C2EA93700C72A85 /* MonthlyCounter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCA600D12C2EA93700C72A85 /* MonthlyCounter.swift */; };
+		CCA600D42C2EE49600C72A85 /* DateManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCA600D32C2EE49600C72A85 /* DateManager.swift */; };
+		CCA600D62C2FA95600C72A85 /* CounterFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCA600D52C2FA95600C72A85 /* CounterFactory.swift */; };
 		CCAA463B2BEC99AA00FBF22D /* Develop_Provisioning_Profile.mobileprovision in Resources */ = {isa = PBXBuildFile; fileRef = CCAA463A2BEC99AA00FBF22D /* Develop_Provisioning_Profile.mobileprovision */; };
 		CCAA463C2BEC99AA00FBF22D /* Develop_Provisioning_Profile.mobileprovision in Resources */ = {isa = PBXBuildFile; fileRef = CCAA463A2BEC99AA00FBF22D /* Develop_Provisioning_Profile.mobileprovision */; };
 		CCDEAD292BDB1CCE0096704A /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCDEAD282BDB1CCE0096704A /* LoginViewController.swift */; };
@@ -59,9 +67,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		CC209D272BD47EB10069E2E4 /* MatchCountManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchCountManager.swift; sourceTree = "<group>"; };
-		CC209D292BD47ED20069E2E4 /* MatchCountRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchCountRepository.swift; sourceTree = "<group>"; };
-		CC209D2B2BD47EED0069E2E4 /* UserDefaultsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsManager.swift; sourceTree = "<group>"; };
+		CC209D272BD47EB10069E2E4 /* CountManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountManager.swift; sourceTree = "<group>"; };
+		CC209D292BD47ED20069E2E4 /* CountRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountRepository.swift; sourceTree = "<group>"; };
 		CC55BF4C2BC9028D003C3E15 /* ArigatouApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ArigatouApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CC55BF4F2BC9028D003C3E15 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CC55BF512BC9028D003C3E15 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -77,12 +84,21 @@
 		CCA1F9DB2C001165008DCF70 /* SignupPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupPresenter.swift; sourceTree = "<group>"; };
 		CCA1F9DD2C0046BA008DCF70 /* ValidationPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidationPresenter.swift; sourceTree = "<group>"; };
 		CCA1F9DF2C006731008DCF70 /* SignupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupViewController.swift; sourceTree = "<group>"; };
-		CCA1F9E32C016AC6008DCF70 /* RealtimeDBMatchCountRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealtimeDBMatchCountRepository.swift; sourceTree = "<group>"; };
+		CCA1F9E32C016AC6008DCF70 /* RealtimeDBCountRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealtimeDBCountRepository.swift; sourceTree = "<group>"; };
 		CCA1F9E72C04A831008DCF70 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		CCA1F9EA2C0548E4008DCF70 /* SynchronizedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SynchronizedViewController.swift; sourceTree = "<group>"; };
 		CCA1F9EC2C054BAB008DCF70 /* SynchronizedPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SynchronizedPresenter.swift; sourceTree = "<group>"; };
-		CCA1F9EE2C059D74008DCF70 /* MatchCount.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchCount.swift; sourceTree = "<group>"; };
+		CCA1F9EE2C059D74008DCF70 /* Count.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Count.swift; sourceTree = "<group>"; };
 		CCA1F9F02C06BE75008DCF70 /* videos.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = videos.json; sourceTree = "<group>"; };
+		CCA600C32C2CBA0A00C72A85 /* CountContextTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountContextTests.swift; sourceTree = "<group>"; };
+		CCA600C52C2E93EF00C72A85 /* Counter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Counter.swift; sourceTree = "<group>"; };
+		CCA600C72C2E941E00C72A85 /* TotalCounter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TotalCounter.swift; sourceTree = "<group>"; };
+		CCA600C92C2E95E100C72A85 /* UserDefaultsKeys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsKeys.swift; sourceTree = "<group>"; };
+		CCA600CD2C2EA39600C72A85 /* DailyCounter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyCounter.swift; sourceTree = "<group>"; };
+		CCA600CF2C2EA7F100C72A85 /* WeeklyCounter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeeklyCounter.swift; sourceTree = "<group>"; };
+		CCA600D12C2EA93700C72A85 /* MonthlyCounter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonthlyCounter.swift; sourceTree = "<group>"; };
+		CCA600D32C2EE49600C72A85 /* DateManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateManager.swift; sourceTree = "<group>"; };
+		CCA600D52C2FA95600C72A85 /* CounterFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CounterFactory.swift; sourceTree = "<group>"; };
 		CCAA463A2BEC99AA00FBF22D /* Develop_Provisioning_Profile.mobileprovision */ = {isa = PBXFileReference; lastKnownFileType = file; path = Develop_Provisioning_Profile.mobileprovision; sourceTree = "<group>"; };
 		CCDEAD282BDB1CCE0096704A /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		CCDEADCD2BE224ED0096704A /* AppStore_ProvisioningProfile.mobileprovision */ = {isa = PBXFileReference; lastKnownFileType = file; path = AppStore_ProvisioningProfile.mobileprovision; sourceTree = "<group>"; };
@@ -121,15 +137,22 @@
 		CC209D242BD47E5F0069E2E4 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				CCA1F9EE2C059D74008DCF70 /* MatchCount.swift */,
-				CC209D292BD47ED20069E2E4 /* MatchCountRepository.swift */,
-				CC209D272BD47EB10069E2E4 /* MatchCountManager.swift */,
-				CCA1F9E32C016AC6008DCF70 /* RealtimeDBMatchCountRepository.swift */,
-				CCDEAE162BE6BD350096704A /* Validator.swift */,
+				CCA1F9EE2C059D74008DCF70 /* Count.swift */,
+				CC209D292BD47ED20069E2E4 /* CountRepository.swift */,
+				CC209D272BD47EB10069E2E4 /* CountManager.swift */,
+				CCA1F9E32C016AC6008DCF70 /* RealtimeDBCountRepository.swift */,
 				CCFB7DD42BED9C1300C4617A /* AuthManager.swift */,
 				CCFB7DD62BF17A8300C4617A /* VideoList.swift */,
 				CCFB7E132BF18D6F00C4617A /* NetworkManager.swift */,
-				CC209D2B2BD47EED0069E2E4 /* UserDefaultsManager.swift */,
+				CCDEAE162BE6BD350096704A /* Validator.swift */,
+				CCA600C52C2E93EF00C72A85 /* Counter.swift */,
+				CCA600C92C2E95E100C72A85 /* UserDefaultsKeys.swift */,
+				CCA600C72C2E941E00C72A85 /* TotalCounter.swift */,
+				CCA600CD2C2EA39600C72A85 /* DailyCounter.swift */,
+				CCA600CF2C2EA7F100C72A85 /* WeeklyCounter.swift */,
+				CCA600D12C2EA93700C72A85 /* MonthlyCounter.swift */,
+				CCA600D52C2FA95600C72A85 /* CounterFactory.swift */,
+				CCA600D32C2EE49600C72A85 /* DateManager.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -211,6 +234,7 @@
 			isa = PBXGroup;
 			children = (
 				CC55BFF62BCE9C2D003C3E15 /* HomePresenterTests.swift */,
+				CCA600C32C2CBA0A00C72A85 /* CountContextTests.swift */,
 			);
 			path = ArigatouAppTests;
 			sourceTree = "<group>";
@@ -334,25 +358,32 @@
 			buildActionMask = 2147483647;
 			files = (
 				CCA1F9ED2C054BAB008DCF70 /* SynchronizedPresenter.swift in Sources */,
-				CCA1F9E42C016AC6008DCF70 /* RealtimeDBMatchCountRepository.swift in Sources */,
+				CCA600D02C2EA7F100C72A85 /* WeeklyCounter.swift in Sources */,
+				CCA1F9E42C016AC6008DCF70 /* RealtimeDBCountRepository.swift in Sources */,
+				CCA600D22C2EA93700C72A85 /* MonthlyCounter.swift in Sources */,
+				CCA600CA2C2E95E200C72A85 /* UserDefaultsKeys.swift in Sources */,
+				CCA600C62C2E93EF00C72A85 /* Counter.swift in Sources */,
 				CCFB7DD72BF17A8300C4617A /* VideoList.swift in Sources */,
+				CCA600CE2C2EA39600C72A85 /* DailyCounter.swift in Sources */,
 				CC55BF652BC90301003C3E15 /* HomePresenter.swift in Sources */,
 				CCA1F9E02C006731008DCF70 /* SignupViewController.swift in Sources */,
 				CCA1F9EB2C0548E4008DCF70 /* SynchronizedViewController.swift in Sources */,
-				CCA1F9EF2C059D74008DCF70 /* MatchCount.swift in Sources */,
+				CCA1F9EF2C059D74008DCF70 /* Count.swift in Sources */,
 				CCFB7E142BF18D6F00C4617A /* NetworkManager.swift in Sources */,
 				CCFB7E3C2BFB1AF600C4617A /* Alert.swift in Sources */,
 				CCFB7DD52BED9C1300C4617A /* AuthManager.swift in Sources */,
-				CC209D282BD47EB10069E2E4 /* MatchCountManager.swift in Sources */,
+				CC209D282BD47EB10069E2E4 /* CountManager.swift in Sources */,
 				CC55BF542BC9028D003C3E15 /* HomeViewController.swift in Sources */,
 				CCDEAD292BDB1CCE0096704A /* LoginViewController.swift in Sources */,
 				CCA1F9DE2C0046BA008DCF70 /* ValidationPresenter.swift in Sources */,
 				CCDEAE172BE6BD350096704A /* Validator.swift in Sources */,
+				CCA600D62C2FA95600C72A85 /* CounterFactory.swift in Sources */,
+				CCA600D42C2EE49600C72A85 /* DateManager.swift in Sources */,
 				CCDEADF32BE44A160096704A /* MicImageView.swift in Sources */,
+				CCA600C82C2E941E00C72A85 /* TotalCounter.swift in Sources */,
 				CC55BF502BC9028D003C3E15 /* AppDelegate.swift in Sources */,
 				CCDEAE192BE6BE330096704A /* LoginPresenter.swift in Sources */,
-				CC209D2A2BD47ED20069E2E4 /* MatchCountRepository.swift in Sources */,
-				CC209D2C2BD47EED0069E2E4 /* UserDefaultsManager.swift in Sources */,
+				CC209D2A2BD47ED20069E2E4 /* CountRepository.swift in Sources */,
 				CC55BF522BC9028D003C3E15 /* SceneDelegate.swift in Sources */,
 				CCA1F9DC2C001165008DCF70 /* SignupPresenter.swift in Sources */,
 				CCDEAE152BE514630096704A /* NaviMenuTableView.swift in Sources */,
@@ -363,6 +394,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CCA600C42C2CBA0A00C72A85 /* CountContextTests.swift in Sources */,
 				CC55BFF72BCE9C2D003C3E15 /* HomePresenterTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
