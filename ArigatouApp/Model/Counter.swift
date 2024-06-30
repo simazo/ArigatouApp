@@ -15,4 +15,5 @@ protocol Counter {
     func setCount(for key: String, count: Int)
     func getCount(for key: String) -> Int
     func incrementCount(for key: String)
+    func getAllCounts() -> [String: Int]
 }

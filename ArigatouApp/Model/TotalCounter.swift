@@ -28,15 +28,18 @@ class TotalCounter: Counter {
     }
     
     func setCount(for key: String, count: Int) {
-        // TODO 呼ばれたら例外発生させる
+        fatalError("This method is not supported for TotalCounter")
     }
     
     func getCount(for key: String) -> Int {
-        // TODO 呼ばれたら例外発生させる
-        return 0
+        fatalError("This method is not supported for TotalCounter")
     }
     
     func incrementCount(for key: String) {
-        // TODO 呼ばれたら例外発生させる
+        fatalError("This method is not supported for TotalCounter")
+    }
+    
+    func getAllCounts() -> [String : Int] {
+        fatalError("This method is not supported for TotalCounter")
     }
 }

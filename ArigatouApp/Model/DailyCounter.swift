@@ -33,16 +33,21 @@ class DailyCounter: Counter {
         setCount(for: key, count: count)
     }
     
+    // UserDefaultsからすべてのカウントを取得
+    func getAllCounts() -> [String: Int] {
+        let defaults = UserDefaults.standard
+        return defaults.dictionary(forKey: UserDefaultsKeys.DAILY_COUNT) as? [String: Int] ?? [:]
+    }
+    
     func setCount(_ count: Int) {
-        // 呼ばれたら例外発生させる
+        fatalError("This method is not supported for DailyCounter")
     }
     
     func getCount() -> Int {
-        // 呼ばれたら例外発生させる
-        return 0
+        fatalError("This method is not supported for DailyCounter")
     }
     
     func incrementCount() {
-        // 呼ばれたら例外発生させる
+        fatalError("This method is not supported for DailyCounter")
     }
 }

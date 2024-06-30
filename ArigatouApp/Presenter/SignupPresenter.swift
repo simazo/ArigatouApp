@@ -23,11 +23,17 @@ class SignupPresenter {
     private let dateManager = DateManager.shared
     private let factory = CounterFactory()
     private var totalCounter: Counter!
+    private var dailyCounter: Counter!
+    private var weeklyCounter: Counter!
+    private var monthlyCounter: Counter!
     
     init(view: SignupPresenterOutput) {
         self.view = view
         
         totalCounter = factory.create(type: .total)
+        dailyCounter = factory.create(type: .daily)
+        weeklyCounter = factory.create(type: .weekly)
+        monthlyCounter = factory.create(type: .monthly)
     }
 }
 
@@ -44,15 +50,18 @@ extension SignupPresenter : SignupPresenterInput {
             
             switch result {
             case .success(let user):
-                let userMatchCount = Count(
+                let count = Count(
                     uid: user.uid,
-                    count: totalCounter.getCount(),
+                    totalCount: totalCounter.getCount(),
+                    dailyCount: dailyCounter.getAllCounts(),
+                    weeklyCount: weeklyCounter.getAllCounts(),
+                    monthlyCount: monthlyCounter.getAllCounts(),
                     updateAt: Date().timeIntervalSince1970
                 )
                 
                 // マッチ数作成
                 let countManger = CountManager(RealtimeDBCountRepository())
-                countManger.create(userMatchCount) { success, error in
+                countManger.create(count) { success, error in
                     // 成功
                     if success {
                         self.view?.showSignupSuccess()

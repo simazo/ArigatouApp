@@ -45,7 +45,7 @@ class HomePresenter{
     private let factory = CounterFactory()
     private var totalCounter: Counter!
     private var dailyCounter: Counter!
-    private var weelyCounter: Counter!
+    private var weeklyCounter: Counter!
     private var monthlyCounter: Counter!
     
     init(view: HomePresenterOutput) {
@@ -53,14 +53,14 @@ class HomePresenter{
         
         totalCounter = factory.create(type: .total)
         dailyCounter = factory.create(type: .daily)
-        weelyCounter = factory.create(type: .weekly)
+        weeklyCounter = factory.create(type: .weekly)
         monthlyCounter = factory.create(type: .monthly)
     }
     
     private func incrementCount() {
         totalCounter.incrementCount()
         dailyCounter.incrementCount(for: dateManager.currentDateString())
-        weelyCounter.incrementCount(for: dateManager.currentWeekString())
+        weeklyCounter.incrementCount(for: dateManager.currentWeekString())
         monthlyCounter.incrementCount(for: dateManager.currentMonthString())
     }
     

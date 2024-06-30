@@ -7,6 +7,9 @@
 
 struct Count {
     let uid: String
-    let count: Int
+    let totalCount: Int
+    let dailyCount: [String: Int]
+    let weeklyCount: [String: Int]
+    let monthlyCount: [String: Int]
     let updateAt: Double
 }

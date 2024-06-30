@@ -26,11 +26,17 @@ class SynchronizedPresenter {
     private let dateManager = DateManager.shared
     private let factory = CounterFactory()
     private var totalCounter: Counter!
+    private var dailyCounter: Counter!
+    private var weeklyCounter: Counter!
+    private var monthlyCounter: Counter!
     
     init(view: SynchronizedPresenterOutput) {
         self.view = view
         
         totalCounter = factory.create(type: .total)
+        dailyCounter = factory.create(type: .daily)
+        weeklyCounter = factory.create(type: .weekly)
+        monthlyCounter = factory.create(type: .monthly)
     }
 }
 extension SynchronizedPresenter: SynchronizedPresenterInput {
@@ -44,7 +50,7 @@ extension SynchronizedPresenter: SynchronizedPresenterInput {
                         self.uid = uid!
                         self.view?.redrawInformationLabel(
                             localCount: self.totalCounter.getCount(),
-                            serverCount: count.count,
+                            serverCount: count.totalCount,
                             lastUpdateAt: count.updateAt
                         )
                     case .failure(let error):
@@ -59,7 +65,10 @@ extension SynchronizedPresenter: SynchronizedPresenterInput {
     func synchronize() {
         let count = Count(
             uid: self.uid,
-            count: self.totalCounter.getCount(),
+            totalCount: self.totalCounter.getCount(),
+            dailyCount: self.dailyCounter.getAllCounts(),
+            weeklyCount: self.weeklyCounter.getAllCounts(),
+            monthlyCount: self.monthlyCounter.getAllCounts(),
             updateAt: Date().timeIntervalSince1970
         )
         let countManger = CountManager(RealtimeDBCountRepository())
