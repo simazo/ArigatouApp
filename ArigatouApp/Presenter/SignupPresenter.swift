@@ -20,8 +20,14 @@ protocol SignupPresenterOutput: AnyObject {
 class SignupPresenter {
     private weak var view: SignupPresenterOutput?
     
+    private let dateManager = DateManager.shared
+    private let factory = CounterFactory()
+    private var totalCounter: Counter!
+    
     init(view: SignupPresenterOutput) {
         self.view = view
+        
+        totalCounter = factory.create(type: .total)
     }
 }
 
@@ -40,7 +46,7 @@ extension SignupPresenter : SignupPresenterInput {
             case .success(let user):
                 let userMatchCount = MatchCount(
                     uid: user.uid,
-                    count: UserDefaultsManager.shared.getCount(),
+                    count: totalCounter.getCount(),
                     updateAt: Date().timeIntervalSince1970
                 )
                 

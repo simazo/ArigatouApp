@@ -23,8 +23,14 @@ class SynchronizedPresenter {
     private weak var view: SynchronizedPresenterOutput?
     private var uid = ""
     
+    private let dateManager = DateManager.shared
+    private let factory = CounterFactory()
+    private var totalCounter: Counter!
+    
     init(view: SynchronizedPresenterOutput) {
         self.view = view
+        
+        totalCounter = factory.create(type: .total)
     }
 }
 extension SynchronizedPresenter: SynchronizedPresenterInput {
@@ -37,7 +43,7 @@ extension SynchronizedPresenter: SynchronizedPresenterInput {
                     case .success(let matchCount):
                         self.uid = uid!
                         self.view?.redrawInformationLabel(
-                            localCount: UserDefaultsManager.shared.getCount(),
+                            localCount: self.totalCounter.getCount(),
                             serverCount: matchCount.count,
                             lastUpdateAt: matchCount.updateAt
                         )
@@ -53,7 +59,7 @@ extension SynchronizedPresenter: SynchronizedPresenterInput {
     func synchronize() {
         let userMatchCount = MatchCount(
             uid: self.uid,
-            count: UserDefaultsManager.shared.getCount(),
+            count: self.totalCounter.getCount(),
             updateAt: Date().timeIntervalSince1970
         )
         let matchCountManger = MatchCountManager(RealtimeDBMatchCountRepository())

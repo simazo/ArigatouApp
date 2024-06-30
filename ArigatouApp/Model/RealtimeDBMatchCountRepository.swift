@@ -6,6 +6,7 @@
 //
 
 import FirebaseDatabase
+import FirebaseDatabaseInternal
 
 class RealtimeDBMatchCountRepository: MatchCountRepository {
     let database = Database.database().reference()
