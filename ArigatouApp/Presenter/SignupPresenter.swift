@@ -44,15 +44,15 @@ extension SignupPresenter : SignupPresenterInput {
             
             switch result {
             case .success(let user):
-                let userMatchCount = MatchCount(
+                let userMatchCount = Count(
                     uid: user.uid,
                     count: totalCounter.getCount(),
                     updateAt: Date().timeIntervalSince1970
                 )
                 
                 // マッチ数作成
-                let matchCountManger = MatchCountManager(RealtimeDBMatchCountRepository())
-                matchCountManger.create(userMatchCount) { success, error in
+                let countManger = CountManager(RealtimeDBCountRepository())
+                countManger.create(userMatchCount) { success, error in
                     // 成功
                     if success {
                         self.view?.showSignupSuccess()

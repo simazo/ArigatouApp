@@ -37,15 +37,15 @@ extension SynchronizedPresenter: SynchronizedPresenterInput {
     func viewWillAppear() {
         AuthManager.shared.isLoggedIn { (isAuthenticated, uid) in
             if isAuthenticated {
-                let matchCountManger = MatchCountManager(RealtimeDBMatchCountRepository())
-                matchCountManger.findByUid(uid: uid!) { result in
+                let countManger = CountManager(RealtimeDBCountRepository())
+                countManger.findByUid(uid: uid!) { result in
                     switch result {
-                    case .success(let matchCount):
+                    case .success(let count):
                         self.uid = uid!
                         self.view?.redrawInformationLabel(
                             localCount: self.totalCounter.getCount(),
-                            serverCount: matchCount.count,
-                            lastUpdateAt: matchCount.updateAt
+                            serverCount: count.count,
+                            lastUpdateAt: count.updateAt
                         )
                     case .failure(let error):
                         print(error.localizedDescription)
@@ -57,14 +57,14 @@ extension SynchronizedPresenter: SynchronizedPresenterInput {
     }
     
     func synchronize() {
-        let userMatchCount = MatchCount(
+        let count = Count(
             uid: self.uid,
             count: self.totalCounter.getCount(),
             updateAt: Date().timeIntervalSince1970
         )
-        let matchCountManger = MatchCountManager(RealtimeDBMatchCountRepository())
+        let countManger = CountManager(RealtimeDBCountRepository())
         
-        matchCountManger.create(userMatchCount){ success, error in
+        countManger.create(count){ success, error in
             if success {
                 self.view?.showSynchronizedSuccess()
             } else {

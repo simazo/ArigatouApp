@@ -1,5 +1,5 @@
 //
-//  RealtimeDBMatchCountRepository.swift
+//  RealtimeDBCountRepository.swift
 //  ArigatouApp
 //
 //  Created by pero on 2024/05/25.
@@ -8,16 +8,16 @@
 import FirebaseDatabase
 import FirebaseDatabaseInternal
 
-class RealtimeDBMatchCountRepository: MatchCountRepository {
+class RealtimeDBCountRepository: CountRepository {
     let database = Database.database().reference()
     
-    func create(_ matchCount: MatchCount, completion: @escaping (Bool, Error?) -> Void) {
+    func create(_ count: Count, completion: @escaping (Bool, Error?) -> Void) {
         let userData = [
-            "count": matchCount.count,
-            "updatedAt": matchCount.updateAt
+            "count": count.count,
+            "updatedAt": count.updateAt
         ] as [String : Any]
         
-        database.child("userMatchCount").child(matchCount.uid).setValue(userData){ error, _ in
+        database.child("userMatchCount").child(count.uid).setValue(userData){ error, _ in
             if let error = error {
                 completion(false, error)
             } else {
@@ -26,7 +26,7 @@ class RealtimeDBMatchCountRepository: MatchCountRepository {
         }
     }
     
-    func findByUid(uid:String, completion: @escaping (Result<MatchCount, Error>) -> Void) {
+    func findByUid(uid:String, completion: @escaping (Result<Count, Error>) -> Void) {
         let userMatchCountRef = database.child("userMatchCount").child(uid)
         
         userMatchCountRef.getData { error, snapshot in
@@ -47,8 +47,8 @@ class RealtimeDBMatchCountRepository: MatchCountRepository {
             // データをMatchCountに変換
             if let count = value["count"] as? Int,
                let updatedAt = value["updatedAt"] as? Double {
-                let matchCount = MatchCount(uid: uid, count: count, updateAt: updatedAt)
-                completion(.success(matchCount))
+                let count = Count(uid: uid, count: count, updateAt: updatedAt)
+                completion(.success(count))
             } else {
                 let error = NSError(domain: "com.Arigatouapp", code: 0, userInfo: [NSLocalizedDescriptionKey: "Invalid data format"])
                 completion(.failure(error))
