@@ -36,6 +36,9 @@ class DateManager {
         calendarWithLocale.timeZone = timeZone
         calendarWithLocale.locale = locale
         
+        // 週の開始日を月曜日に設定する
+        calendarWithLocale.firstWeekday = 2
+        
         let year = calendarWithLocale.component(.yearForWeekOfYear, from: date)
         let weekOfYear = calendarWithLocale.component(.weekOfYear, from: date)
         
