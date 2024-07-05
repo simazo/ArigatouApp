@@ -20,21 +20,23 @@ class DateManager {
         self.locale = Locale(identifier: "ja_JP")
     }
     
-    func currentDateString() -> String {
+    func currentDateString(date: Date = Date()) -> String {
         let dateFormatter = DateFormatter()
         dateFormatter.calendar = calendar
         dateFormatter.timeZone = timeZone
         dateFormatter.locale = locale
         dateFormatter.dateFormat = "yyyy-MM-dd"
         
-        return dateFormatter.string(from: Date())
+        return dateFormatter.string(from: date)
     }
     
-    func currentWeekString() -> String {
-        let date = Date()
+    func currentWeekString(date: Date = Date()) -> String {
         var calendarWithLocale = calendar
         calendarWithLocale.timeZone = timeZone
         calendarWithLocale.locale = locale
+        
+        // 週の開始日を月曜日に設定する
+        calendarWithLocale.firstWeekday = 2
         
         let year = calendarWithLocale.component(.yearForWeekOfYear, from: date)
         let weekOfYear = calendarWithLocale.component(.weekOfYear, from: date)
@@ -42,14 +44,14 @@ class DateManager {
         return String(format: "%d-W%02d", year, weekOfYear)
     }
     
-    func currentMonthString() -> String {
+    func currentMonthString(date: Date = Date()) -> String {
         let dateFormatter = DateFormatter()
         dateFormatter.calendar = calendar
         dateFormatter.timeZone = timeZone
         dateFormatter.locale = locale
         dateFormatter.dateFormat = "yyyy-MM"
         
-        return dateFormatter.string(from: Date())
+        return dateFormatter.string(from: date)
     }
     
 }
