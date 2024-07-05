@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		CC1067092C375FD7005B3BDD /* DateManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC1067082C375FD7005B3BDD /* DateManagerTests.swift */; };
 		CC209D282BD47EB10069E2E4 /* CountManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC209D272BD47EB10069E2E4 /* CountManager.swift */; };
 		CC209D2A2BD47ED20069E2E4 /* CountRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC209D292BD47ED20069E2E4 /* CountRepository.swift */; };
 		CC55BF502BC9028D003C3E15 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC55BF4F2BC9028D003C3E15 /* AppDelegate.swift */; };
@@ -67,6 +68,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		CC1067082C375FD7005B3BDD /* DateManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateManagerTests.swift; sourceTree = "<group>"; };
 		CC209D272BD47EB10069E2E4 /* CountManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountManager.swift; sourceTree = "<group>"; };
 		CC209D292BD47ED20069E2E4 /* CountRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountRepository.swift; sourceTree = "<group>"; };
 		CC55BF4C2BC9028D003C3E15 /* ArigatouApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ArigatouApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -235,6 +237,7 @@
 			children = (
 				CC55BFF62BCE9C2D003C3E15 /* HomePresenterTests.swift */,
 				CCA600C32C2CBA0A00C72A85 /* CountContextTests.swift */,
+				CC1067082C375FD7005B3BDD /* DateManagerTests.swift */,
 			);
 			path = ArigatouAppTests;
 			sourceTree = "<group>";
@@ -395,6 +398,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				CCA600C42C2CBA0A00C72A85 /* CountContextTests.swift in Sources */,
+				CC1067092C375FD7005B3BDD /* DateManagerTests.swift in Sources */,
 				CC55BFF72BCE9C2D003C3E15 /* HomePresenterTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
