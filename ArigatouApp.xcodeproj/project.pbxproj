@@ -148,12 +148,12 @@
 				CCFB7E132BF18D6F00C4617A /* NetworkManager.swift */,
 				CCDEAE162BE6BD350096704A /* Validator.swift */,
 				CCA600C52C2E93EF00C72A85 /* Counter.swift */,
-				CCA600C92C2E95E100C72A85 /* UserDefaultsKeys.swift */,
+				CCA600D52C2FA95600C72A85 /* CounterFactory.swift */,
 				CCA600C72C2E941E00C72A85 /* TotalCounter.swift */,
 				CCA600CD2C2EA39600C72A85 /* DailyCounter.swift */,
 				CCA600CF2C2EA7F100C72A85 /* WeeklyCounter.swift */,
 				CCA600D12C2EA93700C72A85 /* MonthlyCounter.swift */,
-				CCA600D52C2FA95600C72A85 /* CounterFactory.swift */,
+				CCA600C92C2E95E100C72A85 /* UserDefaultsKeys.swift */,
 				CCA600D32C2EE49600C72A85 /* DateManager.swift */,
 			);
 			path = Model;
