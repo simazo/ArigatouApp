@@ -25,7 +25,7 @@ class HomeViewController: UIViewController {
         initBackground(name: "cosmos-1920.jpg")
         
         initNavigation()
-        initPersonMenu()
+        initPersonAndChartMenu()
         initGesture()
         
         presenter = HomePresenter(view: self)
@@ -80,12 +80,32 @@ class HomeViewController: UIViewController {
         self.navigationItem.backBarButtonItem = UIBarButtonItem(title:  "戻る", style:  .plain, target: nil, action: nil)
     }
     
-    private func initPersonMenu() {
+    private func initPersonAndChartMenu() {
+        let personButton: UIBarButtonItem
+        let chartButton: UIBarButtonItem
+        
         if #available(iOS 16.0, *) {
-            navigationItem.rightBarButtonItem = UIBarButtonItem(title: "", image: UIImage(systemName: "person"), target: self, action: #selector(personButtonTapped))
+            personButton = UIBarButtonItem(title: "", 
+                                           image: UIImage(systemName: "person"),
+                                           target: self,
+                                           action: #selector(personButtonTapped))
+            chartButton = UIBarButtonItem(title: "", 
+                                          image: UIImage(systemName: "chart.line.uptrend.xyaxis"),
+                                          target: self,
+                                          action: #selector(chartButtonTapped))
         } else {
-            navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "person"), style: .plain, target: self, action: #selector(personButtonTapped))
+            personButton = UIBarButtonItem(image: UIImage(systemName: "person"), 
+                                           style: .plain,
+                                           target: self,
+                                           action: #selector(personButtonTapped))
+            chartButton = UIBarButtonItem(image: UIImage(systemName: "chart.line.uptrend.xyaxis"), 
+                                          style: .plain,
+                                          target: self,
+                                          action: #selector(chartButtonTapped))
+            
         }
+        
+        navigationItem.rightBarButtonItems = [personButton, chartButton]
         
         naviMenutableViewForPerson = NaviMenuTableView(frame: CGRect.zero, style: .plain)
         naviMenutableViewForPerson.translatesAutoresizingMaskIntoConstraints = false
@@ -105,9 +125,15 @@ class HomeViewController: UIViewController {
     
     private func initPlayVideoMenu(menus: [String]) {
         if #available(iOS 16.0, *) {
-            navigationItem.leftBarButtonItem = UIBarButtonItem(title: "", image: UIImage(systemName: "play.fill"), target: self, action: #selector(playVideoButtonTapped))
+            navigationItem.leftBarButtonItem = UIBarButtonItem(title: "", 
+                                                               image: UIImage(systemName: "play.fill"), 
+                                                               target: self,
+                                                               action: #selector(playVideoButtonTapped))
         } else {
-            navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "play.fill"), style: .plain, target: self, action: #selector(personButtonTapped))
+            navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "play.fill"), 
+                                                                style: .plain,
+                                                                target: self,
+                                                                action: #selector(personButtonTapped))
         }
         
         naviMenutableViewForPlayVideo = NaviMenuTableView(frame: CGRect.zero, style: .plain)
@@ -146,6 +172,10 @@ class HomeViewController: UIViewController {
     @objc func personButtonTapped(){
         isPersonMenuVisible.toggle()
         naviMenutableViewForPerson.isHidden = !isPersonMenuVisible
+    }
+    
+    @objc func chartButtonTapped() {
+        self.navigationController?.pushViewController(TodayRecordViewController(), animated: true)
     }
     
     @objc func playVideoButtonTapped() {
