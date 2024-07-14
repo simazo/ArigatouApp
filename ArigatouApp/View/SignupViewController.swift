@@ -217,7 +217,7 @@ class SignupViewController: UIViewController {
 }
 
 extension SignupViewController: SignupPresenterOutput {
-    func showSignupSuccessButCreateMatchCountFailed(errorMessage: String) {
+    func showSignupSuccessButCreateCountFailed(errorMessage: String) {
         DispatchQueue.main.async {
             self.showAlert(title: "カウント数登録エラー", message: errorMessage)
         }

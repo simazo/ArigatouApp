@@ -14,7 +14,7 @@ protocol SignupPresenterInput: AnyObject {
 protocol SignupPresenterOutput: AnyObject {
     func showSignupSuccess()
     func showSignupFailed(errorMessage: String)
-    func showSignupSuccessButCreateMatchCountFailed(errorMessage: String)
+    func showSignupSuccessButCreateCountFailed(errorMessage: String)
 }
 
 class SignupPresenter {
@@ -70,9 +70,9 @@ extension SignupPresenter : SignupPresenterInput {
                         // rollobackのためユーザアカウント削除
                         AuthManager.shared.deleteUser { success, error in
                             if success {
-                                self.view?.showSignupSuccessButCreateMatchCountFailed(errorMessage: "カウント数の登録に失敗したためロールバックしました")
+                                self.view?.showSignupSuccessButCreateCountFailed(errorMessage: "カウント数の登録に失敗したためロールバックしました")
                             } else {
-                                self.view?.showSignupSuccessButCreateMatchCountFailed(errorMessage: error!.localizedDescription)
+                                self.view?.showSignupSuccessButCreateCountFailed(errorMessage: error!.localizedDescription)
                             }
                         }
                     }

@@ -1,5 +1,5 @@
 //
-//  CountContextTests.swift
+//  CountFactoryTests.swift
 //  ArigatouAppTests
 //
 //  Created by pero on 2024/06/27.
@@ -8,7 +8,7 @@
 import XCTest
 @testable import ArigatouApp
 
-final class CountContextTests: XCTestCase {
+final class CountFactoryTests: XCTestCase {
 
     var testUserDefaults: UserDefaults!
     let factory = CounterFactory()
