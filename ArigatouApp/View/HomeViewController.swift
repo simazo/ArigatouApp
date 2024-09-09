@@ -30,7 +30,6 @@ class HomeViewController: UIViewController {
         
         presenter = HomePresenter(view: self)
         presenter.viewDidLoad()
-
     }
     
     // ログインページから戻ってきた場合など、このViewControllerがアクティブになった時

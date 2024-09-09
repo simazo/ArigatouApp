@@ -7,9 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		020B279BE032ED60D7BFD791 /* Pods_ArigatouApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8FE99373F78B3E84E43D2663 /* Pods_ArigatouApp.framework */; };
+		77BB12EAC2AFA903FA144677 /* Pods_ArigatouAppTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FEE7AD52EB1F322B9C7827EF /* Pods_ArigatouAppTests.framework */; };
 		CC1067092C375FD7005B3BDD /* DateManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC1067082C375FD7005B3BDD /* DateManagerTests.swift */; };
 		CC209D282BD47EB10069E2E4 /* CountManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC209D272BD47EB10069E2E4 /* CountManager.swift */; };
 		CC209D2A2BD47ED20069E2E4 /* CountRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC209D292BD47ED20069E2E4 /* CountRepository.swift */; };
+		CC242F4A2C44A5BE0085CB74 /* DailyRecordPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC242F492C44A5BE0085CB74 /* DailyRecordPresenter.swift */; };
+		CC242F4C2C44B4300085CB74 /* DailyRecordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC242F4B2C44B4300085CB74 /* DailyRecordView.swift */; };
 		CC55BF502BC9028D003C3E15 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC55BF4F2BC9028D003C3E15 /* AppDelegate.swift */; };
 		CC55BF522BC9028D003C3E15 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC55BF512BC9028D003C3E15 /* SceneDelegate.swift */; };
 		CC55BF542BC9028D003C3E15 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC55BF532BC9028D003C3E15 /* HomeViewController.swift */; };
@@ -70,9 +74,14 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		19895CB3A3C26A6291F9D75F /* Pods-ArigatouApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ArigatouApp.release.xcconfig"; path = "Target Support Files/Pods-ArigatouApp/Pods-ArigatouApp.release.xcconfig"; sourceTree = "<group>"; };
+		8FE99373F78B3E84E43D2663 /* Pods_ArigatouApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ArigatouApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		AA410583528CC5FCD4DA3D06 /* Pods-ArigatouApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ArigatouApp.debug.xcconfig"; path = "Target Support Files/Pods-ArigatouApp/Pods-ArigatouApp.debug.xcconfig"; sourceTree = "<group>"; };
 		CC1067082C375FD7005B3BDD /* DateManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateManagerTests.swift; sourceTree = "<group>"; };
 		CC209D272BD47EB10069E2E4 /* CountManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountManager.swift; sourceTree = "<group>"; };
 		CC209D292BD47ED20069E2E4 /* CountRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountRepository.swift; sourceTree = "<group>"; };
+		CC242F492C44A5BE0085CB74 /* DailyRecordPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyRecordPresenter.swift; sourceTree = "<group>"; };
+		CC242F4B2C44B4300085CB74 /* DailyRecordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyRecordView.swift; sourceTree = "<group>"; };
 		CC55BF4C2BC9028D003C3E15 /* ArigatouApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ArigatouApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CC55BF4F2BC9028D003C3E15 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CC55BF512BC9028D003C3E15 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -116,6 +125,9 @@
 		CCFB7DD62BF17A8300C4617A /* VideoList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoList.swift; sourceTree = "<group>"; };
 		CCFB7E132BF18D6F00C4617A /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		CCFB7E3B2BFB1AF600C4617A /* Alert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Alert.swift; sourceTree = "<group>"; };
+		E5A36654F407BDFC426BE9DA /* Pods-ArigatouAppTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ArigatouAppTests.debug.xcconfig"; path = "Target Support Files/Pods-ArigatouAppTests/Pods-ArigatouAppTests.debug.xcconfig"; sourceTree = "<group>"; };
+		F4DE49E236595B89AEE8713F /* Pods-ArigatouAppTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ArigatouAppTests.release.xcconfig"; path = "Target Support Files/Pods-ArigatouAppTests/Pods-ArigatouAppTests.release.xcconfig"; sourceTree = "<group>"; };
+		FEE7AD52EB1F322B9C7827EF /* Pods_ArigatouAppTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ArigatouAppTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -127,6 +139,7 @@
 				CCDEAE222BE866270096704A /* FirebaseFirestore in Frameworks */,
 				CCA1F9E22C016A4F008DCF70 /* FirebaseDatabase in Frameworks */,
 				CCDEAE242BE89D430096704A /* FirebaseFirestoreSwift in Frameworks */,
+				020B279BE032ED60D7BFD791 /* Pods_ArigatouApp.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -134,12 +147,34 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				77BB12EAC2AFA903FA144677 /* Pods_ArigatouAppTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0A985FC2CCA9788FE5646484 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				AA410583528CC5FCD4DA3D06 /* Pods-ArigatouApp.debug.xcconfig */,
+				19895CB3A3C26A6291F9D75F /* Pods-ArigatouApp.release.xcconfig */,
+				E5A36654F407BDFC426BE9DA /* Pods-ArigatouAppTests.debug.xcconfig */,
+				F4DE49E236595B89AEE8713F /* Pods-ArigatouAppTests.release.xcconfig */,
+			);
+			name = Pods;
+			path = Pods;
+			sourceTree = "<group>";
+		};
+		B748CAF46458C0DD05BBB2E1 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				8FE99373F78B3E84E43D2663 /* Pods_ArigatouApp.framework */,
+				FEE7AD52EB1F322B9C7827EF /* Pods_ArigatouAppTests.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		CC209D242BD47E5F0069E2E4 /* Model */ = {
 			isa = PBXGroup;
 			children = (
@@ -172,6 +207,8 @@
 				CC55BF4E2BC9028D003C3E15 /* ArigatouApp */,
 				CC55BFF52BCE9C2D003C3E15 /* ArigatouAppTests */,
 				CC55BF4D2BC9028D003C3E15 /* Products */,
+				0A985FC2CCA9788FE5646484 /* Pods */,
+				B748CAF46458C0DD05BBB2E1 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -208,6 +245,7 @@
 				CCDEAE182BE6BE330096704A /* LoginPresenter.swift */,
 				CCA1F9DD2C0046BA008DCF70 /* ValidationPresenter.swift */,
 				CCB900632C3ABA7C003CDDE0 /* TodayRecordPresenter.swift */,
+				CC242F492C44A5BE0085CB74 /* DailyRecordPresenter.swift */,
 			);
 			path = Presenter;
 			sourceTree = "<group>";
@@ -223,6 +261,7 @@
 				CCDEAE142BE514630096704A /* NaviMenuTableView.swift */,
 				CCFB7E3B2BFB1AF600C4617A /* Alert.swift */,
 				CCB900652C3ABBDE003CDDE0 /* TodayRecordView.swift */,
+				CC242F4B2C44B4300085CB74 /* DailyRecordView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -255,9 +294,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = CC55BF602BC9028E003C3E15 /* Build configuration list for PBXNativeTarget "ArigatouApp" */;
 			buildPhases = (
+				C5C4633A61038CA49E90E631 /* [CP] Check Pods Manifest.lock */,
 				CC55BF482BC9028D003C3E15 /* Sources */,
 				CC55BF492BC9028D003C3E15 /* Frameworks */,
 				CC55BF4A2BC9028D003C3E15 /* Resources */,
+				77A39088B1EBE31E81C44309 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -278,6 +319,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = CC55BFFC2BCE9C2D003C3E15 /* Build configuration list for PBXNativeTarget "ArigatouAppTests" */;
 			buildPhases = (
+				87972DB93C3025C4E9B878B2 /* [CP] Check Pods Manifest.lock */,
 				CC55BFF02BCE9C2D003C3E15 /* Sources */,
 				CC55BFF12BCE9C2D003C3E15 /* Frameworks */,
 				CC55BFF22BCE9C2D003C3E15 /* Resources */,
@@ -321,7 +363,7 @@
 			);
 			mainGroup = CC55BF432BC9028D003C3E15;
 			packageReferences = (
-				CCDEAE1E2BE866270096704A /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+				CCDEAE1E2BE866270096704A /* XCRemoteSwiftPackageReference "firebase-ios-sdk.git" */,
 			);
 			productRefGroup = CC55BF4D2BC9028D003C3E15 /* Products */;
 			projectDirPath = "";
@@ -361,12 +403,77 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		77A39088B1EBE31E81C44309 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-ArigatouApp/Pods-ArigatouApp-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-ArigatouApp/Pods-ArigatouApp-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-ArigatouApp/Pods-ArigatouApp-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		87972DB93C3025C4E9B878B2 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-ArigatouAppTests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		C5C4633A61038CA49E90E631 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-ArigatouApp-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		CC55BF482BC9028D003C3E15 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				CCA1F9ED2C054BAB008DCF70 /* SynchronizedPresenter.swift in Sources */,
+				CC242F4A2C44A5BE0085CB74 /* DailyRecordPresenter.swift in Sources */,
 				CCA600D02C2EA7F100C72A85 /* WeeklyCounter.swift in Sources */,
 				CCA1F9E42C016AC6008DCF70 /* RealtimeDBCountRepository.swift in Sources */,
 				CCA600D22C2EA93700C72A85 /* MonthlyCounter.swift in Sources */,
@@ -376,6 +483,7 @@
 				CCA600CE2C2EA39600C72A85 /* DailyCounter.swift in Sources */,
 				CCB900642C3ABA7C003CDDE0 /* TodayRecordPresenter.swift in Sources */,
 				CC55BF652BC90301003C3E15 /* HomePresenter.swift in Sources */,
+				CC242F4C2C44B4300085CB74 /* DailyRecordView.swift in Sources */,
 				CCA1F9E02C006731008DCF70 /* SignupViewController.swift in Sources */,
 				CCA1F9EB2C0548E4008DCF70 /* SynchronizedViewController.swift in Sources */,
 				CCA1F9EF2C059D74008DCF70 /* Count.swift in Sources */,
@@ -554,6 +662,7 @@
 		};
 		CC55BF612BC9028E003C3E15 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = AA410583528CC5FCD4DA3D06 /* Pods-ArigatouApp.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -590,6 +699,7 @@
 		};
 		CC55BF622BC9028E003C3E15 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 19895CB3A3C26A6291F9D75F /* Pods-ArigatouApp.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -626,6 +736,7 @@
 		};
 		CC55BFFA2BCE9C2D003C3E15 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = E5A36654F407BDFC426BE9DA /* Pods-ArigatouAppTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
@@ -644,6 +755,7 @@
 		};
 		CC55BFFB2BCE9C2D003C3E15 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = F4DE49E236595B89AEE8713F /* Pods-ArigatouAppTests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
@@ -693,7 +805,7 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		CCDEAE1E2BE866270096704A /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+		CCDEAE1E2BE866270096704A /* XCRemoteSwiftPackageReference "firebase-ios-sdk.git" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/firebase/firebase-ios-sdk.git";
 			requirement = {
@@ -706,22 +818,22 @@
 /* Begin XCSwiftPackageProductDependency section */
 		CCA1F9E12C016A4F008DCF70 /* FirebaseDatabase */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = CCDEAE1E2BE866270096704A /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			package = CCDEAE1E2BE866270096704A /* XCRemoteSwiftPackageReference "firebase-ios-sdk.git" */;
 			productName = FirebaseDatabase;
 		};
 		CCDEAE1F2BE866270096704A /* FirebaseAuth */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = CCDEAE1E2BE866270096704A /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			package = CCDEAE1E2BE866270096704A /* XCRemoteSwiftPackageReference "firebase-ios-sdk.git" */;
 			productName = FirebaseAuth;
 		};
 		CCDEAE212BE866270096704A /* FirebaseFirestore */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = CCDEAE1E2BE866270096704A /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			package = CCDEAE1E2BE866270096704A /* XCRemoteSwiftPackageReference "firebase-ios-sdk.git" */;
 			productName = FirebaseFirestore;
 		};
 		CCDEAE232BE89D430096704A /* FirebaseFirestoreSwift */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = CCDEAE1E2BE866270096704A /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			package = CCDEAE1E2BE866270096704A /* XCRemoteSwiftPackageReference "firebase-ios-sdk.git" */;
 			productName = FirebaseFirestoreSwift;
 		};
 /* End XCSwiftPackageProductDependency section */
