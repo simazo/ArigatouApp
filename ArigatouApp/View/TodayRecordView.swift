@@ -216,7 +216,7 @@ class TodayRecordViewController: UIViewController {
     }
     
     @objc func buttonDailyRecordTapped(sender : Any) {
-        print("xxxx")
+        self.navigationController?.pushViewController(DailyRecordViewController(), animated: true)
     }
     
     @objc func buttonWeeklyRecordTapped(sender : Any) {
