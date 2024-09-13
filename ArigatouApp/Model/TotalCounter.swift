@@ -27,6 +27,10 @@ class TotalCounter: Counter {
         setCount(count)
     }
     
+    func minDate() -> String{
+        fatalError("This method is not supported for TotalCounter")
+    }
+    
     func setCount(for key: String, count: Int) {
         fatalError("This method is not supported for TotalCounter")
     }

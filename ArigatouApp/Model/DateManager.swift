@@ -13,21 +13,27 @@ class DateManager {
     private let calendar: Calendar
     private let timeZone: TimeZone
     private let locale: Locale
+    private let dateFormatter = DateFormatter()
     
     private init() {
         self.calendar = Calendar(identifier: .gregorian)
         self.timeZone = TimeZone(identifier: "Asia/Tokyo")!
         self.locale = Locale(identifier: "ja_JP")
-    }
-    
-    func currentDateString(date: Date = Date()) -> String {
-        let dateFormatter = DateFormatter()
+        
         dateFormatter.calendar = calendar
         dateFormatter.timeZone = timeZone
         dateFormatter.locale = locale
         dateFormatter.dateFormat = "yyyy-MM-dd"
-        
+    }
+    
+    /// 指定されたDate型の日付を文字列にフォーマットして返す
+    func currentDateString(date: Date = Date()) -> String {
         return dateFormatter.string(from: date)
+    }
+    
+    /// 指定された文字列の日付をDate型にフォーマットして返す
+    func currentDate(_ dateString: String) -> Date? {
+        return dateFormatter.date(from: dateString)
     }
     
     func currentWeekString(date: Date = Date()) -> String {
@@ -45,10 +51,6 @@ class DateManager {
     }
     
     func currentMonthString(date: Date = Date()) -> String {
-        let dateFormatter = DateFormatter()
-        dateFormatter.calendar = calendar
-        dateFormatter.timeZone = timeZone
-        dateFormatter.locale = locale
         dateFormatter.dateFormat = "yyyy-MM"
         
         return dateFormatter.string(from: date)

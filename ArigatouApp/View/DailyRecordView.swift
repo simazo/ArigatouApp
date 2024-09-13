@@ -13,9 +13,12 @@ class DailyRecordViewController: UIViewController {
     private var chartView: LineChartView!
     private var presenter: DailyRecordPresenter!
 
+    var prevButton: UIButton!
+    var nextButton: UIButton!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        presenter = DailyRecordPresenter(view: self)
+        presenter = DailyRecordPresenter(view: self, today: Date()) //初期値は現在日
         
         //initChart()
     }
@@ -23,6 +26,39 @@ class DailyRecordViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         //presenter.viewWillAppear()
+        
+        initNextButton()
+        initPrevButton()
+        presenter.fillChartData(from: Date()) //初期値は現在日
+        presenter.updateButtonState()
+    }
+    
+    func initNextButton(){
+        nextButton = UIButton(type: .system)
+        nextButton.setTitle("Next", for: .normal)
+        nextButton.addTarget(self, action: #selector(nextWeek), for: .touchUpInside)
+        nextButton.frame = CGRect(x: 250, y: 600, width: 100, height: 50)
+        view.addSubview(nextButton)
+    }
+    
+    func initPrevButton(){
+        prevButton = UIButton(type: .system)
+        prevButton.setTitle("Prev", for: .normal)
+        prevButton.addTarget(self, action: #selector(prevWeek), for: .touchUpInside)
+        prevButton.frame = CGRect(x: 50, y: 600, width: 100, height: 50)
+        view.addSubview(prevButton)
+    }
+    
+    /// 前の週に移動
+    @objc func prevWeek() {
+        presenter.fillChartData(from: presenter.prev())
+        presenter.updateButtonState()
+    }
+    
+    /// 次の週に移動
+    @objc func nextWeek() {
+        presenter.fillChartData(from: presenter.next())
+        presenter.updateButtonState()
     }
     
     func initChart() {
@@ -43,6 +79,14 @@ class DailyRecordViewController: UIViewController {
 }
 
 extension DailyRecordViewController: DailyRecordPresenterOutput {
+    func enableNextButton(_ isEnable: Bool) {
+        nextButton.isEnabled = isEnable
+    }
+    
+    func enablePrevButton(_ isEnable: Bool) {
+        prevButton.isEnabled = isEnable
+    }
+    
     func showChart(with dailyCounts: [String : Int]) {
         var entries: [ChartDataEntry] = []
         // データをChartDataEntryに変換

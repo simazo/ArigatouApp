@@ -39,6 +39,17 @@ class MonthlyCounter: Counter {
         return defaults.dictionary(forKey: UserDefaultsKeys.MONTHLY_COUNT) as? [String: Int] ?? [:]
     }
     
+    /// UserDefaultsから最小月を返す
+    /// アプリインストール直後など、まだ月が存在しない場合は現在月を返す
+    func minDate() -> String{
+        if let monthlyCount = defaults.dictionary(forKey: UserDefaultsKeys.MONTHLY_COUNT) as? [String: Int] {
+            if let minDateString = monthlyCount.keys.min() {
+                return minDateString
+            }
+        }
+        return DateManager.shared.currentMonthString()
+    }
+    
     func setCount(_ count: Int) {
         fatalError("This method is not supported for MonthlyCounter")
     }
