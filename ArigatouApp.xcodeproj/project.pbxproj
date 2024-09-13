@@ -14,6 +14,7 @@
 		CC209D2A2BD47ED20069E2E4 /* CountRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC209D292BD47ED20069E2E4 /* CountRepository.swift */; };
 		CC242F4A2C44A5BE0085CB74 /* DailyRecordPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC242F492C44A5BE0085CB74 /* DailyRecordPresenter.swift */; };
 		CC242F4C2C44B4300085CB74 /* DailyRecordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC242F4B2C44B4300085CB74 /* DailyRecordView.swift */; };
+		CC52B30B2C91626E0011923D /* DailyRecordPresenterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC52B30A2C91626E0011923D /* DailyRecordPresenterTests.swift */; };
 		CC55BF502BC9028D003C3E15 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC55BF4F2BC9028D003C3E15 /* AppDelegate.swift */; };
 		CC55BF522BC9028D003C3E15 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC55BF512BC9028D003C3E15 /* SceneDelegate.swift */; };
 		CC55BF542BC9028D003C3E15 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC55BF532BC9028D003C3E15 /* HomeViewController.swift */; };
@@ -82,6 +83,7 @@
 		CC209D292BD47ED20069E2E4 /* CountRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountRepository.swift; sourceTree = "<group>"; };
 		CC242F492C44A5BE0085CB74 /* DailyRecordPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyRecordPresenter.swift; sourceTree = "<group>"; };
 		CC242F4B2C44B4300085CB74 /* DailyRecordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyRecordView.swift; sourceTree = "<group>"; };
+		CC52B30A2C91626E0011923D /* DailyRecordPresenterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyRecordPresenterTests.swift; sourceTree = "<group>"; };
 		CC55BF4C2BC9028D003C3E15 /* ArigatouApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ArigatouApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CC55BF4F2BC9028D003C3E15 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CC55BF512BC9028D003C3E15 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -162,7 +164,6 @@
 				E5A36654F407BDFC426BE9DA /* Pods-ArigatouAppTests.debug.xcconfig */,
 				F4DE49E236595B89AEE8713F /* Pods-ArigatouAppTests.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -281,6 +282,7 @@
 			isa = PBXGroup;
 			children = (
 				CC55BFF62BCE9C2D003C3E15 /* HomePresenterTests.swift */,
+				CC52B30A2C91626E0011923D /* DailyRecordPresenterTests.swift */,
 				CCA600C32C2CBA0A00C72A85 /* CountFactoryTests.swift */,
 				CC1067082C375FD7005B3BDD /* DateManagerTests.swift */,
 			);
@@ -363,7 +365,7 @@
 			);
 			mainGroup = CC55BF432BC9028D003C3E15;
 			packageReferences = (
-				CCDEAE1E2BE866270096704A /* XCRemoteSwiftPackageReference "firebase-ios-sdk.git" */,
+				CCDEAE1E2BE866270096704A /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 			);
 			productRefGroup = CC55BF4D2BC9028D003C3E15 /* Products */;
 			projectDirPath = "";
@@ -516,6 +518,7 @@
 				CCA600C42C2CBA0A00C72A85 /* CountFactoryTests.swift in Sources */,
 				CC1067092C375FD7005B3BDD /* DateManagerTests.swift in Sources */,
 				CC55BFF72BCE9C2D003C3E15 /* HomePresenterTests.swift in Sources */,
+				CC52B30B2C91626E0011923D /* DailyRecordPresenterTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -805,7 +808,7 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		CCDEAE1E2BE866270096704A /* XCRemoteSwiftPackageReference "firebase-ios-sdk.git" */ = {
+		CCDEAE1E2BE866270096704A /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/firebase/firebase-ios-sdk.git";
 			requirement = {
@@ -818,22 +821,22 @@
 /* Begin XCSwiftPackageProductDependency section */
 		CCA1F9E12C016A4F008DCF70 /* FirebaseDatabase */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = CCDEAE1E2BE866270096704A /* XCRemoteSwiftPackageReference "firebase-ios-sdk.git" */;
+			package = CCDEAE1E2BE866270096704A /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseDatabase;
 		};
 		CCDEAE1F2BE866270096704A /* FirebaseAuth */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = CCDEAE1E2BE866270096704A /* XCRemoteSwiftPackageReference "firebase-ios-sdk.git" */;
+			package = CCDEAE1E2BE866270096704A /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseAuth;
 		};
 		CCDEAE212BE866270096704A /* FirebaseFirestore */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = CCDEAE1E2BE866270096704A /* XCRemoteSwiftPackageReference "firebase-ios-sdk.git" */;
+			package = CCDEAE1E2BE866270096704A /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseFirestore;
 		};
 		CCDEAE232BE89D430096704A /* FirebaseFirestoreSwift */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = CCDEAE1E2BE866270096704A /* XCRemoteSwiftPackageReference "firebase-ios-sdk.git" */;
+			package = CCDEAE1E2BE866270096704A /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseFirestoreSwift;
 		};
 /* End XCSwiftPackageProductDependency section */

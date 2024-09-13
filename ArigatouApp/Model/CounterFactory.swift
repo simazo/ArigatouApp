@@ -15,6 +15,8 @@ class CounterFactory {
         case monthly
     }
 
+    /// DIするため引数にdefaultsを追加
+    /// 指定しない場合 standardがセットされる
     func create(type: CountType, defaults: UserDefaults = .standard) -> Counter {
         switch type {
         case .total:

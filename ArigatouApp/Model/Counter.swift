@@ -16,4 +16,6 @@ protocol Counter {
     func getCount(for key: String) -> Int
     func incrementCount(for key: String)
     func getAllCounts() -> [String: Int]
+    
+    func minDate() -> String
 }
