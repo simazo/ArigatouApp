@@ -16,10 +16,14 @@ jobs:
           xcode-version: latest-stable
 
       - name: Install CocoaPods
-        run: sudo gem install cocoapods
+        run: |
+          sudo gem install cocoapods
+          pod --version
 
       - name: Install Pods
-        run: pod install
+        run: |
+          pod install
+          ls -l Pods
 
       - name: Install the Apple certificate and provisioning profile
         env:
