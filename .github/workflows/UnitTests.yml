@@ -26,8 +26,9 @@ jobs:
         run: |
           echo "pod install..."
           pod install
-          echo "ls pods:"
+          echo "ls pods"
           ls -l Pods
+          echo "debug finish."
 
       - name: Install the Apple certificate and provisioning profile
         env:
