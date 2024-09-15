@@ -26,8 +26,9 @@ jobs:
         run: |
           echo "pod install..."
           pod install
-          echo "ls Pods:"
+          echo "ls pods"
           ls -l Pods
+          echo "debug finish."
 
       - name: Install the Apple certificate and provisioning profile
         env:
@@ -62,11 +63,8 @@ jobs:
 
       - name: UnitTests
         #run: xcodebuild test -project ArigatouApp.xcodeproj -scheme ArigatouApp -sdk iphonesimulator -destination 'platform=iOS Simulator,id=00008110-000664DA0EA0401E,OS=17.4.1' -allowProvisioningUpdates
-        run: |
-          xcodebuild test \
-          -project ArigatouApp.xcodeproj \
-          -scheme ArigatouApp \
-          -sdk iphonesimulator \
-          -destination 'platform=iOS Simulator,name=iPhone 15,OS=15.3.0' \
-          -allowProvisioningUpdates
+        run: xcodebuild
+          -scheme ArigatouApp
+          -sdk iphonesimulator
+          -destination 'platform=iOS Simulator,name=iPhone 15,OS=15.3.0'
           
