@@ -15,20 +15,20 @@ jobs:
         with:
           xcode-version: latest-stable
 
+      - name: Check Xcode Version
+        run: xcodebuild -version
+
+      - name: List available simulators
+        run: xcrun simctl list
+
       - name: Install CocoaPods
         run: sudo gem install cocoapods
 
       - name: Install Pods
         run: pod install
 
-      - name: Reset Simulator
-        run: xcrun simctl shutdown all && xcrun simctl erase all
-
       - name: Clean Derived Data
         run: rm -rf ~/Library/Developer/Xcode/DerivedData
-
-      #- name: List available simulators
-      #  run: xcrun simctl list
 
       - name: Check Timezone
         run: |
