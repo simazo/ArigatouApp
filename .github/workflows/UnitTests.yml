@@ -24,21 +24,14 @@ jobs:
       #- name: List available simulators
       #  run: xcrun simctl list
 
-      - name: Check Timezone default
+      - name: Check Timezone
         run: |
           date
-          echo "Current Timezone: $(tzutil /l)"
 
       - name: Set Timezone to JST
         run: |
           sudo ln -sf /usr/share/zoneinfo/Asia/Tokyo /etc/localtime
-          sudo cp /usr/share/zoneinfo/Asia/Tokyo /etc/localtime
           date
-
-      - name: Check Timezone changed
-        run: |
-          date
-          echo "Current Timezone: $(tzutil /l)"
 
       - name: Install the Apple certificate and provisioning profile
         env:
