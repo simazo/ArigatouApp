@@ -91,7 +91,7 @@ jobs:
         #run: xcodebuild test -workspace ArigatouApp.xcworkspace -scheme ArigatouApp -sdk iphonesimulator -destination 'platform=iOS Simulator,name=iPhone 15,OS=15.3.0'
         run: xcodebuild test -workspace ArigatouApp.xcworkspace -scheme ArigatouApp -sdk iphonesimulator -destination 'platform=iOS Simulator,name=iPhone 15,OS=17.2'
 
-       - name: Clean Derived Data
+      - name: Clean Derived Data
         run: rm -rf ~/Library/Developer/Xcode/DerivedData
 
       - name: Clean Xcode Caches
