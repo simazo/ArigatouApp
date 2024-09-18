@@ -13,26 +13,33 @@ class DateManager {
     private let calendar: Calendar
     private let timeZone: TimeZone
     private let locale: Locale
-    private let dateFormatter = DateFormatter()
+    
     
     private init() {
         self.calendar = Calendar(identifier: .gregorian)
         self.timeZone = TimeZone(identifier: "Asia/Tokyo")!
         self.locale = Locale(identifier: "ja_JP")
-        
-        dateFormatter.calendar = calendar
-        dateFormatter.timeZone = timeZone
-        dateFormatter.locale = locale
-        dateFormatter.dateFormat = "yyyy-MM-dd"
     }
     
     /// 指定されたDate型の日付を文字列にフォーマットして返す
     func currentDateString(date: Date = Date()) -> String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.calendar = calendar
+        dateFormatter.timeZone = timeZone
+        dateFormatter.locale = locale
+        dateFormatter.dateFormat = "yyyy-MM-dd"
+        
         return dateFormatter.string(from: date)
     }
     
     /// 指定された文字列の日付をDate型にフォーマットして返す
     func currentDate(_ dateString: String) -> Date? {
+        let dateFormatter = DateFormatter()
+        dateFormatter.calendar = calendar
+        dateFormatter.timeZone = timeZone
+        dateFormatter.locale = locale
+        dateFormatter.dateFormat = "yyyy-MM-dd"
+        
         return dateFormatter.date(from: dateString)
     }
     
@@ -51,9 +58,13 @@ class DateManager {
     }
     
     func currentMonthString(date: Date = Date()) -> String {
-        dateFormatter.dateFormat = "yyyy-MM"
+        let monthFormatter = DateFormatter()
+        monthFormatter.calendar = calendar
+        monthFormatter.timeZone = timeZone
+        monthFormatter.locale = locale
+        monthFormatter.dateFormat = "yyyy-MM"
         
-        return dateFormatter.string(from: date)
+        return monthFormatter.string(from: date)
     }
     
 }
