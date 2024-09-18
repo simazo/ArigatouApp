@@ -67,38 +67,36 @@ jobs:
           mkdir -p ~/Library/MobileDevice/Provisioning\ Profiles
           cp $DEV_PP_PATH ~/Library/MobileDevice/Provisioning\ Profiles
 
-      - name: Shutdown all simulators
-        run: xcrun simctl shutdown all
+      # - name: Shutdown all simulators
+      #   run: xcrun simctl shutdown all
   
-      - name: Erase all simulators
-        run: xcrun simctl erase all
+      # - name: Erase all simulators
+      #   run: xcrun simctl erase all
   
-      - name: Boot simulator (iPhone 15, iOS 17.2)
-        run: |
-          xcrun simctl boot "iPhone 15" || echo "Simulator already booted"
-          # Custom timeout handling
-          for i in {1..60}; do
-            if xcrun simctl bootstatus "iPhone 15" -b; then
-              echo "Simulator booted successfully."
-              break
-            fi
-            echo "Waiting for simulator to boot..."
-            sleep 5
-          done
+      # - name: Boot simulator (iPhone 15, iOS 17.2)
+      #   run: |
+      #     xcrun simctl boot "iPhone 15" || echo "Simulator already booted"
+      #     # Custom timeout handling
+      #     for i in {1..60}; do
+      #       if xcrun simctl bootstatus "iPhone 15" -b; then
+      #         echo "Simulator booted successfully."
+      #         break
+      #       fi
+      #       echo "Waiting for simulator to boot..."
+      #       sleep 5
+      #     done
 
       - name: UnitTests
-        #run: xcodebuild test -project ArigatouApp.xcodeproj -scheme ArigatouApp -sdk iphonesimulator -destination 'platform=iOS Simulator,id=00008110-000664DA0EA0401E,OS=17.4.1' -allowProvisioningUpdates
-        #run: xcodebuild test -workspace ArigatouApp.xcworkspace -scheme ArigatouApp -sdk iphonesimulator -destination 'platform=iOS Simulator,name=iPhone 15,OS=15.3.0'
         run: xcodebuild test -workspace ArigatouApp.xcworkspace -scheme ArigatouApp -sdk iphonesimulator -destination 'platform=iOS Simulator,name=iPhone 15,OS=17.2'
 
-      - name: Clean Derived Data
-        run: rm -rf ~/Library/Developer/Xcode/DerivedData
+      # - name: Clean Derived Data
+      #   run: rm -rf ~/Library/Developer/Xcode/DerivedData
 
-      - name: Clean Xcode Caches
-        run: rm -rf ~/Library/Caches/com.apple.dt.Xcode
+      # - name: Clean Xcode Caches
+      #   run: rm -rf ~/Library/Caches/com.apple.dt.Xcode
 
-      - name: Clean CoreSimulator 
-        run: rm -rf ~/Library/Developer/CoreSimulator
+      # - name: Clean CoreSimulator 
+      #   run: rm -rf ~/Library/Developer/CoreSimulator
 
       - name: Save test results
         if: failure()
