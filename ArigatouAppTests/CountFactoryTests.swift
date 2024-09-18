@@ -5,6 +5,7 @@
 //  Created by pero on 2024/06/27.
 //
 
+
 import XCTest
 @testable import ArigatouApp
 
@@ -34,7 +35,11 @@ final class CountFactoryTests: XCTestCase {
     }
     
     func testDailyCounter() {
-        let dailyCounter = factory.create(type: .daily)
+        let dailyCounter = factory.create(type: .daily, defaults: testUserDefaults)
+        
+        // UserDefaultsにまだデータがない場合
+        var result = dailyCounter.minDate()
+        XCTAssertEqual(result, DateManager.shared.currentDateString(), "データがない場合、現在日が返されるべき")
         
         dailyCounter.setCount(for: "2023-10-01", count: 100)
         XCTAssertEqual(dailyCounter.getCount(for: "2023-10-01"), 100)
@@ -47,10 +52,18 @@ final class CountFactoryTests: XCTestCase {
         
         dailyCounter.incrementCount(for: "2023-10-02")
         XCTAssertEqual(dailyCounter.getCount(for: "2023-10-02"), 201)
+        
+        // UserDefaultsにデータが存在する場合
+        result = dailyCounter.minDate()
+        XCTAssertEqual(result, "2023-10-01", "最小日が返されるべき")
     }
     
     func testWeeklyCounter() {
-        let weeklyCounter = factory.create(type: .weekly)
+        let weeklyCounter = factory.create(type: .weekly, defaults: testUserDefaults)
+        
+        // UserDefaultsにまだデータがない場合
+        var result = weeklyCounter.minDate()
+        XCTAssertEqual(result, DateManager.shared.currentWeekString(), "データがない場合、現在週が返されるべき")
         
         weeklyCounter.setCount(for: "2023-W30", count: 100)
         XCTAssertEqual(weeklyCounter.getCount(for: "2023-W30"), 100)
@@ -63,10 +76,18 @@ final class CountFactoryTests: XCTestCase {
         
         weeklyCounter.incrementCount(for: "2023-W31")
         XCTAssertEqual(weeklyCounter.getCount(for: "2023-W31"), 201)
+        
+        // UserDefaultsにデータが存在する場合
+        result = weeklyCounter.minDate()
+        XCTAssertEqual(result, "2023-W30", "最小週が返されるべき")
     }
     
     func testMonthlyCounter() {
-        let monthlyCounter = factory.create(type: .monthly)
+        let monthlyCounter = factory.create(type: .monthly, defaults: testUserDefaults)
+        
+        // UserDefaultsにまだデータがない場合
+        var result = monthlyCounter.minDate()
+        XCTAssertEqual(result, DateManager.shared.currentMonthString(), "データがない場合、現在月が返されるべき")
         
         monthlyCounter.setCount(for: "2023-01", count: 1000)
         XCTAssertEqual(monthlyCounter.getCount(for: "2023-01"), 1000)
@@ -79,5 +100,9 @@ final class CountFactoryTests: XCTestCase {
         
         monthlyCounter.incrementCount(for: "2023-12")
         XCTAssertEqual(monthlyCounter.getCount(for: "2023-12"), 2001)
+        
+        // UserDefaultsにデータが存在する場合
+        result = monthlyCounter.minDate()
+        XCTAssertEqual(result, "2023-01", "最小月が返されるべき")
     }
 }

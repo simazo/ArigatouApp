@@ -28,7 +28,8 @@ class DailyCounter: Counter {
     }
     
     /// UserDefaultsから最小日付を返す
-    /// アプリインストール直後など、まだ日付が存在しない場合は現在日を返す
+    /// アプリインストール直後などまだ日付が存在しない場合は現在日を返す
+    /// nilを返すことはありません
     func minDate() -> String{
         if let dailyCount = defaults.dictionary(forKey: UserDefaultsKeys.DAILY_COUNT) as? [String: Int] {
             if let minDateString = dailyCount.keys.min() {

@@ -40,7 +40,8 @@ class WeeklyCounter: Counter {
     }
     
     /// UserDefaultsから最小週を返す
-    /// アプリインストール直後など、まだ週が存在しない場合は現在週を返す
+    /// アプリインストール直後などまだ週が存在しない場合は現在週を返す
+    /// nilを返すことはありません
     func minDate() -> String{
         if let weeklyCount = defaults.dictionary(forKey: UserDefaultsKeys.WEEKLY_COUNT) as? [String: Int] {
             if let minDateString = weeklyCount.keys.min() {

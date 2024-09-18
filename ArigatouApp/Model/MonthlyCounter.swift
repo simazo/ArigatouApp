@@ -40,7 +40,8 @@ class MonthlyCounter: Counter {
     }
     
     /// UserDefaultsから最小月を返す
-    /// アプリインストール直後など、まだ月が存在しない場合は現在月を返す
+    /// アプリインストール直後などまだ月が存在しない場合は現在月を返す
+    ///  nilを返すことはありません
     func minDate() -> String{
         if let monthlyCount = defaults.dictionary(forKey: UserDefaultsKeys.MONTHLY_COUNT) as? [String: Int] {
             if let minDateString = monthlyCount.keys.min() {
