@@ -123,8 +123,6 @@ extension DailyRecordPresenter: DailyRecordPresenterInput {
 
         let currentWeekdayIndex = calendar.component(.weekday, from: currentDate) - 1
         chartData[currentWeekdayIndex].date = DateManager.shared.currentDateString(date: currentDate)
-        
-        print("Starting fillDate with includedDate: \(includedDate), minDate: \(minDate)")
 
         // 基準日から日曜に向かって日付をセット
         for i in stride(from: currentWeekdayIndex, to: 0, by: -1) {
@@ -136,34 +134,17 @@ extension DailyRecordPresenter: DailyRecordPresenterInput {
                 break
             }
             chartData[i - 1].date = DateManager.shared.currentDateString(date: currentDate)
-            print("Setting date at index \(i - 1): \(currentDate)")
         }
         
         // 基準日から土曜までの日付をセット、現在日を超えないようにする
         currentDate = includedDate
-        /*
         for i in currentWeekdayIndex..<chartData.count - 1 {
             guard let nextDate = calendar.date(byAdding: .day, value: 1, to: currentDate),
                   calendar.startOfDay(for: nextDate) <= today else {
-                print("Next date \(nextDate) is after today \(today). Breaking loop.")
                 break
             }
             currentDate = nextDate
             chartData[i + 1].date = DateManager.shared.currentDateString(date: currentDate)
-        }*/
-        for i in currentWeekdayIndex..<chartData.count - 1 {
-            if let nextDate = calendar.date(byAdding: .day, value: 1, to: currentDate) {
-                if calendar.startOfDay(for: nextDate) > today {
-                    print("Next date \(nextDate) is after today \(today). Breaking loop.")
-                    break
-                }
-                currentDate = nextDate
-                chartData[i + 1].date = DateManager.shared.currentDateString(date: currentDate)
-                print("Setting date at index \(i + 1): \(currentDate)")
-            } else {
-                print("Failed to compute nextDate from currentDate \(currentDate).")
-                break
-            }
         }
     }
     
