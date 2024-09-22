@@ -15,6 +15,7 @@
 		CC242F4A2C44A5BE0085CB74 /* DailyRecordPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC242F492C44A5BE0085CB74 /* DailyRecordPresenter.swift */; };
 		CC242F4C2C44B4300085CB74 /* DailyRecordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC242F4B2C44B4300085CB74 /* DailyRecordView.swift */; };
 		CC52B30B2C91626E0011923D /* DailyRecordPresenterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC52B30A2C91626E0011923D /* DailyRecordPresenterTests.swift */; };
+		CC52B30D2C9CE9E60011923D /* WeeklyRecordPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC52B30C2C9CE9E60011923D /* WeeklyRecordPresenter.swift */; };
 		CC55BF502BC9028D003C3E15 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC55BF4F2BC9028D003C3E15 /* AppDelegate.swift */; };
 		CC55BF522BC9028D003C3E15 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC55BF512BC9028D003C3E15 /* SceneDelegate.swift */; };
 		CC55BF542BC9028D003C3E15 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC55BF532BC9028D003C3E15 /* HomeViewController.swift */; };
@@ -84,6 +85,7 @@
 		CC242F492C44A5BE0085CB74 /* DailyRecordPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyRecordPresenter.swift; sourceTree = "<group>"; };
 		CC242F4B2C44B4300085CB74 /* DailyRecordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyRecordView.swift; sourceTree = "<group>"; };
 		CC52B30A2C91626E0011923D /* DailyRecordPresenterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyRecordPresenterTests.swift; sourceTree = "<group>"; };
+		CC52B30C2C9CE9E60011923D /* WeeklyRecordPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeeklyRecordPresenter.swift; sourceTree = "<group>"; };
 		CC55BF4C2BC9028D003C3E15 /* ArigatouApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ArigatouApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CC55BF4F2BC9028D003C3E15 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CC55BF512BC9028D003C3E15 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -247,6 +249,7 @@
 				CCA1F9DD2C0046BA008DCF70 /* ValidationPresenter.swift */,
 				CCB900632C3ABA7C003CDDE0 /* TodayRecordPresenter.swift */,
 				CC242F492C44A5BE0085CB74 /* DailyRecordPresenter.swift */,
+				CC52B30C2C9CE9E60011923D /* WeeklyRecordPresenter.swift */,
 			);
 			path = Presenter;
 			sourceTree = "<group>";
@@ -488,6 +491,7 @@
 				CC242F4C2C44B4300085CB74 /* DailyRecordView.swift in Sources */,
 				CCA1F9E02C006731008DCF70 /* SignupViewController.swift in Sources */,
 				CCA1F9EB2C0548E4008DCF70 /* SynchronizedViewController.swift in Sources */,
+				CC52B30D2C9CE9E60011923D /* WeeklyRecordPresenter.swift in Sources */,
 				CCA1F9EF2C059D74008DCF70 /* Count.swift in Sources */,
 				CCFB7E142BF18D6F00C4617A /* NetworkManager.swift in Sources */,
 				CCFB7E3C2BFB1AF600C4617A /* Alert.swift in Sources */,

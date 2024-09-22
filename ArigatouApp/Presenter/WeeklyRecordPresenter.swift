@@ -1,66 +1,65 @@
 //
-//  DailyRecordPresenter.swift
+//  WeeklyRecordPresenter.swift
 //  ArigatouApp
 //
-//  Created by pero on 2024/07/15.
+//  Created by pero on 2024/09/20.
 //
 
 import Foundation
 
-protocol DailyRecordPresenterInput: AnyObject {
+protocol WeeklyRecordPresenterInput: AnyObject {
     func viewWillAppear()
-    func next() -> Date
-    func prev() -> Date
+    func next() -> (year: Int, weekNumber: Int)
+    func prev() -> (year: Int, weekNumber: Int)
     func fillChartData(from baseDate: Date)
 }
 
-protocol DailyRecordPresenterOutput: AnyObject {
+protocol WeeklyRecordPresenterOutput: AnyObject {
     func showChart(with dailyCounts: [String: Int])
     func enableNextButton(_ isEnable: Bool)
     func enablePrevButton(_ isEnable: Bool)
 }
 
-class DailyRecordPresenter {
-    private weak var view: DailyRecordPresenterOutput?
+class WeeklyRecordPresenter {
+    private weak var view: WeeklyRecordPresenterOutput?
     
-    public var chartData: [(day: String, date: String, count: Int)] = [
-        ("日曜日", "", 0),
-        ("月曜日", "", 0),
-        ("火曜日", "", 0),
-        ("水曜日", "", 0),
-        ("木曜日", "", 0),
-        ("金曜日", "", 0),
-        ("土曜日", "", 0)
+    public var chartData: [(week: String, fromDate: String, fromTo: String, count: Int)] = [
+        ("1周目", "", "", 0),
+        ("2周目", "", "", 0),
+        ("3周目", "", "", 0),
+        ("4周目", "", "", 0),
+        ("5周目", "", "", 0)
     ]
-
+    
     private var calendar = Calendar(identifier: .gregorian)
-    private var currentDate: Date
-    private var today: Date
+    private var currentWeek: String
+    private var thisWeek: String
     
     private let factory = CounterFactory()
-    private var dailyCounter: Counter!
+    private var weeklyCounter: Counter!
     
-    init(view: DailyRecordPresenterOutput, today: Date = Date(), defaults: UserDefaults = .standard) {
+    init(view: WeeklyRecordPresenterOutput, thisWeek: String, defaults: UserDefaults = .standard) {
         self.view = view
-        self.today = today //Date()とせず、わざわざ渡す理由はDIでテストしやすくするため
-        self.currentDate = today
+        self.thisWeek = thisWeek
+        self.currentWeek = thisWeek
 
-        dailyCounter = factory.create(type: .daily, defaults: defaults)
+        weeklyCounter = factory.create(type: .weekly, defaults: defaults)
     }
 }
 
-extension DailyRecordPresenter: DailyRecordPresenterInput {
+/*
+extension WeeklyRecordPresenter: WeeklyRecordPresenterInput {
     
-    /// currentDateの１週間後の日付を返す
-    func next() -> Date {
-        currentDate =  calendar.date(byAdding: .day, value: 7, to: currentDate)!
-        return currentDate
+    /// currentWeekの翌週を返す
+    func next() -> String {
+        currentWeek = DateManager.shared.nextWeek(from: currentWeek)
+        return currentWeek
     }
     
     /// currentDateの１週間前の日付を返す
-    func prev() -> Date {
-        currentDate = calendar.date(byAdding: .day, value: -7, to: currentDate)!
-        return currentDate
+    func prev() -> String {
+        currentWeek = DateManager.shared.previousWeek(from: currentWeek)
+        return currentWeek
     }
     
     func viewWillAppear() {
@@ -156,3 +155,4 @@ extension DailyRecordPresenter: DailyRecordPresenterInput {
     }
 }
 
+*/
