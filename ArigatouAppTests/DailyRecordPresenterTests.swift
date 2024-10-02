@@ -38,8 +38,10 @@ class DailyRecordPresenterTests: XCTestCase {
         testUserDefaults = UserDefaults(suiteName: "testSuite")
         dailyCounter = factory.create(type: .daily, defaults: testUserDefaults)
         
-        // テストデータとしてアプリ開始日を2024年8月27日（火曜日）、アプリ起動（現在日）を2024年9月５日（木曜）とする
+        // アプリ開始日を2024年8月27日（火曜日）とする
         dailyCounter.setCount(for: "2024-08-22", count: 100)
+        
+        // アプリ起動（現在日）を2024年9月５日（木曜）とする
         todayDate = Calendar.current.date(from: DateComponents(year: 2024, month: 9, day: 5))
         
         presenter = DailyRecordPresenter(view: mock, today: todayDate, defaults: testUserDefaults)

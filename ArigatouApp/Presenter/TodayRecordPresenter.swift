@@ -37,10 +37,10 @@ extension TodayRecordPresenter: TodayRecordPresenterInput {
         let yesterday = Calendar.current.date(byAdding: .day,value: -1, to: Date())!
         
         let todayCount = dailyCounter.getCount(
-            for: dateManager.currentDateString()
+            for: dateManager.formattedDateString()
         )
         let yesterDayCount = dailyCounter.getCount(
-            for: dateManager.currentDateString(date: yesterday)
+            for: dateManager.formattedDateString(date: yesterday)
         )
         self.view?.showTodayRecord(count: todayCount)
         self.view?.showYesterdayRecord(count: yesterDayCount)

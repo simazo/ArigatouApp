@@ -48,7 +48,7 @@ class WeeklyCounter: Counter {
                 return minDateString
             }
         }
-        return DateManager.shared.currentWeekString()
+        return DateManager.shared.formattedWeekString()
     }
     
     func setCount(_ count: Int) {

@@ -48,7 +48,7 @@ class MonthlyCounter: Counter {
                 return minDateString
             }
         }
-        return DateManager.shared.currentMonthString()
+        return DateManager.shared.formattedMonthString()
     }
     
     func setCount(_ count: Int) {
