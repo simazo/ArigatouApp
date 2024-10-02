@@ -59,6 +59,7 @@
 		CCDEAE202BE866270096704A /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = CCDEAE1F2BE866270096704A /* FirebaseAuth */; };
 		CCDEAE222BE866270096704A /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = CCDEAE212BE866270096704A /* FirebaseFirestore */; };
 		CCDEAE242BE89D430096704A /* FirebaseFirestoreSwift in Frameworks */ = {isa = PBXBuildFile; productRef = CCDEAE232BE89D430096704A /* FirebaseFirestoreSwift */; };
+		CCE7F9832CA499FB0070E65D /* WeeklyRecordPresenterTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCE7F9822CA499FB0070E65D /* WeeklyRecordPresenterTest.swift */; };
 		CCFB7DD52BED9C1300C4617A /* AuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCFB7DD42BED9C1300C4617A /* AuthManager.swift */; };
 		CCFB7DD72BF17A8300C4617A /* VideoList.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCFB7DD62BF17A8300C4617A /* VideoList.swift */; };
 		CCFB7E142BF18D6F00C4617A /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCFB7E132BF18D6F00C4617A /* NetworkManager.swift */; };
@@ -125,6 +126,7 @@
 		CCDEAE142BE514630096704A /* NaviMenuTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NaviMenuTableView.swift; sourceTree = "<group>"; };
 		CCDEAE162BE6BD350096704A /* Validator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Validator.swift; sourceTree = "<group>"; };
 		CCDEAE182BE6BE330096704A /* LoginPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginPresenter.swift; sourceTree = "<group>"; };
+		CCE7F9822CA499FB0070E65D /* WeeklyRecordPresenterTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeeklyRecordPresenterTest.swift; sourceTree = "<group>"; };
 		CCFB7DD42BED9C1300C4617A /* AuthManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthManager.swift; sourceTree = "<group>"; };
 		CCFB7DD62BF17A8300C4617A /* VideoList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoList.swift; sourceTree = "<group>"; };
 		CCFB7E132BF18D6F00C4617A /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
@@ -286,6 +288,7 @@
 			children = (
 				CC55BFF62BCE9C2D003C3E15 /* HomePresenterTests.swift */,
 				CC52B30A2C91626E0011923D /* DailyRecordPresenterTests.swift */,
+				CCE7F9822CA499FB0070E65D /* WeeklyRecordPresenterTest.swift */,
 				CCA600C32C2CBA0A00C72A85 /* CountFactoryTests.swift */,
 				CC1067082C375FD7005B3BDD /* DateManagerTests.swift */,
 			);
@@ -519,6 +522,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CCE7F9832CA499FB0070E65D /* WeeklyRecordPresenterTest.swift in Sources */,
 				CCA600C42C2CBA0A00C72A85 /* CountFactoryTests.swift in Sources */,
 				CC1067092C375FD7005B3BDD /* DateManagerTests.swift in Sources */,
 				CC55BFF72BCE9C2D003C3E15 /* HomePresenterTests.swift in Sources */,
@@ -686,6 +690,7 @@
 				INFOPLIST_KEY_NSSpeechRecognitionUsageDescription = "音声データは匿名化され、個人情報は含まず、保存されることもありません。";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UIStatusBarStyle = "";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
@@ -723,6 +728,7 @@
 				INFOPLIST_KEY_NSSpeechRecognitionUsageDescription = "音声データは匿名化され、個人情報は含まず、保存されることもありません。";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UIStatusBarStyle = "";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;

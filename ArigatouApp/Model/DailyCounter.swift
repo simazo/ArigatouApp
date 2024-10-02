@@ -36,7 +36,7 @@ class DailyCounter: Counter {
                 return minDateString
             }
         }
-        return DateManager.shared.currentDateString()
+        return DateManager.shared.formattedDateString()
     }
 
     func incrementCount(for key: String) {

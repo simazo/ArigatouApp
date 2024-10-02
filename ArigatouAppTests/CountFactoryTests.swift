@@ -39,7 +39,7 @@ final class CountFactoryTests: XCTestCase {
         
         // UserDefaultsにまだデータがない場合
         var result = dailyCounter.minDate()
-        XCTAssertEqual(result, DateManager.shared.currentDateString(), "データがない場合、現在日が返されるべき")
+        XCTAssertEqual(result, DateManager.shared.formattedDateString(), "データがない場合、現在日が返されるべき")
         
         dailyCounter.setCount(for: "2023-10-01", count: 100)
         XCTAssertEqual(dailyCounter.getCount(for: "2023-10-01"), 100)
@@ -63,7 +63,7 @@ final class CountFactoryTests: XCTestCase {
         
         // UserDefaultsにまだデータがない場合
         var result = weeklyCounter.minDate()
-        XCTAssertEqual(result, DateManager.shared.currentWeekString(), "データがない場合、現在週が返されるべき")
+        XCTAssertEqual(result, DateManager.shared.formattedWeekString(), "データがない場合、現在週が返されるべき")
         
         weeklyCounter.setCount(for: "2023-W30", count: 100)
         XCTAssertEqual(weeklyCounter.getCount(for: "2023-W30"), 100)
@@ -87,7 +87,7 @@ final class CountFactoryTests: XCTestCase {
         
         // UserDefaultsにまだデータがない場合
         var result = monthlyCounter.minDate()
-        XCTAssertEqual(result, DateManager.shared.currentMonthString(), "データがない場合、現在月が返されるべき")
+        XCTAssertEqual(result, DateManager.shared.formattedMonthString(), "データがない場合、現在月が返されるべき")
         
         monthlyCounter.setCount(for: "2023-01", count: 1000)
         XCTAssertEqual(monthlyCounter.getCount(for: "2023-01"), 1000)

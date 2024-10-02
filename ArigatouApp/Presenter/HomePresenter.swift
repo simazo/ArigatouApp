@@ -59,9 +59,9 @@ class HomePresenter{
     
     private func incrementCount() {
         totalCounter.incrementCount()
-        dailyCounter.incrementCount(for: dateManager.currentDateString())
-        weeklyCounter.incrementCount(for: dateManager.currentWeekString())
-        monthlyCounter.incrementCount(for: dateManager.currentMonthString())
+        dailyCounter.incrementCount(for: dateManager.formattedDateString())
+        weeklyCounter.incrementCount(for: dateManager.formattedWeekString())
+        monthlyCounter.incrementCount(for: dateManager.formattedMonthString())
     }
     
     /// マイク使用許可の確認

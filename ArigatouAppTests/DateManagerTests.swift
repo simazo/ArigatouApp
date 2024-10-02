@@ -12,12 +12,12 @@ class DateManagerTests: XCTestCase {
     
     private let dateManager = DateManager.shared
     
-    func testCurrentDateString() {
+    func testFormattedDateString() {
         // 任意の日付でテスト
         let testDate = Calendar.current.date(from: DateComponents(year: 2024, month: 7, day: 2))!
         let expectedDateString = "2024-07-02"
         
-        XCTAssertEqual(dateManager.currentDateString(date: testDate), expectedDateString)
+        XCTAssertEqual(dateManager.formattedDateString(date: testDate), expectedDateString)
         
         // 現在日でテスト
         let currentDate = Date()
@@ -26,24 +26,24 @@ class DateManagerTests: XCTestCase {
         dateFormatter.timeZone = TimeZone(identifier: "Asia/Tokyo")!
         dateFormatter.locale = Locale(identifier: "ja_JP")
         dateFormatter.dateFormat = "yyyy-MM-dd"
-        let currentDateString = dateFormatter.string(from: currentDate)
+        let todayString = dateFormatter.string(from: currentDate)
         
-        XCTAssertEqual(dateManager.currentDateString(), currentDateString)
+        XCTAssertEqual(dateManager.formattedDateString(), todayString)
             
     }
     
-    func testCurrentWeekString() {
+    func testFormattedWeekString() {
         // 週の境目でテスト
         var testDate = Calendar.current.date(from: DateComponents(year: 2024, month: 6, day: 30))!
         var expectedWeekString = "2024-W27"
         
-        XCTAssertEqual(dateManager.currentWeekString(date: testDate), expectedWeekString)
+        XCTAssertEqual(dateManager.formattedWeekString(date: testDate), expectedWeekString)
         
         // 週の境目でテスト
         testDate = Calendar.current.date(from: DateComponents(year: 2024, month: 6, day: 29))!
         expectedWeekString = "2024-W26"
         
-        XCTAssertEqual(dateManager.currentWeekString(date: testDate), expectedWeekString)
+        XCTAssertEqual(dateManager.formattedWeekString(date: testDate), expectedWeekString)
        
         // 現在の週でのテスト
         let currentDate = Date()
@@ -57,15 +57,15 @@ class DateManagerTests: XCTestCase {
         let currentWeekOfYear = calendarWithLocale.component(.weekOfYear, from: currentDate)
         let currentWeekString = String(format: "%d-W%02d", currentYear, currentWeekOfYear)
         
-        XCTAssertEqual(dateManager.currentWeekString(), currentWeekString)
+        XCTAssertEqual(dateManager.formattedWeekString(), currentWeekString)
     }
     
-    func testCurrentMonthString() {
+    func testFormattedMonthString() {
         // 任意の月でテスト
         let testDate = Calendar.current.date(from: DateComponents(year: 2023, month: 7, day: 2))!
         let expectedMonthString = "2023-07"
         
-        XCTAssertEqual(dateManager.currentMonthString(date: testDate), expectedMonthString)
+        XCTAssertEqual(dateManager.formattedMonthString(date: testDate), expectedMonthString)
         
         // 現在の月でのテスト
         let currentDate = Date()
@@ -76,7 +76,7 @@ class DateManagerTests: XCTestCase {
         dateFormatter.dateFormat = "yyyy-MM"
         let currentMonthString = dateFormatter.string(from: currentDate)
         
-        XCTAssertEqual(dateManager.currentMonthString(), currentMonthString)
+        XCTAssertEqual(dateManager.formattedMonthString(), currentMonthString)
     }
     
     func testNextWeek(){
@@ -98,7 +98,7 @@ class DateManagerTests: XCTestCase {
             //"2024-W99", // 無効な週番号
         ]
         
-        currentWeek = dateManager.currentWeekString()
+        currentWeek = dateManager.formattedWeekString()
         // 各不正な週番号についてテスト
         for invalidWeek in invalidWeeks {
             let result = dateManager.nextWeek(from: invalidWeek)
@@ -130,7 +130,7 @@ class DateManagerTests: XCTestCase {
             //"2024-W99", // 無効な週番号
         ]
         
-        currentWeek = dateManager.currentWeekString()
+        currentWeek = dateManager.formattedWeekString()
         // 各不正な週番号についてテスト
         for invalidWeek in invalidWeeks {
             let result = dateManager.previousWeek(from: invalidWeek)
@@ -138,5 +138,48 @@ class DateManagerTests: XCTestCase {
         }
     }
     
+    func testExtractYearAndWeek(){
+        
+        var result = dateManager.extractYearAndWeek(from: "2024-W05")
+        XCTAssertEqual(result.year, 2024)
+        XCTAssertEqual(result.week, 5)
+        
+        
+        result = dateManager.extractYearAndWeek(from: "2023-W52")
+        XCTAssertEqual(result.year, 2023)
+        XCTAssertEqual(result.week, 52)
+        
+        let invalidWeeks = [
+            "invalid", // フォーマットエラー
+            "2024-W",  // 不完全なフォーマット
+        ]
+        // 各不正な週番号についてテスト
+        for invalidWeek in invalidWeeks {
+            let result = dateManager.extractYearAndWeek(from: invalidWeek)
+            XCTAssertEqual(result.year, 1900)
+            XCTAssertEqual(result.week, 1)
+        }
+    }
     
+    func testWeeksDifference(){
+        var result = dateManager.weeksDifference(from: "2024-W12", to: "2024-W14")
+        XCTAssertEqual(result, 2, "Expected difference to be 2 weeks")
+        
+        // 年またぎ
+        result = dateManager.weeksDifference(from: "2023-W52", to: "2024-W01")
+        XCTAssertEqual(result, 1, "Expected difference to be 1 week")
+    
+        // うるう年
+        result = dateManager.weeksDifference(from: "2020-W52", to: "2021-W01")
+        XCTAssertEqual(result, 1, "Expected difference to be 1 week")
+        
+        // 逆方向
+        result = dateManager.weeksDifference(from: "2024-W14", to: "2024-W12")
+        XCTAssertEqual(result, -2, "Expected difference to be -2 weeks")
+        
+        // 差が０
+        result = dateManager.weeksDifference(from: "2024-W12", to: "2024-W12")
+        XCTAssertEqual(result, 0, "Expected difference to be 0 weeks")
+        
+    }
 }
