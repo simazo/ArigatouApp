@@ -130,56 +130,36 @@ class DateManagerTests: XCTestCase {
             //"2024-W99", // 無効な週番号
         ]
         
-        currentWeek = dateManager.formattedWeekString()
         // 各不正な週番号についてテスト
         for invalidWeek in invalidWeeks {
-            let result = dateManager.previousWeek(from: invalidWeek)
-            XCTAssertEqual(result, "", "無効な週番号 \(invalidWeek) では空文字が返るべき")
+            let result = dateManager.previousMonth(from: invalidWeek)
+            XCTAssertEqual(result, "", "無効な年月 \(invalidWeek) では空文字が返るべき")
         }
     }
     
-    func testExtractYearAndWeek(){
+    func testPreviousMonth(){
+        var currentMonth = "2024-07"
+        var result = dateManager.previousMonth(from: currentMonth)
+        XCTAssertEqual(result, "2024-06", "先月が返ること")
         
-        var result = dateManager.extractYearAndWeek(from: "2024-W05")
-        XCTAssertEqual(result.year, 2024)
-        XCTAssertEqual(result.week, 5)
+        currentMonth = "2025-01" // 翌年の始め
+        result = dateManager.previousMonth(from: currentMonth)
+        XCTAssertEqual(result, "2024-12", "前年の最後の月が返ること")
         
+        currentMonth = "2024-01" // 年の始め
+        result = dateManager.previousMonth(from: currentMonth)
+        XCTAssertEqual(result, "2023-12", "前年の最後の月が返ること")
         
-        result = dateManager.extractYearAndWeek(from: "2023-W52")
-        XCTAssertEqual(result.year, 2023)
-        XCTAssertEqual(result.week, 52)
-        
-        let invalidWeeks = [
+        // 不正な年月
+        let invalidMonths = [
             "invalid", // フォーマットエラー
-            "2024-W",  // 不完全なフォーマット
+            "2024-",  // 不完全なフォーマット
         ]
+        
         // 各不正な週番号についてテスト
-        for invalidWeek in invalidWeeks {
-            let result = dateManager.extractYearAndWeek(from: invalidWeek)
-            XCTAssertEqual(result.year, 1900)
-            XCTAssertEqual(result.week, 1)
+        for month in invalidMonths {
+            let result = dateManager.previousWeek(from: month)
+            XCTAssertEqual(result, "", "無効な週番号 \(month) では空文字が返るべき")
         }
-    }
-    
-    func testWeeksDifference(){
-        var result = dateManager.weeksDifference(from: "2024-W12", to: "2024-W14")
-        XCTAssertEqual(result, 2, "Expected difference to be 2 weeks")
-        
-        // 年またぎ
-        result = dateManager.weeksDifference(from: "2023-W52", to: "2024-W01")
-        XCTAssertEqual(result, 1, "Expected difference to be 1 week")
-    
-        // うるう年
-        result = dateManager.weeksDifference(from: "2020-W52", to: "2021-W01")
-        XCTAssertEqual(result, 1, "Expected difference to be 1 week")
-        
-        // 逆方向
-        result = dateManager.weeksDifference(from: "2024-W14", to: "2024-W12")
-        XCTAssertEqual(result, -2, "Expected difference to be -2 weeks")
-        
-        // 差が０
-        result = dateManager.weeksDifference(from: "2024-W12", to: "2024-W12")
-        XCTAssertEqual(result, 0, "Expected difference to be 0 weeks")
-        
     }
 }

@@ -1,16 +1,16 @@
 //
-//  WeeklyRecordPresenterTest.swift
+//  MonthlyRecordPresenterTest.swift
 //  ArigatouAppTests
 //
-//  Created by pero on 2024/09/26.
+//  Created by pero on 2024/10/02.
 //
 
 import XCTest
 @testable import ArigatouApp
 
-class WeeklyRecordPresenterTest: XCTestCase {
+class MonthlyRecordPresenterTest: XCTestCase {
     
-    class MockPresenterOutput: WeeklyRecordPresenterOutput {
+    class MockPresenterOutput: MonthlyRecordPresenterOutput {
         func showChart(with dailyCounts: [String : Int]) {}
         
         var isNextButtonEnabled: Bool?
@@ -23,28 +23,28 @@ class WeeklyRecordPresenterTest: XCTestCase {
         }
     }
     
-    var presenter: WeeklyRecordPresenter!
+    var presenter: MonthlyRecordPresenter!
     var mock: MockPresenterOutput!
     
     var testUserDefaults: UserDefaults!
     let factory = CounterFactory()
-    private var weeklyCounter: Counter!
+    private var monthlyCounter: Counter!
     
-    var thisWeek: String = ""
+    var thisYearMonth: String = ""
     
     override func setUp() {
         super.setUp()
         mock = MockPresenterOutput()
         testUserDefaults = UserDefaults(suiteName: "testSuite")
-        weeklyCounter = factory.create(type: .weekly, defaults: testUserDefaults)
+        monthlyCounter = factory.create(type: .monthly, defaults: testUserDefaults)
         
         // アプリ開始日
-        weeklyCounter.setCount(for: "2024-W27", count: 100)
+        monthlyCounter.setCount(for: "2024-01", count: 100)
         
         // アプリ起動（現在）
-        thisWeek = "2024-W40"
+        thisYearMonth = "2024-12"
         
-        presenter = WeeklyRecordPresenter(view: mock, thisWeek: thisWeek, defaults: testUserDefaults)
+        presenter = MonthlyRecordPresenter(view: mock, thisYearMonth: thisYearMonth, defaults: testUserDefaults)
     }
     
     override func tearDown() {
@@ -55,59 +55,59 @@ class WeeklyRecordPresenterTest: XCTestCase {
     }
     
     func testFillChartData(){
-        var week = "2024-W27"
-        presenter = WeeklyRecordPresenter(view: mock, thisWeek: week, defaults: testUserDefaults)
+        var yearMonth = "2024-04"
+        presenter = MonthlyRecordPresenter(view: mock, thisYearMonth: yearMonth, defaults: testUserDefaults)
         presenter.fillChartData()
         XCTAssertEqual(presenter.chartData.count, 5) // 5の倍数
-        XCTAssertEqual(presenter.chartData[0].weekNumber, week)
-        XCTAssertEqual(presenter.chartData[presenter.chartData.count - 1].weekNumber, "")
+        XCTAssertEqual(presenter.chartData[0].yearMonth, yearMonth)
+        XCTAssertEqual(presenter.chartData[presenter.chartData.count - 1].yearMonth, "")
         
-        week = "2024-W28"
-        presenter = WeeklyRecordPresenter(view: mock, thisWeek: week, defaults: testUserDefaults)
+        yearMonth = "2024-10"
+        presenter = MonthlyRecordPresenter(view: mock, thisYearMonth: yearMonth, defaults: testUserDefaults)
         presenter.fillChartData()
-        XCTAssertEqual(presenter.chartData.count, 5) // 5の倍数
-        XCTAssertEqual(presenter.chartData[0].weekNumber, week)
-        XCTAssertEqual(presenter.chartData[presenter.chartData.count - 1].weekNumber, "")
+        XCTAssertEqual(presenter.chartData.count, 10) // 5の倍数
+        XCTAssertEqual(presenter.chartData[0].yearMonth, yearMonth)
+        XCTAssertEqual(presenter.chartData[presenter.chartData.count - 1].yearMonth, "2024-01")
         
-        week = "2024-W52"
-        presenter = WeeklyRecordPresenter(view: mock, thisWeek: week, defaults: testUserDefaults)
+        yearMonth = "2025-01"
+        presenter = MonthlyRecordPresenter(view: mock, thisYearMonth: yearMonth, defaults: testUserDefaults)
         presenter.fillChartData()
-        XCTAssertEqual(presenter.chartData.count, 30) // 5の倍数
-        XCTAssertEqual(presenter.chartData[0].weekNumber, week)
-        XCTAssertEqual(presenter.chartData[presenter.chartData.count - 1].weekNumber, "")
+        XCTAssertEqual(presenter.chartData.count, 15) // 5の倍数
+        XCTAssertEqual(presenter.chartData[0].yearMonth, yearMonth)
+        XCTAssertEqual(presenter.chartData[presenter.chartData.count - 1].yearMonth, "")
         
     }
     
     func testFetchChartData() {
-        let week = "2024-W40"
-        presenter = WeeklyRecordPresenter(view: mock, thisWeek: week, defaults: testUserDefaults)
+        let yearMonth = "2025-01"
+        presenter = MonthlyRecordPresenter(view: mock, thisYearMonth: yearMonth, defaults: testUserDefaults)
         presenter.fillChartData()
         
         // 0ページ目
         var result = presenter.fetchChartData()
         
-        XCTAssertEqual(result[0].weekNumber, "2024-W40")
-        XCTAssertEqual(result[result.count - 1].weekNumber, "2024-W36")
+        XCTAssertEqual(result[0].yearMonth, "2025-01")
+        XCTAssertEqual(result[result.count - 1].yearMonth, "2024-09")
         
         // 1ページ目
         presenter.prev()
         result = presenter.fetchChartData()
 
-        XCTAssertEqual(result[0].weekNumber, "2024-W35")
-        XCTAssertEqual(result[result.count - 1].weekNumber, "2024-W31")
+        XCTAssertEqual(result[0].yearMonth, "2024-08")
+        XCTAssertEqual(result[result.count - 1].yearMonth, "2024-04")
         
         // ページを戻す
         presenter.next()
         result = presenter.fetchChartData()
         
-        XCTAssertEqual(result[0].weekNumber, "2024-W40")
-        XCTAssertEqual(result[result.count - 1].weekNumber, "2024-W36")
+        XCTAssertEqual(result[0].yearMonth, "2025-01")
+        XCTAssertEqual(result[result.count - 1].yearMonth, "2024-09")
         
     }
     
     func testUpdateButtonState() {
-        let week = "2024-W40"
-        presenter = WeeklyRecordPresenter(view: mock, thisWeek: week, defaults: testUserDefaults)
+        let yearMonth = "2025-01"
+        presenter = MonthlyRecordPresenter(view: mock, thisYearMonth: yearMonth, defaults: testUserDefaults)
         presenter.fillChartData()
         
         _ = presenter.fetchChartData()
@@ -148,3 +148,4 @@ class WeeklyRecordPresenterTest: XCTestCase {
     
 
 }
+
