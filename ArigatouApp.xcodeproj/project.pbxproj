@@ -60,6 +60,7 @@
 		CCDEAE222BE866270096704A /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = CCDEAE212BE866270096704A /* FirebaseFirestore */; };
 		CCDEAE242BE89D430096704A /* FirebaseFirestoreSwift in Frameworks */ = {isa = PBXBuildFile; productRef = CCDEAE232BE89D430096704A /* FirebaseFirestoreSwift */; };
 		CCE7F9832CA499FB0070E65D /* WeeklyRecordPresenterTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCE7F9822CA499FB0070E65D /* WeeklyRecordPresenterTest.swift */; };
+		CCE7F9852CAD026E0070E65D /* MonthlyRecordPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCE7F9842CAD026E0070E65D /* MonthlyRecordPresenter.swift */; };
 		CCFB7DD52BED9C1300C4617A /* AuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCFB7DD42BED9C1300C4617A /* AuthManager.swift */; };
 		CCFB7DD72BF17A8300C4617A /* VideoList.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCFB7DD62BF17A8300C4617A /* VideoList.swift */; };
 		CCFB7E142BF18D6F00C4617A /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCFB7E132BF18D6F00C4617A /* NetworkManager.swift */; };
@@ -127,6 +128,7 @@
 		CCDEAE162BE6BD350096704A /* Validator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Validator.swift; sourceTree = "<group>"; };
 		CCDEAE182BE6BE330096704A /* LoginPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginPresenter.swift; sourceTree = "<group>"; };
 		CCE7F9822CA499FB0070E65D /* WeeklyRecordPresenterTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeeklyRecordPresenterTest.swift; sourceTree = "<group>"; };
+		CCE7F9842CAD026E0070E65D /* MonthlyRecordPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonthlyRecordPresenter.swift; sourceTree = "<group>"; };
 		CCFB7DD42BED9C1300C4617A /* AuthManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthManager.swift; sourceTree = "<group>"; };
 		CCFB7DD62BF17A8300C4617A /* VideoList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoList.swift; sourceTree = "<group>"; };
 		CCFB7E132BF18D6F00C4617A /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
@@ -252,6 +254,7 @@
 				CCB900632C3ABA7C003CDDE0 /* TodayRecordPresenter.swift */,
 				CC242F492C44A5BE0085CB74 /* DailyRecordPresenter.swift */,
 				CC52B30C2C9CE9E60011923D /* WeeklyRecordPresenter.swift */,
+				CCE7F9842CAD026E0070E65D /* MonthlyRecordPresenter.swift */,
 			);
 			path = Presenter;
 			sourceTree = "<group>";
@@ -495,6 +498,7 @@
 				CCA1F9E02C006731008DCF70 /* SignupViewController.swift in Sources */,
 				CCA1F9EB2C0548E4008DCF70 /* SynchronizedViewController.swift in Sources */,
 				CC52B30D2C9CE9E60011923D /* WeeklyRecordPresenter.swift in Sources */,
+				CCE7F9852CAD026E0070E65D /* MonthlyRecordPresenter.swift in Sources */,
 				CCA1F9EF2C059D74008DCF70 /* Count.swift in Sources */,
 				CCFB7E142BF18D6F00C4617A /* NetworkManager.swift in Sources */,
 				CCFB7E3C2BFB1AF600C4617A /* Alert.swift in Sources */,

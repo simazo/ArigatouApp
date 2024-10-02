@@ -131,6 +131,48 @@ class DateManager {
         return result
     }
 
+    /// 指定された年月文字列から、指定した数の月を加算または減算した年月を計算して返します。
+    /// - Parameter monthString: "yyyy-mm" 形式の年月文字列（例: "2023-06"）。
+    /// - Parameter value: 加算または減算する月数。正の値で翌月、負の値で先月を指定します。
+    /// - Returns: 計算された年月文字列（例: "2023-07"）。無効な形式が渡された場合は、空文字を返します。
+    func month(from monthString: String, addingMonths value: Int) -> String {
+        
+        // monthString を分割して年と月を取得
+        let components = monthString.components(separatedBy: "-")
+        guard components.count == 2,
+              let year = Int(components[0]),
+              let month = Int(components[1]) else {
+            Swift.print("Invalid month format: \(monthString)")
+            return ""
+        }
+        
+        // 年と月を元に日付を作成
+        var dateComponents = DateComponents()
+        dateComponents.year = year
+        dateComponents.month = month
+        
+        // Calendarを使って日付を作成
+        guard let validDate = calendar.date(from: dateComponents) else {
+            print("Failed to create date from components: \(dateComponents)")
+            return ""
+        }
+        
+        // 月を加算または減算する
+        guard let newDate = calendar.date(byAdding: .month, value: value, to: validDate) else {
+            print("Failed to calculate the new date.")
+            return ""
+        }
+        
+        // 新しい年と月を取得
+        let newYear = calendar.component(.year, from: newDate)
+        let newMonth = calendar.component(.month, from: newDate)
+        
+        // 結果を "yyyy-mm" 形式にフォーマット
+        let result = String(format: "%04d-%02d", newYear, newMonth)
+        
+        return result
+    }
+
     /// 指定された `Date` オブジェクトに基づいて、その月を "yyyy-MM" 形式の文字列で返します。
     /// - Parameter date: 対象の日付。デフォルトでは現在の日付が使用されます。
     /// - Returns: "yyyy-MM" 形式の月を表す文字列。
