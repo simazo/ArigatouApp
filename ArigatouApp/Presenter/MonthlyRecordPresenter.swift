@@ -66,7 +66,7 @@ extension MonthlyRecordPresenter: MonthlyRecordPresenterInput {
         while currYearMonth >= minMonth {
             let count = MonthlyCounter.getCount(for: currYearMonth)
             chartData.append((yearMonth: currYearMonth, count: count))
-            currYearMonth = DateManager.shared.previousWeek(from: currYearMonth)
+            currYearMonth = DateManager.shared.previousMonth(from: currYearMonth)
         }
         
         // 5個単位になるよう調整

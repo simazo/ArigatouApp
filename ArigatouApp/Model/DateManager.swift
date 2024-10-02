@@ -131,6 +131,15 @@ class DateManager {
         return result
     }
 
+
+    /// 指定された年月（"yyyy-mm" 形式）から先月を計算して返す。
+    /// 入力が無効な場合は現在日を基準に先月を返す。
+    /// - Parameter currentWeek: "yyyy-mm" 形式の年月文字列（例: "2023-12"）。
+    /// - Returns: 先月の文字列（例: "2023-11"）。無効な形式が渡された場合は、""（空文字）を返す。
+    func previousMonth(from currentMonth: String) -> String {
+        return month(from: currentMonth, addingMonths: -1)
+    }
+    
     /// 指定された年月文字列から、指定した数の月を加算または減算した年月を計算して返します。
     /// - Parameter monthString: "yyyy-mm" 形式の年月文字列（例: "2023-06"）。
     /// - Parameter value: 加算または減算する月数。正の値で翌月、負の値で先月を指定します。
@@ -181,72 +190,9 @@ class DateManager {
         return formatter.string(from: date)
     }
     
-    /// 文字列の週番号から数値の年と週番号を抽出します。
-    ///
-    /// - パラメータ weekString: "YYYY-Www" 形式の週番号を表す文字列です。YYYY は年、Www は週番号を示します (例: "2023-W10")。
-    /// - 戻り値: 年と週番号を整数で含むタプルを返します。入力文字列が無効または解析できない場合は、エラーメッセージを出力し、デフォルト値 (1900, 1) を返します。
-    ///
-    /// - 注意: 入力文字列が期待される形式でない場合、デフォルト値 (1900, 1) が返されます。
-    ///   週番号は "W" 文字の後に続き、有効な整数である必要があります。
-    func extractYearAndWeek(from weekString: String) -> (year: Int, week: Int) {
-        // "-"で分割して、年と週番号を取得
-        let components = weekString.split(separator: "-").map { String($0) }
-        
-        // 年と週番号が正常に取得できるかをguardでチェック
-        guard components.count == 2,
-              let year = Int(components[0]),
-              let week = Int(components[1].dropFirst()) else {
-            // エラーメッセージを出力し、デフォルト値を返す
-            print("無効な入力です。デフォルト値 (1900-W01) を返します。")
-            return (1900, 1)
-        }
-        
-        return (year, week)
-    }
     
-    /// 指定された年と週番号に基づいて日付を作成します。
-    ///
-    /// - Parameters:
-    ///   - year: 週番号が属する年（例: 2024）
-    ///   - week: 年内の週番号（例: 1〜53）
-    ///
-    /// - Returns: 指定された年と週番号の最初の日（週の最初の日、通常は日曜日）の `Date` オブジェクト。
-    ///   TODO : バリデーション未対応
-    func dateFor(year: Int, week: Int) -> Date {
-        // 年と週番号を元に日付を作成
-        var dateComponents = DateComponents()
-        dateComponents.yearForWeekOfYear = year
-        dateComponents.weekOfYear = week
-        dateComponents.weekday = 1 // 日曜日に設定
-        
-        return calendar.date(from: dateComponents)!
-    }
+
     
-    /// 2つの週番号間の週の差を計算します。
-    ///
-    /// - Parameters:
-    ///   - week1: 最初の週を表す文字列（形式: "YYYY-Www"、例: "2024-W12"）
-    ///   - week2: 2つ目の週を表す文字列（形式: "YYYY-Www"、例: "2024-W14"）
-    ///
-    /// - Returns: week1 から week2 までの週の差を示す整数。
-    ///   week1 が week2 より後の場合は負の値が返され、
-    ///   どちらかの週が無効な場合は 0 が返されます。
-    func weeksDifference(from week1: String, to week2: String) -> Int {
-        let from = extractYearAndWeek(from: week1)
-        let to = extractYearAndWeek(from: week2)
-        
-        let fromDate = dateFor(year: from.year, week: from.week)
-        let toDate = dateFor(year: to.year, week: to.week)
-        
-      
-        let difference = calendar.dateComponents([.weekOfYear], from: fromDate, to: toDate)
-        
-        guard let weekDifference = difference.weekOfYear else {
-            return 0
-        }
-            
-        return weekDifference
-    }
     
 }
 
