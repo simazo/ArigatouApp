@@ -48,6 +48,8 @@ class HomePresenter{
     private var weeklyCounter: Counter!
     private var monthlyCounter: Counter!
     
+    private var isRestarting = false
+    
     init(view: HomePresenterOutput) {
         self.view = view
         
@@ -135,7 +137,6 @@ class HomePresenter{
                     // 音声認識リスタート
                     self.restartSpeech()
                 }
-                
             }
         }
         
@@ -144,8 +145,13 @@ class HomePresenter{
             self.recognitionRequest?.append(buffer)
         }
         
-        audioEngine.prepare()
-        try? audioEngine.start()
+        do {
+            audioEngine.prepare()
+            try audioEngine.start()
+        } catch {
+            print("Audio engine start error: \(error.localizedDescription)")
+            throw error
+        }
     }
     
     func filterDuplicate(previous: String, current: String) -> String {
@@ -161,23 +167,29 @@ class HomePresenter{
     }
     
     func stopSpeech() {
-        guard let task = self.recognitionTask else {
-            fatalError("Error")
+        if let task = self.recognitionTask {
+            task.cancel()
+            task.finish()
+            self.recognitionTask = nil
         }
-        task.cancel()
-        task.finish()
-        
-        self.audioEngine.inputNode.removeTap(onBus: 0)
         self.audioEngine.stop()
+        self.audioEngine.inputNode.removeTap(onBus: 0)
         self.recognitionRequest?.endAudio()
+        self.recognitionRequest = nil
     }
     
     private func restartSpeech() {
+        guard !isRestarting else { return }
+        isRestarting = true
         self.stopSpeech()
-        do {
-            try self.startSpeech()
-        } catch {
-            print("startError: \(error)")
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) { [weak self] in
+            guard let self = self else { return }
+            do {
+                try self.startSpeech()
+            } catch {
+                print("restartSpeech Error: \(error)")
+            }
+            self.isRestarting = false
         }
     }
     
