@@ -11,7 +11,7 @@ import XCTest
 class DailyRecordPresenterTests: XCTestCase {
     
     class MockPresenterOutput: DailyRecordPresenterOutput {
-        func showChart(with dailyCounts: [String : Int]) {}
+        func updateChart(with chartData: [(day: String, date: String, count: Int)]) {}
         
         var isNextButtonEnabled: Bool?
         var isPrevButtonEnabled: Bool?
