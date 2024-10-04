@@ -32,12 +32,21 @@ class TodayRecordViewController: UIViewController {
         initWeeklyRecordButton()
         initMonthlyRecordButton()
         
+        initNavigation()
+        
         presenter = TodayRecordPresenter(view: self)
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         presenter.viewWillAppear()
+    }
+    
+    private func initNavigation(){
+        self.title = ""
+        
+        // 次の画面のBackボタンを「戻る」に変更
+        self.navigationItem.backBarButtonItem = UIBarButtonItem(title:  "戻る", style:  .plain, target: nil, action: nil)
     }
     
     func initTodayCountTitleLabel() {
