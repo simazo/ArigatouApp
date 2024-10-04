@@ -110,7 +110,7 @@ class HomePresenter{
                 let filteredTranscription = self.filterDuplicate(previous: self.previousTranscription, current: currentTranscription)
                 
                 // 結果を表示
-                print(filteredTranscription)
+                //print(filteredTranscription)
 
                 self.previousTranscription = currentTranscription
                 self.view?.startMicAnimating()

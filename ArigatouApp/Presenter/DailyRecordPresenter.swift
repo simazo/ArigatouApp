@@ -15,7 +15,7 @@ protocol DailyRecordPresenterInput: AnyObject {
 }
 
 protocol DailyRecordPresenterOutput: AnyObject {
-    func showChart(with dailyCounts: [String: Int])
+    func updateChart(with chartData: [(day: String, date: String, count: Int)])
     func enableNextButton(_ isEnable: Bool)
     func enablePrevButton(_ isEnable: Bool)
 }
