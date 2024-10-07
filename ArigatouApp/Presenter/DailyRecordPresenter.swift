@@ -8,13 +8,14 @@
 import Foundation
 
 protocol DailyRecordPresenterInput: AnyObject {
-    func viewWillAppear()
     func next() -> Date
     func prev() -> Date
     func fillChartData(from baseDate: Date)
+    func averageCount() -> (count: Double, minDate: String, maxDate: String)
 }
 
 protocol DailyRecordPresenterOutput: AnyObject {
+    func updateLabel(avg:(count: Double, minDate: String, maxDate: String))
     func updateChart(with chartData: [(day: String, date: String, count: Int)])
     func enableNextButton(_ isEnable: Bool)
     func enablePrevButton(_ isEnable: Bool)
@@ -24,13 +25,13 @@ class DailyRecordPresenter {
     private weak var view: DailyRecordPresenterOutput?
     
     public var chartData: [(day: String, date: String, count: Int)] = [
-        ("日曜日", "", 0),
-        ("月曜日", "", 0),
-        ("火曜日", "", 0),
-        ("水曜日", "", 0),
-        ("木曜日", "", 0),
-        ("金曜日", "", 0),
-        ("土曜日", "", 0)
+        ("日", "", 0),
+        ("月", "", 0),
+        ("火", "", 0),
+        ("水", "", 0),
+        ("木", "", 0),
+        ("金", "", 0),
+        ("土", "", 0)
     ]
 
     private var calendar = Calendar(identifier: .gregorian)
@@ -50,6 +51,46 @@ class DailyRecordPresenter {
 }
 
 extension DailyRecordPresenter: DailyRecordPresenterInput {
+    func averageCount() -> (count: Double, minDate: String, maxDate: String) {
+        var totalCount = 0
+        var validCountEntries = 0
+        
+        var minDate: String = ""
+        var maxDate: String = ""
+        
+        for entry in chartData {
+            if !entry.date.isEmpty {
+                // count の合計を計算
+                totalCount += entry.count
+                validCountEntries += 1
+                
+                // minDateとmaxDateの設定
+                if minDate.isEmpty {
+                    minDate = entry.date
+                    maxDate = entry.date
+                } else {
+                    if entry.date < minDate {
+                        minDate = entry.date
+                    }
+                    if entry.date > maxDate {
+                        maxDate = entry.date
+                    }
+                }
+            }
+        }
+        // 有効な count の平均を計算
+        let averageCount = validCountEntries > 0 ? Double(totalCount) / Double(validCountEntries) : 0.0
+            
+        // 四捨五入して小数点第一位までにする
+        let roundedAverageCount = round(averageCount * 10) / 10
+            
+        // フォーマット
+        let minDateJP = DateManager.shared.japaneseFormattedDate(from: minDate)
+        let maxDateJP = DateManager.shared.japaneseFormattedDate(from: maxDate)
+        
+        // minDateとmaxDateは必ず値が設定されている
+        return (roundedAverageCount, minDateJP, maxDateJP)
+    }
     
     /// currentDateの１週間後の日付を返す
     func next() -> Date {
@@ -61,14 +102,6 @@ extension DailyRecordPresenter: DailyRecordPresenterInput {
     func prev() -> Date {
         currentDate = calendar.date(byAdding: .day, value: -7, to: currentDate)!
         return currentDate
-    }
-    
-    func viewWillAppear() {
-        /*
-        if let dailyCounts = UserDefaults.standard.dictionary(forKey: UserDefaultsKeys.DAILY_COUNT) as? [String: Int] {
-            self.view?.showChart(with: dailyCounts)
-        }
-         */
     }
     
     /// chartDataに日付とカウント数を設定する
@@ -98,7 +131,7 @@ extension DailyRecordPresenter: DailyRecordPresenterInput {
             self.view?.enablePrevButton(currentDay > earliestDay)
         }
         
-        print("Debug DailyRecord chartData: \(chartData)")
+        //print("Debug DailyRecord chartData: \(chartData)")
     }
 
     /// chartDataの初期化

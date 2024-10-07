@@ -11,6 +11,10 @@ import XCTest
 class DailyRecordPresenterTests: XCTestCase {
     
     class MockPresenterOutput: DailyRecordPresenterOutput {
+        func updateLabel(avg: (count: Double, minDate: String, maxDate: String)) {
+        }
+
+        
         func updateChart(with chartData: [(day: String, date: String, count: Int)]) {}
         
         var isNextButtonEnabled: Bool?
@@ -114,5 +118,36 @@ class DailyRecordPresenterTests: XCTestCase {
         XCTAssertEqual(mock.isPrevButtonEnabled, false) // 開始日まで達したので無効
     }
     
+    func testAverageCount() {
+        
+        // 1件のみでテスト
+        todayDate = Calendar.current.date(from: DateComponents(year: 2024, month: 8, day: 22))
+        
+        // 8/18〜8/24の週
+        presenter = DailyRecordPresenter(view: mock, today: todayDate, defaults: testUserDefaults)
+        presenter.fillChartData(from: todayDate)
+        
+        var result = presenter.averageCount()
+        XCTAssertEqual(result.count, 100)
+        XCTAssertEqual(result.minDate, "2024-08-22")
+        XCTAssertEqual(result.maxDate, "2024-08-22")
+        
+        //複数件でテスト
+        // setUpで2024-08-22, count:100
+        dailyCounter.setCount(for: "2024-08-23", count: 200)
+        dailyCounter.setCount(for: "2024-08-24", count: 300)
+        
+        // アプリ起動
+        todayDate = Calendar.current.date(from: DateComponents(year: 2024, month: 8, day: 24))
+        
+        // 8/18〜8/24の週
+        presenter = DailyRecordPresenter(view: mock, today: todayDate, defaults: testUserDefaults)
+        presenter.fillChartData(from: todayDate)
+        
+        result = presenter.averageCount()
+        XCTAssertEqual(result.count, 200)
+        XCTAssertEqual(result.minDate, "2024-08-22")
+        XCTAssertEqual(result.maxDate, "2024-08-24")
+    }
 }
 
