@@ -119,7 +119,6 @@ class DailyRecordPresenterTests: XCTestCase {
     }
     
     func testAverageCount() {
-        
         // 1件のみでテスト
         todayDate = Calendar.current.date(from: DateComponents(year: 2024, month: 8, day: 22))
         
@@ -129,14 +128,14 @@ class DailyRecordPresenterTests: XCTestCase {
         
         var result = presenter.averageCount()
         XCTAssertEqual(result.count, 100)
-        XCTAssertEqual(result.minDate, "2024-08-22")
-        XCTAssertEqual(result.maxDate, "2024-08-22")
+        XCTAssertEqual(result.minDate, "2024年08月22日")
+        XCTAssertEqual(result.maxDate, "2024年08月22日")
         
         //複数件でテスト
         // setUpで2024-08-22, count:100
         dailyCounter.setCount(for: "2024-08-23", count: 200)
         dailyCounter.setCount(for: "2024-08-24", count: 300)
-        
+
         // アプリ起動
         todayDate = Calendar.current.date(from: DateComponents(year: 2024, month: 8, day: 24))
         
@@ -146,8 +145,8 @@ class DailyRecordPresenterTests: XCTestCase {
         
         result = presenter.averageCount()
         XCTAssertEqual(result.count, 200)
-        XCTAssertEqual(result.minDate, "2024-08-22")
-        XCTAssertEqual(result.maxDate, "2024-08-24")
+        XCTAssertEqual(result.minDate, "2024年08月22日")
+        XCTAssertEqual(result.maxDate, "2024年08月24日")
     }
 }
 

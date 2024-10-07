@@ -108,6 +108,7 @@ extension DailyRecordPresenter: DailyRecordPresenterInput {
     func fillChartData(from baseDate: Date){
         fillDate(from: baseDate)
         fillCount()
+        //print("Debug DailyRecord chartData: \(chartData)")
     }
     
     /// ボタン制御
