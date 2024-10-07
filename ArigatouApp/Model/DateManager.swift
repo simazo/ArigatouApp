@@ -39,6 +39,19 @@ class DateManager {
         return formatter.string(from: date)
     }
     
+    /// 指定された "yyyy-MM-dd" 形式の日付文字列を "yyyy年MM月dd日" 形式に変換して返します。
+    /// - Parameter dateString: "yyyy-MM-dd" 形式の日付を表す文字列。
+    /// - Returns: "yyyy年MM月dd日" 形式の日付を表す文字列。変換に失敗した場合は空文字を返します。
+    func japaneseFormattedDate(from dateString: String) -> String {
+        // "yyyy-MM-dd" 形式のDateFormatterを使ってDate型に変換
+        let date = formattedDate(dateString)
+        
+        // "yyyy年MM月dd日" 形式のフォーマットを使用して日付を変換
+        let formatter = dateFormatter(withFormat: "yyyy年MM月dd日")
+        return formatter.string(from: date)
+    }
+
+    
     /// 指定された日付文字列を `Date` 型に変換します。
     /// - Parameter dateString: "yyyy-MM-dd" 形式の日付を表す文字列。
     /// - Returns: 変換された `Date` オブジェクト。変換に失敗した場合は 1900/01/01 を返します。
