@@ -26,10 +26,7 @@ class TodayRecordPresenter {
     
     init(view: TodayRecordPresenterOutput) {
         self.view = view
-        
         dailyCounter = factory.create(type: .daily)
-        
-        
     }
 }
 extension TodayRecordPresenter: TodayRecordPresenterInput {

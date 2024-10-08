@@ -11,7 +11,10 @@ import XCTest
 class WeeklyRecordPresenterTest: XCTestCase {
     
     class MockPresenterOutput: WeeklyRecordPresenterOutput {
-        func showChart(with dailyCounts: [String : Int]) {}
+        func updateLabel(avg: (count: Double, minWeek: String, maxWeek: String)) {}
+        
+        func updateChart(with chartData: [(weekNumber: String, count: Int)]) {}
+        
         
         var isNextButtonEnabled: Bool?
         var isPrevButtonEnabled: Bool?
@@ -66,15 +69,15 @@ class WeeklyRecordPresenterTest: XCTestCase {
         presenter = WeeklyRecordPresenter(view: mock, thisWeek: week, defaults: testUserDefaults)
         presenter.fillChartData()
         XCTAssertEqual(presenter.chartData.count, 5) // 5の倍数
-        XCTAssertEqual(presenter.chartData[0].weekNumber, week)
+        XCTAssertEqual(presenter.chartData[1].weekNumber, week)
         XCTAssertEqual(presenter.chartData[presenter.chartData.count - 1].weekNumber, "")
         
-        week = "2024-W52"
+        week = "2024-W36"
         presenter = WeeklyRecordPresenter(view: mock, thisWeek: week, defaults: testUserDefaults)
         presenter.fillChartData()
-        XCTAssertEqual(presenter.chartData.count, 30) // 5の倍数
-        XCTAssertEqual(presenter.chartData[0].weekNumber, week)
-        XCTAssertEqual(presenter.chartData[presenter.chartData.count - 1].weekNumber, "")
+        XCTAssertEqual(presenter.chartData.count, 10) // 5の倍数
+        XCTAssertEqual(presenter.chartData[0].weekNumber, "2024-W27")
+        XCTAssertEqual(presenter.chartData[presenter.chartData.count - 1].weekNumber, "2024-W36")
         
     }
     
@@ -83,25 +86,25 @@ class WeeklyRecordPresenterTest: XCTestCase {
         presenter = WeeklyRecordPresenter(view: mock, thisWeek: week, defaults: testUserDefaults)
         presenter.fillChartData()
         
-        // 0ページ目
+        // 最初のページ
         var result = presenter.fetchChartData()
         
-        XCTAssertEqual(result[0].weekNumber, "2024-W40")
-        XCTAssertEqual(result[result.count - 1].weekNumber, "2024-W36")
+        XCTAssertEqual(result[0].weekNumber, "2024-W37")
+        XCTAssertEqual(result[result.count - 1].weekNumber, "")
         
-        // 1ページ目
+        // 前のページへ
         presenter.prev()
         result = presenter.fetchChartData()
 
-        XCTAssertEqual(result[0].weekNumber, "2024-W35")
-        XCTAssertEqual(result[result.count - 1].weekNumber, "2024-W31")
+        XCTAssertEqual(result[0].weekNumber, "2024-W32")
+        XCTAssertEqual(result[result.count - 1].weekNumber, "2024-W36")
         
         // ページを戻す
         presenter.next()
         result = presenter.fetchChartData()
         
-        XCTAssertEqual(result[0].weekNumber, "2024-W40")
-        XCTAssertEqual(result[result.count - 1].weekNumber, "2024-W36")
+        XCTAssertEqual(result[0].weekNumber, "2024-W37")
+        XCTAssertEqual(result[result.count - 1].weekNumber, "")
         
     }
     

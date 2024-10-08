@@ -51,7 +51,7 @@ class TodayRecordViewController: UIViewController {
     
     func initTodayCountTitleLabel() {
         todayCountTitleLabel = UILabel()
-        todayCountTitleLabel.text = "今日のカウント"
+        todayCountTitleLabel.text = "今日"
         if UIDevice.current.userInterfaceIdiom == .pad {
             todayCountTitleLabel.font = .boldSystemFont(ofSize: 42)
         } else {
@@ -229,7 +229,7 @@ class TodayRecordViewController: UIViewController {
     }
     
     @objc func buttonWeeklyRecordTapped(sender : Any) {
-        print("xxxx")
+        self.navigationController?.pushViewController(WeeklyRecordViewController(), animated: true)
     }
     
     @objc func buttonMonthlyRecordTapped(sender : Any) {
