@@ -8,15 +8,16 @@
 import Foundation
 
 protocol WeeklyRecordPresenterInput: AnyObject {
-    func viewWillAppear()
     func next()
     func prev()
     func fillChartData()
     func fetchChartData() -> [(weekNumber: String, count: Int)]
+    func averageCount(with chartData: [(weekNumber: String, count: Int)]) -> (count: Double, minWeek: String, maxWeek: String)
 }
 
 protocol WeeklyRecordPresenterOutput: AnyObject {
-    func showChart(with dailyCounts: [String: Int])
+    func updateLabel(avg:(count: Double, minWeek: String, maxWeek: String))
+    func updateChart(with chartData: [(weekNumber: String, count: Int)])
     func enableNextButton(_ isEnable: Bool)
     func enablePrevButton(_ isEnable: Bool)
 }
@@ -47,6 +48,45 @@ class WeeklyRecordPresenter {
 
 
 extension WeeklyRecordPresenter: WeeklyRecordPresenterInput {
+    func averageCount(with chartData: [(weekNumber: String, count: Int)]) -> (count: Double, minWeek: String, maxWeek: String) {
+        var totalCount = 0
+        var validCountEntries = 0
+        
+        var minWeek: String = ""
+        var maxWeek: String = ""
+        
+        for entry in chartData {
+            if !entry.weekNumber.isEmpty {
+                // count の合計を計算
+                totalCount += entry.count
+                validCountEntries += 1
+                
+                // minDateとmaxDateの設定
+                if minWeek.isEmpty {
+                    minWeek = entry.weekNumber
+                    maxWeek = entry.weekNumber
+                } else {
+                    if entry.weekNumber < minWeek {
+                        minWeek = entry.weekNumber
+                    }
+                    if entry.weekNumber > maxWeek {
+                        maxWeek = entry.weekNumber
+                    }
+                }
+            }
+        }
+        // 有効な count の平均を計算
+        let averageCount = validCountEntries > 0 ? Double(totalCount) / Double(validCountEntries) : 0.0
+            
+        // 四捨五入して小数点第一位までにする
+        let roundedAverageCount = round(averageCount * 10) / 10
+            
+        // フォーマット
+        //let minDateJP = DateManager.shared.japaneseFormattedDate(from: minWeek)
+        //let maxDateJP = DateManager.shared.japaneseFormattedDate(from: maxWeek)
+        
+        return (roundedAverageCount, minWeek, maxWeek)
+    }
     
     private func resetChartData(){
         maxPage = 0
@@ -61,12 +101,12 @@ extension WeeklyRecordPresenter: WeeklyRecordPresenterInput {
         resetChartData()
         
         let minWeek = weeklyCounter.minDate()
-        var currWeek = thisWeek
+        var currWeek = minWeek
      
-        while currWeek >= minWeek {
+        while currWeek <= thisWeek {
             let count = weeklyCounter.getCount(for: currWeek)
             chartData.append((weekNumber: currWeek, count: count))
-            currWeek = DateManager.shared.previousWeek(from: currWeek)
+            currWeek = DateManager.shared.nextWeek(from: currWeek)
         }
         
         // 5個単位になるよう調整
@@ -82,12 +122,12 @@ extension WeeklyRecordPresenter: WeeklyRecordPresenterInput {
     }
 
     func fetchChartData() -> [(weekNumber: String, count: Int)] {
-        var startIndex = 0
-        var endIndex = ONE_PAGE_DATA_MAX_COUNT - 1
+        var startIndex = maxPage * ONE_PAGE_DATA_MAX_COUNT - ONE_PAGE_DATA_MAX_COUNT
+        var endIndex = maxPage * ONE_PAGE_DATA_MAX_COUNT - 1
         let addCount = ONE_PAGE_DATA_MAX_COUNT * currentPage
         
-        startIndex += addCount
-        endIndex += addCount
+        startIndex -= addCount
+        endIndex -= addCount
         
         return Array(chartData[startIndex...endIndex])
     }
@@ -102,14 +142,6 @@ extension WeeklyRecordPresenter: WeeklyRecordPresenterInput {
         currentPage += 1
     }
     
-    func viewWillAppear() {
-        /*
-        if let dailyCounts = UserDefaults.standard.dictionary(forKey: UserDefaultsKeys.DAILY_COUNT) as? [String: Int] {
-            self.view?.showChart(with: dailyCounts)
-        }
-         */
-    }
-    
     func updateButtonState() {
  
         // nextボタンの制御
@@ -119,11 +151,6 @@ extension WeeklyRecordPresenter: WeeklyRecordPresenterInput {
         self.view?.enablePrevButton(currentPage < maxPage - 1)
         
     }
-
-
     
-
- 
-
 }
 

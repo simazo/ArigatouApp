@@ -62,6 +62,7 @@
 		CCE7F9832CA499FB0070E65D /* WeeklyRecordPresenterTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCE7F9822CA499FB0070E65D /* WeeklyRecordPresenterTest.swift */; };
 		CCE7F9852CAD026E0070E65D /* MonthlyRecordPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCE7F9842CAD026E0070E65D /* MonthlyRecordPresenter.swift */; };
 		CCE7F9872CAD535A0070E65D /* MonthlyRecordPresenterTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCE7F9862CAD535A0070E65D /* MonthlyRecordPresenterTest.swift */; };
+		CCE7F9892CB4A1130070E65D /* WeeklyRecordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCE7F9882CB4A1130070E65D /* WeeklyRecordView.swift */; };
 		CCFB7DD52BED9C1300C4617A /* AuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCFB7DD42BED9C1300C4617A /* AuthManager.swift */; };
 		CCFB7DD72BF17A8300C4617A /* VideoList.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCFB7DD62BF17A8300C4617A /* VideoList.swift */; };
 		CCFB7E142BF18D6F00C4617A /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCFB7E132BF18D6F00C4617A /* NetworkManager.swift */; };
@@ -131,6 +132,7 @@
 		CCE7F9822CA499FB0070E65D /* WeeklyRecordPresenterTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeeklyRecordPresenterTest.swift; sourceTree = "<group>"; };
 		CCE7F9842CAD026E0070E65D /* MonthlyRecordPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonthlyRecordPresenter.swift; sourceTree = "<group>"; };
 		CCE7F9862CAD535A0070E65D /* MonthlyRecordPresenterTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonthlyRecordPresenterTest.swift; sourceTree = "<group>"; };
+		CCE7F9882CB4A1130070E65D /* WeeklyRecordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeeklyRecordView.swift; sourceTree = "<group>"; };
 		CCFB7DD42BED9C1300C4617A /* AuthManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthManager.swift; sourceTree = "<group>"; };
 		CCFB7DD62BF17A8300C4617A /* VideoList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoList.swift; sourceTree = "<group>"; };
 		CCFB7E132BF18D6F00C4617A /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
@@ -273,6 +275,7 @@
 				CCFB7E3B2BFB1AF600C4617A /* Alert.swift */,
 				CCB900652C3ABBDE003CDDE0 /* TodayRecordView.swift */,
 				CC242F4B2C44B4300085CB74 /* DailyRecordView.swift */,
+				CCE7F9882CB4A1130070E65D /* WeeklyRecordView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -503,6 +506,7 @@
 				CC52B30D2C9CE9E60011923D /* WeeklyRecordPresenter.swift in Sources */,
 				CCE7F9852CAD026E0070E65D /* MonthlyRecordPresenter.swift in Sources */,
 				CCA1F9EF2C059D74008DCF70 /* Count.swift in Sources */,
+				CCE7F9892CB4A1130070E65D /* WeeklyRecordView.swift in Sources */,
 				CCFB7E142BF18D6F00C4617A /* NetworkManager.swift in Sources */,
 				CCFB7E3C2BFB1AF600C4617A /* Alert.swift in Sources */,
 				CCFB7DD52BED9C1300C4617A /* AuthManager.swift in Sources */,

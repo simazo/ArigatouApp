@@ -204,7 +204,26 @@ class DateManager {
     }
     
     
-
+    /// 指定された "yyyy-Www" 形式の週番号文字列から年を除外し、週番号だけ（"Www" 形式）を返します。
+    /// - Parameter weekString: "yyyy-Www" 形式の週番号文字列。
+    /// - Returns: 週番号だけを含む "Www" 形式の文字列。無効な形式の場合は空文字を返します。
+    func getWeekNumber(from weekString: String) -> String {
+        // 'W' が含まれているかを確認
+        guard weekString.contains("W") else {
+            Swift.print("Invalid week format: \(weekString)")
+            return ""
+        }
+        
+        // 年と週番号を分割
+        let components = weekString.components(separatedBy: "-W")
+        guard components.count == 2 else {
+            Swift.print("Invalid week format: \(weekString)")
+            return ""
+        }
+        
+        // 週番号だけを返す
+        return "W\(components[1])"
+    }
     
     
 }
