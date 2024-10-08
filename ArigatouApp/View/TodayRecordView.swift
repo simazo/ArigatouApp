@@ -13,6 +13,7 @@ class TodayRecordViewController: UIViewController {
     private var todayCountTitleLabel: UILabel!
     private var yesterDayCountLabel: UILabel!
     private var yesterDayCountTitleLabel: UILabel!
+    private var rateLabel: UILabel!
     private var dailyRecordButton: UIButton!
     private var weeklyRecordButton: UIButton!
     private var monthlyRecordButton: UIButton!
@@ -27,6 +28,8 @@ class TodayRecordViewController: UIViewController {
         
         initYesterdayCountTitleLabel()
         initYesterdayCountLabel()
+        
+        //initAchievementRateLabel()
         
         initDailyRecordButton()
         initWeeklyRecordButton()
@@ -66,7 +69,7 @@ class TodayRecordViewController: UIViewController {
         view.addSubview(todayCountTitleLabel)
         NSLayoutConstraint.activate([
             todayCountTitleLabel.topAnchor.constraint(
-                equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 40.0),
+                equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 10.0),
             todayCountTitleLabel.leadingAnchor.constraint(
                 equalTo: view.leadingAnchor, constant: 16.0),
             todayCountTitleLabel.trailingAnchor.constraint(
@@ -91,10 +94,36 @@ class TodayRecordViewController: UIViewController {
         view.addSubview(todayCountLabel)
         NSLayoutConstraint.activate([
             todayCountLabel.topAnchor.constraint(
-                equalTo: todayCountTitleLabel.bottomAnchor, constant: 20.0),
+                equalTo: todayCountTitleLabel.bottomAnchor, constant: 10.0),
             todayCountLabel.leadingAnchor.constraint(
                 equalTo: view.leadingAnchor, constant: 16.0),
             todayCountLabel.trailingAnchor.constraint(
+                equalTo: view.trailingAnchor, constant: -16.0)
+        ])
+    }
+    
+    func initAchievementRateLabel() {
+        rateLabel = UILabel()
+        rateLabel.text = "本日の達成率20.5%"
+        
+        if UIDevice.current.userInterfaceIdiom == .pad {
+            rateLabel.font = .boldSystemFont(ofSize: 40)
+        } else {
+            rateLabel.font = .boldSystemFont(ofSize: 20)
+        }
+        rateLabel.backgroundColor = UIColor.clear
+        rateLabel.textColor = .white
+        rateLabel.textAlignment = .center
+        rateLabel.numberOfLines = 1
+
+        rateLabel.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(rateLabel)
+        NSLayoutConstraint.activate([
+            rateLabel.topAnchor.constraint(
+                equalTo: rateLabel.bottomAnchor, constant: 20.0),
+            rateLabel.leadingAnchor.constraint(
+                equalTo: view.leadingAnchor, constant: 16.0),
+            rateLabel.trailingAnchor.constraint(
                 equalTo: view.trailingAnchor, constant: -16.0)
         ])
     }
