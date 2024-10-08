@@ -9,15 +9,16 @@ import Foundation
 
 
 protocol MonthlyRecordPresenterInput: AnyObject {
-    func viewWillAppear()
     func next()
     func prev()
     func fillChartData()
     func fetchChartData() -> [(yearMonth: String, count: Int)]
+    func averageCount(with chartData: [(yearMonth: String, count: Int)]) -> (count: Double, minYearMonth: String, maxYearMonth: String)
 }
 
 protocol MonthlyRecordPresenterOutput: AnyObject {
-    func showChart(with dailyCounts: [String: Int])
+    func updateLabel(avg:(count: Double, minYearMonth: String, maxYearMonth: String))
+    func updateChart(with chartData: [(yearMonth: String, count: Int)])
     func enableNextButton(_ isEnable: Bool)
     func enablePrevButton(_ isEnable: Bool)
 }
@@ -47,6 +48,46 @@ class MonthlyRecordPresenter {
 }
 
 extension MonthlyRecordPresenter: MonthlyRecordPresenterInput {
+    func averageCount(with chartData: [(yearMonth: String, count: Int)]) -> (count: Double, minYearMonth: String, maxYearMonth: String) {
+        var totalCount = 0
+        var validCountEntries = 0
+        
+        var minYearMonth: String = ""
+        var maxYearMonth: String = ""
+        
+        for entry in chartData {
+            if !entry.yearMonth.isEmpty {
+                // count の合計を計算
+                totalCount += entry.count
+                validCountEntries += 1
+                
+                // minDateとmaxDateの設定
+                if minYearMonth.isEmpty {
+                    minYearMonth = entry.yearMonth
+                    maxYearMonth = entry.yearMonth
+                } else {
+                    if entry.yearMonth < minYearMonth {
+                        minYearMonth = entry.yearMonth
+                    }
+                    if entry.yearMonth > maxYearMonth {
+                        maxYearMonth = entry.yearMonth
+                    }
+                }
+            }
+        }
+        // 有効な count の平均を計算
+        let averageCount = validCountEntries > 0 ? Double(totalCount) / Double(validCountEntries) : 0.0
+            
+        // 四捨五入して小数点第一位までにする
+        let roundedAverageCount = round(averageCount * 10) / 10
+            
+        // フォーマット
+        let minYearMonthJp = DateManager.shared.getjpYearMonth(from: minYearMonth)
+        let maxYearMonthJp = DateManager.shared.getjpYearMonth(from: maxYearMonth)
+        
+        return (roundedAverageCount, minYearMonthJp, maxYearMonthJp)
+    }
+    
     
     private func resetChartData(){
         maxPage = 0
@@ -75,7 +116,7 @@ extension MonthlyRecordPresenter: MonthlyRecordPresenterInput {
             chartData.append((yearMonth: "", count: 0)) // 空白を追加
         }
         
-        print("Debug MonthlyRecord baseData: \(chartData)")
+        print("Debug MonthlyRecord chartData: \(chartData)")
         
         // 全ページ数を設定
         maxPage = chartData.count / ONE_PAGE_DATA_MAX_COUNT
@@ -100,14 +141,6 @@ extension MonthlyRecordPresenter: MonthlyRecordPresenterInput {
     // 古い週番号のページに向かう
     func prev() {
         currentPage += 1
-    }
-    
-    func viewWillAppear() {
-        /*
-        if let dailyCounts = UserDefaults.standard.dictionary(forKey: UserDefaultsKeys.DAILY_COUNT) as? [String: Int] {
-            self.view?.showChart(with: dailyCounts)
-        }
-         */
     }
     
     func updateButtonState() {

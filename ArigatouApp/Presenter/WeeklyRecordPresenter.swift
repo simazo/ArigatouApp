@@ -82,10 +82,10 @@ extension WeeklyRecordPresenter: WeeklyRecordPresenterInput {
         let roundedAverageCount = round(averageCount * 10) / 10
             
         // フォーマット
-        //let minDateJP = DateManager.shared.japaneseFormattedDate(from: minWeek)
-        //let maxDateJP = DateManager.shared.japaneseFormattedDate(from: maxWeek)
+        let minWeekNumJp = DateManager.shared.getWeekNumberJp(from: minWeek)
+        let maxWeekNumJp = DateManager.shared.getWeekNumberJp(from: maxWeek)
         
-        return (roundedAverageCount, minWeek, maxWeek)
+        return (roundedAverageCount, minWeekNumJp, maxWeekNumJp)
     }
     
     private func resetChartData(){
@@ -115,7 +115,7 @@ extension WeeklyRecordPresenter: WeeklyRecordPresenterInput {
             chartData.append((weekNumber: "", count: 0)) // 空白を追加
         }
         
-        print("Debug WeeklyRecord baseData: \(chartData)")
+        print("Debug WeeklyRecord chartData: \(chartData)")
         
         // 全ページ数を設定
         maxPage = chartData.count / ONE_PAGE_DATA_MAX_COUNT

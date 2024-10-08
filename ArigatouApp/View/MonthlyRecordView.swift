@@ -1,5 +1,5 @@
 //
-//  WeeklyRecordView.swift
+//  MonthlyRecordView.swift
 //  ArigatouApp
 //
 //  Created by pero on 2024/10/08.
@@ -8,10 +8,9 @@
 import UIKit
 import DGCharts
 
-
-class WeeklyRecordViewController: UIViewController, ChartViewDelegate {
+class MonthlyRecordViewController: UIViewController, ChartViewDelegate {
     private var chartView: BarChartView!
-    private var presenter: WeeklyRecordPresenter!
+    private var presenter: MonthlyRecordPresenter!
     
     var infoLabel: UILabel!
     var prevButton: UIButton!
@@ -21,8 +20,8 @@ class WeeklyRecordViewController: UIViewController, ChartViewDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        let thisWeek = DateManager.shared.formattedWeekString()
-        presenter = WeeklyRecordPresenter(view: self, thisWeek: thisWeek) //初期値は現在の週番号
+        let thisYearMonth = DateManager.shared.formattedMonthString()
+        presenter = MonthlyRecordPresenter(view: self, thisYearMonth: thisYearMonth) //初期値は現在の年月
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -74,18 +73,18 @@ class WeeklyRecordViewController: UIViewController, ChartViewDelegate {
         guard index < presenter.chartData.count else { return }
         
         let fetchedData = presenter.fetchChartData()
-        let week = fetchedData[index]
+        let month = fetchedData[index]
 
-        let count = week.count // カウント
-        let weekNumber = week.weekNumber // 週番号
+        let count = month.count // カウント
+        let yearMonth = month.yearMonth // 週番号
         
         // カスタムポップアップの表示
-        if !weekNumber.isEmpty { showCustomPopup(withCount: count, weekNumber: weekNumber) }
+        if !yearMonth.isEmpty { showCustomPopup(withCount: count, yearMonth: yearMonth) }
     }
     
-    func showCustomPopup(withCount count: Int, weekNumber: String) {
+    func showCustomPopup(withCount count: Int, yearMonth: String) {
         let popupLabel = UILabel()
-        popupLabel.text = "\(weekNumber)\n\(count)回"
+        popupLabel.text = "\(yearMonth)\n\(count)回"
         popupLabel.backgroundColor = UIColor.black.withAlphaComponent(0.7)
         popupLabel.textColor = .white
         popupLabel.textAlignment = .center
@@ -185,14 +184,14 @@ class WeeklyRecordViewController: UIViewController, ChartViewDelegate {
         presenter.updateButtonState()
         updateLabel(avg:presenter.averageCount(with: fetchedData))
     }
+    
 }
 
-extension WeeklyRecordViewController: WeeklyRecordPresenterOutput {
- 
-    func updateLabel(avg:(count: Double, minWeek: String, maxWeek: String)) {
+extension MonthlyRecordViewController: MonthlyRecordPresenterOutput {
+    func updateLabel(avg:(count: Double, minYearMonth: String, maxYearMonth: String)) {
         
         infoLabel.text = """
-            \(avg.minWeek) 〜 \(avg.maxWeek)
+            \(avg.minYearMonth) 〜 \(avg.maxYearMonth)
             \n平均:\(avg.count)回
             """
     }
@@ -211,7 +210,7 @@ extension WeeklyRecordViewController: WeeklyRecordPresenterOutput {
         button.setTitleColor(isEnable ? .white : .darkGray, for: .normal)
     }
     
-    func updateChart(with chartData: [(weekNumber: String, count: Int)]) {
+    func updateChart(with chartData: [(yearMonth: String, count: Int)]) {
         var dataEntries: [BarChartDataEntry] = []
         
         // データエントリの作成
@@ -233,14 +232,14 @@ extension WeeklyRecordViewController: WeeklyRecordPresenterOutput {
         // グラフにデータを設定
         chartView.data = barChartData
         
-        let weeks = chartData.map { data in
-            DateManager.shared.getWeekNumber(from: data.weekNumber)
+        let ym = chartData.map { data in
+            DateManager.shared.getjpMonth(from: data.yearMonth)
         }
 
         // X軸の設定
         let xAxis = chartView.xAxis
-        xAxis.valueFormatter = IndexAxisValueFormatter(values: weeks)
-        xAxis.labelCount = weeks.count
+        xAxis.valueFormatter = IndexAxisValueFormatter(values: ym)
+        xAxis.labelCount = ym.count
         xAxis.granularity = 1
         xAxis.labelPosition = .bottom
         
@@ -252,5 +251,4 @@ extension WeeklyRecordViewController: WeeklyRecordPresenterOutput {
         chartView.notifyDataSetChanged()
     }
 
-    
 }

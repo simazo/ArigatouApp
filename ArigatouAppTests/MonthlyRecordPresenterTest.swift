@@ -11,7 +11,9 @@ import XCTest
 class MonthlyRecordPresenterTest: XCTestCase {
     
     class MockPresenterOutput: MonthlyRecordPresenterOutput {
-        func showChart(with dailyCounts: [String : Int]) {}
+        func updateLabel(avg: (count: Double, minYearMonth: String, maxYearMonth: String)) {}
+        
+        func updateChart(with chartData: [(yearMonth: String, count: Int)]) {}
         
         var isNextButtonEnabled: Bool?
         var isPrevButtonEnabled: Bool?

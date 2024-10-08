@@ -203,11 +203,14 @@ class DateManager {
         return formatter.string(from: date)
     }
     
-    
     /// 指定された "yyyy-Www" 形式の週番号文字列から年を除外し、週番号だけ（"Www" 形式）を返します。
     /// - Parameter weekString: "yyyy-Www" 形式の週番号文字列。
     /// - Returns: 週番号だけを含む "Www" 形式の文字列。無効な形式の場合は空文字を返します。
     func getWeekNumber(from weekString: String) -> String {
+        guard !weekString.isEmpty else {
+            return ""
+        }
+        
         // 'W' が含まれているかを確認
         guard weekString.contains("W") else {
             Swift.print("Invalid week format: \(weekString)")
@@ -225,6 +228,69 @@ class DateManager {
         return "W\(components[1])"
     }
     
+    /// 指定された "yyyy-Www" 形式の週番号"何年の何周目"という形を文字列で返します。
+    /// - Parameter weekString: "yyyy-Www" 形式の週番号文字列。
+    /// - Returns: 週番号だけを含む "yyyy年の何周目" 形式の文字列。無効な形式の場合は空文字を返します。
+    func getWeekNumberJp(from weekString: String) -> String {
+        guard !weekString.isEmpty else {
+            return ""
+        }
+        
+        // 'W' が含まれているかを確認
+        guard weekString.contains("W") else {
+            Swift.print("Invalid week format: \(weekString)")
+            return ""
+        }
+        
+        // 年と週番号を分割
+        let components = weekString.components(separatedBy: "-W")
+        guard components.count == 2 else {
+            Swift.print("Invalid week format: \(weekString)")
+            return ""
+        }
+        
+        
+        return "\(components[0])年\(components[1])周目"
+    }
     
+    
+    /// 指定された "yyyy-mm" 形式の年月文字列を "yyyy年MM月" 形式に変換して返します。
+    /// - Parameter monthString: "yyyy-mm" 形式の年月文字列。
+    /// - Returns: "yyyy年MM月" 形式の年月を表す文字列。変換に失敗した場合は1900年01月を返します。
+    func getjpYearMonth(from yearMonth: String) -> String {
+        
+        // "yyyy-MM" 形式のDateFormatterを使ってDate型に変換
+        let formatter = dateFormatter(withFormat: "yyyy-MM")
+        guard let date = formatter.date(from: yearMonth) else {
+            Swift.print("Invalid yearmonth format: \(yearMonth)")
+            return "1900年01月"
+        }
+        
+        // "yyyy年MM月" 形式のフォーマットを使用して日付を変換
+        let outputFormatter = dateFormatter(withFormat: "yyyy年MM月")
+        return outputFormatter.string(from: date)
+    }
+    
+    /// 指定された "yyyy-mm" 形式の年月文字列を "MM月" 形式に変換して返します。
+    /// - Parameter yearMonth: "yyyy-mm" 形式の年月文字列。
+    /// - Returns: "MM月" 形式の月を表す文字列。変換に失敗した場合は "" を返します。
+    func getjpMonth(from yearMonth: String) -> String {
+        
+        guard !yearMonth.isEmpty else {
+            return ""
+        }
+        
+        // "yyyy-MM" 形式のDateFormatterを使ってDate型に変換
+        let formatter = dateFormatter(withFormat: "yyyy-MM")
+        guard let date = formatter.date(from: yearMonth) else {
+            Swift.print("Invalid yearmonth format: \(yearMonth)")
+            return ""
+        }
+        
+        // "MM月" 形式のフォーマットを使用して月を変換
+        let outputFormatter = dateFormatter(withFormat: "MM月")
+        return outputFormatter.string(from: date)
+    }
+
 }
 
