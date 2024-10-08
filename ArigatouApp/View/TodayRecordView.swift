@@ -233,7 +233,7 @@ class TodayRecordViewController: UIViewController {
     }
     
     @objc func buttonMonthlyRecordTapped(sender : Any) {
-        print("xxxx")
+        self.navigationController?.pushViewController(MonthlyRecordViewController(), animated: true)
     }
 }
 
