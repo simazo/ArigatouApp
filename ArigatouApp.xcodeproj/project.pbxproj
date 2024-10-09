@@ -15,6 +15,7 @@
 		CC242F4A2C44A5BE0085CB74 /* DailyRecordPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC242F492C44A5BE0085CB74 /* DailyRecordPresenter.swift */; };
 		CC242F4C2C44B4300085CB74 /* DailyRecordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC242F4B2C44B4300085CB74 /* DailyRecordView.swift */; };
 		CC3127722CB4EF5400E46F5F /* MonthlyRecordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC3127712CB4EF5400E46F5F /* MonthlyRecordView.swift */; };
+		CC3127742CB65FAE00E46F5F /* TargetCountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC3127732CB65FAE00E46F5F /* TargetCountView.swift */; };
 		CC52B30B2C91626E0011923D /* DailyRecordPresenterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC52B30A2C91626E0011923D /* DailyRecordPresenterTests.swift */; };
 		CC52B30D2C9CE9E60011923D /* WeeklyRecordPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC52B30C2C9CE9E60011923D /* WeeklyRecordPresenter.swift */; };
 		CC55BF502BC9028D003C3E15 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC55BF4F2BC9028D003C3E15 /* AppDelegate.swift */; };
@@ -90,6 +91,7 @@
 		CC242F492C44A5BE0085CB74 /* DailyRecordPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyRecordPresenter.swift; sourceTree = "<group>"; };
 		CC242F4B2C44B4300085CB74 /* DailyRecordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyRecordView.swift; sourceTree = "<group>"; };
 		CC3127712CB4EF5400E46F5F /* MonthlyRecordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonthlyRecordView.swift; sourceTree = "<group>"; };
+		CC3127732CB65FAE00E46F5F /* TargetCountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TargetCountView.swift; sourceTree = "<group>"; };
 		CC52B30A2C91626E0011923D /* DailyRecordPresenterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyRecordPresenterTests.swift; sourceTree = "<group>"; };
 		CC52B30C2C9CE9E60011923D /* WeeklyRecordPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeeklyRecordPresenter.swift; sourceTree = "<group>"; };
 		CC55BF4C2BC9028D003C3E15 /* ArigatouApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ArigatouApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -279,6 +281,7 @@
 				CC242F4B2C44B4300085CB74 /* DailyRecordView.swift */,
 				CCE7F9882CB4A1130070E65D /* WeeklyRecordView.swift */,
 				CC3127712CB4EF5400E46F5F /* MonthlyRecordView.swift */,
+				CC3127732CB65FAE00E46F5F /* TargetCountView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -508,6 +511,7 @@
 				CCA1F9E02C006731008DCF70 /* SignupViewController.swift in Sources */,
 				CCA1F9EB2C0548E4008DCF70 /* SynchronizedViewController.swift in Sources */,
 				CC52B30D2C9CE9E60011923D /* WeeklyRecordPresenter.swift in Sources */,
+				CC3127742CB65FAE00E46F5F /* TargetCountView.swift in Sources */,
 				CCE7F9852CAD026E0070E65D /* MonthlyRecordPresenter.swift in Sources */,
 				CCA1F9EF2C059D74008DCF70 /* Count.swift in Sources */,
 				CCE7F9892CB4A1130070E65D /* WeeklyRecordView.swift in Sources */,

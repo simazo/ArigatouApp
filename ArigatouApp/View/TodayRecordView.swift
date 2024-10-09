@@ -164,7 +164,7 @@ class TodayRecordViewController: UIViewController {
         ])
         
         targetCountButton.addTarget(self,
-                              action: #selector(self.buttonDailyRecordTapped(sender:)),
+                              action: #selector(self.buttonTargetCountTapped(sender:)),
                               for: .touchUpInside)
     }
     
@@ -313,6 +313,10 @@ class TodayRecordViewController: UIViewController {
     
     @objc func buttonMonthlyRecordTapped(sender : Any) {
         self.navigationController?.pushViewController(MonthlyRecordViewController(), animated: true)
+    }
+    
+    @objc func buttonTargetCountTapped(sender : Any) {
+        self.navigationController?.pushViewController(TargetCountView(), animated: true)
     }
 }
 
