@@ -13,9 +13,11 @@ class TodayRecordViewController: UIViewController {
     private var todayCountTitleLabel: UILabel!
     private var yesterDayCountLabel: UILabel!
     private var yesterDayCountTitleLabel: UILabel!
+    private var achievementRateLabel: UILabel!
     private var dailyRecordButton: UIButton!
     private var weeklyRecordButton: UIButton!
     private var monthlyRecordButton: UIButton!
+    private var targetCountButton: UIButton!
     
     private var presenter: TodayRecordPresenter!
     
@@ -27,6 +29,10 @@ class TodayRecordViewController: UIViewController {
         
         initYesterdayCountTitleLabel()
         initYesterdayCountLabel()
+        
+        initAchievementRateLabel()
+        
+        initTargetCountButton()
         
         initDailyRecordButton()
         initWeeklyRecordButton()
@@ -66,7 +72,7 @@ class TodayRecordViewController: UIViewController {
         view.addSubview(todayCountTitleLabel)
         NSLayoutConstraint.activate([
             todayCountTitleLabel.topAnchor.constraint(
-                equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 40.0),
+                equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 10.0),
             todayCountTitleLabel.leadingAnchor.constraint(
                 equalTo: view.leadingAnchor, constant: 16.0),
             todayCountTitleLabel.trailingAnchor.constraint(
@@ -78,9 +84,9 @@ class TodayRecordViewController: UIViewController {
         todayCountLabel = UILabel()
  
         if UIDevice.current.userInterfaceIdiom == .pad {
-            todayCountLabel.font = .boldSystemFont(ofSize: 62)
+            todayCountLabel.font = .boldSystemFont(ofSize: 68)
         } else {
-            todayCountLabel.font = .boldSystemFont(ofSize: 40)
+            todayCountLabel.font = .boldSystemFont(ofSize: 44)
         }
         todayCountLabel.backgroundColor = UIColor.clear
         todayCountLabel.textColor = .white
@@ -91,7 +97,7 @@ class TodayRecordViewController: UIViewController {
         view.addSubview(todayCountLabel)
         NSLayoutConstraint.activate([
             todayCountLabel.topAnchor.constraint(
-                equalTo: todayCountTitleLabel.bottomAnchor, constant: 20.0),
+                equalTo: todayCountTitleLabel.bottomAnchor, constant: 10.0),
             todayCountLabel.leadingAnchor.constraint(
                 equalTo: view.leadingAnchor, constant: 16.0),
             todayCountLabel.trailingAnchor.constraint(
@@ -99,14 +105,83 @@ class TodayRecordViewController: UIViewController {
         ])
     }
     
+    func initAchievementRateLabel() {
+        var fontSise = 14
+        var positionX = -10
+        var positionY = 40
+        if UIDevice.current.userInterfaceIdiom == .pad {
+            fontSise = fontSise * 2
+            positionX = positionX * 2
+            positionY = positionY * 2
+        }
+        
+        achievementRateLabel = UILabel()
+        achievementRateLabel.text = "30.5%達成"
+        achievementRateLabel.font = .boldSystemFont(ofSize: CGFloat(fontSise))
+        
+        achievementRateLabel.backgroundColor = UIColor.clear
+        achievementRateLabel.textColor = .white
+        achievementRateLabel.textAlignment = .center
+        achievementRateLabel.numberOfLines = 1
+
+        achievementRateLabel.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(achievementRateLabel)
+        NSLayoutConstraint.activate([
+            achievementRateLabel.centerXAnchor.constraint(
+                equalTo: todayCountLabel.centerXAnchor),
+            achievementRateLabel.centerYAnchor.constraint(
+                equalTo: todayCountLabel.centerYAnchor, constant: CGFloat(positionY)),
+            
+        ])
+    }
+    
+    func initTargetCountButton() {
+        var fontSise = 10
+        var width = 120
+        var positionY = 30
+        if UIDevice.current.userInterfaceIdiom == .pad {
+            fontSise = fontSise * 2
+            width = width * 2
+            positionY = positionY * 2
+        }
+        
+        targetCountButton = UIButton()
+        targetCountButton.setTitle("目標数の変更", for:UIControl.State.normal)
+        targetCountButton.titleLabel?.font =  UIFont.systemFont(ofSize: CGFloat(fontSise))
+        
+        targetCountButton.backgroundColor = .systemBlue
+        
+        targetCountButton.translatesAutoresizingMaskIntoConstraints = false
+        targetCountButton.widthAnchor.constraint(equalToConstant: CGFloat(width)).isActive = true
+        
+        view.addSubview(targetCountButton)
+        NSLayoutConstraint.activate([
+            targetCountButton.centerXAnchor.constraint(
+                equalTo: todayCountTitleLabel.centerXAnchor),
+            targetCountButton.centerYAnchor.constraint(
+                equalTo: achievementRateLabel.centerYAnchor, constant: CGFloat(positionY)),
+            
+        ])
+        
+        targetCountButton.addTarget(self,
+                              action: #selector(self.buttonDailyRecordTapped(sender:)),
+                              for: .touchUpInside)
+    }
+    
     func initYesterdayCountTitleLabel(){
+        var fontSise = 14
+        var positionX = -50
+        var positionY = -30
+        if UIDevice.current.userInterfaceIdiom == .pad {
+            fontSise = fontSise * 2
+            positionX = positionX * 2
+            positionY = positionY * 2
+        }
+        
         yesterDayCountTitleLabel = UILabel()
         yesterDayCountTitleLabel.text = "昨日"
-        if UIDevice.current.userInterfaceIdiom == .pad {
-            yesterDayCountTitleLabel.font = .boldSystemFont(ofSize: 30)
-        } else {
-            yesterDayCountTitleLabel.font = .boldSystemFont(ofSize: 14)
-        }
+        yesterDayCountTitleLabel.font = .boldSystemFont(ofSize: CGFloat(fontSise))
+        
         yesterDayCountTitleLabel.backgroundColor = UIColor.clear
         yesterDayCountTitleLabel.textColor = .white
         yesterDayCountTitleLabel.textAlignment = .center
@@ -116,21 +191,25 @@ class TodayRecordViewController: UIViewController {
         view.addSubview(yesterDayCountTitleLabel)
         NSLayoutConstraint.activate([
             yesterDayCountTitleLabel.centerXAnchor.constraint(
-                equalTo: todayCountLabel.centerXAnchor, constant: -140),
+                equalTo: todayCountLabel.centerXAnchor, constant: CGFloat(positionX)),
             yesterDayCountTitleLabel.centerYAnchor.constraint(
-                equalTo: todayCountLabel.centerYAnchor, constant: -30),
+                equalTo: todayCountLabel.centerYAnchor, constant: CGFloat(positionY)),
             
         ])
     }
 
     func initYesterdayCountLabel(){
+        var fontSise = 18
+        var positionY = 20
+        if UIDevice.current.userInterfaceIdiom == .pad {
+            fontSise = fontSise * 2
+            positionY = positionY * 2
+        }
+        
         yesterDayCountLabel = UILabel()
         yesterDayCountLabel.text = "900,000"
-        if UIDevice.current.userInterfaceIdiom == .pad {
-            yesterDayCountLabel.font = .boldSystemFont(ofSize: 40)
-        } else {
-            yesterDayCountLabel.font = .boldSystemFont(ofSize: 18)
-        }
+        yesterDayCountLabel.font = .boldSystemFont(ofSize: CGFloat(fontSise))
+        
         yesterDayCountLabel.backgroundColor = UIColor.clear
         yesterDayCountLabel.textColor = .white
         yesterDayCountLabel.textAlignment = .center
@@ -142,7 +221,7 @@ class TodayRecordViewController: UIViewController {
             yesterDayCountLabel.centerXAnchor.constraint(
                 equalTo: yesterDayCountTitleLabel.centerXAnchor),
             yesterDayCountLabel.centerYAnchor.constraint(
-                equalTo: yesterDayCountTitleLabel.centerYAnchor, constant: 30),
+                equalTo: yesterDayCountTitleLabel.centerYAnchor, constant: CGFloat(positionY)),
         ])
     }
 
