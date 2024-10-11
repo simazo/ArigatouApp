@@ -13,15 +13,15 @@ class TargetCountView: UIViewController, UIPickerViewDelegate, UIPickerViewDataS
     private var description2Label: UILabel!
     private var achievementRateLabel: UILabel!
     private var pickerView: UIPickerView!
+    private var presenter: TargetCountPresenter!
     
-    let items = [
-        "7年で100万回達成する", 
-        "6年で100万回達成する",
-        "5年で100万回達成する",
-        "4年で100万回達成する", 
-        "3年で100万回達成する",
-        "2年で100万回達成する",
-        "1年で100万回達成する"
+    let items: [(title: String, value: Double)] = [
+        ("5年で100万回達成する", 5),
+        ("4年で100万回達成する", 4),
+        ("3年で100万回達成する", 3),
+        ("2年で100万回達成する", 2),
+        ("1年で100万回達成する", 1),
+        ("半年で100万回達成する", 0.5),
     ]
     
     override func viewDidLoad() {
@@ -33,6 +33,18 @@ class TargetCountView: UIViewController, UIPickerViewDelegate, UIPickerViewDataS
         initDescription2Label()
         
         pickerView.reloadAllComponents()
+        
+        presenter = TargetCountPresenter(view: self)
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        let year = presenter.completionYear()
+        
+        if let initialIndex = items.firstIndex(where: { $0.value == year }) {
+            pickerView.selectRow(initialIndex, inComponent: 0, animated: false)
+            pickerView(pickerView, didSelectRow: initialIndex, inComponent: 0)
+        }
     }
     
     func initPickerView() {
@@ -139,14 +151,23 @@ class TargetCountView: UIViewController, UIPickerViewDelegate, UIPickerViewDataS
         return items.count
     }
     
-    // UIPickerViewの各行の表示内容
+    // 表示するテキストを設定
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        return items[row]
+        return items[row].title
     }
     
     // 項目選択時の処理
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        print("選択されたのは \(items[row]) です")
+        let selectedItem = items[row]
+        presenter.calcAchievementRate(year: selectedItem.value)
+        presenter.setYear(year: selectedItem.value)
     }
 }
 
+extension TargetCountView: TargetCountPresenterOutput {
+    func updateAchievementRateLabel(text: String) {
+        DispatchQueue.main.async {
+            self.achievementRateLabel.text = text
+        }
+    }
+}

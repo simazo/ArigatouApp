@@ -16,6 +16,9 @@
 		CC242F4C2C44B4300085CB74 /* DailyRecordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC242F4B2C44B4300085CB74 /* DailyRecordView.swift */; };
 		CC3127722CB4EF5400E46F5F /* MonthlyRecordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC3127712CB4EF5400E46F5F /* MonthlyRecordView.swift */; };
 		CC3127742CB65FAE00E46F5F /* TargetCountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC3127732CB65FAE00E46F5F /* TargetCountView.swift */; };
+		CC3127762CB74CA700E46F5F /* TargetCountPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC3127752CB74CA700E46F5F /* TargetCountPresenter.swift */; };
+		CC3127782CB7F1E900E46F5F /* CompletionYearManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC3127772CB7F1E900E46F5F /* CompletionYearManager.swift */; };
+		CC31277A2CB8A3CD00E46F5F /* CompletionYearManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC3127792CB8A3CD00E46F5F /* CompletionYearManagerTests.swift */; };
 		CC52B30B2C91626E0011923D /* DailyRecordPresenterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC52B30A2C91626E0011923D /* DailyRecordPresenterTests.swift */; };
 		CC52B30D2C9CE9E60011923D /* WeeklyRecordPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC52B30C2C9CE9E60011923D /* WeeklyRecordPresenter.swift */; };
 		CC55BF502BC9028D003C3E15 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC55BF4F2BC9028D003C3E15 /* AppDelegate.swift */; };
@@ -92,6 +95,9 @@
 		CC242F4B2C44B4300085CB74 /* DailyRecordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyRecordView.swift; sourceTree = "<group>"; };
 		CC3127712CB4EF5400E46F5F /* MonthlyRecordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonthlyRecordView.swift; sourceTree = "<group>"; };
 		CC3127732CB65FAE00E46F5F /* TargetCountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TargetCountView.swift; sourceTree = "<group>"; };
+		CC3127752CB74CA700E46F5F /* TargetCountPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TargetCountPresenter.swift; sourceTree = "<group>"; };
+		CC3127772CB7F1E900E46F5F /* CompletionYearManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompletionYearManager.swift; sourceTree = "<group>"; };
+		CC3127792CB8A3CD00E46F5F /* CompletionYearManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompletionYearManagerTests.swift; sourceTree = "<group>"; };
 		CC52B30A2C91626E0011923D /* DailyRecordPresenterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyRecordPresenterTests.swift; sourceTree = "<group>"; };
 		CC52B30C2C9CE9E60011923D /* WeeklyRecordPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeeklyRecordPresenter.swift; sourceTree = "<group>"; };
 		CC55BF4C2BC9028D003C3E15 /* ArigatouApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ArigatouApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -209,6 +215,7 @@
 				CCA600D12C2EA93700C72A85 /* MonthlyCounter.swift */,
 				CCA600C92C2E95E100C72A85 /* UserDefaultsKeys.swift */,
 				CCA600D32C2EE49600C72A85 /* DateManager.swift */,
+				CC3127772CB7F1E900E46F5F /* CompletionYearManager.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -263,6 +270,7 @@
 				CC242F492C44A5BE0085CB74 /* DailyRecordPresenter.swift */,
 				CC52B30C2C9CE9E60011923D /* WeeklyRecordPresenter.swift */,
 				CCE7F9842CAD026E0070E65D /* MonthlyRecordPresenter.swift */,
+				CC3127752CB74CA700E46F5F /* TargetCountPresenter.swift */,
 			);
 			path = Presenter;
 			sourceTree = "<group>";
@@ -306,6 +314,7 @@
 				CCE7F9862CAD535A0070E65D /* MonthlyRecordPresenterTest.swift */,
 				CCA600C32C2CBA0A00C72A85 /* CountFactoryTests.swift */,
 				CC1067082C375FD7005B3BDD /* DateManagerTests.swift */,
+				CC3127792CB8A3CD00E46F5F /* CompletionYearManagerTests.swift */,
 			);
 			path = ArigatouAppTests;
 			sourceTree = "<group>";
@@ -497,6 +506,7 @@
 			files = (
 				CCA1F9ED2C054BAB008DCF70 /* SynchronizedPresenter.swift in Sources */,
 				CC3127722CB4EF5400E46F5F /* MonthlyRecordView.swift in Sources */,
+				CC3127782CB7F1E900E46F5F /* CompletionYearManager.swift in Sources */,
 				CC242F4A2C44A5BE0085CB74 /* DailyRecordPresenter.swift in Sources */,
 				CCA600D02C2EA7F100C72A85 /* WeeklyCounter.swift in Sources */,
 				CCA1F9E42C016AC6008DCF70 /* RealtimeDBCountRepository.swift in Sources */,
@@ -508,6 +518,7 @@
 				CCB900642C3ABA7C003CDDE0 /* TodayRecordPresenter.swift in Sources */,
 				CC55BF652BC90301003C3E15 /* HomePresenter.swift in Sources */,
 				CC242F4C2C44B4300085CB74 /* DailyRecordView.swift in Sources */,
+				CC3127762CB74CA700E46F5F /* TargetCountPresenter.swift in Sources */,
 				CCA1F9E02C006731008DCF70 /* SignupViewController.swift in Sources */,
 				CCA1F9EB2C0548E4008DCF70 /* SynchronizedViewController.swift in Sources */,
 				CC52B30D2C9CE9E60011923D /* WeeklyRecordPresenter.swift in Sources */,
@@ -546,6 +557,7 @@
 				CCE7F9872CAD535A0070E65D /* MonthlyRecordPresenterTest.swift in Sources */,
 				CC1067092C375FD7005B3BDD /* DateManagerTests.swift in Sources */,
 				CC55BFF72BCE9C2D003C3E15 /* HomePresenterTests.swift in Sources */,
+				CC31277A2CB8A3CD00E46F5F /* CompletionYearManagerTests.swift in Sources */,
 				CC52B30B2C91626E0011923D /* DailyRecordPresenterTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

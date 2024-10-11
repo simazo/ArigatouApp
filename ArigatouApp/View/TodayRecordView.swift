@@ -321,6 +321,7 @@ class TodayRecordViewController: UIViewController {
 }
 
 extension TodayRecordViewController: TodayRecordPresenterOutput {
+
     func showTodayRecord(count: Int) {
         DispatchQueue.main.async {
             self.todayCountLabel.text =
@@ -334,5 +335,12 @@ extension TodayRecordViewController: TodayRecordPresenterOutput {
                 String.localizedStringWithFormat("%d", count)
         }
     }
+    
+    func updateAchievementRateLabel(text: String) {
+        DispatchQueue.main.async {
+            self.achievementRateLabel.text = text
+        }
+    }
+    
 }
 
