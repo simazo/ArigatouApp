@@ -164,7 +164,7 @@ class TodayRecordViewController: UIViewController {
         ])
         
         targetCountButton.addTarget(self,
-                              action: #selector(self.buttonDailyRecordTapped(sender:)),
+                              action: #selector(self.buttonTargetCountTapped(sender:)),
                               for: .touchUpInside)
     }
     
@@ -314,9 +314,14 @@ class TodayRecordViewController: UIViewController {
     @objc func buttonMonthlyRecordTapped(sender : Any) {
         self.navigationController?.pushViewController(MonthlyRecordViewController(), animated: true)
     }
+    
+    @objc func buttonTargetCountTapped(sender : Any) {
+        self.navigationController?.pushViewController(TargetCountView(), animated: true)
+    }
 }
 
 extension TodayRecordViewController: TodayRecordPresenterOutput {
+
     func showTodayRecord(count: Int) {
         DispatchQueue.main.async {
             self.todayCountLabel.text =
@@ -330,5 +335,12 @@ extension TodayRecordViewController: TodayRecordPresenterOutput {
                 String.localizedStringWithFormat("%d", count)
         }
     }
+    
+    func updateAchievementRateLabel(text: String) {
+        DispatchQueue.main.async {
+            self.achievementRateLabel.text = text
+        }
+    }
+    
 }
 
