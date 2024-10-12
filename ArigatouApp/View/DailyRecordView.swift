@@ -33,7 +33,10 @@ class DailyRecordViewController: UIViewController, ChartViewDelegate {
         presenter.fillChartData(from: Date()) //初期値は現在日
         presenter.updateButtonState()
         updateChart(with: presenter.chartData)
-        updateLabel(avg:presenter.averageCount())
+        let average = presenter.averageCount()
+        let achieve = presenter.achievementRate()
+        updateLabel(average: average, achieve: achieve )
+        
     }
     
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
@@ -177,7 +180,9 @@ class DailyRecordViewController: UIViewController, ChartViewDelegate {
         presenter.fillChartData(from: presenter.prev())
         presenter.updateButtonState()
         updateChart(with: presenter.chartData)
-        updateLabel(avg:presenter.averageCount())
+        let average = presenter.averageCount()
+        let achieve = presenter.achievementRate()
+        updateLabel(average: average, achieve: achieve )
     }
     
     /// 次の週に移動
@@ -185,17 +190,22 @@ class DailyRecordViewController: UIViewController, ChartViewDelegate {
         presenter.fillChartData(from: presenter.next())
         presenter.updateButtonState()
         updateChart(with: presenter.chartData)
-        updateLabel(avg:presenter.averageCount())
+        let average = presenter.averageCount()
+        let achieve = presenter.achievementRate()
+        updateLabel(average: average, achieve: achieve )
     }
     
 }
 
 extension DailyRecordViewController: DailyRecordPresenterOutput {
-    func updateLabel(avg:(count: Double, minDate: String, maxDate: String)) {
+    func updateLabel(
+        average:(count: Double, minDate: String, maxDate: String),
+        achieve:(total: Int, completed: Int)) {
         
         infoLabel.text = """
-            \(avg.minDate) 〜 \(avg.maxDate)
-            \n平均:\(avg.count)回
+            \(average.minDate) 〜 \(average.maxDate)
+            \n平均:\(average.count)回
+            \n\(achieve.completed) / \(achieve.total)達成
             """
     }
     

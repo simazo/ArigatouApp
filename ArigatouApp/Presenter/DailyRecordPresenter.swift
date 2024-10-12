@@ -15,7 +15,10 @@ protocol DailyRecordPresenterInput: AnyObject {
 }
 
 protocol DailyRecordPresenterOutput: AnyObject {
-    func updateLabel(avg:(count: Double, minDate: String, maxDate: String))
+    func updateLabel(
+        average:(count: Double, minDate: String, maxDate: String),
+        achieve:(total: Int, completed: Int)
+    )
     func updateChart(with chartData: [(day: String, date: String, count: Int)])
     func enableNextButton(_ isEnable: Bool)
     func enablePrevButton(_ isEnable: Bool)
@@ -78,18 +81,36 @@ extension DailyRecordPresenter: DailyRecordPresenterInput {
                 }
             }
         }
+        
         // 有効な count の平均を計算
         let averageCount = validCountEntries > 0 ? Double(totalCount) / Double(validCountEntries) : 0.0
             
         // 四捨五入して小数点第一位までにする
         let roundedAverageCount = round(averageCount * 10) / 10
-            
+        
         // フォーマット
         let minDateJP = DateManager.shared.japaneseFormattedDate(from: minDate)
         let maxDateJP = DateManager.shared.japaneseFormattedDate(from: maxDate)
         
         // minDateとmaxDateは必ず値が設定されている
         return (roundedAverageCount, minDateJP, maxDateJP)
+    }
+    
+    func achievementRate() -> (total: Int, completed: Int) {
+        var validCountEntries = 0
+        var completedCount = 0
+        
+        for entry in chartData {
+            if !entry.date.isEmpty {
+                // 日曜ではなく週の途中からアプリ開始となる事を想定し、分母は7固定ではなくカウントする
+                validCountEntries += 1
+                if CompletionYearManager.shared.isDailyAchievementCompleted(dailyCount: entry.count) {
+                    completedCount += 1
+                }
+            }
+        }
+        
+        return (validCountEntries, completedCount)
     }
     
     /// currentDateの１週間後の日付を返す
@@ -108,7 +129,6 @@ extension DailyRecordPresenter: DailyRecordPresenterInput {
     func fillChartData(from baseDate: Date){
         fillDate(from: baseDate)
         fillCount()
-        //print("Debug DailyRecord chartData: \(chartData)")
     }
     
     /// ボタン制御
