@@ -41,4 +41,11 @@ class CompletionYearManager {
         let achievementRate =  Double(dailyCount) / countPerDay * 100
         return round(achievementRate * 10) / 10  // 小数点以下1桁に四捨五入
     }
+    
+    // 達成率に達したかどうか
+    func isDailyAchievementCompleted(dailyCount: Int) -> Bool {
+        let achievementRate = calcDailyAchievementRate(dailyCount: dailyCount)
+        return achievementRate >= 100
+    }
+
 }
