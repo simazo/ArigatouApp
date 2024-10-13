@@ -45,7 +45,7 @@ extension TodayRecordPresenter: TodayRecordPresenterInput {
         
         let dailyAchievementRate = CompletionYearManager.shared.calcDailyAchievementRate(dailyCount: todayCount)
         // フォーマットしてviewへ渡す
-        view?.updateAchievementRateLabel(text: String(format: "%.1f%%", dailyAchievementRate))
+        view?.updateAchievementRateLabel(text: String(format: "%.1f%%達成", dailyAchievementRate))
     }
     
 }

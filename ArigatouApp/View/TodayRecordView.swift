@@ -18,6 +18,9 @@ class TodayRecordViewController: UIViewController {
     private var weeklyRecordButton: UIButton!
     private var monthlyRecordButton: UIButton!
     private var targetCountButton: UIButton!
+    private var cheeringMessageLabel: UILabel!
+    
+    private var buttonsStackView: UIStackView!
     
     private var presenter: TodayRecordPresenter!
     
@@ -26,17 +29,16 @@ class TodayRecordViewController: UIViewController {
         
         initTodayCountTitleLabel()
         initTodayCountLabel()
-        
         initYesterdayCountTitleLabel()
         initYesterdayCountLabel()
-        
         initAchievementRateLabel()
-        
         initTargetCountButton()
-        
+        initCheeringMessageLabel()
         initDailyRecordButton()
         initWeeklyRecordButton()
         initMonthlyRecordButton()
+        
+        initButtonsStackView()
         
         initNavigation()
         
@@ -46,6 +48,21 @@ class TodayRecordViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         presenter.viewWillAppear()
+    }
+    
+    // 回転時にaxisを切り替える
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        super.viewWillTransition(to: size, with: coordinator)
+        
+        coordinator.animate(alongsideTransition: { _ in
+            if size.width > size.height {
+                // 横向きの場合はボタンを横に並べる
+                self.buttonsStackView.axis = .horizontal
+            } else {
+                // 縦向きの場合はボタンを縦に並べる
+                self.buttonsStackView.axis = .vertical
+            }
+        })
     }
     
     private func initNavigation(){
@@ -106,7 +123,7 @@ class TodayRecordViewController: UIViewController {
     }
     
     func initAchievementRateLabel() {
-        var fontSise = 14
+        var fontSise = 18
         var positionX = -10
         var positionY = 40
         if UIDevice.current.userInterfaceIdiom == .pad {
@@ -116,7 +133,7 @@ class TodayRecordViewController: UIViewController {
         }
         
         achievementRateLabel = UILabel()
-        achievementRateLabel.text = "30.5%達成"
+        achievementRateLabel.text = "30.5%"
         achievementRateLabel.font = .boldSystemFont(ofSize: CGFloat(fontSise))
         
         achievementRateLabel.backgroundColor = UIColor.clear
@@ -135,18 +152,48 @@ class TodayRecordViewController: UIViewController {
         ])
     }
     
-    func initTargetCountButton() {
-        var fontSise = 10
-        var width = 120
-        var positionY = 30
+    func initCheeringMessageLabel(){
+        var fontSise = 18
+        var positionX = -10
+        var positionY = 40
         if UIDevice.current.userInterfaceIdiom == .pad {
             fontSise = fontSise * 2
-            width = width * 2
+            positionX = positionX * 2
             positionY = positionY * 2
         }
         
+        cheeringMessageLabel = UILabel()
+        cheeringMessageLabel.text = "その調子です、無理せずいきましょう♪"
+        cheeringMessageLabel.font = .boldSystemFont(ofSize: CGFloat(fontSise))
+        
+        cheeringMessageLabel.backgroundColor = UIColor.clear
+        cheeringMessageLabel.textColor = .white
+        cheeringMessageLabel.textAlignment = .center
+        cheeringMessageLabel.numberOfLines = 1
+
+        cheeringMessageLabel.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(cheeringMessageLabel)
+        NSLayoutConstraint.activate([
+            cheeringMessageLabel.centerXAnchor.constraint(
+                equalTo: achievementRateLabel.centerXAnchor),
+            cheeringMessageLabel.centerYAnchor.constraint(
+                equalTo: achievementRateLabel.centerYAnchor, constant: CGFloat(positionY)),
+            
+        ])
+    }
+    
+    func initTargetCountButton() {
+        var fontSise = 10
+        var width = 60
+        var positionX = 80
+        if UIDevice.current.userInterfaceIdiom == .pad {
+            fontSise = fontSise * 2
+            width = width * 2
+            positionX = positionX * 2
+        }
+        
         targetCountButton = UIButton()
-        targetCountButton.setTitle("目標数の変更", for:UIControl.State.normal)
+        targetCountButton.setTitle("目標数", for:UIControl.State.normal)
         targetCountButton.titleLabel?.font =  UIFont.systemFont(ofSize: CGFloat(fontSise))
         
         targetCountButton.backgroundColor = .systemBlue
@@ -157,9 +204,9 @@ class TodayRecordViewController: UIViewController {
         view.addSubview(targetCountButton)
         NSLayoutConstraint.activate([
             targetCountButton.centerXAnchor.constraint(
-                equalTo: todayCountTitleLabel.centerXAnchor),
+                equalTo: achievementRateLabel.centerXAnchor, constant: CGFloat(positionX)),
             targetCountButton.centerYAnchor.constraint(
-                equalTo: achievementRateLabel.centerYAnchor, constant: CGFloat(positionY)),
+                equalTo: achievementRateLabel.centerYAnchor),
             
         ])
         
@@ -224,83 +271,60 @@ class TodayRecordViewController: UIViewController {
                 equalTo: yesterDayCountTitleLabel.centerYAnchor, constant: CGFloat(positionY)),
         ])
     }
-
+    
     func initDailyRecordButton(){
         dailyRecordButton = UIButton()
-        dailyRecordButton.setTitle("日別 集計", for:UIControl.State.normal)
-        if UIDevice.current.userInterfaceIdiom == .pad {
-            dailyRecordButton.titleLabel?.font =  UIFont.systemFont(ofSize: 26)
-        } else {
-            dailyRecordButton.titleLabel?.font =  UIFont.systemFont(ofSize: 16)
-        }
+        dailyRecordButton.setTitle("日別チャート", for: .normal)
+        dailyRecordButton.titleLabel?.font = UIDevice.current.userInterfaceIdiom == .pad ? UIFont.systemFont(ofSize: 26) : UIFont.systemFont(ofSize: 16)
         dailyRecordButton.backgroundColor = .systemBlue
-        
-        dailyRecordButton.translatesAutoresizingMaskIntoConstraints = false
-        view.addSubview(dailyRecordButton)
-        NSLayoutConstraint.activate([
-            dailyRecordButton.centerYAnchor.constraint(
-                equalTo: view.centerYAnchor),
-            dailyRecordButton.centerXAnchor.constraint(
-                equalTo: view.centerXAnchor),
-            dailyRecordButton.widthAnchor.constraint(equalToConstant: 280),
-            dailyRecordButton.heightAnchor.constraint(equalToConstant: 40)
-        ])
+        dailyRecordButton.widthAnchor.constraint(equalToConstant: 240).isActive = true
+        dailyRecordButton.heightAnchor.constraint(equalToConstant: 40).isActive = true
         
         dailyRecordButton.addTarget(self,
-                              action: #selector(self.buttonDailyRecordTapped(sender:)),
-                              for: .touchUpInside)
+                                    action: #selector(self.buttonDailyRecordTapped(sender:)),
+                                    for: .touchUpInside)
     }
     
     func initWeeklyRecordButton(){
         weeklyRecordButton = UIButton()
-        weeklyRecordButton.setTitle("週別 集計", for:UIControl.State.normal)
-        if UIDevice.current.userInterfaceIdiom == .pad {
-            weeklyRecordButton.titleLabel?.font =  UIFont.systemFont(ofSize: 26)
-        } else {
-            weeklyRecordButton.titleLabel?.font =  UIFont.systemFont(ofSize: 16)
-        }
+        weeklyRecordButton.setTitle("週別チャート", for: .normal)
+        weeklyRecordButton.titleLabel?.font = UIDevice.current.userInterfaceIdiom == .pad ? UIFont.systemFont(ofSize: 26) : UIFont.systemFont(ofSize: 16)
         weeklyRecordButton.backgroundColor = .systemBlue
-        
-        weeklyRecordButton.translatesAutoresizingMaskIntoConstraints = false
-        view.addSubview(weeklyRecordButton)
-        NSLayoutConstraint.activate([
-            weeklyRecordButton.centerYAnchor.constraint(
-                equalTo: self.dailyRecordButton.centerYAnchor, constant: 60.0),
-            weeklyRecordButton.centerXAnchor.constraint(
-                equalTo: self.dailyRecordButton.centerXAnchor),
-            weeklyRecordButton.widthAnchor.constraint(equalToConstant: 280),
-            weeklyRecordButton.heightAnchor.constraint(equalToConstant: 40)
-        ])
+        weeklyRecordButton.widthAnchor.constraint(equalToConstant: 240).isActive = true
+        weeklyRecordButton.heightAnchor.constraint(equalToConstant: 40).isActive = true
         
         weeklyRecordButton.addTarget(self,
-                              action: #selector(self.buttonWeeklyRecordTapped(sender:)),
-                              for: .touchUpInside)
+                                     action: #selector(self.buttonWeeklyRecordTapped(sender:)),
+                                     for: .touchUpInside)
     }
- 
+    
     func initMonthlyRecordButton(){
         monthlyRecordButton = UIButton()
-        monthlyRecordButton.setTitle("月別 集計", for:UIControl.State.normal)
-        if UIDevice.current.userInterfaceIdiom == .pad {
-            monthlyRecordButton.titleLabel?.font =  UIFont.systemFont(ofSize: 26)
-        } else {
-            monthlyRecordButton.titleLabel?.font =  UIFont.systemFont(ofSize: 16)
-        }
+        monthlyRecordButton.setTitle("月別チャート", for: .normal)
+        monthlyRecordButton.titleLabel?.font = UIDevice.current.userInterfaceIdiom == .pad ? UIFont.systemFont(ofSize: 26) : UIFont.systemFont(ofSize: 16)
         monthlyRecordButton.backgroundColor = .systemBlue
-        
-        monthlyRecordButton.translatesAutoresizingMaskIntoConstraints = false
-        view.addSubview(monthlyRecordButton)
-        NSLayoutConstraint.activate([
-            monthlyRecordButton.centerYAnchor.constraint(
-                equalTo: self.weeklyRecordButton.centerYAnchor, constant: 60.0),
-            monthlyRecordButton.centerXAnchor.constraint(
-                equalTo: self.weeklyRecordButton.centerXAnchor),
-            monthlyRecordButton.widthAnchor.constraint(equalToConstant: 280),
-            monthlyRecordButton.heightAnchor.constraint(equalToConstant: 40)
-        ])
+        monthlyRecordButton.widthAnchor.constraint(equalToConstant: 240).isActive = true
+        monthlyRecordButton.heightAnchor.constraint(equalToConstant: 40).isActive = true
         
         monthlyRecordButton.addTarget(self,
-                              action: #selector(self.buttonMonthlyRecordTapped(sender:)),
-                              for: .touchUpInside)
+                                      action: #selector(self.buttonMonthlyRecordTapped(sender:)),
+                                      for: .touchUpInside)
+    }
+    
+    private func initButtonsStackView() {
+        buttonsStackView = UIStackView(arrangedSubviews: [dailyRecordButton, weeklyRecordButton, monthlyRecordButton])
+        buttonsStackView.axis = .vertical // 初期は縦方向
+        buttonsStackView.alignment = .center
+        buttonsStackView.distribution = .equalSpacing
+        buttonsStackView.spacing = 20 // ボタン間のスペース
+        
+        buttonsStackView.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(buttonsStackView)
+        
+        NSLayoutConstraint.activate([
+            buttonsStackView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            buttonsStackView.centerYAnchor.constraint(equalTo: achievementRateLabel.centerYAnchor, constant: 200)
+        ])
     }
     
     @objc func buttonDailyRecordTapped(sender : Any) {
