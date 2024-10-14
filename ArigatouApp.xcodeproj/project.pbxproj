@@ -19,6 +19,8 @@
 		CC3127762CB74CA700E46F5F /* TargetCountPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC3127752CB74CA700E46F5F /* TargetCountPresenter.swift */; };
 		CC3127782CB7F1E900E46F5F /* CompletionYearManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC3127772CB7F1E900E46F5F /* CompletionYearManager.swift */; };
 		CC31277A2CB8A3CD00E46F5F /* CompletionYearManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC3127792CB8A3CD00E46F5F /* CompletionYearManagerTests.swift */; };
+		CC31277C2CBB5F1A00E46F5F /* CheeringMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC31277B2CBB5F1A00E46F5F /* CheeringMessage.swift */; };
+		CC31277E2CBC9CA600E46F5F /* CheeringMessageTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC31277D2CBC9CA600E46F5F /* CheeringMessageTest.swift */; };
 		CC52B30B2C91626E0011923D /* DailyRecordPresenterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC52B30A2C91626E0011923D /* DailyRecordPresenterTests.swift */; };
 		CC52B30D2C9CE9E60011923D /* WeeklyRecordPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC52B30C2C9CE9E60011923D /* WeeklyRecordPresenter.swift */; };
 		CC55BF502BC9028D003C3E15 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC55BF4F2BC9028D003C3E15 /* AppDelegate.swift */; };
@@ -98,6 +100,8 @@
 		CC3127752CB74CA700E46F5F /* TargetCountPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TargetCountPresenter.swift; sourceTree = "<group>"; };
 		CC3127772CB7F1E900E46F5F /* CompletionYearManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompletionYearManager.swift; sourceTree = "<group>"; };
 		CC3127792CB8A3CD00E46F5F /* CompletionYearManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompletionYearManagerTests.swift; sourceTree = "<group>"; };
+		CC31277B2CBB5F1A00E46F5F /* CheeringMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheeringMessage.swift; sourceTree = "<group>"; };
+		CC31277D2CBC9CA600E46F5F /* CheeringMessageTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheeringMessageTest.swift; sourceTree = "<group>"; };
 		CC52B30A2C91626E0011923D /* DailyRecordPresenterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyRecordPresenterTests.swift; sourceTree = "<group>"; };
 		CC52B30C2C9CE9E60011923D /* WeeklyRecordPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeeklyRecordPresenter.swift; sourceTree = "<group>"; };
 		CC55BF4C2BC9028D003C3E15 /* ArigatouApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ArigatouApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -216,6 +220,7 @@
 				CCA600C92C2E95E100C72A85 /* UserDefaultsKeys.swift */,
 				CCA600D32C2EE49600C72A85 /* DateManager.swift */,
 				CC3127772CB7F1E900E46F5F /* CompletionYearManager.swift */,
+				CC31277B2CBB5F1A00E46F5F /* CheeringMessage.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -315,6 +320,7 @@
 				CCA600C32C2CBA0A00C72A85 /* CountFactoryTests.swift */,
 				CC1067082C375FD7005B3BDD /* DateManagerTests.swift */,
 				CC3127792CB8A3CD00E46F5F /* CompletionYearManagerTests.swift */,
+				CC31277D2CBC9CA600E46F5F /* CheeringMessageTest.swift */,
 			);
 			path = ArigatouAppTests;
 			sourceTree = "<group>";
@@ -536,6 +542,7 @@
 				CCB900662C3ABBDE003CDDE0 /* TodayRecordView.swift in Sources */,
 				CCDEAE172BE6BD350096704A /* Validator.swift in Sources */,
 				CCA600D62C2FA95600C72A85 /* CounterFactory.swift in Sources */,
+				CC31277C2CBB5F1A00E46F5F /* CheeringMessage.swift in Sources */,
 				CCA600D42C2EE49600C72A85 /* DateManager.swift in Sources */,
 				CCDEADF32BE44A160096704A /* MicImageView.swift in Sources */,
 				CCA600C82C2E941E00C72A85 /* TotalCounter.swift in Sources */,
@@ -558,6 +565,7 @@
 				CC1067092C375FD7005B3BDD /* DateManagerTests.swift in Sources */,
 				CC55BFF72BCE9C2D003C3E15 /* HomePresenterTests.swift in Sources */,
 				CC31277A2CB8A3CD00E46F5F /* CompletionYearManagerTests.swift in Sources */,
+				CC31277E2CBC9CA600E46F5F /* CheeringMessageTest.swift in Sources */,
 				CC52B30B2C91626E0011923D /* DailyRecordPresenterTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
