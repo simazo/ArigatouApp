@@ -14,7 +14,8 @@ protocol TodayRecordPresenterInput: AnyObject {
 protocol TodayRecordPresenterOutput: AnyObject {
     func showTodayRecord(count: Int)
     func showYesterdayRecord(count: Int)
-    func updateAchievementRateLabel(text: String)
+    func updateAchievementRateLabel(achievementRate: Double)
+    func updateCheeringMessageLabel(message: String)
 }
 
 class TodayRecordPresenter {
@@ -43,9 +44,11 @@ extension TodayRecordPresenter: TodayRecordPresenterInput {
         self.view?.showTodayRecord(count: todayCount)
         self.view?.showYesterdayRecord(count: yesterDayCount)
         
-        let dailyAchievementRate = CompletionYearManager.shared.calcDailyAchievementRate(dailyCount: todayCount)
-        // フォーマットしてviewへ渡す
-        view?.updateAchievementRateLabel(text: String(format: "%.1f%%達成", dailyAchievementRate))
+        let rate = CompletionYearManager.shared.calcDailyAchievementRate(dailyCount: todayCount)
+        let message = CheeringMessage.shared.getMessage(achievementRate: rate)
+        
+        view?.updateAchievementRateLabel(achievementRate: rate)
+        view?.updateCheeringMessageLabel(message: message)
     }
     
 }

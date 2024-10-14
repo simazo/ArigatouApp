@@ -345,7 +345,7 @@ class TodayRecordViewController: UIViewController {
 }
 
 extension TodayRecordViewController: TodayRecordPresenterOutput {
-
+ 
     func showTodayRecord(count: Int) {
         DispatchQueue.main.async {
             self.todayCountLabel.text =
@@ -360,9 +360,15 @@ extension TodayRecordViewController: TodayRecordPresenterOutput {
         }
     }
     
-    func updateAchievementRateLabel(text: String) {
+    func updateAchievementRateLabel(achievementRate: Double) {
         DispatchQueue.main.async {
-            self.achievementRateLabel.text = text
+            self.achievementRateLabel.text = String(format: "%.1f%%達成", achievementRate)
+        }
+    }
+    
+    func updateCheeringMessageLabel(message: String) {
+        DispatchQueue.main.async {
+            self.cheeringMessageLabel.text = message
         }
     }
     
