@@ -153,7 +153,7 @@ class TodayRecordViewController: UIViewController {
     }
     
     func initCheeringMessageLabel(){
-        var fontSise = 18
+        var fontSise = 24
         var positionX = -10
         var positionY = 40
         if UIDevice.current.userInterfaceIdiom == .pad {
@@ -273,12 +273,15 @@ class TodayRecordViewController: UIViewController {
     }
     
     func initDailyRecordButton(){
+        var fontSize = 16
+        if UIDevice.current.userInterfaceIdiom == .pad {
+            fontSize = fontSize * 2
+        }
+        
         dailyRecordButton = UIButton()
         dailyRecordButton.setTitle("日別チャート", for: .normal)
-        dailyRecordButton.titleLabel?.font = UIDevice.current.userInterfaceIdiom == .pad ? UIFont.systemFont(ofSize: 26) : UIFont.systemFont(ofSize: 16)
+        dailyRecordButton.titleLabel?.font = .boldSystemFont(ofSize: CGFloat(fontSize))
         dailyRecordButton.backgroundColor = .systemBlue
-        dailyRecordButton.widthAnchor.constraint(equalToConstant: 240).isActive = true
-        dailyRecordButton.heightAnchor.constraint(equalToConstant: 40).isActive = true
         
         dailyRecordButton.addTarget(self,
                                     action: #selector(self.buttonDailyRecordTapped(sender:)),
@@ -286,12 +289,15 @@ class TodayRecordViewController: UIViewController {
     }
     
     func initWeeklyRecordButton(){
+        var fontSize = 16
+        if UIDevice.current.userInterfaceIdiom == .pad {
+            fontSize = fontSize * 2
+        }
+        
         weeklyRecordButton = UIButton()
         weeklyRecordButton.setTitle("週別チャート", for: .normal)
-        weeklyRecordButton.titleLabel?.font = UIDevice.current.userInterfaceIdiom == .pad ? UIFont.systemFont(ofSize: 26) : UIFont.systemFont(ofSize: 16)
+        weeklyRecordButton.titleLabel?.font = .boldSystemFont(ofSize: CGFloat(fontSize))
         weeklyRecordButton.backgroundColor = .systemBlue
-        weeklyRecordButton.widthAnchor.constraint(equalToConstant: 240).isActive = true
-        weeklyRecordButton.heightAnchor.constraint(equalToConstant: 40).isActive = true
         
         weeklyRecordButton.addTarget(self,
                                      action: #selector(self.buttonWeeklyRecordTapped(sender:)),
@@ -299,12 +305,15 @@ class TodayRecordViewController: UIViewController {
     }
     
     func initMonthlyRecordButton(){
+        var fontSize = 16
+        if UIDevice.current.userInterfaceIdiom == .pad {
+            fontSize = fontSize * 2
+        }
+        
         monthlyRecordButton = UIButton()
         monthlyRecordButton.setTitle("月別チャート", for: .normal)
-        monthlyRecordButton.titleLabel?.font = UIDevice.current.userInterfaceIdiom == .pad ? UIFont.systemFont(ofSize: 26) : UIFont.systemFont(ofSize: 16)
+        monthlyRecordButton.titleLabel?.font = .boldSystemFont(ofSize: CGFloat(fontSize))
         monthlyRecordButton.backgroundColor = .systemBlue
-        monthlyRecordButton.widthAnchor.constraint(equalToConstant: 240).isActive = true
-        monthlyRecordButton.heightAnchor.constraint(equalToConstant: 40).isActive = true
         
         monthlyRecordButton.addTarget(self,
                                       action: #selector(self.buttonMonthlyRecordTapped(sender:)),
@@ -313,20 +322,29 @@ class TodayRecordViewController: UIViewController {
     
     private func initButtonsStackView() {
         buttonsStackView = UIStackView(arrangedSubviews: [dailyRecordButton, weeklyRecordButton, monthlyRecordButton])
-        buttonsStackView.axis = .vertical // 初期は縦方向
-        buttonsStackView.alignment = .center
-        buttonsStackView.distribution = .equalSpacing
+        buttonsStackView.axis = .vertical // 縦方向
+        buttonsStackView.alignment = .center // ボタンを中央揃え
+        buttonsStackView.distribution = .equalSpacing // ボタン間のスペースを均等に
         buttonsStackView.spacing = 20 // ボタン間のスペース
         
         buttonsStackView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(buttonsStackView)
-        
+
+        let spacing: CGFloat = UIDevice.current.userInterfaceIdiom == .pad ? 180 : 100
         NSLayoutConstraint.activate([
             buttonsStackView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            buttonsStackView.centerYAnchor.constraint(equalTo: achievementRateLabel.centerYAnchor, constant: 200)
+            buttonsStackView.topAnchor.constraint(equalTo: achievementRateLabel.bottomAnchor, constant: spacing)
         ])
+
+        // デバイスに応じてボタンの幅と高さを設定
+        let buttonWidth: CGFloat = UIDevice.current.userInterfaceIdiom == .pad ? 240 * 2 : 240
+        let buttonHeight: CGFloat = UIDevice.current.userInterfaceIdiom == .pad ? 40 * 2 : 40
+        for button in [dailyRecordButton, weeklyRecordButton, monthlyRecordButton] {
+            button?.widthAnchor.constraint(equalToConstant: buttonWidth).isActive = true
+            button?.heightAnchor.constraint(equalToConstant: buttonHeight).isActive = true
+        }
     }
-    
+
     @objc func buttonDailyRecordTapped(sender : Any) {
         self.navigationController?.pushViewController(DailyRecordViewController(), animated: true)
     }
