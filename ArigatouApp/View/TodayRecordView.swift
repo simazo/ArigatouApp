@@ -185,7 +185,7 @@ class TodayRecordViewController: UIViewController {
     func initTargetCountButton() {
         var fontSise = 10
         var width = 60
-        var positionX = 80
+        var positionX = 90
         if UIDevice.current.userInterfaceIdiom == .pad {
             fontSise = fontSise * 2
             width = width * 2
@@ -217,7 +217,7 @@ class TodayRecordViewController: UIViewController {
     
     func initYesterdayCountTitleLabel(){
         var fontSise = 14
-        var positionX = -50
+        var positionX = -90
         var positionY = -30
         if UIDevice.current.userInterfaceIdiom == .pad {
             fontSise = fontSise * 2
