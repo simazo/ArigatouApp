@@ -12,6 +12,7 @@ protocol DailyRecordPresenterInput: AnyObject {
     func prev() -> Date
     func fillChartData(from baseDate: Date)
     func averageCount() -> (count: Double, minDate: String, maxDate: String)
+    func achievementRate() -> (total: Int, completed: Int)
 }
 
 protocol DailyRecordPresenterOutput: AnyObject {
