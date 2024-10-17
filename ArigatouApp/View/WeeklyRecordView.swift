@@ -36,7 +36,8 @@ class WeeklyRecordViewController: UIViewController, ChartViewDelegate {
         let fetchedData = presenter.fetchChartData()
         presenter.updateButtonState()
         updateChart(with: fetchedData)
-        updateLabel(avg:presenter.averageCount(with: fetchedData))
+        updateLabel(avg:presenter.averageCount(with: fetchedData),
+                    calorie: presenter.caloriesBurned())
     }
     
     func initChartView() {
@@ -173,7 +174,8 @@ class WeeklyRecordViewController: UIViewController, ChartViewDelegate {
         updateChart(with: fetchedData)
         
         presenter.updateButtonState()
-        updateLabel(avg:presenter.averageCount(with: fetchedData))
+        updateLabel(avg:presenter.averageCount(with: fetchedData),
+                    calorie: presenter.caloriesBurned())
     }
     
     /// 次のページに移動
@@ -183,17 +185,25 @@ class WeeklyRecordViewController: UIViewController, ChartViewDelegate {
         updateChart(with: fetchedData)
         
         presenter.updateButtonState()
-        updateLabel(avg:presenter.averageCount(with: fetchedData))
+        updateLabel(avg:presenter.averageCount(with: fetchedData),
+                    calorie: presenter.caloriesBurned())
     }
 }
 
 extension WeeklyRecordViewController: WeeklyRecordPresenterOutput {
  
-    func updateLabel(avg:(count: Double, minWeek: String, maxWeek: String)) {
+    func updateLabel(avg:(sum: Int, count: Double, minWeek: String, maxWeek: String),
+                     calorie:(sumCalorie: Double, avgCalorie: Double)) {
+        
+        let sumString = NumberFormatManager.shared.formatWithCommas(Double(avg.sum))
+        let averageString = NumberFormatManager.shared.formatWithCommas(avg.count)
+        let sumCalorieString = NumberFormatManager.shared.formatWithCommas(calorie.sumCalorie / 1000)
+        let avgCalorieString = NumberFormatManager.shared.formatWithCommas(calorie.avgCalorie / 1000)
         
         infoLabel.text = """
             \(avg.minWeek) 〜 \(avg.maxWeek)
-            \n平均:\(avg.count)回
+            \n合計 : \(sumString) 回 (平均 : \(averageString) 回)
+            \n\(sumCalorieString) kcal (平均 : \(avgCalorieString) kcal)
             """
     }
     

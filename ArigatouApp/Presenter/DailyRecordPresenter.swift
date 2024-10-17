@@ -11,14 +11,16 @@ protocol DailyRecordPresenterInput: AnyObject {
     func next() -> Date
     func prev() -> Date
     func fillChartData(from baseDate: Date)
-    func averageCount() -> (count: Double, minDate: String, maxDate: String)
+    func averageCount() -> (sum: Int, count: Double, minDate: String, maxDate: String)
     func achievementRate() -> (total: Int, completed: Int)
+    func caloriesBurned() -> (sumCalorie: Double, avgCalorie: Double)
 }
 
 protocol DailyRecordPresenterOutput: AnyObject {
     func updateLabel(
-        average:(count: Double, minDate: String, maxDate: String),
-        achieve:(total: Int, completed: Int)
+        average:(sum: Int, count: Double, minDate: String, maxDate: String),
+        achieve:(total: Int, completed: Int),
+        calorie:(sumCalorie: Double, avgCalorie: Double)
     )
     func updateChart(with chartData: [(day: String, date: String, count: Int)])
     func enableNextButton(_ isEnable: Bool)
@@ -45,6 +47,9 @@ class DailyRecordPresenter {
     private let factory = CounterFactory()
     private var dailyCounter: Counter!
     
+    private var sumCount = 0.0
+    private var avgCount = 0.0
+    
     init(view: DailyRecordPresenterOutput, today: Date = Date(), defaults: UserDefaults = .standard) {
         self.view = view
         self.today = today //ユニットテストのためDI
@@ -55,7 +60,13 @@ class DailyRecordPresenter {
 }
 
 extension DailyRecordPresenter: DailyRecordPresenterInput {
-    func averageCount() -> (count: Double, minDate: String, maxDate: String) {
+    func caloriesBurned() -> (sumCalorie: Double, avgCalorie: Double) {
+        let sumCal = Calorie.shared.getCaloriesBurned(count: Double(sumCount))
+        let avgCal = Calorie.shared.getCaloriesBurned(count: Double(avgCount))
+        return (sumCal, avgCal)
+    }
+    
+    func averageCount() -> (sum: Int, count: Double, minDate: String, maxDate: String) {
         var totalCount = 0
         var validCountEntries = 0
         
@@ -89,12 +100,15 @@ extension DailyRecordPresenter: DailyRecordPresenterInput {
         // 四捨五入して小数点第一位までにする
         let roundedAverageCount = round(averageCount * 10) / 10
         
+        avgCount = roundedAverageCount
+        sumCount = Double(totalCount)
+        
         // フォーマット
         let minDateJP = DateManager.shared.japaneseFormattedDate(from: minDate)
         let maxDateJP = DateManager.shared.japaneseFormattedDate(from: maxDate)
         
         // minDateとmaxDateは必ず値が設定されている
-        return (roundedAverageCount, minDateJP, maxDateJP)
+        return (totalCount, roundedAverageCount, minDateJP, maxDateJP)
     }
     
     func achievementRate() -> (total: Int, completed: Int) {

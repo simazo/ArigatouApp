@@ -35,7 +35,8 @@ class DailyRecordViewController: UIViewController, ChartViewDelegate {
         updateChart(with: presenter.chartData)
         let average = presenter.averageCount()
         let achieve = presenter.achievementRate()
-        updateLabel(average: average, achieve: achieve )
+        let calorie = presenter.caloriesBurned()
+        updateLabel(average: average, achieve: achieve, calorie: calorie )
         
     }
     
@@ -182,7 +183,8 @@ class DailyRecordViewController: UIViewController, ChartViewDelegate {
         updateChart(with: presenter.chartData)
         let average = presenter.averageCount()
         let achieve = presenter.achievementRate()
-        updateLabel(average: average, achieve: achieve )
+        let calorie = presenter.caloriesBurned()
+        updateLabel(average: average, achieve: achieve, calorie: calorie )
     }
     
     /// 次の週に移動
@@ -192,20 +194,28 @@ class DailyRecordViewController: UIViewController, ChartViewDelegate {
         updateChart(with: presenter.chartData)
         let average = presenter.averageCount()
         let achieve = presenter.achievementRate()
-        updateLabel(average: average, achieve: achieve )
+        let calorie = presenter.caloriesBurned()
+        updateLabel(average: average, achieve: achieve, calorie: calorie )
     }
     
 }
 
 extension DailyRecordViewController: DailyRecordPresenterOutput {
     func updateLabel(
-        average:(count: Double, minDate: String, maxDate: String),
-        achieve:(total: Int, completed: Int)) {
+        average:(sum: Int, count: Double, minDate: String, maxDate: String),
+        achieve:(total: Int, completed: Int),
+        calorie:(sumCalorie: Double, avgCalorie: Double)) {
         
+        let sumString = NumberFormatManager.shared.formatWithCommas(Double(average.sum))
+        let averageString = NumberFormatManager.shared.formatWithCommas(average.count)
+        let sumCalorieString = NumberFormatManager.shared.formatWithCommas(calorie.sumCalorie / 1000)
+        let avgCalorieString = NumberFormatManager.shared.formatWithCommas(calorie.avgCalorie / 1000)
+            
         infoLabel.text = """
             \(average.minDate) 〜 \(average.maxDate)
-            \n平均:\(average.count)回
-            \n\(achieve.completed) / \(achieve.total)達成
+            \n合計 : \(sumString) 回 (平均 : \(averageString) 回)
+            \n\(sumCalorieString) kcal (平均 : \(avgCalorieString) kcal)
+            \n\(achieve.completed) / \(achieve.total) 達成
             """
     }
     

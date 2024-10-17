@@ -12,11 +12,13 @@ protocol WeeklyRecordPresenterInput: AnyObject {
     func prev()
     func fillChartData()
     func fetchChartData() -> [(weekNumber: String, count: Int)]
-    func averageCount(with chartData: [(weekNumber: String, count: Int)]) -> (count: Double, minWeek: String, maxWeek: String)
+    func averageCount(with chartData: [(weekNumber: String, count: Int)]) -> (sum: Int, count: Double, minWeek: String, maxWeek: String)
+    func caloriesBurned() -> (sumCalorie: Double, avgCalorie: Double)
 }
 
 protocol WeeklyRecordPresenterOutput: AnyObject {
-    func updateLabel(avg:(count: Double, minWeek: String, maxWeek: String))
+    func updateLabel(avg:(sum: Int, count: Double, minWeek: String, maxWeek: String),
+                     calorie:(sumCalorie: Double, avgCalorie: Double))
     func updateChart(with chartData: [(weekNumber: String, count: Int)])
     func enableNextButton(_ isEnable: Bool)
     func enablePrevButton(_ isEnable: Bool)
@@ -34,9 +36,11 @@ class WeeklyRecordPresenter {
     private var calendar = Calendar(identifier: .gregorian)
     private var thisWeek: String // "yyyy-Www" 形式
     
-
     private let factory = CounterFactory()
     private var weeklyCounter: Counter!
+    
+    private var sumCount = 0.0
+    private var avgCount = 0.0
     
     init(view: WeeklyRecordPresenterOutput, thisWeek: String, defaults: UserDefaults = .standard) {
         self.view = view
@@ -48,7 +52,13 @@ class WeeklyRecordPresenter {
 
 
 extension WeeklyRecordPresenter: WeeklyRecordPresenterInput {
-    func averageCount(with chartData: [(weekNumber: String, count: Int)]) -> (count: Double, minWeek: String, maxWeek: String) {
+    func caloriesBurned() -> (sumCalorie: Double, avgCalorie: Double) {
+        let sumCal = Calorie.shared.getCaloriesBurned(count: Double(sumCount))
+        let avgCal = Calorie.shared.getCaloriesBurned(count: Double(avgCount))
+        return (sumCal, avgCal)
+    }
+    
+    func averageCount(with chartData: [(weekNumber: String, count: Int)]) -> (sum: Int, count: Double, minWeek: String, maxWeek: String) {
         var totalCount = 0
         var validCountEntries = 0
         
@@ -80,12 +90,15 @@ extension WeeklyRecordPresenter: WeeklyRecordPresenterInput {
             
         // 四捨五入して小数点第一位までにする
         let roundedAverageCount = round(averageCount * 10) / 10
-            
+        
+        avgCount = roundedAverageCount
+        sumCount = Double(totalCount)
+        
         // フォーマット
         let minWeekNumJp = DateManager.shared.getWeekNumberJp(from: minWeek)
         let maxWeekNumJp = DateManager.shared.getWeekNumberJp(from: maxWeek)
         
-        return (roundedAverageCount, minWeekNumJp, maxWeekNumJp)
+        return (totalCount, roundedAverageCount, minWeekNumJp, maxWeekNumJp)
     }
     
     private func resetChartData(){
