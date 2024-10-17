@@ -116,7 +116,7 @@ extension MonthlyRecordPresenter: MonthlyRecordPresenterInput {
             chartData.append((yearMonth: "", count: 0)) // 空白を追加
         }
         
-        print("Debug MonthlyRecord chartData: \(chartData)")
+        //print("Debug MonthlyRecord chartData: \(chartData)")
         
         // 全ページ数を設定
         maxPage = chartData.count / ONE_PAGE_DATA_MAX_COUNT

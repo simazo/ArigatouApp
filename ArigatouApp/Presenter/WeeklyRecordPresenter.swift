@@ -115,7 +115,7 @@ extension WeeklyRecordPresenter: WeeklyRecordPresenterInput {
             chartData.append((weekNumber: "", count: 0)) // 空白を追加
         }
         
-        print("Debug WeeklyRecord chartData: \(chartData)")
+        //print("Debug WeeklyRecord chartData: \(chartData)")
         
         // 全ページ数を設定
         maxPage = chartData.count / ONE_PAGE_DATA_MAX_COUNT
