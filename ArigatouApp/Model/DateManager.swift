@@ -153,6 +153,14 @@ class DateManager {
         return month(from: currentMonth, addingMonths: -1)
     }
     
+    /// 指定された年月（"yyyy-mm" 形式）から翌月を計算して返す。
+    /// 入力が無効な場合は現在日を基準に翌月を返す。
+    /// - Parameter currentWeek: "yyyy-mm" 形式の年月文字列（例: "2023-12"）。
+    /// - Returns: 翌月の文字列（例: "2023-11"）。無効な形式が渡された場合は、""（空文字）を返す。
+    func nextMonth(from currentMonth: String) -> String {
+        return month(from: currentMonth, addingMonths: 1)
+    }
+    
     /// 指定された年月文字列から、指定した数の月を加算または減算した年月を計算して返します。
     /// - Parameter monthString: "yyyy-mm" 形式の年月文字列（例: "2023-06"）。
     /// - Parameter value: 加算または減算する月数。正の値で翌月、負の値で先月を指定します。

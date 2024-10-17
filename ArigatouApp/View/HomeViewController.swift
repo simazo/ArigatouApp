@@ -30,17 +30,6 @@ class HomeViewController: UIViewController {
         
         presenter = HomePresenter(view: self)
         presenter.viewDidLoad()
-        
-        // UserDefaults debug
-        //print(UserDefaults.standard.dictionaryRepresentation())
-
-        // UserDefaults clear
-        /*
-        if let appDomain = Bundle.main.bundleIdentifier {
-            UserDefaults.standard.removePersistentDomain(forName: appDomain)
-        }
-        */
-
     }
     
     // ログインページから戻ってきた場合など、このViewControllerがアクティブになった時

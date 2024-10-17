@@ -21,6 +21,8 @@
 		CC31277A2CB8A3CD00E46F5F /* CompletionYearManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC3127792CB8A3CD00E46F5F /* CompletionYearManagerTests.swift */; };
 		CC31277C2CBB5F1A00E46F5F /* CheeringMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC31277B2CBB5F1A00E46F5F /* CheeringMessage.swift */; };
 		CC31277E2CBC9CA600E46F5F /* CheeringMessageTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC31277D2CBC9CA600E46F5F /* CheeringMessageTest.swift */; };
+		CC3127822CC09F8300E46F5F /* Calorie.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC3127812CC09F8300E46F5F /* Calorie.swift */; };
+		CC3127842CC0AE1E00E46F5F /* NumberFormatManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC3127832CC0AE1E00E46F5F /* NumberFormatManager.swift */; };
 		CC52B30B2C91626E0011923D /* DailyRecordPresenterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC52B30A2C91626E0011923D /* DailyRecordPresenterTests.swift */; };
 		CC52B30D2C9CE9E60011923D /* WeeklyRecordPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC52B30C2C9CE9E60011923D /* WeeklyRecordPresenter.swift */; };
 		CC55BF502BC9028D003C3E15 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC55BF4F2BC9028D003C3E15 /* AppDelegate.swift */; };
@@ -102,6 +104,8 @@
 		CC3127792CB8A3CD00E46F5F /* CompletionYearManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompletionYearManagerTests.swift; sourceTree = "<group>"; };
 		CC31277B2CBB5F1A00E46F5F /* CheeringMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheeringMessage.swift; sourceTree = "<group>"; };
 		CC31277D2CBC9CA600E46F5F /* CheeringMessageTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheeringMessageTest.swift; sourceTree = "<group>"; };
+		CC3127812CC09F8300E46F5F /* Calorie.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Calorie.swift; sourceTree = "<group>"; };
+		CC3127832CC0AE1E00E46F5F /* NumberFormatManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumberFormatManager.swift; sourceTree = "<group>"; };
 		CC52B30A2C91626E0011923D /* DailyRecordPresenterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyRecordPresenterTests.swift; sourceTree = "<group>"; };
 		CC52B30C2C9CE9E60011923D /* WeeklyRecordPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeeklyRecordPresenter.swift; sourceTree = "<group>"; };
 		CC55BF4C2BC9028D003C3E15 /* ArigatouApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ArigatouApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -221,6 +225,8 @@
 				CCA600D32C2EE49600C72A85 /* DateManager.swift */,
 				CC3127772CB7F1E900E46F5F /* CompletionYearManager.swift */,
 				CC31277B2CBB5F1A00E46F5F /* CheeringMessage.swift */,
+				CC3127812CC09F8300E46F5F /* Calorie.swift */,
+				CC3127832CC0AE1E00E46F5F /* NumberFormatManager.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -525,11 +531,13 @@
 				CC55BF652BC90301003C3E15 /* HomePresenter.swift in Sources */,
 				CC242F4C2C44B4300085CB74 /* DailyRecordView.swift in Sources */,
 				CC3127762CB74CA700E46F5F /* TargetCountPresenter.swift in Sources */,
+				CC3127822CC09F8300E46F5F /* Calorie.swift in Sources */,
 				CCA1F9E02C006731008DCF70 /* SignupViewController.swift in Sources */,
 				CCA1F9EB2C0548E4008DCF70 /* SynchronizedViewController.swift in Sources */,
 				CC52B30D2C9CE9E60011923D /* WeeklyRecordPresenter.swift in Sources */,
 				CC3127742CB65FAE00E46F5F /* TargetCountView.swift in Sources */,
 				CCE7F9852CAD026E0070E65D /* MonthlyRecordPresenter.swift in Sources */,
+				CC3127842CC0AE1E00E46F5F /* NumberFormatManager.swift in Sources */,
 				CCA1F9EF2C059D74008DCF70 /* Count.swift in Sources */,
 				CCE7F9892CB4A1130070E65D /* WeeklyRecordView.swift in Sources */,
 				CCFB7E142BF18D6F00C4617A /* NetworkManager.swift in Sources */,

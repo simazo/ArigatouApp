@@ -57,6 +57,37 @@ class HomePresenter{
         dailyCounter = factory.create(type: .daily)
         weeklyCounter = factory.create(type: .weekly)
         monthlyCounter = factory.create(type: .monthly)
+        
+        // UserDefaults debug
+        // print(UserDefaults.standard.dictionaryRepresentation())
+
+        // UserDefaults clear
+        /*
+        if let appDomain = Bundle.main.bundleIdentifier {
+            UserDefaults.standard.removePersistentDomain(forName: appDomain)
+        }
+        */
+        
+        
+        totalCounter.setCount(6000)
+        dailyCounter.setCount(for: "2024-10-14", count:10000)
+        dailyCounter.setCount(for: "2024-10-15", count:4500)
+        dailyCounter.setCount(for: "2024-10-16", count:2500)
+        dailyCounter.setCount(for: "2024-10-17", count:2500)
+        
+        weeklyCounter.setCount(for: "2024-W37", count:60)
+        weeklyCounter.setCount(for: "2024-W38", count:1700)
+        weeklyCounter.setCount(for: "2024-W39", count:6700)
+        weeklyCounter.setCount(for: "2024-W40", count:68500)
+        weeklyCounter.setCount(for: "2024-W41", count:25900)
+        weeklyCounter.setCount(for: "2024-W42", count:52500)
+        
+        monthlyCounter.setCount(for: "2024-05", count:70)
+        monthlyCounter.setCount(for: "2024-06", count:7800)
+        monthlyCounter.setCount(for: "2024-07", count:900)
+        monthlyCounter.setCount(for: "2024-08", count:60)
+        monthlyCounter.setCount(for: "2024-09", count:70)
+        monthlyCounter.setCount(for: "2024-10", count:1900)
     }
     
     private func incrementCount() {

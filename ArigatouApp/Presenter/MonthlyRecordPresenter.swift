@@ -13,11 +13,13 @@ protocol MonthlyRecordPresenterInput: AnyObject {
     func prev()
     func fillChartData()
     func fetchChartData() -> [(yearMonth: String, count: Int)]
-    func averageCount(with chartData: [(yearMonth: String, count: Int)]) -> (count: Double, minYearMonth: String, maxYearMonth: String)
+    func averageCount(with chartData: [(yearMonth: String, count: Int)]) -> (sum: Int, count: Double, minYearMonth: String, maxYearMonth: String)
+    func caloriesBurned() -> (sumCalorie: Double, avgCalorie: Double)
 }
 
 protocol MonthlyRecordPresenterOutput: AnyObject {
-    func updateLabel(avg:(count: Double, minYearMonth: String, maxYearMonth: String))
+    func updateLabel(avg:(sum: Int, count: Double, minYearMonth: String, maxYearMonth: String),
+                     calorie:(sumCalorie: Double, avgCalorie: Double))
     func updateChart(with chartData: [(yearMonth: String, count: Int)])
     func enableNextButton(_ isEnable: Bool)
     func enablePrevButton(_ isEnable: Bool)
@@ -35,9 +37,11 @@ class MonthlyRecordPresenter {
     private var calendar = Calendar(identifier: .gregorian)
     private var thisYearMonth: String // "yyyy-mm" 形式
     
-
     private let factory = CounterFactory()
     private var MonthlyCounter: Counter!
+    
+    private var sumCount = 0.0
+    private var avgCount = 0.0
     
     init(view: MonthlyRecordPresenterOutput, thisYearMonth: String, defaults: UserDefaults = .standard) {
         self.view = view
@@ -48,7 +52,13 @@ class MonthlyRecordPresenter {
 }
 
 extension MonthlyRecordPresenter: MonthlyRecordPresenterInput {
-    func averageCount(with chartData: [(yearMonth: String, count: Int)]) -> (count: Double, minYearMonth: String, maxYearMonth: String) {
+    func caloriesBurned() -> (sumCalorie: Double, avgCalorie: Double) {
+        let sumCal = Calorie.shared.getCaloriesBurned(count: Double(sumCount))
+        let avgCal = Calorie.shared.getCaloriesBurned(count: Double(avgCount))
+        return (sumCal, avgCal)
+    }
+    
+    func averageCount(with chartData: [(yearMonth: String, count: Int)]) -> (sum: Int, count: Double, minYearMonth: String, maxYearMonth: String) {
         var totalCount = 0
         var validCountEntries = 0
         
@@ -81,13 +91,15 @@ extension MonthlyRecordPresenter: MonthlyRecordPresenterInput {
         // 四捨五入して小数点第一位までにする
         let roundedAverageCount = round(averageCount * 10) / 10
             
+        avgCount = roundedAverageCount
+        sumCount = Double(totalCount)
+        
         // フォーマット
         let minYearMonthJp = DateManager.shared.getjpYearMonth(from: minYearMonth)
         let maxYearMonthJp = DateManager.shared.getjpYearMonth(from: maxYearMonth)
         
-        return (roundedAverageCount, minYearMonthJp, maxYearMonthJp)
+        return (totalCount, roundedAverageCount, minYearMonthJp, maxYearMonthJp)
     }
-    
     
     private func resetChartData(){
         maxPage = 0
@@ -102,12 +114,12 @@ extension MonthlyRecordPresenter: MonthlyRecordPresenterInput {
         resetChartData()
         
         let minMonth = MonthlyCounter.minDate()
-        var currYearMonth = thisYearMonth
+        var currYearMonth = minMonth
      
-        while currYearMonth >= minMonth {
+        while currYearMonth <= thisYearMonth {
             let count = MonthlyCounter.getCount(for: currYearMonth)
             chartData.append((yearMonth: currYearMonth, count: count))
-            currYearMonth = DateManager.shared.previousMonth(from: currYearMonth)
+            currYearMonth = DateManager.shared.nextMonth(from: currYearMonth)
         }
         
         // 5個単位になるよう調整
@@ -123,12 +135,12 @@ extension MonthlyRecordPresenter: MonthlyRecordPresenterInput {
     }
 
     func fetchChartData() -> [(yearMonth: String, count: Int)] {
-        var startIndex = 0
-        var endIndex = ONE_PAGE_DATA_MAX_COUNT - 1
+        var startIndex = maxPage * ONE_PAGE_DATA_MAX_COUNT - ONE_PAGE_DATA_MAX_COUNT
+        var endIndex = maxPage * ONE_PAGE_DATA_MAX_COUNT - 1
         let addCount = ONE_PAGE_DATA_MAX_COUNT * currentPage
         
-        startIndex += addCount
-        endIndex += addCount
+        startIndex -= addCount
+        endIndex -= addCount
         
         return Array(chartData[startIndex...endIndex])
     }
