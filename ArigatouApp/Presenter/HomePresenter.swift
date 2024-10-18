@@ -66,9 +66,9 @@ class HomePresenter{
         if let appDomain = Bundle.main.bundleIdentifier {
             UserDefaults.standard.removePersistentDomain(forName: appDomain)
         }
-        */
+      */
         
-        
+        /*
         totalCounter.setCount(6000)
         dailyCounter.setCount(for: "2024-10-14", count:10000)
         dailyCounter.setCount(for: "2024-10-15", count:4500)
@@ -88,6 +88,7 @@ class HomePresenter{
         monthlyCounter.setCount(for: "2024-08", count:60)
         monthlyCounter.setCount(for: "2024-09", count:70)
         monthlyCounter.setCount(for: "2024-10", count:1900)
+        */
     }
     
     private func incrementCount() {

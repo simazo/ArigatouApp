@@ -57,25 +57,25 @@ class MonthlyRecordPresenterTest: XCTestCase {
     }
     
     func testFillChartData(){
-        var yearMonth = "2024-04"
+        var yearMonth = "2024-01"
         presenter = MonthlyRecordPresenter(view: mock, thisYearMonth: yearMonth, defaults: testUserDefaults)
         presenter.fillChartData()
         XCTAssertEqual(presenter.chartData.count, 5) // 5の倍数
         XCTAssertEqual(presenter.chartData[0].yearMonth, yearMonth)
         XCTAssertEqual(presenter.chartData[presenter.chartData.count - 1].yearMonth, "")
         
-        yearMonth = "2024-10"
+        yearMonth = "2024-02"
         presenter = MonthlyRecordPresenter(view: mock, thisYearMonth: yearMonth, defaults: testUserDefaults)
         presenter.fillChartData()
-        XCTAssertEqual(presenter.chartData.count, 10) // 5の倍数
-        XCTAssertEqual(presenter.chartData[0].yearMonth, yearMonth)
-        XCTAssertEqual(presenter.chartData[presenter.chartData.count - 1].yearMonth, "2024-01")
+        XCTAssertEqual(presenter.chartData.count, 5) // 5の倍数
+        XCTAssertEqual(presenter.chartData[1].yearMonth, yearMonth)
+        XCTAssertEqual(presenter.chartData[presenter.chartData.count - 1].yearMonth, "")
         
         yearMonth = "2025-01"
         presenter = MonthlyRecordPresenter(view: mock, thisYearMonth: yearMonth, defaults: testUserDefaults)
         presenter.fillChartData()
         XCTAssertEqual(presenter.chartData.count, 15) // 5の倍数
-        XCTAssertEqual(presenter.chartData[0].yearMonth, yearMonth)
+        XCTAssertEqual(presenter.chartData[0].yearMonth, "2024-01")
         XCTAssertEqual(presenter.chartData[presenter.chartData.count - 1].yearMonth, "")
         
     }
@@ -88,22 +88,22 @@ class MonthlyRecordPresenterTest: XCTestCase {
         // 0ページ目
         var result = presenter.fetchChartData()
         
-        XCTAssertEqual(result[0].yearMonth, "2025-01")
-        XCTAssertEqual(result[result.count - 1].yearMonth, "2024-09")
+        XCTAssertEqual(result[0].yearMonth, "2024-11")
+        XCTAssertEqual(result[result.count - 1].yearMonth, "")
         
-        // 1ページ目
+        // 前のページへ
         presenter.prev()
         result = presenter.fetchChartData()
 
-        XCTAssertEqual(result[0].yearMonth, "2024-08")
-        XCTAssertEqual(result[result.count - 1].yearMonth, "2024-04")
+        XCTAssertEqual(result[0].yearMonth, "2024-06")
+        XCTAssertEqual(result[result.count - 1].yearMonth, "2024-10")
         
         // ページを戻す
         presenter.next()
         result = presenter.fetchChartData()
         
-        XCTAssertEqual(result[0].yearMonth, "2025-01")
-        XCTAssertEqual(result[result.count - 1].yearMonth, "2024-09")
+        XCTAssertEqual(result[0].yearMonth, "2024-11")
+        XCTAssertEqual(result[result.count - 1].yearMonth, "")
         
     }
     
