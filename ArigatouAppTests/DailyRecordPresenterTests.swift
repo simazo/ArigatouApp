@@ -11,7 +11,7 @@ import XCTest
 class DailyRecordPresenterTests: XCTestCase {
     
     class MockPresenterOutput: DailyRecordPresenterOutput {
-        func updateLabel(average: (count: Double, minDate: String, maxDate: String), achieve: (total: Int, completed: Int)) {}
+        func updateLabel(average: (sum: Int, count: Double, minDate: String, maxDate: String), achieve: (total: Int, completed: Int), calorie: (sumCalorie: Double, avgCalorie: Double)) {}
         
         func updateChart(with chartData: [(day: String, date: String, count: Int)]) {}
         

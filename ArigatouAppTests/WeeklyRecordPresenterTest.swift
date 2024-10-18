@@ -11,7 +11,7 @@ import XCTest
 class WeeklyRecordPresenterTest: XCTestCase {
     
     class MockPresenterOutput: WeeklyRecordPresenterOutput {
-        func updateLabel(avg: (count: Double, minWeek: String, maxWeek: String)) {}
+        func updateLabel(avg: (sum: Int, count: Double, minWeek: String, maxWeek: String), calorie: (sumCalorie: Double, avgCalorie: Double)) {}
         
         func updateChart(with chartData: [(weekNumber: String, count: Int)]) {}
         
