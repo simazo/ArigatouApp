@@ -11,7 +11,7 @@ import XCTest
 class MonthlyRecordPresenterTest: XCTestCase {
     
     class MockPresenterOutput: MonthlyRecordPresenterOutput {
-        func updateLabel(avg: (count: Double, minYearMonth: String, maxYearMonth: String)) {}
+        func updateLabel(avg: (sum: Int, count: Double, minYearMonth: String, maxYearMonth: String), calorie: (sumCalorie: Double, avgCalorie: Double)) {}
         
         func updateChart(with chartData: [(yearMonth: String, count: Int)]) {}
         
