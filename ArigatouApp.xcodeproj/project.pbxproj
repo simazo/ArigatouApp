@@ -732,7 +732,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development: futoshi tanaka (HJ4P3RH3ZB)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "Apple Development: futoshi tanaka (HJ4P3RH3ZB)";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 3;
+				CURRENT_PROJECT_VERSION = 0;
 				DEVELOPMENT_TEAM = P4V2PFCQ2W;
 				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = P4V2PFCQ2W;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -750,7 +750,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.0;
+				MARKETING_VERSION = 1.0.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.tanaka.ArigatouApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = Develop_ProvisioningProfile;
@@ -770,7 +770,7 @@
 				CODE_SIGN_IDENTITY = "Apple Distribution: futoshi tanaka (P4V2PFCQ2W)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "Apple Distribution: futoshi tanaka (P4V2PFCQ2W)";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 3;
+				CURRENT_PROJECT_VERSION = 0;
 				DEVELOPMENT_TEAM = P4V2PFCQ2W;
 				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = P4V2PFCQ2W;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -788,7 +788,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.0;
+				MARKETING_VERSION = 1.0.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.tanaka.ArigatouApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = AppStore_ProvisioningProfile;
