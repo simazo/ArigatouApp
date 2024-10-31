@@ -29,7 +29,7 @@ class RealtimeDBCountRepository: CountRepository {
         }
     }
     
-    func findByUid(uid:String, completion: @escaping (Result<Count, Error>) -> Void) {
+    func findByUid(uid: String, completion: @escaping (Result<Count, Error>) -> Void) {
         let countRef = database.child("Count").child(uid)
         
         countRef.getData { error, snapshot in
@@ -48,17 +48,15 @@ class RealtimeDBCountRepository: CountRepository {
             }
             
             // データをCountに変換
-            if let totalCount = value["total_count"] as? Int,
-               let dailyCount = value["daily_count"] as? [String: Int],
-               let weeklyCount = value["weekly_count"] as? [String: Int],
-               let monthlyCount = value["monthly_count"] as? [String: Int],
-               let updatedAt = value["updatedAt"] as? Double {
-                let count = Count(uid: uid, totalCount: totalCount, dailyCount: dailyCount, weeklyCount: weeklyCount, monthlyCount: monthlyCount, updateAt: updatedAt)
-                completion(.success(count))
-            } else {
-                let error = NSError(domain: "com.Arigatouapp", code: 0, userInfo: [NSLocalizedDescriptionKey: "Invalid data format"])
-                completion(.failure(error))
-            }
+            let totalCount = value["total_count"] as? Int ?? 0
+            let dailyCount = value["daily_count"] as? [String: Int] ?? [:]
+            let weeklyCount = value["weekly_count"] as? [String: Int] ?? [:]
+            let monthlyCount = value["monthly_count"] as? [String: Int] ?? [:]
+            let updatedAt = value["updatedAt"] as? Double ?? Date().timeIntervalSince1970
+            
+            let count = Count(uid: uid, totalCount: totalCount, dailyCount: dailyCount, weeklyCount: weeklyCount, monthlyCount: monthlyCount, updateAt: updatedAt)
+            completion(.success(count))
         }
     }
+
 }
