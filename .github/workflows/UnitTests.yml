@@ -15,11 +15,11 @@ jobs:
         with:
           xcode-version: latest-stable
 
-      - name: Check Xcode Version
-        run: xcodebuild -version
+      # - name: Check Xcode Version
+      #   run: xcodebuild -version
 
-      - name: List available simulators
-        run: xcrun simctl list
+      # - name: List available simulators
+      #   run: xcrun simctl list
 
       - name: Install CocoaPods
         run: sudo gem install cocoapods
