@@ -10,6 +10,7 @@ import AVKit
 
 class HomeViewController: UIViewController {
     private var remainingLabel: UILabel!
+    private var todayCountLabel: UILabel!
     private var counterLabel: UILabel!
     private var micView: MicImageView!
     
@@ -203,6 +204,7 @@ class HomeViewController: UIViewController {
         self.view.sendSubviewToBack(imageViewBackground)
     }
     
+    /// remainingLabelを親ビューの中心に配置する
     func initRemainingLabel(){
         remainingLabel = UILabel()
         if UIDevice.current.userInterfaceIdiom == .pad {
@@ -227,9 +229,9 @@ class HomeViewController: UIViewController {
     func initCounterLabel(){
         counterLabel = UILabel()
         if UIDevice.current.userInterfaceIdiom == .pad {
-            counterLabel.font = .boldSystemFont(ofSize: 54)
+            counterLabel.font = .boldSystemFont(ofSize: 44)
         } else {
-            counterLabel.font = .boldSystemFont(ofSize: 28)
+            counterLabel.font = .boldSystemFont(ofSize: 20)
         }
         counterLabel.backgroundColor = UIColor.clear
         counterLabel.textColor = .yellow
@@ -246,6 +248,36 @@ class HomeViewController: UIViewController {
         counterLabel.alpha = 0
     }
     
+    /// todayCountLabelをremainingLabelの上部に配置する
+    func initTodayCountLabel(){
+        todayCountLabel = UILabel()
+        
+        var position: CGFloat = 0.0
+        if UIDevice.current.userInterfaceIdiom == .pad {
+            position = -240
+            todayCountLabel.font = .boldSystemFont(ofSize: 40)
+        } else {
+            position = -140
+            todayCountLabel.font = .boldSystemFont(ofSize: 16)
+        }
+        
+        // todayCountLabel.font = .boldSystemFont(ofSize: size)
+        
+        todayCountLabel.backgroundColor = UIColor.clear
+        todayCountLabel.textColor = .white
+        todayCountLabel.textAlignment = .center
+        todayCountLabel.numberOfLines = 0
+        
+        // remainingLabelの上部に配置
+        todayCountLabel.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(todayCountLabel)
+        NSLayoutConstraint.activate([
+            todayCountLabel.centerYAnchor.constraint(equalTo: remainingLabel.centerYAnchor, constant: position),
+            todayCountLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor)
+        ])
+    }
+    
+    /// micViewをremainingLabelを基準に配置する
     func initMicImage(){
         micView = MicImageView(image: UIImage(systemName: "mic.fill"))
         micView.tintColor = .orange // アイコンの色をオレンジに設定
@@ -400,6 +432,7 @@ extension HomeViewController: HomePresenterOutput{
         initRemainingLabel()
         initCounterLabel()
         initMicImage()
+        initTodayCountLabel()
     }
     
     func showEndScreen() {
@@ -428,6 +461,13 @@ extension HomeViewController: HomePresenterOutput{
             }
         }
         
+    }
+    
+    func redrawTodayCountLabel(text: String) {
+        guard !text.isEmpty else {return}
+        DispatchQueue.main.async {
+            self.todayCountLabel.text = text
+        }
     }
     
     func showDeniedSpeechAuthorizeAlert(){
