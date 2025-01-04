@@ -21,6 +21,7 @@ protocol HomePresenterOutput: AnyObject {
     func showDeniedSpeechAuthorizeAlert()
     func redrawRemainingLabel(text: String)
     func redrawCounterLabel(text: String)
+    func redrawTodayCountLabel(text: String)
     func startMicAnimating()
     func playVideo(url: String)
     func showPlayVideoListMenu(menus: [String])
@@ -137,9 +138,11 @@ class HomePresenter{
                     playVideoIfMatchCountReached(totalCounter.getCount())
                     
                     // ラベル再描画
-                    self.view?.redrawRemainingLabel(text: "「ありがとう100万回」\n\n達成まで\n\nあと\(self.formatRemainingCount())回")
+                    self.view?.redrawRemainingLabel(text: "「ありがとう100万回」\n\n達成まであと\n\n\(self.formatRemainingCount())回")
                     
                     self.view?.redrawCounterLabel(text: "\(self.formatTotalCount())回目のありがとう")
+                    
+                    self.view?.redrawTodayCountLabel(text: "本日\(self.formatTodayCount())回\n\n合計\(self.formatTotalCount())回")
                     
                     // タイムラグ挿入
                     //Thread.sleep(forTimeInterval: 0.5)
@@ -211,6 +214,13 @@ class HomePresenter{
     
     private func formatRemainingCount() -> String {
         return String.localizedStringWithFormat("%d", 1000000 - totalCounter.getCount())
+    }
+    
+    private func formatTodayCount() -> String {
+        return String.localizedStringWithFormat(
+            "%d",
+            dailyCounter.getCount(for: dateManager.formattedDateString())
+        )
     }
     
     private func formatTotalCount() -> String {
@@ -287,7 +297,9 @@ extension HomePresenter: HomePresenterInput {
             }
         }
         // ラベル更新
-        self.view?.redrawRemainingLabel(text: "「ありがとう100万回」\n\n達成まで\n\nあと\(self.formatRemainingCount())回")
+        self.view?.redrawRemainingLabel(text: "「ありがとう100万回」\n\n達成まであと\n\n\(self.formatRemainingCount())回")
+        
+        self.view?.redrawTodayCountLabel(text: "本日\(self.formatTodayCount())回\n\n合計\(self.formatTotalCount())回")
     }
     
     func logout() {

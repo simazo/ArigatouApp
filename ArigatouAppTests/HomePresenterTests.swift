@@ -9,6 +9,9 @@ import XCTest
 @testable import ArigatouApp
 
 class MockPresenterOutput: HomePresenterOutput {
+    func redrawTodayCountLabel(text: String) {
+    }
+    
     func showDeleteAccountFailure(errorMessage: String) {
     }
     
