@@ -100,7 +100,7 @@ jobs:
 
       - name: Save test results
         if: failure()
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v3.1.2
         with:
           name: TestResults
           path: /Users/runner/Library/Developer/Xcode/DerivedData/ArigatouApp-*/Logs/Test/*.xcresult
