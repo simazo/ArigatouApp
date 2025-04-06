@@ -13,6 +13,7 @@ protocol Counter {
     
     // 日別、週別、月別で実装し、総合的クラスでは実装しない
     func setCount(for key: String, count: Int)
+    func setAllCounts(_ counts: [String: Int])
     func getCount(for key: String) -> Int
     func incrementCount(for key: String)
     func getAllCounts() -> [String: Int]

@@ -27,6 +27,11 @@ class DailyCounter: Counter {
         return 0
     }
     
+    // すべてのカウントを一括でセット
+    func setAllCounts(_ counts: [String: Int]) {
+        defaults.set(counts, forKey: UserDefaultsKeys.DAILY_COUNT)
+    }
+    
     /// UserDefaultsから最小日付を返す
     /// アプリインストール直後などまだ日付が存在しない場合は現在日を返す
     /// nilを返すことはありません

@@ -8,6 +8,10 @@
 import Foundation
 
 class WeeklyCounter: Counter {
+    func setAllCounts(_ counts: [String : Int]) {
+        defaults.set(counts, forKey: UserDefaultsKeys.WEEKLY_COUNT)
+    }
+    
     private let defaults: UserDefaults
     
     init(defaults: UserDefaults = .standard) {

@@ -7,6 +7,7 @@
 import Foundation
 
 class TotalCounter: Counter {
+    
     private let defaults: UserDefaults
     
     init(defaults: UserDefaults = .standard) {
@@ -44,6 +45,10 @@ class TotalCounter: Counter {
     }
     
     func getAllCounts() -> [String : Int] {
+        fatalError("This method is not supported for TotalCounter")
+    }
+    
+    func setAllCounts(_ counts: [String : Int]) {
         fatalError("This method is not supported for TotalCounter")
     }
 }
