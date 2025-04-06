@@ -63,6 +63,57 @@ extension SynchronizedPresenter: SynchronizedPresenterInput {
     }
     
     func synchronize() {
+        let countManager = CountManager(RealtimeDBCountRepository())
+
+        countManager.findByUid(uid: self.uid) { result in
+            switch result {
+            case .success(let serverCount):
+                let localTotal = self.totalCounter.getCount()
+                let localDaily = self.dailyCounter.getAllCounts()
+                let localWeekly = self.weeklyCounter.getAllCounts()
+                let localMonthly = self.monthlyCounter.getAllCounts()
+
+                let shouldUseLocal = localTotal > serverCount.totalCount
+
+                if shouldUseLocal {
+                    // ローカルの方が大きい → サーバを上書き
+                    let countToUpload = Count(
+                        uid: self.uid,
+                        totalCount: localTotal,
+                        dailyCount: localDaily,
+                        weeklyCount: localWeekly,
+                        monthlyCount: localMonthly,
+                        updateAt: Date().timeIntervalSince1970
+                    )
+
+                    countManager.create(countToUpload) { success, error in
+                        if success {
+                            self.view?.showSynchronizedSuccess()
+                        } else {
+                            self.view?.showSynchronizedFailed(errorMessage: error!.localizedDescription)
+                        }
+                    }
+
+                } else {
+                    // サーバの方が大きい → ローカルを上書き
+                    self.totalCounter.setCount(serverCount.totalCount)
+                    self.dailyCounter.setAllCounts(serverCount.dailyCount)
+                    self.weeklyCounter.setAllCounts(serverCount.weeklyCount)
+                    self.monthlyCounter.setAllCounts(serverCount.monthlyCount)
+
+                    self.view?.showSynchronizedSuccess()
+                }
+
+            case .failure(let error):
+                self.view?.showSynchronizedFailed(errorMessage: error.localizedDescription)
+            }
+        }
+    }
+
+
+    
+    /*
+    func synchronize() {
         let count = Count(
             uid: self.uid,
             totalCount: self.totalCounter.getCount(),
@@ -81,4 +132,5 @@ extension SynchronizedPresenter: SynchronizedPresenterInput {
             }
         }
     }
+    */
 }

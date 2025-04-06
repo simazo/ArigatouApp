@@ -8,6 +8,10 @@
 import Foundation
 
 class MonthlyCounter: Counter {
+    func setAllCounts(_ counts: [String : Int]) {
+        defaults.set(counts, forKey: UserDefaultsKeys.MONTHLY_COUNT)
+    }
+    
     private let defaults: UserDefaults
 
     init(defaults: UserDefaults = .standard) {
