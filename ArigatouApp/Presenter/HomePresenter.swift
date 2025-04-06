@@ -254,6 +254,10 @@ extension HomePresenter: HomePresenterInput {
                 view?.showPreLoginMenu()
             }
         }
+        // ラベル更新
+        self.view?.redrawRemainingLabel(text: "「ありがとう100万回」\n\n達成まであと\n\n\(self.formatRemainingCount())回")
+        
+        self.view?.redrawTodayCountLabel(text: "本日\(self.formatTodayCount())回\n\n合計\(self.formatTotalCount())回")
     }
 
     func viewDidLoad() {
