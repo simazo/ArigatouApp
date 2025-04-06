@@ -153,7 +153,7 @@ class TodayRecordViewController: UIViewController {
     }
     
     func initCheeringMessageLabel(){
-        var fontSise = 24
+        var fontSise = 16
         var positionX = -10
         var positionY = 40
         if UIDevice.current.userInterfaceIdiom == .pad {
